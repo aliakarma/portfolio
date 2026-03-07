@@ -1,0 +1,30 @@
+{
+  "name": "ali-akarma-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "homepage": "https://aliakarma.github.io",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next build",
+    "deploy": "next build && touch out/.nojekyll && npx gh-pages -d out --dotfiles",
+    "predeploy": "npm run export"
+  },
+  "dependencies": {
+    "next": "14.2.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "framer-motion": "11.1.9",
+    "lucide-react": "0.378.0",
+    "react-type-animation": "3.2.0",
+    "react-intersection-observer": "9.10.2",
+    "d3": "7.9.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "10.4.19",
+    "postcss": "8.4.38",
+    "tailwindcss": "3.4.3",
+    "gh-pages": "6.0.0"
+  }
+}
