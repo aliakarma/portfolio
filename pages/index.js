@@ -42,8 +42,8 @@ const socialLinks = [
 const stats = [
   { icon: <FileText size={16} />,   value: 12, suffix: '',  label: 'Publications',     sub: 'peer-reviewed & in pipeline' },
   { icon: <Layers size={16} />,     value: 5,  suffix: '',  label: 'Research Areas',   sub: 'AI safety to governance' },
-  { icon: <Award size={16} />,      value: 2,  suffix: '',  label: 'IEEE Conferences', sub: 'ICCA & ICBDT 2025' },
-  { icon: <TrendingUp size={16} />, value: 4,  suffix: '+', label: 'Journals',         sub: 'Springer, PLOS ONE, MDPI' },
+  { icon: <Award size={16} />,      value: 2,  suffix: '',  label: 'Conferences', sub: 'IEEE ICCA 2025 & ICBDT 2025 ICETAS 2026 ' },
+  { icon: <TrendingUp size={16} />, value: 5,  suffix: '+', label: 'Journals',         sub: 'Springer, PLOS ONE, MDPI, IEEE' },
 ]
 
 export default function Home() {
