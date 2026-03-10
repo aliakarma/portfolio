@@ -18,10 +18,10 @@ export const publications = [
     code: "https://github.com/aliakarma",
     dataset: null,
     notebook: null,
-    abstract: "Proposes a blockchain-monitored architecture for agentic AI systems that ensures trusted perception–reasoning–action pipelines with verifiable audit trails and constrained action spaces. The framework integrates immutable on-chain logging with off-chain agentic orchestration, enabling post-hoc accountability and real-time override mechanisms.",
+    abstract: "The application of agentic AI systems in autonomous decision-making is growing in the areas of healthcare, smart cities, digital forensics, and supply chain management. Even though these systems are flexible and offer real-time reasoning, they also raise concerns of trust and oversight, and integrity of the information and activities upon which they are founded. The paper suggests a single architecture model comprising of LangChain-based multi-agent system with a permissioned blockchain to guarantee constant monitoring, policy enforcement, and immutable auditability of agentic action. The framework relates the perception conceptualization-action cycle to a blockchain layer of governance that verifies the inputs, evaluates recommended actions, and documents the outcomes of the execution. A Hyperledger Fabric-based system, action executors MCP-integrated, and LangChain agent are introduced and experiments of smart inventory management, traffic-signal control, and healthcare monitoring are done. The results suggest that blockchain-security verification is efficient in preventing unauthorized practices, offers traceability throughout the whole decision-making process, and maintains operational latency within reasonable ranges. The suggested framework provides a universal system of implementing high-impact agentic AI applications that are autonomous yet responsible.",
     bibtex: `@inproceedings{jan2025blockchain,
   title={Blockchain-Monitored Agentic AI Architecture for Trusted Perception–Reasoning–Action Pipelines},
-  author={Jan, Salman and Akarma, Ali and others},
+  author={Jan, Salman and Akarma, Ali and Hassan Ali Razzaqi and Mohammad Riyaz Belgaum},
   booktitle={Proceedings of the IEEE International Conference on Control and Automation},
   year={2025},
   organization={IEEE}
