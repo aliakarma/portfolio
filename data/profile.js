@@ -10,7 +10,7 @@ export const profile = {
   email: "aliakarma974@gmail.com",
   github: "https://github.com/aliakarma",
   scholar: "https://scholar.google.com/citations?user=kQZZJtYAAAAJ&hl=en",
-  linkedin: "https://www.linkedin.com/in/aliakarma3",
+  linkedin: "https://www.linkedin.com/in/aliakarma",
   cv: "/Ali_Akarma_CV.pdf",
 
   bio: "AI researcher focused on trustworthy and safety-aligned agentic systems, with peer-reviewed publications spanning AI architectures, governance, and real-world deployment contexts. Experienced in designing constrained agent pipelines, analyzing failure modes, and studying robustness in high-stakes environments. Preparing for graduate research in reliable machine learning systems.",
