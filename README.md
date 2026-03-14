@@ -2,7 +2,7 @@
 
 > A production-quality, fully interactive academic portfolio for an AI researcher specializing in Agentic AI, AI Safety, and Trustworthy Machine Learning.
 
-**→ Live:** [aliakarma.github.io](https://aliakarma.github.io) *(after deployment)*
+**→ Live:** [aliakarma.codes](https://www.aliakarma.codes/) *(after deployment)*
 
 ---
 
