@@ -17,6 +17,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [imgError, setImgError] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -40,8 +41,12 @@ export default function Navbar() {
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
           <Link href="/">
             <motion.div whileHover={{ scale: 1.03 }} className="flex items-center gap-3 cursor-pointer">
-              <div className="w-8 h-8 border border-gold-500/40 bg-gold-500/10 flex items-center justify-center">
-                <span className="font-display text-gold-400 text-sm font-bold">A</span>
+              <div className="w-8 h-8 border border-gold-500/40 bg-gold-500/10 flex items-center justify-center overflow-hidden">
+                {imgError ? (
+                  <span className="font-display text-gold-400 text-sm font-bold">A</span>
+                ) : (
+                  <img src="/profile.jpg" alt="Ali Akarma" className="w-full h-full object-cover" onError={() => setImgError(true)} />
+                )}
               </div>
               <span className="font-display text-parchment-100 text-lg font-medium tracking-wide">
                 Ali <span className="text-gold-400">Akarma</span>
