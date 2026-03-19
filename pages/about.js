@@ -25,7 +25,7 @@ export default function About() {
                   <div className="relative mb-8">
                     <div className="w-48 h-48 mx-auto md:mx-0 border border-gold-500/30 bg-noir-700 flex items-center justify-center relative overflow-hidden">
                       <div className="absolute inset-0 bg-radial-gold opacity-30" />
-                      <img src="/profile.png" alt="Ali Akarma" className="w-48 h-48 object-cover" />
+                      <img src="/profile.jpg" alt="Ali Akarma" className="w-48 h-48 object-cover" />
                       <div className="absolute inset-0 bg-grid-pattern opacity-50" style={{backgroundSize:'20px 20px'}} />
                     </div>
                   </div>
