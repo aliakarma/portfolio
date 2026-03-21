@@ -45,7 +45,7 @@ export default function Research() {
               <div className="mb-14">
                 <div className="flex items-center gap-4 mb-4"><div className="w-8 h-px bg-gold-500/60" /><span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Publications</span></div>
                 {/* Responsive Fixes: scale down heading on small screens */}
-                <h1 className="font-display text-5xl md:text-7xl font-light text-parchment-100 mb-4">Research <span className="gold-text italic">Archive</span></h1>
+                <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-light text-parchment-100 mb-4">Research <span className="gold-text italic">Archive</span></h1>
                 <p className="font-body text-parchment-300 max-w-2xl mb-8">{publications.length} publications and manuscripts spanning agentic AI architectures, safety, governance, and real-world deployment in critical systems.</p>
                 <div className="section-divider" />
               </div>

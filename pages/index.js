@@ -71,14 +71,14 @@ export default function Home() {
                   <div className="flex items-center gap-2 px-3 py-1 border border-gold-500/30 bg-gold-500/5 rounded-sm max-w-full overflow-hidden">
                     <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse flex-shrink-0" />
                     {/* Responsive Fixes: allow long badge text to wrap */}
-                    <span className="font-mono text-xs text-gold-400 tracking-widest uppercase leading-relaxed break-words">AI Researcher · Islamic University of Madinah</span>
+                     <span className="font-mono text-xs text-gold-400 tracking-normal sm:tracking-widest uppercase leading-relaxed break-words">AI Researcher · Islamic University of Madinah</span>
                   </div>
                 </motion.div>
                 {/* Responsive Fixes: scale down title on small screens */}
                 <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}
-                  className="font-display text-5xl sm:text-6xl md:text-8xl font-light text-parchment-100 leading-none mb-1">Ali</motion.h1>
+                  className="font-display text-4xl sm:text-6xl md:text-8xl font-light text-parchment-100 leading-none mb-1">Ali</motion.h1>
                 <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
-                  className="font-display text-5xl sm:text-6xl md:text-8xl font-light leading-none mb-6 sm:mb-8">
+                  className="font-display text-4xl sm:text-6xl md:text-8xl font-light leading-none mb-6 sm:mb-8">
                   <span className="gold-shimmer">Akarma</span>
                 </motion.h1>
                 {/* Responsive Fixes: min-height instead of fixed height to prevent clipping on mobile */}

@@ -16,7 +16,7 @@ export default function About() {
               <div className="mb-16">
                 <div className="flex items-center gap-4 mb-4"><div className="w-8 h-px bg-gold-500/60" /><span className="font-mono text-xs text-gold-400 tracking-widest uppercase">About</span></div>
                 {/* Responsive Fixes: scale down heading on small screens */}
-                <h1 className="font-display text-5xl md:text-7xl font-light text-parchment-100 mb-6">The <span className="gold-text italic">Researcher</span></h1>
+                <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-light text-parchment-100 mb-6">The <span className="gold-text italic">Researcher</span></h1>
                 <div className="section-divider" />
               </div>
             </SectionReveal>

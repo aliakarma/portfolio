@@ -48,7 +48,7 @@ export default function Contact() {
               <div className="mb-16">
                 <div className="flex items-center gap-4 mb-4"><div className="w-8 h-px bg-gold-500/60" /><span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Contact</span></div>
                 {/* Responsive Fixes: scale down heading on small screens */}
-                <h1 className="font-display text-5xl md:text-7xl font-light text-parchment-100 mb-4">Get In <span className="gold-text italic">Touch</span></h1>
+                <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-light text-parchment-100 mb-4">Get In <span className="gold-text italic">Touch</span></h1>
                 <p className="font-body text-parchment-300 max-w-xl">Open to research collaborations, academic discussions, and graduate opportunities. Reach out about AI safety, agentic systems, or governance research.</p>
                 <div className="section-divider mt-8" />
               </div>

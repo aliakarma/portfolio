@@ -63,7 +63,7 @@ export default function Skills() {
               <div className="mb-16">
                 <div className="flex items-center gap-4 mb-4"><div className="w-8 h-px bg-gold-500/60" /><span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Skills</span></div>
                 {/* Responsive Fixes: scale down heading on small screens */}
-                <h1 className="font-display text-5xl md:text-7xl font-light text-parchment-100 mb-4">Technical <span className="gold-text italic">Expertise</span></h1>
+                <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-light text-parchment-100 mb-4">Technical <span className="gold-text italic">Expertise</span></h1>
                 <div className="section-divider mt-8" />
               </div>
             </SectionReveal>
