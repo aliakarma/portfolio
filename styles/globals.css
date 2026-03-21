@@ -4,22 +4,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ================= ROOT ================= */
 :root {
   --font-cormorant: 'Cormorant Garamond', serif;
   --font-source: 'Source Serif 4', serif;
   --font-jetbrains: 'JetBrains Mono', monospace;
 }
 
+/* ================= RESET ================= */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  min-width: 0; /* 🔥 prevents flex overflow issues globally */
 }
 
-/* Responsive Fixes: prevent horizontal overflow on all devices */
+/* ================= BASE ================= */
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
   max-width: 100%;
 }
 
@@ -28,20 +30,22 @@ body {
   color: #ede5d0;
   font-family: var(--font-source);
   overflow-x: hidden;
-  /* Responsive Fixes: allow long words to break gracefully on small screens */
-  word-break: normal;
+
+  /* 🔥 SAFE TEXT WRAPPING */
+  word-break: keep-all;
   overflow-wrap: break-word;
 }
 
-/* Responsive Fixes: ensure media never exceeds container */
+/* ================= MEDIA ================= */
 img,
 video,
 canvas,
 svg {
   max-width: 100%;
+  height: auto;
 }
 
-/* Scrollbar */
+/* ================= SCROLLBAR ================= */
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -56,13 +60,13 @@ svg {
   background: #f4c040;
 }
 
-/* Selection */
+/* ================= SELECTION ================= */
 ::selection {
   background: rgba(232, 169, 0, 0.3);
   color: #fef9e7;
 }
 
-/* Noise texture overlay */
+/* ================= NOISE OVERLAY ================= */
 body::before {
   content: '';
   position: fixed;
@@ -76,12 +80,11 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* Gold text gradient */
+/* ================= TEXT STYLES ================= */
 .gold-text {
   background: linear-gradient(135deg, #f4c040 0%, #e8a900 50%, #f4c040 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .gold-shimmer {
@@ -89,15 +92,13 @@ body::before {
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
   animation: shimmer 3s linear infinite;
 }
 
-/* Glass card */
+/* ================= GLASS CARD ================= */
 .glass-card {
   background: rgba(26, 26, 46, 0.6);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(232, 169, 0, 0.12);
   transition: all 0.3s ease;
 }
@@ -109,31 +110,13 @@ body::before {
   box-shadow: 0 8px 32px rgba(232, 169, 0, 0.08);
 }
 
-/* Section divider */
+/* ================= DIVIDER ================= */
 .section-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(232, 169, 0, 0.4), transparent);
 }
 
-/* Animated underline */
-.hover-underline {
-  position: relative;
-}
-.hover-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: #e8a900;
-  transition: width 0.3s ease;
-}
-.hover-underline:hover::after {
-  width: 100%;
-}
-
-/* Tag badge */
+/* ================= TAG BADGE ================= */
 .tag-badge {
   font-family: var(--font-jetbrains);
   font-size: 0.68rem;
@@ -145,7 +128,7 @@ body::before {
   color: #f4c040;
 }
 
-/* Publication card accent */
+/* ================= PUBLICATION CARD ================= */
 .pub-card-accent {
   position: relative;
 }
@@ -159,103 +142,43 @@ body::before {
   background: linear-gradient(180deg, #e8a900, transparent);
 }
 
-/* Timeline line */
-.timeline-line {
-  position: relative;
-}
-.timeline-line::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(180deg, transparent, rgba(232,169,0,0.4), transparent);
-  transform: translateX(-50%);
+/* ================= TYPOGRAPHY ================= */
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: var(--font-cormorant);
+  }
 }
 
-/* Page transitions */
-.page-enter {
-  opacity: 0;
-  transform: translateY(20px);
-}
-.page-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 400ms, transform 400ms;
+/* 🔥 CRITICAL FIX: PREVENT VERTICAL TEXT BUG */
+h1, h2, h3, h4, h5, h6, p, span, div {
+  word-break: keep-all !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
 }
 
-/* Star particle */
-.star-particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: rgba(232, 169, 0, 0.6);
-}
-
-/* Typing cursor */
-.typing-cursor::after {
-  content: '|';
-  animation: blink 1s step-end infinite;
-  color: #e8a900;
-  margin-left: 2px;
-}
-
-@keyframes blink {
-  from, to { opacity: 1; }
-  50% { opacity: 0; }
-}
-
+/* ================= ANIMATIONS ================= */
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
-/* Active nav link */
-.nav-active {
-  color: #e8a900;
-}
-.nav-active::after {
-  width: 100%;
-}
-
-/* Responsive font sizes */
-@layer base {
-  h1 { font-family: var(--font-cormorant); }
-  h2 { font-family: var(--font-cormorant); }
-  h3 { font-family: var(--font-cormorant); }
-  h4 { font-family: var(--font-cormorant); }
-}
-
-/* Responsive Fixes: prevent letter-by-letter vertical stacking on mobile */
-h1, h2, h3, h4, h5, h6 {
-  word-break: normal;
-  overflow-wrap: break-word;
-  white-space: normal;
-}
-
-/* Responsive Fixes: mobile-specific adjustments */
+/* ================= MOBILE FIXES ================= */
 @media (max-width: 479px) {
-  /* Prevent horizontal overflow from fixed-width elements */
   .glass-card {
     max-width: 100%;
   }
 
-  /* Ensure tag badges don't overflow */
   .tag-badge {
     max-width: 100%;
-    word-break: normal;
-    overflow-wrap: break-word;
+    word-break: keep-all;
   }
 
-  /* Ensure the noise overlay doesn't cause issues on iOS */
   body::before {
     display: none;
   }
 }
 
-/* Responsive Fixes: ensure iOS safe-area is respected */
+/* ================= SAFE AREA ================= */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   body {
     padding-bottom: env(safe-area-inset-bottom);
