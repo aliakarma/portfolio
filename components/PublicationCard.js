@@ -5,6 +5,8 @@ import {
   Code2, Database, FileText, Copy, Check, X, Tag
 } from 'lucide-react'
 
+const HIGHLIGHTED_AUTHOR = 'Ali Akarma'
+
 const STATUS_STYLES = {
   published: 'bg-emerald-900/40 text-emerald-300 border-emerald-600/30',
   accepted:  'bg-sky-900/40 text-sky-300 border-sky-600/30',
@@ -115,8 +117,8 @@ export default function PublicationCard({ pub, index = 0 }) {
               </h3>
               {/* Authors */}
               <p className="font-mono text-xs text-parchment-400 mb-3">
-                {pub.authorsStr.split(/(Ali Akarma)/).map((part, i) =>
-                  part === 'Ali Akarma'
+                {pub.authorsStr.split(new RegExp(`(${HIGHLIGHTED_AUTHOR})`)).map((part, i) =>
+                  part === HIGHLIGHTED_AUTHOR
                     ? <span key={i} className="text-gold-400 font-semibold">{part}</span>
                     : part
                 )}

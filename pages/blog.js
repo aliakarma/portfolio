@@ -35,7 +35,7 @@ export default function Blog() {
                       <div className="flex flex-wrap items-center gap-3 mb-3">
                         <span className="font-mono text-xs text-gold-400/70 border border-gold-500/20 px-2 py-0.5 rounded-sm">{post.category}</span>
                         <span className="flex items-center gap-1 font-mono text-xs text-parchment-400/60"><Clock size={10}/>{post.readTime}</span>
-                        <span className="font-mono text-xs text-parchment-400/40">{post.date.slice(0, 7)}</span>
+                        <span className="font-mono text-xs text-parchment-400/40">{post.date.slice(0, 'YYYY-MM'.length)}</span>
                         {post.venue && (
                           <span className="flex items-center gap-1 font-mono text-xs text-parchment-400/50 border border-parchment-400/15 px-2 py-0.5 rounded-sm">
                             <MapPin size={9}/>{post.venue}
