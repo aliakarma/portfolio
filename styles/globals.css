@@ -1,0 +1,237 @@
+/* Fonts loaded via <link> in _document.js for non-blocking render */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================= ROOT ================= */
+:root {
+  --font-cormorant: 'Cormorant Garamond', serif;
+  --font-source: 'Source Serif 4', serif;
+  --font-jetbrains: 'JetBrains Mono', monospace;
+}
+
+/* ================= RESET ================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  min-width: 0; /* Prevents flex overflow globally */
+}
+
+/* ================= BASE ================= */
+html {
+  scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #08080f;
+  color: #ede5d0;
+  font-family: var(--font-source);
+  overflow-x: hidden;
+  /* Responsive Fix: break-word wraps long words at container edge as last resort */
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Responsive Fix: headings use hyphens for long words on narrow screens */
+h1, h2, h3, h4, h5, h6 {
+  hyphens: auto;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ================= MEDIA ================= */
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ================= SCROLLBAR ================= */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #08080f;
+}
+::-webkit-scrollbar-thumb {
+  background: #e8a900;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f4c040;
+}
+
+/* ================= SELECTION ================= */
+::selection {
+  background: rgba(232, 169, 0, 0.3);
+  color: #fef9e7;
+}
+
+/* ================= NOISE OVERLAY ================= */
+@media (min-width: 480px) {
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 100;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+}
+
+/* ================= TEXT STYLES ================= */
+.gold-text {
+  background: linear-gradient(135deg, #f4c040 0%, #e8a900 50%, #f4c040 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg, #e8a900 0%, #f4c040 25%, #fdeebf 50%, #f4c040 75%, #e8a900 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .gold-shimmer {
+    animation: none;
+    background: linear-gradient(135deg, #f4c040 0%, #e8a900 50%, #f4c040 100%);
+  }
+}
+
+/* ================= GLASS CARD ================= */
+.glass-card {
+  background: rgba(26, 26, 46, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 169, 0, 0.12);
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Responsive Fix: hover effects only on pointer devices — prevents stuck hover on touch */
+@media (hover: hover) and (pointer: fine) {
+  .glass-card:hover {
+    border-color: rgba(232, 169, 0, 0.3);
+    background: rgba(26, 26, 46, 0.8);
+    box-shadow: 0 8px 32px rgba(232, 169, 0, 0.08);
+  }
+}
+
+/* ================= DIVIDER ================= */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232, 169, 0, 0.4), transparent);
+}
+
+/* ================= TAG BADGE ================= */
+.tag-badge {
+  font-family: var(--font-jetbrains);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 2px;
+  background: rgba(232, 169, 0, 0.1);
+  border: 1px solid rgba(232, 169, 0, 0.2);
+  color: #f4c040;
+  /* Responsive Fix: prevent tag badges from overflowing their container */
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ================= PUBLICATION CARD ACCENT ================= */
+.pub-card-accent {
+  position: relative;
+}
+.pub-card-accent::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(180deg, #e8a900, transparent);
+  border-radius: 1px 0 0 1px;
+}
+
+/* ================= HOVER UNDERLINE NAV ================= */
+/* Fix: these classes were referenced in Navbar.js but never defined */
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(232, 169, 0, 0.6);
+  transition: width 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hover-underline:hover::after {
+    width: 100%;
+  }
+}
+
+.nav-active::after {
+  width: 100%;
+  background: rgba(232, 169, 0, 1);
+}
+
+/* ================= TYPOGRAPHY ================= */
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: var(--font-cormorant);
+  }
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ================= SAFE AREA (iOS notch support) ================= */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* ================= FOCUS STYLES ================= */
+/* Ensure keyboard-navigable elements have visible focus outlines */
+:focus-visible {
+  outline: 2px solid rgba(232, 169, 0, 0.8);
+  outline-offset: 2px;
+}
+
+/* ================= REDUCED MOTION ================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
