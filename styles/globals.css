@@ -28,9 +28,8 @@ body {
   color: #ede5d0;
   font-family: var(--font-source);
   overflow-x: hidden;
-  /* Responsive Fixes: allow long words to break on small screens */
-  word-break: break-word;
-  overflow-wrap: anywhere;
+  /* Responsive Fixes: allow long words to break gracefully on small screens */
+  overflow-wrap: break-word;
 }
 
 /* Responsive Fixes: ensure media never exceeds container */
@@ -238,7 +237,6 @@ body::before {
   /* Ensure tag badges don't overflow */
   .tag-badge {
     max-width: 100%;
-    white-space: normal;
     word-break: break-word;
   }
 

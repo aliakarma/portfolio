@@ -59,8 +59,8 @@ export default function Home() {
         {/* HERO */}
         <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
           <div className="absolute inset-0 bg-grid-pattern" style={{ backgroundSize: '40px 40px' }} />
-          {/* Responsive Fixes: constrain radial gradient to viewport */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(700px,100vw)] h-[min(700px,100vw)] bg-radial-gold opacity-25 pointer-events-none" />
+          {/* Responsive Fixes: constrain radial gradient to viewport without causing scrollbar */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(700px,100%)] h-[min(700px,100%)] bg-radial-gold opacity-25 pointer-events-none" />
           <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-16">
             <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
               {/* Left */}
