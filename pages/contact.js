@@ -43,16 +43,17 @@ export default function Contact() {
       <Head><title>Contact — Ali Akarma</title></Head>
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">
-          <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <SectionReveal>
               <div className="mb-16">
                 <div className="flex items-center gap-4 mb-4"><div className="w-8 h-px bg-gold-500/60" /><span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Contact</span></div>
+                {/* Responsive Fixes: scale down heading on small screens */}
                 <h1 className="font-display text-5xl md:text-7xl font-light text-parchment-100 mb-4">Get In <span className="gold-text italic">Touch</span></h1>
                 <p className="font-body text-parchment-300 max-w-xl">Open to research collaborations, academic discussions, and graduate opportunities. Reach out about AI safety, agentic systems, or governance research.</p>
                 <div className="section-divider mt-8" />
               </div>
             </SectionReveal>
-            <div className="grid md:grid-cols-5 gap-12">
+            <div className="grid md:grid-cols-5 gap-8 md:gap-12">
               <div className="md:col-span-2 space-y-8">
                 <SectionReveal>
                   <div>
@@ -69,9 +70,9 @@ export default function Contact() {
                     <div className="space-y-3">
                       {socialLinks.map(link => (
                         <motion.a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" whileHover={{x:4}}
-                          className="flex items-center gap-4 glass-card p-4 group">
-                          <div className={`${link.color} group-hover:scale-110 transition-transform`}>{link.icon}</div>
-                          <div><p className="font-mono text-sm text-parchment-100">{link.label}</p><p className="font-mono text-xs text-parchment-400">{link.sub}</p></div>
+                          className="flex items-center gap-4 glass-card p-4 group min-h-[56px]">
+                          <div className={`${link.color} group-hover:scale-110 transition-transform flex-shrink-0`}>{link.icon}</div>
+                          <div className="min-w-0"><p className="font-mono text-sm text-parchment-100">{link.label}</p><p className="font-mono text-xs text-parchment-400">{link.sub}</p></div>
                         </motion.a>
                       ))}
                     </div>
@@ -79,14 +80,14 @@ export default function Contact() {
                 </SectionReveal>
                 <SectionReveal delay={0.2}>
                   <div className="glass-card p-5 border border-gold-500/15">
-                    <div className="flex items-center gap-2 mb-3"><div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"/><span className="font-mono text-xs text-green-400 tracking-wide">Available for collaboration</span></div>
+                    <div className="flex items-center gap-2 mb-3"><div className="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0"/><span className="font-mono text-xs text-green-400 tracking-wide">Available for collaboration</span></div>
                     <p className="font-body text-sm text-parchment-300">Seeking graduate research opportunities and collaborations in AI safety, agentic systems, and trustworthy ML.</p>
                   </div>
                 </SectionReveal>
               </div>
               <div className="md:col-span-3">
                 <SectionReveal delay={0.1}>
-                  <div className="glass-card p-8">
+                  <div className="glass-card p-5 sm:p-8">
                     <div className="flex items-center gap-3 mb-6"><MessageSquare size={18} className="text-gold-400"/><h3 className="font-display text-xl text-parchment-100">Send a Message</h3></div>
                     <form onSubmit={handleSubmit} className="space-y-5">
                       <div className="grid sm:grid-cols-2 gap-4">
