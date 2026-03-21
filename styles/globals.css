@@ -16,8 +16,11 @@
   padding: 0;
 }
 
+/* Responsive Fixes: prevent horizontal overflow on all devices */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -25,6 +28,17 @@ body {
   color: #ede5d0;
   font-family: var(--font-source);
   overflow-x: hidden;
+  /* Responsive Fixes: allow long words to break on small screens */
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Responsive Fixes: ensure media never exceeds container */
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
 }
 
 /* Scrollbar */
@@ -212,4 +226,31 @@ body::before {
   h2 { font-family: var(--font-cormorant); }
   h3 { font-family: var(--font-cormorant); }
   h4 { font-family: var(--font-cormorant); }
+}
+
+/* Responsive Fixes: mobile-specific adjustments */
+@media (max-width: 479px) {
+  /* Prevent horizontal overflow from fixed-width elements */
+  .glass-card {
+    max-width: 100%;
+  }
+
+  /* Ensure tag badges don't overflow */
+  .tag-badge {
+    max-width: 100%;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  /* Ensure the noise overlay doesn't cause issues on iOS */
+  body::before {
+    display: none;
+  }
+}
+
+/* Responsive Fixes: ensure iOS safe-area is respected */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }

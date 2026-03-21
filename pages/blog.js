@@ -15,10 +15,11 @@ export default function Blog() {
       <Head><title>Writing — Ali Akarma</title></Head>
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">
-          <div className="max-w-4xl mx-auto px-6">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
             <SectionReveal>
               <div className="mb-16">
                 <div className="flex items-center gap-4 mb-4"><div className="w-8 h-px bg-gold-500/60" /><span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Writing</span></div>
+                {/* Responsive Fixes: scale down heading on small screens */}
                 <h1 className="font-display text-5xl md:text-7xl font-light text-parchment-100 mb-4">Research <span className="gold-text italic">Notes</span></h1>
                 <p className="font-body text-parchment-300 max-w-2xl mb-6">{blogPosts.length} articles drawn from published research — each paper distilled into a concise, reader-friendly post covering key findings, contributions, and practical implications.</p>
                 <div className="section-divider" />
@@ -50,15 +51,16 @@ export default function Blog() {
                       <p className="font-body text-sm text-parchment-300 leading-relaxed mb-4">{post.excerpt}</p>
 
                       {/* Tags + expand toggle */}
-                      <div className="flex items-center justify-between pt-3 border-t border-noir-600/60">
-                        <div className="flex flex-wrap gap-1.5">
+                      {/* Responsive Fixes: ensure tags and button stay on same line with flex-shrink-0 */}
+                      <div className="flex items-center justify-between pt-3 border-t border-noir-600/60 gap-2">
+                        <div className="flex flex-wrap gap-1.5 min-w-0">
                           {post.tags.map(tag => (
                             <span key={tag} className="flex items-center gap-1 tag-badge"><Tag size={8}/>{tag}</span>
                           ))}
                         </div>
                         <button
                           onClick={() => setExpanded(isOpen ? null : post.id)}
-                          className="flex items-center gap-1.5 font-mono text-xs text-parchment-400 hover:text-gold-400 transition-colors ml-3 flex-shrink-0"
+                          className="flex items-center gap-1.5 font-mono text-xs text-parchment-400 hover:text-gold-400 transition-colors ml-2 flex-shrink-0 min-h-[36px] px-1"
                         >
                           {isOpen ? <><ChevronUp size={11}/>Less</> : <><ChevronDown size={11}/>More</>}
                         </button>

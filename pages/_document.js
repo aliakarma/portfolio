@@ -5,6 +5,8 @@ export default function Document() {
     <Html lang="en" className="dark">
       <Head>
         <meta charSet="utf-8" />
+        {/* Responsive Fixes: proper viewport for all devices */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="description" content="Ali Akarma — AI Researcher specializing in Agentic AI, AI Safety, and Trustworthy Machine Learning at the Islamic University of Madinah." />
         <meta name="keywords" content="Ali Akarma, AI Research, Agentic AI, AI Safety, LLMs, Machine Learning, Islamic University of Madinah" />
         <meta property="og:title" content="Ali Akarma — AI Researcher" />

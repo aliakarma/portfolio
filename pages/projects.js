@@ -12,9 +12,10 @@ function ProjectModal({ project, onClose }) {
   const linkedPaper = project.paper ? publications.find(p => p.id === project.paper) : null
   return (
     <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}
-      className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-noir-900/85 backdrop-blur-md" onClick={onClose}>
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-noir-900/85 backdrop-blur-md" onClick={onClose}>
+      {/* Responsive Fixes: constrain modal height and allow scroll on mobile */}
       <motion.div initial={{scale:0.9,y:20}} animate={{scale:1,y:0}} exit={{scale:0.9,y:20}}
-        onClick={e => e.stopPropagation()} className="glass-card max-w-2xl w-full p-8 border border-gold-500/20 relative max-h-[90vh] overflow-y-auto">
+        onClick={e => e.stopPropagation()} className="glass-card max-w-2xl w-full p-5 sm:p-8 border border-gold-500/20 relative max-h-[90vh] overflow-y-auto">
         <button onClick={onClose} className="absolute top-4 right-4 text-parchment-400 hover:text-parchment-100 transition-colors"><X size={18} /></button>
         <div className="flex items-start gap-3 mb-5">
           <div className="w-10 h-10 border border-gold-500/30 bg-gold-500/10 flex items-center justify-center flex-shrink-0"><Code2 size={16} className="text-gold-400" /></div>
@@ -63,10 +64,11 @@ export default function Projects() {
       <Head><title>Projects — Ali Akarma</title></Head>
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">
-          <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <SectionReveal>
               <div className="mb-16">
                 <div className="flex items-center gap-4 mb-4"><div className="w-8 h-px bg-gold-500/60" /><span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Projects</span></div>
+                {/* Responsive Fixes: scale down heading on small screens */}
                 <h1 className="font-display text-5xl md:text-7xl font-light text-parchment-100 mb-4">Research <span className="gold-text italic">Systems</span></h1>
                 <p className="font-body text-parchment-300 max-w-2xl">Applied AI systems built at the intersection of safety, governance, and real-world deployment — each tied to peer-reviewed research.</p>
                 <div className="section-divider mt-8" />
@@ -74,7 +76,8 @@ export default function Projects() {
             </SectionReveal>
             <SectionReveal>
               <h2 className="font-display text-2xl text-parchment-100 mb-6">Featured Projects</h2>
-              <div className="grid md:grid-cols-3 gap-6 mb-16">
+              {/* Responsive Fixes: single column on xs, 2 cols on sm, 3 on md */}
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 mb-16">
                 {featured.map((project, i) => (
                   <motion.div key={project.id} initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.1}}>
                     <ProjectCard project={project} onClick={() => setSelected(project)} />
@@ -84,7 +87,7 @@ export default function Projects() {
             </SectionReveal>
             <SectionReveal delay={0.1}>
               <h2 className="font-display text-2xl text-parchment-100 mb-6">All Projects</h2>
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6">
                 {other.map((project, i) => (
                   <motion.div key={project.id} initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.1}}>
                     <ProjectCard project={project} onClick={() => setSelected(project)} />

@@ -21,7 +21,8 @@ export default function ResearchGraph() {
 
       const svg = d3.select(svgRef.current)
       const W = svgRef.current.clientWidth || 700
-      const H = 420
+      // Responsive Fixes: reduce height on narrow screens
+      const H = W < 480 ? 300 : 420
       svg.attr('width', W).attr('height', H)
       svg.selectAll('*').remove()
 
@@ -136,11 +137,11 @@ export default function ResearchGraph() {
       <svg
         ref={svgRef}
         className="w-full rounded-sm"
-        style={{ minHeight: 420, opacity: loaded ? 1 : 0, transition: 'opacity 0.5s' }}
+        style={{ minHeight: 280, opacity: loaded ? 1 : 0, transition: 'opacity 0.5s' }}
       />
 
-      {/* Legend */}
-      <div className="flex flex-wrap gap-4 mt-3 justify-center">
+      {/* Responsive Fixes: wrap legend items on small screens */}
+      <div className="flex flex-wrap gap-3 sm:gap-4 mt-3 justify-center">
         {Object.entries(groupColors).map(([group, color]) => (
           <div key={group} className="flex items-center gap-1.5">
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />

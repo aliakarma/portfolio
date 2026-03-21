@@ -58,17 +58,19 @@ export default function Skills() {
       <Head><title>Skills — Ali Akarma</title></Head>
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">
-          <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <SectionReveal>
               <div className="mb-16">
                 <div className="flex items-center gap-4 mb-4"><div className="w-8 h-px bg-gold-500/60" /><span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Skills</span></div>
+                {/* Responsive Fixes: scale down heading on small screens */}
                 <h1 className="font-display text-5xl md:text-7xl font-light text-parchment-100 mb-4">Technical <span className="gold-text italic">Expertise</span></h1>
                 <div className="section-divider mt-8" />
               </div>
             </SectionReveal>
-            <div className="grid md:grid-cols-5 gap-12 mb-16">
+            {/* Responsive Fixes: stack columns on mobile */}
+            <div className="grid md:grid-cols-5 gap-8 md:gap-12 mb-16">
               <SectionReveal className="md:col-span-2">
-                <div className="glass-card p-6">
+                <div className="glass-card p-5 sm:p-6">
                   <h3 className="font-mono text-xs text-gold-400 tracking-widest uppercase mb-6 text-center">AI Competency Radar</h3>
                   <RadarChart data={skills['AI & Machine Learning']} />
                   <p className="font-mono text-xs text-parchment-400/40 text-center mt-4">Self-assessed proficiency</p>
@@ -77,7 +79,7 @@ export default function Skills() {
               <div className="md:col-span-3 space-y-6">
                 {Object.entries(skills).map(([cat,catSkills],ci) => (
                   <SectionReveal key={cat} delay={ci*0.1}>
-                    <div className="glass-card p-6">
+                    <div className="glass-card p-5 sm:p-6">
                       <h3 className="font-display text-lg text-parchment-100 mb-5">{cat}</h3>
                       {catSkills.map((s,i) => <SkillBar key={s.name} name={s.name} level={s.level} delay={ci*0.1+i*0.05} />)}
                     </div>

@@ -38,7 +38,7 @@ export default function Navbar() {
           scrolled ? 'bg-noir-900/92 backdrop-blur-md border-b border-gold-500/10 py-3' : 'bg-transparent py-5'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           <Link href="/">
             <motion.div whileHover={{ scale: 1.03 }} className="flex items-center gap-3 cursor-pointer">
               <div className="w-8 h-8 border border-gold-500/40 bg-gold-500/10 flex items-center justify-center overflow-hidden">
@@ -75,8 +75,9 @@ export default function Navbar() {
             </a>
           </div>
 
+          {/* Responsive Fixes: add padding for larger touch target on mobile */}
           <button onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-parchment-200 hover:text-gold-400 transition-colors">
+            className="md:hidden text-parchment-200 hover:text-gold-400 transition-colors p-2 -mr-2">
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
@@ -86,15 +87,15 @@ export default function Navbar() {
         {mobileOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
             className="fixed top-[60px] left-0 right-0 z-40 bg-noir-800/97 backdrop-blur-md border-b border-gold-500/10">
-            <div className="flex flex-col px-6 py-3">
+            <div className="flex flex-col px-4 sm:px-6 py-3">
               {navLinks.map((link) => (
                 <Link key={link.href} href={link.href}
-                  className={`py-3 font-mono text-xs tracking-widest uppercase border-b border-noir-600/50 ${router.pathname === link.href ? 'text-gold-400' : 'text-parchment-300'}`}>
+                  className={`py-3 font-mono text-xs tracking-widest uppercase border-b border-noir-600/50 min-h-[44px] flex items-center ${router.pathname === link.href ? 'text-gold-400' : 'text-parchment-300'}`}>
                   {link.label}
                 </Link>
               ))}
               <a href="/Ali_Akarma_CV.pdf" target="_blank" rel="noopener noreferrer"
-                className="py-3 font-mono text-xs tracking-widest uppercase text-gold-400 flex items-center gap-2">
+                className="py-3 font-mono text-xs tracking-widest uppercase text-gold-400 flex items-center gap-2 min-h-[44px]">
                 <FileText size={11} /> Download CV
               </a>
             </div>

@@ -59,50 +59,55 @@ export default function Home() {
         {/* HERO */}
         <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
           <div className="absolute inset-0 bg-grid-pattern" style={{ backgroundSize: '40px 40px' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-radial-gold opacity-25 pointer-events-none" />
-          <div className="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-16">
-            <div className="grid md:grid-cols-5 gap-12 items-center">
+          {/* Responsive Fixes: constrain radial gradient to viewport */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(700px,100vw)] h-[min(700px,100vw)] bg-radial-gold opacity-25 pointer-events-none" />
+          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-16">
+            <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
               {/* Left */}
               <div className="md:col-span-3">
+                {/* Responsive Fixes: allow badge to wrap on small screens */}
                 <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}
-                  className="inline-flex items-center gap-2 mb-8">
-                  <div className="flex items-center gap-2 px-3 py-1 border border-gold-500/30 bg-gold-500/5 rounded-sm">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
-                    <span className="font-mono text-xs text-gold-400 tracking-widest uppercase">AI Researcher · Islamic University of Madinah</span>
+                  className="flex items-start mb-6 sm:mb-8 max-w-full">
+                  <div className="flex items-center gap-2 px-3 py-1 border border-gold-500/30 bg-gold-500/5 rounded-sm max-w-full overflow-hidden">
+                    <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse flex-shrink-0" />
+                    {/* Responsive Fixes: allow long badge text to wrap */}
+                    <span className="font-mono text-xs text-gold-400 tracking-widest uppercase leading-relaxed break-words">AI Researcher · Islamic University of Madinah</span>
                   </div>
                 </motion.div>
+                {/* Responsive Fixes: scale down title on small screens */}
                 <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}
-                  className="font-display text-6xl md:text-8xl font-light text-parchment-100 leading-none mb-1">Ali</motion.h1>
+                  className="font-display text-5xl sm:text-6xl md:text-8xl font-light text-parchment-100 leading-none mb-1">Ali</motion.h1>
                 <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
-                  className="font-display text-6xl md:text-8xl font-light leading-none mb-8">
+                  className="font-display text-5xl sm:text-6xl md:text-8xl font-light leading-none mb-6 sm:mb-8">
                   <span className="gold-shimmer">Akarma</span>
                 </motion.h1>
+                {/* Responsive Fixes: min-height instead of fixed height to prevent clipping on mobile */}
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
-                  className="font-mono text-base md:text-lg text-parchment-300 mb-6 h-7">
+                  className="font-mono text-base md:text-lg text-parchment-300 mb-6 min-h-[28px]">
                   <TypeAnimation
                     sequence={['Designing Safety-Aligned Agentic Systems.', 2200, 'Researching Trustworthy Machine Learning.', 2200, 'Building AI Governance Frameworks.', 2200, 'Studying Failure Modes in Autonomous AI.', 2200]}
                     wrapper="span" speed={55} repeat={Infinity} className="text-gold-300" />
                 </motion.div>
                 <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
-                  className="font-body text-parchment-300 text-base leading-relaxed max-w-xl mb-10">{profile.bio}</motion.p>
+                  className="font-body text-parchment-300 text-base leading-relaxed max-w-xl mb-8 sm:mb-10">{profile.bio}</motion.p>
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}
-                  className="flex flex-wrap gap-3 mb-10">
-                  <Link href="/research" className="group flex items-center gap-2 px-6 py-3 bg-gold-500 text-noir-900 font-mono text-xs font-medium tracking-widest uppercase hover:bg-gold-400 transition-all">
+                  className="flex flex-wrap gap-3 mb-8 sm:mb-10">
+                  <Link href="/research" className="group flex items-center gap-2 px-5 sm:px-6 py-3 bg-gold-500 text-noir-900 font-mono text-xs font-medium tracking-widest uppercase hover:bg-gold-400 transition-all">
                     View Research <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
                   <a href={profile.scholar} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 border border-gold-500/40 text-gold-400 font-mono text-xs tracking-widest uppercase hover:bg-gold-500/10 transition-all">
+                    className="flex items-center gap-2 px-5 sm:px-6 py-3 border border-gold-500/40 text-gold-400 font-mono text-xs tracking-widest uppercase hover:bg-gold-500/10 transition-all">
                     <BookOpen size={13} /> Google Scholar
                   </a>
                   <a href={profile.cv} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 border border-parchment-300/20 text-parchment-300 font-mono text-xs tracking-widest uppercase hover:border-parchment-300/50 transition-all">
+                    className="flex items-center gap-2 px-5 sm:px-6 py-3 border border-parchment-300/20 text-parchment-300 font-mono text-xs tracking-widest uppercase hover:border-parchment-300/50 transition-all">
                     <FileText size={13} /> Download CV
                   </a>
                 </motion.div>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="flex items-center gap-5">
                   {socialLinks.map(s => (
                     <a key={s.label} href={s.href} target={s.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
-                      aria-label={s.label} className="text-parchment-400 hover:text-gold-400 transition-all duration-200 hover:scale-110">{s.icon}</a>
+                      aria-label={s.label} className="text-parchment-400 hover:text-gold-400 transition-all duration-200 hover:scale-110 p-1">{s.icon}</a>
                   ))}
                 </motion.div>
               </div>
@@ -114,10 +119,11 @@ export default function Home() {
                     <motion.div key={stat.label} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.6 + i * 0.1 }}
                       className="glass-card p-4 flex items-center gap-4">
                       <div className="w-10 h-10 border border-gold-500/25 bg-gold-500/8 flex items-center justify-center flex-shrink-0 text-gold-400">{stat.icon}</div>
-                      <div className="flex-1">
+                      {/* Responsive Fixes: min-w-0 prevents flex overflow of long sub text */}
+                      <div className="flex-1 min-w-0">
                         <div className="font-display text-2xl text-gold-400"><AnimatedCounter target={stat.value} suffix={stat.suffix} delay={0.8 + i * 0.1} /></div>
                         <div className="font-mono text-xs text-parchment-100">{stat.label}</div>
-                        <div className="font-mono text-xs text-parchment-400/50">{stat.sub}</div>
+                        <div className="font-mono text-xs text-parchment-400/50 break-words">{stat.sub}</div>
                       </div>
                     </motion.div>
                   ))}
@@ -150,20 +156,21 @@ export default function Home() {
 
         {/* RESEARCH VISION */}
         <SectionReveal>
-          <section className="relative z-10 max-w-6xl mx-auto px-6 py-20">
+          <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-20">
             <div className="section-divider mb-16" />
-            <div className="grid md:grid-cols-5 gap-10 items-start">
+            <div className="grid md:grid-cols-5 gap-8 md:gap-10 items-start">
               <div className="md:col-span-2">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-8 h-px bg-gold-500/60" />
                   <span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Research Vision</span>
                 </div>
-                <h2 className="font-display text-4xl md:text-5xl font-light text-parchment-100 leading-tight">
+                {/* Responsive Fixes: scale down heading on small screens */}
+                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-parchment-100 leading-tight">
                   Why This<br /><span className="gold-text italic">Research</span><br />Matters
                 </h2>
               </div>
               <div className="md:col-span-3">
-                <div className="relative glass-card p-8 border-l-2 border-gold-500/50">
+                <div className="relative glass-card p-6 sm:p-8 border-l-2 border-gold-500/50">
                   <Quote size={28} className="text-gold-500/20 absolute top-6 right-6" />
                   {profile.researchVision.split('\n\n').map((para, i) => (
                     <p key={i} className={`font-body text-parchment-200 leading-relaxed text-base ${i > 0 ? 'mt-4' : ''}`}>{para}</p>
@@ -185,14 +192,14 @@ export default function Home() {
 
         {/* RESEARCH GRAPH */}
         <SectionReveal>
-          <section className="relative z-10 max-w-6xl mx-auto px-6 pb-20">
+          <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pb-20">
             <div className="section-divider mb-12" />
             <div className="flex items-center gap-4 mb-2">
               <div className="w-8 h-px bg-gold-500/60" />
               <span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Knowledge Graph</span>
             </div>
             <h2 className="font-display text-3xl text-parchment-100 mb-8">Research Landscape</h2>
-            <div className="glass-card p-6 border border-gold-500/10">
+            <div className="glass-card p-4 sm:p-6 border border-gold-500/10 overflow-hidden">
               <ResearchGraph />
             </div>
           </section>
@@ -200,9 +207,10 @@ export default function Home() {
 
         {/* RECENT PUBLICATIONS */}
         <SectionReveal>
-          <section className="relative z-10 max-w-6xl mx-auto px-6 pb-24">
+          <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pb-24">
             <div className="section-divider mb-12" />
-            <div className="flex items-center justify-between mb-8">
+            {/* Responsive Fixes: stack header and link on small screens */}
+            <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
               <div>
                 <div className="flex items-center gap-4 mb-2">
                   <div className="w-8 h-px bg-gold-500/60" />
@@ -210,7 +218,7 @@ export default function Home() {
                 </div>
                 <h2 className="font-display text-3xl text-parchment-100">Recent Publications</h2>
               </div>
-              <Link href="/research" className="font-mono text-xs text-gold-400 tracking-widest uppercase hover-underline flex items-center gap-1">
+              <Link href="/research" className="font-mono text-xs text-gold-400 tracking-widest uppercase hover-underline flex items-center gap-1 self-end">
                 All {publications.length} Papers <ArrowRight size={12} />
               </Link>
             </div>
@@ -219,12 +227,12 @@ export default function Home() {
                 <motion.div key={pub.id} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                   className="pub-card-accent glass-card p-5 pl-7">
                   <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <h3 className="font-display text-lg text-parchment-100 mb-1 leading-snug">{pub.title}</h3>
-                      <p className="font-mono text-xs text-parchment-400 mb-2">{pub.authorsStr}</p>
+                      <p className="font-mono text-xs text-parchment-400 mb-2 break-words">{pub.authorsStr}</p>
                       <div className="flex flex-wrap gap-1.5">{pub.tags.slice(0,3).map(tag => <span key={tag} className="tag-badge">{tag}</span>)}</div>
                     </div>
-                    <span className={`font-mono text-xs px-2 py-1 border rounded-sm ${pub.status === 'published' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-700/30' : pub.status === 'accepted' ? 'bg-sky-900/30 text-sky-400 border-sky-700/30' : 'bg-amber-900/30 text-amber-400 border-amber-700/30'}`}>{pub.statusLabel}</span>
+                    <span className={`font-mono text-xs px-2 py-1 border rounded-sm flex-shrink-0 ${pub.status === 'published' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-700/30' : pub.status === 'accepted' ? 'bg-sky-900/30 text-sky-400 border-sky-700/30' : 'bg-amber-900/30 text-amber-400 border-amber-700/30'}`}>{pub.statusLabel}</span>
                   </div>
                 </motion.div>
               ))}
