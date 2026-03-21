@@ -29,6 +29,7 @@ body {
   font-family: var(--font-source);
   overflow-x: hidden;
   /* Responsive Fixes: allow long words to break gracefully on small screens */
+  word-break: normal;
   overflow-wrap: break-word;
 }
 
@@ -227,6 +228,13 @@ body::before {
   h4 { font-family: var(--font-cormorant); }
 }
 
+/* Responsive Fixes: prevent letter-by-letter vertical stacking on mobile */
+h1, h2, h3, h4, h5, h6 {
+  word-break: normal;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
 /* Responsive Fixes: mobile-specific adjustments */
 @media (max-width: 479px) {
   /* Prevent horizontal overflow from fixed-width elements */
@@ -237,7 +245,8 @@ body::before {
   /* Ensure tag badges don't overflow */
   .tag-badge {
     max-width: 100%;
-    word-break: break-word;
+    word-break: normal;
+    overflow-wrap: break-word;
   }
 
   /* Ensure the noise overlay doesn't cause issues on iOS */

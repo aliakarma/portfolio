@@ -20,7 +20,7 @@ export default function Blog() {
               <div className="mb-16">
                 <div className="flex items-center gap-4 mb-4"><div className="w-8 h-px bg-gold-500/60" /><span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Writing</span></div>
                 {/* Responsive Fixes: scale down heading on small screens */}
-                <h1 className="font-display text-5xl md:text-7xl font-light text-parchment-100 mb-4">Research <span className="gold-text italic">Notes</span></h1>
+                <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-light text-parchment-100 mb-4">Research <span className="gold-text italic">Notes</span></h1>
                 <p className="font-body text-parchment-300 max-w-2xl mb-6">{blogPosts.length} articles drawn from published research — each paper distilled into a concise, reader-friendly post covering key findings, contributions, and practical implications.</p>
                 <div className="section-divider" />
               </div>
