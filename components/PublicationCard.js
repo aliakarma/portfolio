@@ -98,9 +98,9 @@ export default function PublicationCard({ pub, index = 0 }) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -8 }}
         transition={{ duration: 0.35, delay: index * 0.04 }}
-        className="pub-card-accent glass-card pl-7 group"
+        className="pub-card-accent glass-card pl-4 sm:pl-7 group"
       >
-        <div className="p-5">
+        <div className="p-4 sm:p-5">
           {/* Top row */}
           <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
             <div className="flex-1 min-w-0">
@@ -112,7 +112,7 @@ export default function PublicationCard({ pub, index = 0 }) {
                 <span className="font-mono text-xs text-parchment-400/60">{pub.venueShort} · {pub.year}</span>
               </div>
               {/* Title */}
-              <h3 className="font-display text-xl leading-snug text-parchment-100 mb-1.5 group-hover:text-gold-100 transition-colors">
+              <h3 className="font-display text-xl leading-snug text-parchment-100 mb-1.5 group-hover:text-gold-100 transition-colors break-words whitespace-normal w-full min-w-0">
                 {pub.title}
               </h3>
               {/* Authors */}
