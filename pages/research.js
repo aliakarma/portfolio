@@ -15,12 +15,14 @@ export default function Research() {
   const [typeFilter,   setTypeFilter]   = useState('All')
   const [tagFilter,    setTagFilter]    = useState(null)
 
-  const filtered = publications.filter(p => {
-    const s = statusFilter === 'All' || p.status === statusFilter
-    const t = typeFilter   === 'All' || p.type   === typeFilter
-    const g = !tagFilter              || p.tags.includes(tagFilter)
-    return s && t && g
-  })
+  const filtered = publications
+    .filter(p => {
+      const s = statusFilter === 'All' || p.status === statusFilter
+      const t = typeFilter   === 'All' || p.type   === typeFilter
+      const g = !tagFilter              || p.tags.includes(tagFilter)
+      return s && t && g
+    })
+    .sort((a, b) => b.year - a.year || b.id - a.id)
 
   const counts = {
     published: publications.filter(p => p.status === 'published').length,

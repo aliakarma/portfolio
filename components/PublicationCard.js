@@ -115,7 +115,11 @@ export default function PublicationCard({ pub, index = 0 }) {
               </h3>
               {/* Authors */}
               <p className="font-mono text-xs text-parchment-400 mb-3">
-                {pub.authorsStr}
+                {pub.authorsStr.split(/(Ali Akarma)/).map((part, i) =>
+                  part === 'Ali Akarma'
+                    ? <span key={i} className="text-gold-400 font-semibold">{part}</span>
+                    : part
+                )}
               </p>
               {/* Tags */}
               <div className="flex flex-wrap gap-1.5">
