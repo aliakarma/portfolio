@@ -122,10 +122,10 @@ export default function PublicationCard({ pub, index = 0 }) {
         <div className="p-3 sm:p-5">
 
           {/* TOP SECTION */}
-          <div className="flex flex-wrap items-start gap-3 mb-3">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-start gap-3 mb-3">
 
             {/* LEFT CONTENT */}
-            <div className="flex-1 min-w-0 w-full">
+            <div className="w-full sm:flex-1 sm:min-w-0">
 
               {/* TYPE + VENUE */}
               <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -165,7 +165,7 @@ export default function PublicationCard({ pub, index = 0 }) {
             </div>
 
             {/* STATUS BADGE */}
-            <span className={`self-start flex-shrink-0 text-[10px] sm:text-xs px-2 py-1 border rounded-sm ${STATUS_STYLES[pub.status]}`}>
+            <span className={`w-full sm:w-auto self-start text-[10px] sm:text-xs px-2 py-1 border rounded-sm break-words ${STATUS_STYLES[pub.status]}`}>
               {pub.statusLabel}
             </span>
 

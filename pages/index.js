@@ -429,8 +429,8 @@ export default function Home() {
                   transition={{ delay: i * 0.1 }}
                   className="pub-card-accent glass-card p-5 pl-7"
                 >
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div className="flex-1 min-w-0">
+                  <div className="flex flex-col sm:flex-row sm:flex-wrap items-start justify-between gap-3">
+                    <div className="w-full sm:flex-1 sm:min-w-0">
                       <h3 className="font-display text-lg text-parchment-100 mb-1 leading-snug">{pub.title}</h3>
                       <p className="font-mono text-xs text-parchment-400 mb-2 leading-relaxed">
                         {pub.authorsStr.split(new RegExp(`(${HIGHLIGHTED_AUTHOR})`)).map((part, idx) => (
@@ -445,7 +445,7 @@ export default function Home() {
                         ))}
                       </div>
                     </div>
-                    <span className={`font-mono text-xs px-2 py-1 border rounded-sm flex-shrink-0 ${
+                    <span className={`w-full sm:w-auto font-mono text-[10px] sm:text-xs px-2 py-1 border rounded-sm break-words ${
                       pub.status === 'published' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-700/30'
                       : pub.status === 'accepted' ? 'bg-sky-900/30 text-sky-400 border-sky-700/30'
                       : 'bg-amber-900/30 text-amber-400 border-amber-700/30'
