@@ -75,8 +75,8 @@ A central concern of my work is the alignment problem in deployed agentic system
     },
     {
       title:  "Certificate of Appreciation",
-      issuer: "ICBDT 2025",
-      year:   2025,
+      issuer: "ICETAS 2026",
+      year:   2026,
     },
     {
       title:  "Mindware: Critical Thinking",
