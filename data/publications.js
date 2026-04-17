@@ -272,17 +272,17 @@ export const publications = [
     statusLabel: "Under Review · Springer",
     tags: ["AI Governance", "Academic Integrity", "Ethics", "Guidelines"],
     doi:      null,
-    pdf:      null,
+    pdf:      "https://arxiv.org/pdf/2604.11111",
     code:     null,
     dataset:  null,
     notebook: null,
-    abstract: "Develops comprehensive guidelines for ethical AI tool use in academic settings, balancing pedagogical benefits against integrity and fairness, with a proposed framework for institutional policy adoption.",
-    bibtex: `@article{hatem2025ai_integrity,
-  title={Use of AI Tools: Guidelines to Maintain Academic Integrity},
-  author={Hatem M. El-boghdadi and Toqeer Ali Syed and Ali Akarma and Qamar Wali},
-  journal={Springer},
-  year={2025},
-  note={Under Review}
+    abstract: "The rapid adoption of AI tools such as ChatGPT has significantly transformed academic practices, offering considerable benefits for both students and faculty in computing disciplines. These tools have been shown to enhance learning efficiency, academic self-efficacy, and confidence. However, their increasing use also raises pressing concerns regarding the preservation of academic integrity -- an essential pillar of the educational process. This paper explores the implications of widespread AI tool usage within computing colleges, with a particular focus on how to align their use with the principles of academic honesty. We begin by classifying common assessment techniques employed in computing education and examine how each may be impacted by AI-assisted tools. Building on this foundation, we propose a set of general guidelines applicable across various assessment formats to help instructors responsibly integrate AI tools into their pedagogy. Furthermore, we provide targeted, assessment-specific recommendations designed to uphold educational objectives while mitigating risks of academic misconduct. These guidelines serve as a practical framework for instructors aiming to balance the pedagogical advantages of AI tools with the imperative of maintaining academic integrity in computing education. Finally, we introduce a formal model that provides a structured mathematical framework for evaluating student assessments in the presence of AI-assisted tools.",
+    bibtex: `@article{el2026use,
+  title={Use of AI Tools: Guidelines to Maintain Academic Integrity in Computing Colleges},
+  author={El-boghdadi, Hatem M and Syed, Toqeer Ali and Akarma, Ali and Wali, Qamar},
+  journal={arXiv preprint arXiv:2604.11111},
+  year={2026}
+}
 }`,
   },
   {
