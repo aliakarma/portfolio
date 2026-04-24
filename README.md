@@ -222,5 +222,3 @@ In `data/publications.js`, populate these fields for each paper:
 MIT — Free to use and adapt for your own academic portfolio.
 
 ---
-
-*Ali Akarma · Islamic University of Madinah · 2025*
