@@ -166,7 +166,6 @@ In `data/publications.js`, populate these fields for each paper:
   doi:      "https://doi.org/10.xxxx/xxxxx",
   pdf:      "https://arxiv.org/pdf/xxxx.xxxxx",
   code:     "https://github.com/aliakarma/paper-repo",
-  dataset:  "https://kaggle.com/...",
   notebook: "https://colab.research.google.com/...",
 }
 ```
