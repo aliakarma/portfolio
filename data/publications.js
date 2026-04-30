@@ -363,4 +363,36 @@ export const publications = [
   year={2026}
 }`,
   },
+
+
+  {
+    id: 15,
+    title: "Agentic AI for Climate-Resilient Cities: A PRISMA-Guided Review and Digital Twin Framework",
+    authors: ["Toqeer Ali Syed, Ali Akarma, Muhammad Tayyab Naqash, Danial Hameed, Shahid Kamal, Antonio Formisano"],
+    authorsStr: "Toqeer Ali Syed, Ali Akarma, Muhammad Tayyab Naqash, Danial Hameed, Shahid Kamal, Antonio Formisano",
+    venue: "MDPI Sustainability",
+    venueShort: "MDPI Sustainability",
+    type: "journal",
+    year: 2026,
+    status: "published",
+    statusLabel: "Journal Article · MDPI Sustainability",
+    tags: ["Agentic AI", "SDGs", "AI Governance", "PRISMA", "Digital Twins", "SDG11", "SDG13"],
+    doi:      "https://doi.org/10.20944/preprints202604.1837.v1",
+    pdf:      "https://doi.org/10.20944/preprints202604.1837.v1",
+    code:     null,
+    dataset:  "https://doi.org/10.5281/zenodo.19645690",
+    notebook: null,
+    abstract: "Rapid urbanization and intensifying climate risks are placing unprecedented pressure on cities to transition toward sustainable and resilient models. Achieving Sustainable Development Goals (SDGs) 11 (Sustainable Cities and Communities) and 13 (Climate Action) requires intelligent systems capable of interpreting complex urban dynamics and enabling proactive, adaptive decision-making. This paper presents a PRISMA-guided rapid review examining the role of Agentic Artificial Intelligence (AAI)–autonomous, goal-directed systems with multi-step reasoning, tool use, and multi-agent coordination–in advancing urban sustainability and climate resilience. Studies were required to exhibit at least two attributes: autonomous decision-making, multi-step planning, tool use or environmental interaction, and multi-agent coordination. From 920 records, 70 peer-reviewed studies were synthesized, covering smart mobility, infrastructure planning, waste management, emergency response, climate monitoring, emissions tracking, renewable energy forecasting, and multi-hazard early warning systems. Results show that despite rapid progress, AAI applications remain fragmented and domain-specific. To address this, a unified Agentic AI–Digital Twin framework is proposed, integrating real-time sensing, urban–climate co-simulation, multi-agent coordination, and adaptive decision intelligence. A Pareto-based optimization approach balances competing sustainability goals. Key challenges in interoperability, data governance, ethics, and scalability are identified, alongside a research roadmap for integrated intelligent urban ecosystems.",
+    bibtex: `@article{toqeer2026climate,
+	doi = {10.20944/preprints202604.1837.v1},
+	url = {https://doi.org/10.20944/preprints202604.1837.v1},
+	year = 2026,
+	month = {April},
+	publisher = {Preprints},
+	author = {Toqeer Ali Syed and Ali Akarma and Muhammad Tayyab Naqash and Danial Hameed and Shahid Kamal and Antonio Formisano},
+	title = {Agentic AI for Climate-Resilient Cities: A PRISMA-Guided Review and Digital Twin Framework},
+	journal = {Preprints}
+}
+}`,
+  },
 ]
