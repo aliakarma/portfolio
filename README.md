@@ -218,6 +218,6 @@ In `data/publications.js`, populate these fields for each paper:
 
 ## 📄 License
 
-MIT — Free to use and adapt for your own academic portfolio.
+MIT — Free to use and adapt for your own academic portfolio
 
 ---
