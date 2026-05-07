@@ -185,6 +185,19 @@ export const projects = [
     status: "Published",
     paper: null,
   },
+  {
+    id: 15,
+    title: "Prompt Injection Defense Framework",
+    description: "LangChain prompt-injection defense framework with a drop-in middleware, three detection modes, four policy strategies, a formal threat model, and a reproducible evaluation suite for blocking or annotating malicious prompts and tool content.",
+    technologies: ["Python", "LangChain", "scikit-learn", "Jupyter Notebook", "Pytest"],
+    github: "https://github.com/aliakarma/langchain-prompt-injection",
+    demo: null,
+    tags: ["Security", "LLMs", "LangChain"],
+    themes: ["AI Safety", "Security", "Agentic AI"],
+    featured: true,
+    status: "Published",
+    paper: null,
+  },
 
   
 ]
