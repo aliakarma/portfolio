@@ -285,32 +285,32 @@ export const publications = [
 }
 }`,
   },
-  {
+   {
     id: 12,
-    title: "Multi-Agent Reinforcement Learning for Cloudburst Prediction and Disaster Response",
-    authors: ["Toqeer Ali Syed, Ali Akarma, Salman Jan"],
-    authorsStr: "Toqeer Ali Syed, Ali Akarma, Salman Jan",
-    venue: "MDPI Mathematics",
-    venueShort: "MDPI Mathematics",
-    type: "journal",
+    title: "Autonomous Traffic Signal Optimization Using Digital Twin and Agentic AI for Real-Time Decision-Making",
+    authors: ["Salman Jan, Toqeer Ali Syed, Shahid Kamal, Qamar Wali, Ali Akarma"],
+    authorsStr: "Salman Jan, Toqeer Ali Syed, Shahid Kamal, Qamar Wali, Ali Akarma",
+    venue: "Multimedia University Engineering Conference (MECON 2026)",
+    venueShort: "MECON 2026",
+    type: "conference",
     year: 2026,
-    status: "review",
-    statusLabel: "Under Review · MDPI Mathematics",
-    tags: ["Multi-Agent RL", "Deep RL", "Disaster Response", "Safety"],
-    doi:      "https://doi.org/10.5281/zenodo.19023333",
-    pdf:      null,
-    code:     "https://github.com/aliakarma/agentic-weather-rl",
-    dataset:  "https://doi.org/10.5281/zenodo.19023333",
-    notebook: "https://colab.research.google.com/github/aliakarma/agentic-weather-rl/blob/main/notebooks/colab_demo.ipynb",
-    abstract: "Introduces a risk-aware multi-agent deep reinforcement learning framework for cloudburst prediction and coordinated autonomous disaster response with explicit uncertainty quantification and risk-sensitive policy optimization.",
-    bibtex: `@article{toqeer2026marl_cloudburst,
-  title={Multi-Agent Reinforcement Learning for Cloudburst Prediction and Disaster Response},
-  author={Toqeer Ali Syed and Ali Akarma and Salman Jan},
-  journal={MDPI Mathematics},
-  year={2026},
-  note={Under Review}
+    status: "published",
+    statusLabel: "Conference Paper · MECON 2026",
+    tags: ["Agentic AI", "AI Governance", "AI Safety", "Digital Twin", "IoT"],
+    doi:      "https://doi.org/10.48550/arXiv.2604.27753",
+    pdf:      "https://arxiv.org/pdf/2604.27753",
+    code:     null,
+    dataset:  null,
+    notebook: null,
+    abstract: "This article outlines a new framework of traffic light optimization through a digital twin of the transportinfrastructure, managed by agentic AI to ensure real-time autonomous decisions. The framework relies on physical sensorsand edge computing to measure real-time traffic information and simulate traffic flow in a constantly updated digital twin.The traffic light is automatically controlled through the digital twin according to traffic congestion, travel delay and trafficpatterns. This approach is implemented as a three-layer system: perception, conceptualization and action. The perceptionlayer receives data on physical systems; the conceptualization layer uses LangChain to process the data; and the actionlayer links to the Model Context Protocol (MCP) and traffic management APIs to implement optimised traffic signal controlalgorithms. The results show that the framework minimizes waiting time at traffic lights and positively affects theeffectiveness of the entire traffic flow, which is better than the fixed-time and reinforcement learning-based baselines.",
+    bibtex: `@article{jan2026autonomous,
+  title={Autonomous Traffic Signal Optimization Using Digital Twin and Agentic AI for Real-Time Decision-Making},
+  author={Jan, Salman and Syed, Toqeer Ali and Kamal, Shahid and Wali, Qamar and Akarma, Ali},
+  journal={arXiv preprint arXiv:2604.27753},
+  year={2026}
 }`,
   },
+  
   {
     id: 13,
     title: "Agents for Agents: An Interrogator-Based Secure Framework for Autonomous Internet of Underwater Things",
@@ -396,6 +396,7 @@ export const publications = [
 }`,
   },
 
+ 
 
   
 ]
