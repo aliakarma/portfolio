@@ -1,19 +1,7 @@
 // data/projects.js
 
 export const projects = [
-  {
-    id: 14,
-    title: "ADAPT — Agentic AI Nutrition & Healthcare Monitor",
-    description: "Production-ready multi-agent PRA system for inclusive nutrition and healthcare support, coordinating meal planning, reminders, food guidance, and monitoring through a blackboard-driven orchestrator with XAI explanations, policy checks, and a FastAPI API.",
-    technologies: ["Python", "FastAPI", "PyTorch", "LLMs", "Multi-Agent Systems"],
-    github: "https://github.com/aliakarma/ADAPT",
-    demo: null,
-    tags: ["Healthcare", "Nutrition", "Agentic AI"],
-    themes: ["Agentic AI", "Healthcare AI", "Accessibility"],
-    featured: true,
-    status: "Published",
-    paper: null,
-  },
+ 
   {
     id: 1,
     title: "LagrangianCTDE — Constrained MARL for Disaster Response",
@@ -183,4 +171,20 @@ export const projects = [
     status: "Published",
     paper: null,
   },
+
+   {
+    id: 14,
+    title: "ADAPT — Agentic AI Nutrition & Healthcare Monitor",
+    description: "Production-ready multi-agent PRA system for inclusive nutrition and healthcare support, coordinating meal planning, reminders, food guidance, and monitoring through a blackboard-driven orchestrator with XAI explanations, policy checks, and a FastAPI API.",
+    technologies: ["Python", "FastAPI", "PyTorch", "LLMs", "Multi-Agent Systems"],
+    github: "https://github.com/aliakarma/ADAPT",
+    demo: null,
+    tags: ["Healthcare", "Nutrition", "Agentic AI"],
+    themes: ["Agentic AI", "Healthcare AI", "Accessibility"],
+    featured: true,
+    status: "Published",
+    paper: null,
+  },
+
+  
 ]
