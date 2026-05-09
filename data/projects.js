@@ -238,5 +238,19 @@ export const projects = [
     paper: null,
   },
 
+  {
+    id: 19,
+    title: "FedAgent-Chain — Federated Agent Chains",
+    description: "Framework for composing federated agent chains to enable decentralized LLM agent orchestration and secure multi-party tool execution.",
+    technologies: ["Node.js", "Docker", "gRPC", "LLMs"],
+    github: "https://github.com/aliakarma/fedagent-chain",
+    demo: null,
+    tags: ["Federation", "Agents", "LLMs"],
+    themes: ["Agentic AI", "Federated Learning"],
+    featured: true,
+    status: "Published",
+    paper: null,
+  },
+
   
 ]
