@@ -32,8 +32,8 @@ A central concern of my work is the alignment problem in deployed agentic system
 
   // Scholar metrics (static — update when data is available)
   scholarMetrics: {
-    citations: 30,
-    hIndex:    4,
+    citations: 34,
+    hIndex:    5,
     i10Index:  0,
     since:     2025,
   },
