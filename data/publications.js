@@ -268,10 +268,10 @@ export const publications = [
     venueShort: "Springer",
     type: "journal",
     year: 2025,
-    status: "review",
-    statusLabel: "Under Review · Springer",
+    status: "accepted",
+    statusLabel: "Accepted · IJEEE",
     tags: ["AI Governance", "Academic Integrity", "Ethics", "Guidelines"],
-    doi:      null,
+    doi:      "https://novapublishers.com/shop/volume-33-issue-4-2025-international-journal-of-energy-environment-and-economics/",
     pdf:      "https://arxiv.org/pdf/2604.11111",
     code:     null,
     dataset:  null,
@@ -282,7 +282,6 @@ export const publications = [
   author={El-boghdadi, Hatem M and Syed, Toqeer Ali and Akarma, Ali and Wali, Qamar},
   journal={arXiv preprint arXiv:2604.11111},
   year={2026}
-}
 }`,
   },
    {
