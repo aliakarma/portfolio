@@ -118,19 +118,20 @@ svg {
 
 /* ================= GLASS CARD ================= */
 .glass-card {
-  background: rgba(26, 26, 46, 0.6);
+  background: #1a1a2e; /* Fallback for older browsers */
+  background: rgba(26, 26, 46, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(232, 169, 0, 0.12);
+  border: 1px solid rgba(232, 169, 0, 0.15);
   transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Responsive Fix: hover effects only on pointer devices — prevents stuck hover on touch */
 @media (hover: hover) and (pointer: fine) {
   .glass-card:hover {
-    border-color: rgba(232, 169, 0, 0.3);
-    background: rgba(26, 26, 46, 0.8);
-    box-shadow: 0 8px 32px rgba(232, 169, 0, 0.08);
+    border-color: rgba(232, 169, 0, 0.4);
+    background: rgba(26, 26, 46, 0.85);
+    box-shadow: 0 8px 32px rgba(232, 169, 0, 0.12);
   }
 }
 
