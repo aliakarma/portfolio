@@ -49,7 +49,7 @@ export default function Footer() {
         </div>
 
         <div className="section-divider mt-8" />
-        <p className="text-center font-mono text-xs text-parchment-400/30 mt-4">Madinah, Saudi Arabia</p>
+        <p className="text-center font-mono text-xs text-parchment-400/60 mt-4">Madinah, Saudi Arabia</p>
       </div>
     </footer>
   )
