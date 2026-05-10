@@ -9,7 +9,7 @@ export default function Footer() {
     { icon: <BookOpen size={18} />, href: profile.scholar,  label: 'Google Scholar Profile' },
     { icon: <Github   size={18} />, href: profile.github,   label: 'GitHub' },
     { icon: <Linkedin size={18} />, href: profile.linkedin, label: 'LinkedIn' },
-    { icon: <Mail     size={18} />, href: `mailto:${profile.email}`, label: 'Email' },
+    { icon: <Mail     size={18} />, href: '/contact',           label: 'Contact' },
     ...(profile.orcid ? [{ icon: <Link2 size={18} />, href: profile.orcid, label: 'ORCID Profile' }] : []),
   ]
 
