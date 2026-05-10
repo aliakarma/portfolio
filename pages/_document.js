@@ -22,7 +22,31 @@ export default function Document() {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#08080f" />
+        <meta property="og:image" content="https://aliakarma.codes/og-image.png" />
+        <meta name="twitter:image" content="https://aliakarma.codes/og-image.png" />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Ali Akarma",
+              "jobTitle": "AI Researcher",
+              "url": "https://aliakarma.codes",
+              "sameAs": [
+                "https://github.com/aliakarma",
+                "https://www.linkedin.com/in/aliakarma",
+                "https://scholar.google.com/citations?user=kQZZJtYAAAAJ"
+              ],
+              "affiliation": {
+                "@type": "Organization",
+                "name": "Islamic University of Madinah"
+              }
+            })
+          }}
+        />
 
         {/* Performance Fix: preconnect for DNS before font requests */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
