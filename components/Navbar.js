@@ -9,8 +9,6 @@ const navLinks = [
   { label: 'About',    href: '/about' },
   { label: 'Research', href: '/research' },
   { label: 'Projects', href: '/projects' },
-  { label: 'Skills',   href: '/skills' },
-  { label: 'Writing',  href: '/blog' },
   { label: 'Contact',  href: '/contact' },
 ]
 
@@ -75,15 +73,15 @@ export default function Navbar() {
               whileHover={{ scale: 1.03 }}
               className="flex items-center gap-3 cursor-pointer"
             >
-              <div className="w-8 h-8 border border-gold-500/40 bg-gold-500/10 flex items-center justify-center overflow-hidden flex-shrink-0">
+              <div className="w-10 h-10 border border-gold-500/40 bg-gold-500/10 flex items-center justify-center overflow-hidden flex-shrink-0">
                 {imgError ? (
-                  <span className="font-display text-gold-400 text-sm font-bold" aria-hidden="true">A</span>
+                  <span className="font-display text-gold-400 text-base font-bold" aria-hidden="true">A</span>
                 ) : (
                   <img
                     src="/profile.jpg"
                     alt="Ali Akarma"
-                    width={32}
-                    height={32}
+                    width={40}
+                    height={40}
                     className="w-full h-full object-cover"
                     onError={() => setImgError(true)}
                   />
