@@ -74,8 +74,19 @@ export default function Navbar() {
               whileHover={{ scale: 1.03 }}
               className="flex items-center gap-3 cursor-pointer"
             >
-              <div className="w-10 h-10 border border-gold-500/40 bg-gold-500/10 flex items-center justify-center flex-shrink-0">
-                <span className="font-display text-gold-400 text-lg font-bold tracking-tighter" aria-hidden="true">AA</span>
+              <div className="w-10 h-10 border border-gold-500/40 bg-gold-500/10 flex items-center justify-center overflow-hidden flex-shrink-0">
+                {imgError ? (
+                  <span className="font-display text-gold-400 text-base font-bold" aria-hidden="true">A</span>
+                ) : (
+                  <img
+                    src="/profile.jpg"
+                    alt="Ali Akarma"
+                    width={40}
+                    height={40}
+                    className="w-full h-full object-cover"
+                    onError={() => setImgError(true)}
+                  />
+                )}
               </div>
               <span className="font-display text-parchment-100 text-lg font-medium tracking-wide">
                 Ali <span className="text-gold-400">Akarma</span>

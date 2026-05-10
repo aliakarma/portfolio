@@ -169,7 +169,7 @@ export default function Home() {
                     <div className="inline-flex items-center gap-2 px-3 py-1 border border-gold-500/20 bg-noir-800 rounded-sm">
                       <Award size={12} className="text-gold-400 flex-shrink-0" />
                       <span className="font-mono text-[10px] sm:text-xs text-parchment-200 uppercase tracking-widest">
-                        GPA 4.95 · Ranked 1st
+                        GPA 4.23
                       </span>
                     </div>
                   </div>
