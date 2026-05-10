@@ -1,0 +1,31 @@
+name: Update Scholar Stats
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Every day at midnight
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch Scholar Metrics
+        run: |
+          # Use a script that tries multiple TLDs or mirrors if one fails
+          node scripts/update_scholar.js
+        env:
+          SCHOLAR_USER_ID: 'kQZZJtYAAAAJ'
+
+      - name: Commit and Push if changed
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/scholar.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: automated update of scholar metrics" && git push)

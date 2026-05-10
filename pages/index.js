@@ -373,9 +373,16 @@ export default function Home() {
                     transition={{ delay: 1.1 }}
                     className="glass-card p-4"
                   >
-                    <div className="flex items-center gap-2 mb-3">
-                      <BookOpen size={12} className="text-gold-400" aria-hidden="true" />
-                      <span className="font-mono text-xs text-gold-400/70 tracking-widest uppercase">Scholar Metrics</span>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <div className="flex items-center gap-2">
+                        <BookOpen size={12} className="text-gold-400" aria-hidden="true" />
+                        <span className="font-mono text-xs text-gold-400/70 tracking-widest uppercase">Scholar Metrics</span>
+                      </div>
+                      {profile.scholarMetrics.lastUpdated && (
+                        <span className="font-mono text-[8px] text-parchment-400/40 uppercase">
+                          Updated {new Date(profile.scholarMetrics.lastUpdated).toLocaleDateString()}
+                        </span>
+                      )}
                     </div>
                     <div className="grid grid-cols-3 gap-2">
                       {[

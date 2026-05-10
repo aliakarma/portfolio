@@ -2,7 +2,7 @@
 
 export const blogPosts = [
   {
-    id: 101,
+    id: 16,
     title: "The Governance Gap: Why Agentic AI Needs More Than Just Code",
     date: "2026-05-10",
     category: "Opinion",
@@ -18,7 +18,7 @@ export const blogPosts = [
     tags: ["AI Governance", "Ethics", "Agentic AI"],
   },
   {
-    id: 102,
+    id: 15,
     title: "Beyond the Chatbox: The Looming Shift from Models to Systems",
     date: "2026-04-15",
     category: "Research Commentary",

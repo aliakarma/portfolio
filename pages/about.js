@@ -263,26 +263,6 @@ export default function About() {
                   </div>
                 </SectionReveal>
 
-                {profile.testimonials && profile.testimonials.length > 0 && (
-                  <SectionReveal delay={0.28}>
-                    <div className="mt-12">
-                      <h2 className="font-display text-2xl text-parchment-100 mb-6">Collaborative Insights</h2>
-                      <div className="grid gap-4">
-                        {profile.testimonials.map((t, i) => (
-                          <div key={i} className="glass-card p-6 border-l-2 border-gold-500/40 italic">
-                            <Quote size={20} className="text-gold-500/20 mb-3" aria-hidden="true" />
-                            <p className="font-body text-parchment-200 text-base leading-relaxed mb-4">
-                              "{t.quote}"
-                            </p>
-                            <div className="font-mono text-xs text-gold-400">
-                              — {t.author}, <span className="text-parchment-400">{t.role}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </SectionReveal>
-                )}
 
               </div>
             </div>

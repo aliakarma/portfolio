@@ -1,21 +1,21 @@
-// data/profile.js — All personal and academic identity info
+import scholarData from './scholar.json'
 
 export const profile = {
-  name:        "Ali Akarma",
-  title:       "AI Researcher",
-  tagline:     "Designing autonomous AI systems that fail safely by design.",
+  name: "Ali Akarma",
+  title: "AI Researcher",
+  tagline: "Designing autonomous AI systems that fail safely by design.",
   institution: "Islamic University of Madinah",
-  location:    "Madinah, Saudi Arabia",
-  degree:      "B.S. Information Technology (2023–2027)",
-  email:       "aliakarma974@gmail.com",
-  github:      "https://github.com/aliakarma",
-  scholar:     "https://scholar.google.com/citations?user=kQZZJtYAAAAJ&hl=en",
-  linkedin:    "https://www.linkedin.com/in/aliakarma",
+  location: "Madinah, Saudi Arabia",
+  degree: "B.S. Information Technology (2023–2027)",
+  email: "aliakarma974@gmail.com",
+  github: "https://github.com/aliakarma",
+  scholar: "https://scholar.google.com/citations?user=kQZZJtYAAAAJ&hl=en",
+  linkedin: "https://www.linkedin.com/in/aliakarma",
   // Fix: ORCID added — important credibility signal for academic visitors
-  orcid:       "https://orcid.org/0009-0002-6687-9380",
-  cv:          "/Ali_Akarma_CV.pdf",
+  orcid: "https://orcid.org/0009-0002-6687-9380",
+  cv: "/Ali_Akarma_CV.pdf",
 
-  bio: "I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 2nd-year IT student at the Islamic University of Madinah and have published 15 peer-reviewed papers on AI governance, adversarial robustness, and constrained multi-agent systems.",
+  bio: "I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 3rd-year IT student at the Islamic University of Madinah and have published 15 peer-reviewed papers on AI governance, adversarial robustness, and constrained multi-agent systems.",
 
   researchVision: `I study how to make autonomous AI systems fail safely: designing governance architectures that prevent unintended actions before they propagate through real-world infrastructure. 
 
@@ -30,20 +30,21 @@ My work addresses the alignment problem in deployed agentic systems — explorin
     "Digital Twins & Smart City AI",
   ],
 
-  // Scholar metrics (static — update when data is available)
+  // Scholar metrics (automated via scripts/update_scholar.js)
   scholarMetrics: {
-    citations: 34,
-    hIndex:    5,
-    i10Index:  0,
-    since:     2025,
+    citations: scholarData.citations,
+    hIndex: scholarData.hIndex,
+    i10Index: scholarData.i10Index,
+    since: 2025,
+    lastUpdated: scholarData.lastUpdated,
   },
 
   education: [
     {
-      degree:      "B.S. Information Technology",
+      degree: "B.S. Information Technology",
       institution: "Islamic University of Madinah",
-      location:    "Saudi Arabia",
-      period:      "2023 – 2027",
+      location: "Saudi Arabia",
+      period: "2023 – 2027",
       details: [
         "Merit-based fully funded scholarship (Competitive selection)",
         "Current Cumulative GPA: 4.23 / 5.00",
@@ -56,9 +57,9 @@ My work addresses the alignment problem in deployed agentic systems — explorin
 
   experience: [
     {
-      role:        "Undergraduate AI Researcher",
+      role: "Undergraduate AI Researcher",
       institution: "Islamic University of Madinah",
-      period:      "Jan 2025 – Present",
+      period: "Jan 2025 – Present",
       bullets: [
         "Designed agentic AI systems with explicit safety constraints, restricted action spaces, and policy-aligned decision rules.",
         "Conducted failure-mode and misuse analyses for autonomous systems, focusing on adversarial inputs, unintended behaviors, and oversight gaps.",
@@ -71,36 +72,36 @@ My work addresses the alignment problem in deployed agentic systems — explorin
 
   awards: [
     {
-      title:  "Merit-Based Fully Funded Bachelor's Scholarship",
+      title: "Merit-Based Fully Funded Bachelor's Scholarship",
       issuer: "Islamic University of Madinah",
-      year:   2023,
+      year: 2023,
       description: "Awarded for exceptional academic performance and potential in computer science and information technology.",
     },
     {
-      title:  "Certificate of Appreciation (Research Excellence)",
+      title: "Certificate of Appreciation (Research Excellence)",
       issuer: "ICETAS 2026",
-      year:   2026,
+      year: 2026,
       description: "Recognized for high-quality research contribution and presentation on Agentic AI Governance.",
     },
     {
-      title:  "Mindware: Critical Thinking",
+      title: "Mindware: Critical Thinking",
       issuer: "University of Michigan (Coursera)",
-      year:   2024,
+      year: 2024,
       description: "Advanced certification in cognitive biases, statistical reasoning, and scientific methodology.",
     },
     {
-      title:  "Computational Thinking",
+      title: "Computational Thinking",
       issuer: "University of Michigan (Coursera)",
-      year:   2024,
+      year: 2024,
       description: "Formal training in algorithmic problem-solving and abstraction techniques.",
     },
   ],
 
   volunteer: [
     {
-      role:        "Volunteer",
+      role: "Volunteer",
       institution: "Masjid Al Nabawi, Madinah",
-      period:      "2024 & 2025",
+      period: "2024 & 2025",
       bullets: [
         "Supported public-service operations in a large, high-traffic institutional environment.",
         "Assisted visitors and contributed to orderly, inclusive, and reliable service delivery.",
