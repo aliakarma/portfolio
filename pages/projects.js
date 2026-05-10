@@ -160,8 +160,12 @@ export default function Projects() {
   return (
     <>
       <Head>
-        <title>Projects — Ali Akarma</title>
-        <meta name="description" content="Research projects by Ali Akarma — applied AI systems for safety, governance, and real-world deployment." />
+        <title>Research Systems & Projects — Ali Akarma</title>
+        <meta name="description" content="Technical implementation of safety-aligned agentic systems: coordinating heterogeneous agents under Lagrangian safety constraints." />
+        <link rel="canonical" href="https://aliakarma.codes/projects" />
+        <meta property="og:title" content="Research Systems — Ali Akarma" />
+        <meta property="og:description" content="Technical implementation of safety-aligned agentic systems." />
+        <meta property="og:url" content="https://aliakarma.codes/projects" />
       </Head>
 
       <PageTransition>
