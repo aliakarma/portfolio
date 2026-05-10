@@ -72,6 +72,17 @@ module.exports = {
         'grid-pattern': "linear-gradient(rgba(232,169,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(232,169,0,0.05) 1px, transparent 1px)",
         'radial-gold':  'radial-gradient(ellipse at center, rgba(232,169,0,0.15) 0%, transparent 70%)',
       },
+      fontSize: {
+        'xs':   ['clamp(0.7rem, 2vw, 0.75rem)', { lineHeight: '1.5' }],
+        'sm':   ['clamp(0.8rem, 2.5vw, 0.875rem)', { lineHeight: '1.5' }],
+        'base': ['clamp(0.9rem, 3vw, 1rem)', { lineHeight: '1.6' }],
+        'lg':   ['clamp(1.1rem, 4vw, 1.25rem)', { lineHeight: '1.5' }],
+        'xl':   ['clamp(1.25rem, 5vw, 1.5rem)', { lineHeight: '1.4' }],
+        '2xl':  ['clamp(1.5rem, 6vw, 1.875rem)', { lineHeight: '1.3' }],
+        '3xl':  ['clamp(1.875rem, 7vw, 2.25rem)', { lineHeight: '1.2' }],
+        '4xl':  ['clamp(2.25rem, 8vw, 3rem)', { lineHeight: '1.1' }],
+        '5xl':  ['clamp(3rem, 10vw, 4.5rem)', { lineHeight: '1' }],
+      },
       backdropBlur: {
         xs: '2px',
       },
