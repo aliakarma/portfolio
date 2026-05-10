@@ -11,7 +11,7 @@ import { profile } from '../data/profile'
 import { publications } from '../data/publications'
 
 const ResearchGraph = dynamic(() => import('../components/ResearchGraph'), { ssr: false })
-const HIGHLIGHTED_AUTHOR = 'Ali Akarma'
+const AUTHOR_REGEX = new RegExp(`(${profile.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`)
 
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ target, suffix = '', delay = 0 }) {
@@ -30,18 +30,20 @@ function AnimatedCounter({ target, suffix = '', delay = 0 }) {
 
   useEffect(() => {
     if (!started) return
+    let iv
     const timer = setTimeout(() => {
       let cur = 0
       const step = Math.ceil(target / 40)
-      const iv = setInterval(() => {
+      iv = setInterval(() => {
         cur = Math.min(cur + step, target)
         setCount(cur)
         if (cur >= target) clearInterval(iv)
       }, 30)
-      /* Fix: return cleanup inside the timer callback to handle unmount */
-      return () => clearInterval(iv)
     }, delay * 1000)
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+      if (iv) clearInterval(iv)
+    }
   }, [started, target, delay])
 
   return <span ref={ref}>{count}{suffix}</span>
@@ -99,6 +101,16 @@ const stats = [
 ]
 
 export default function Home() {
+  const [prefersReduced, setPrefersReduced] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setPrefersReduced(mediaQuery.matches)
+    const handler = (e) => setPrefersReduced(e.matches)
+    mediaQuery.addEventListener('change', handler)
+    return () => mediaQuery.removeEventListener('change', handler)
+  }, [])
+
   const recent = [...publications]
     .sort((a, b) => b.id - a.id)
     .slice(0, 3)
@@ -179,18 +191,22 @@ export default function Home() {
                   className="font-mono text-base md:text-lg text-parchment-300 mb-6 min-h-[28px]"
                   aria-live="polite"
                 >
-                  <TypeAnimation
-                    sequence={[
-                      'Designing Safety-Aligned Agentic Systems.',   2200,
-                      'Researching Trustworthy Machine Learning.',    2200,
-                      'Building AI Governance Frameworks.',           2200,
-                      'Studying Failure Modes in Autonomous AI.',     2200,
-                    ]}
-                    wrapper="span"
-                    speed={55}
-                    repeat={Infinity}
-                    className="text-gold-300"
-                  />
+                  {prefersReduced ? (
+                    <span className="text-gold-300">Designing Safety-Aligned Agentic Systems.</span>
+                  ) : (
+                    <TypeAnimation
+                      sequence={[
+                        'Designing Safety-Aligned Agentic Systems.',   2200,
+                        'Researching Trustworthy Machine Learning.',    2200,
+                        'Building AI Governance Frameworks.',           2200,
+                        'Studying Failure Modes in Autonomous AI.',     2200,
+                      ]}
+                      wrapper="span"
+                      speed={55}
+                      repeat={Infinity}
+                      className="text-gold-300"
+                    />
+                  )}
                 </motion.div>
 
                 {/* Bio */}
@@ -212,29 +228,31 @@ export default function Home() {
                 >
                   <Link
                     href="/research"
-                    className="group flex items-center gap-2 px-5 sm:px-6 py-3 bg-gold-500 text-noir-900 font-mono text-xs font-medium tracking-widest uppercase hover:bg-gold-400 transition-all min-h-[44px]"
+                    className="group flex items-center gap-2 px-6 sm:px-8 py-3 bg-gold-500 text-noir-900 font-mono text-xs font-bold tracking-widest uppercase hover:bg-gold-400 transition-all min-h-[48px] shadow-lg shadow-gold-500/20"
                   >
                     View Research
-                    <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   </Link>
-                  <a
-                    href={profile.scholar}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View Google Scholar profile (opens in new tab)"
-                    className="flex items-center gap-2 px-5 sm:px-6 py-3 border border-gold-500/40 text-gold-400 font-mono text-xs tracking-widest uppercase hover:bg-gold-500/10 transition-all min-h-[44px]"
-                  >
-                    <BookOpen size={13} aria-hidden="true" /> Google Scholar
-                  </a>
-                  <a
-                    href={profile.cv}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Download CV (opens in new tab)"
-                    className="flex items-center gap-2 px-5 sm:px-6 py-3 border border-parchment-300/20 text-parchment-300 font-mono text-xs tracking-widest uppercase hover:border-parchment-300/50 transition-all min-h-[44px]"
-                  >
-                    <FileText size={13} aria-hidden="true" /> Download CV
-                  </a>
+                  <div className="flex gap-2">
+                    <a
+                      href={profile.scholar}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View Google Scholar profile (opens in new tab)"
+                      className="flex items-center justify-center w-12 h-12 border border-gold-500/40 text-gold-400 hover:bg-gold-500/10 transition-all"
+                    >
+                      <BookOpen size={18} aria-hidden="true" />
+                    </a>
+                    <a
+                      href={profile.cv}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Download CV (opens in new tab)"
+                      className="flex items-center justify-center w-12 h-12 border border-parchment-300/20 text-parchment-300 hover:border-parchment-300/50 transition-all"
+                    >
+                      <FileText size={18} aria-hidden="true" />
+                    </a>
+                  </div>
                 </motion.div>
 
                 {/* Social links */}
@@ -268,6 +286,24 @@ export default function Home() {
                   transition={{ duration: 0.7, delay: 0.5 }}
                   className="space-y-3"
                 >
+                  {/* Profile Photo in Hero */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.7, delay: 0.4 }}
+                    className="relative mb-6 group"
+                  >
+                    <div className="w-40 h-40 mx-auto md:mx-0 border-2 border-gold-500/30 bg-noir-700 relative overflow-hidden shadow-2xl shadow-gold-500/10">
+                      <img
+                        src="/profile.jpg"
+                        alt="Ali Akarma"
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                      />
+                      <div className="absolute inset-0 border border-gold-500/20 pointer-events-none" />
+                    </div>
+                    <div className="absolute -bottom-2 -right-2 w-12 h-12 border-r-2 border-b-2 border-gold-500/40 pointer-events-none" />
+                  </motion.div>
+
                   {stats.map((stat, i) => (
                     <motion.div
                       key={stat.label}
@@ -326,7 +362,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.6 }}
+            transition={{ delay: 0.8 }}
             className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
             aria-hidden="true"
           >
@@ -433,8 +469,8 @@ export default function Home() {
                     <div className="w-full sm:flex-1 sm:min-w-0">
                       <h3 className="font-display text-lg text-parchment-100 mb-1 leading-snug">{pub.title}</h3>
                       <p className="font-mono text-xs text-parchment-400 mb-2 leading-relaxed">
-                        {pub.authorsStr.split(new RegExp(`(${HIGHLIGHTED_AUTHOR})`)).map((part, idx) => (
-                          part === HIGHLIGHTED_AUTHOR
+                        {pub.authorsStr.split(AUTHOR_REGEX).map((part, idx) => (
+                          AUTHOR_REGEX.test(part)
                             ? <span key={idx} className="text-gold-400 font-semibold">{part}</span>
                             : <span key={idx}>{part}</span>
                         ))}
