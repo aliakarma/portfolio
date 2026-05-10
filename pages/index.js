@@ -16,7 +16,7 @@ const AUTHOR_REGEX = new RegExp(`(${profile.name.replace(/[.*+?^${}()|[\]\\]/g, 
 
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ target, suffix = '', delay = 0 }) {
-  const [count,   setCount]   = useState(0)
+  const [count, setCount] = useState(0)
   const [started, setStarted] = useState(false)
   const ref = useRef(null)
 
@@ -51,10 +51,10 @@ function AnimatedCounter({ target, suffix = '', delay = 0 }) {
 }
 
 const socialLinks = [
-  { icon: <BookOpen size={18} />, href: profile.scholar,           label: 'Google Scholar Profile' },
-  { icon: <Github   size={18} />, href: profile.github,            label: 'GitHub' },
-  { icon: <Linkedin size={18} />, href: profile.linkedin,          label: 'LinkedIn' },
-  { icon: <Mail     size={18} />, href: `mailto:${profile.email}`, label: 'Email' },
+  { icon: <BookOpen size={18} />, href: profile.scholar, label: 'Google Scholar Profile' },
+  { icon: <Github size={18} />, href: profile.github, label: 'GitHub' },
+  { icon: <Linkedin size={18} />, href: profile.linkedin, label: 'LinkedIn' },
+  { icon: <Mail size={18} />, href: `mailto:${profile.email}`, label: 'Email' },
 ]
 
 /*
@@ -71,33 +71,33 @@ const journalCount = publications.filter(p => p.type === 'journal').length
 
 const stats = [
   {
-    icon:   <FileText size={16} />,
-    value:  publications.length,
+    icon: <FileText size={16} />,
+    value: publications.length,
     suffix: '',
-    label:  'Publications',
-    sub:    'peer-reviewed & in pipeline',
+    label: 'Publications',
+    sub: 'peer-reviewed & in pipeline',
   },
   {
-    icon:   <Layers size={16} />,
-    value:  5,
+    icon: <Layers size={16} />,
+    value: 5,
     suffix: '',
-    label:  'Research Areas',
-    sub:    'safety, governance, agentic AI',
+    label: 'Research Areas',
+    sub: 'safety, governance, agentic AI',
   },
   {
-    icon:   <Award size={16} />,
-    value:  conferenceVenues.length,
+    icon: <Award size={16} />,
+    value: conferenceVenues.length,
     suffix: '',
-    label:  'Conferences',
+    label: 'Conferences',
     // Responsive Fix: shorter sub-label prevents overflow on 320px stat cards
-    sub:    'IEEE ICCA, ICBDT, ICETAS',
+    sub: 'IEEE ICCA, ICBDT, ICETAS',
   },
   {
-    icon:   <TrendingUp size={16} />,
-    value:  journalCount,
+    icon: <TrendingUp size={16} />,
+    value: journalCount,
     suffix: '',
-    label:  'Journals',
-    sub:    'Springer, PLOS ONE, MDPI, IEEE',
+    label: 'Journals',
+    sub: 'Springer, PLOS ONE, MDPI, IEEE',
   },
 ]
 
@@ -166,12 +166,6 @@ export default function Home() {
                         AI Researcher · IU Madinah
                       </span>
                     </div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 border border-gold-500/20 bg-noir-800 rounded-sm">
-                      <Award size={12} className="text-gold-400 flex-shrink-0" />
-                      <span className="font-mono text-[10px] sm:text-xs text-parchment-200 uppercase tracking-widest">
-                        GPA 4.23
-                      </span>
-                    </div>
                   </div>
                 </motion.div>
 
@@ -208,10 +202,10 @@ export default function Home() {
                   ) : (
                     <TypeAnimation
                       sequence={[
-                        'Designing Safety-Aligned Agentic Systems.',   2200,
-                        'Researching Trustworthy Machine Learning.',    2200,
-                        'Building AI Governance Frameworks.',           2200,
-                        'Studying Failure Modes in Autonomous AI.',     2200,
+                        'Designing Safety-Aligned Agentic Systems.', 2200,
+                        'Researching Trustworthy Machine Learning.', 2200,
+                        'Building AI Governance Frameworks.', 2200,
+                        'Studying Failure Modes in Autonomous AI.', 2200,
                       ]}
                       wrapper="span"
                       speed={55}
@@ -317,29 +311,29 @@ export default function Home() {
                   className="space-y-4"
                 >
                   {/* Featured Research Focus Card — Premium Academic Detail */}
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.7, delay: 0.5 }}
-                      className="glass-card p-6 border-gold-500/20 bg-gold-500/[0.03] mb-6"
-                    >
-                      <h4 className="font-mono text-[10px] text-gold-400 uppercase tracking-[0.2em] mb-4">Current Research Frontier</h4>
-                      <div className="space-y-4">
-                        <div className="flex gap-4">
-                          <div className="w-8 h-8 rounded-full bg-gold-500/10 border border-gold-500/20 flex items-center justify-center flex-shrink-0">
-                            <Star size={14} className="text-gold-400" />
-                          </div>
-                          <div>
-                            <p className="font-display text-base text-parchment-100 leading-snug">Autonomous Safety Governance</p>
-                            <p className="font-mono text-[10px] text-parchment-400 mt-1 uppercase">Safety-Critical Multi-Agent Systems</p>
-                          </div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.7, delay: 0.5 }}
+                    className="glass-card p-6 border-gold-500/20 bg-gold-500/[0.03] mb-6"
+                  >
+                    <h4 className="font-mono text-[10px] text-gold-400 uppercase tracking-[0.2em] mb-4">Current Research Frontier</h4>
+                    <div className="space-y-4">
+                      <div className="flex gap-4">
+                        <div className="w-8 h-8 rounded-full bg-gold-500/10 border border-gold-500/20 flex items-center justify-center flex-shrink-0">
+                          <Star size={14} className="text-gold-400" />
                         </div>
-                        <div className="h-px bg-gold-500/10" />
-                        <p className="font-body text-xs text-parchment-300 leading-relaxed italic">
-                          "Investigating cryptographic trust-anchors and constrained reasoning for large-scale agentic deployments."
-                        </p>
+                        <div>
+                          <p className="font-display text-base text-parchment-100 leading-snug">Autonomous Safety Governance</p>
+                          <p className="font-mono text-[10px] text-parchment-400 mt-1 uppercase">Safety-Critical Multi-Agent Systems</p>
+                        </div>
                       </div>
-                    </motion.div>
+                      <div className="h-px bg-gold-500/10" />
+                      <p className="font-body text-xs text-parchment-300 leading-relaxed italic">
+                        "Investigating cryptographic trust-anchors and constrained reasoning for large-scale agentic deployments."
+                      </p>
+                    </div>
+                  </motion.div>
 
                   {stats.map((stat, i) => (
                     <motion.div
@@ -386,9 +380,9 @@ export default function Home() {
                     </div>
                     <div className="grid grid-cols-3 gap-2">
                       {[
-                        { label: 'Citations',  value: profile.scholarMetrics.citations },
-                        { label: 'h-index',    value: profile.scholarMetrics.hIndex },
-                        { label: 'i10-index',  value: profile.scholarMetrics.i10Index },
+                        { label: 'Citations', value: profile.scholarMetrics.citations },
+                        { label: 'h-index', value: profile.scholarMetrics.hIndex },
+                        { label: 'i10-index', value: profile.scholarMetrics.i10Index },
                       ].map(m => (
                         <div key={m.label} className="text-center">
                           <div className="font-display text-xl text-parchment-100">{m.value}</div>
@@ -527,11 +521,10 @@ export default function Home() {
                         ))}
                       </div>
                     </div>
-                    <span className={`w-full sm:w-auto font-mono text-[10px] sm:text-xs px-2 py-1 border rounded-sm break-words ${
-                      pub.status === 'published' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-700/30'
+                    <span className={`w-full sm:w-auto font-mono text-[10px] sm:text-xs px-2 py-1 border rounded-sm break-words ${pub.status === 'published' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-700/30'
                       : pub.status === 'accepted' ? 'bg-sky-900/30 text-sky-400 border-sky-700/30'
-                      : 'bg-amber-900/30 text-amber-400 border-amber-700/30'
-                    }`}>
+                        : 'bg-amber-900/30 text-amber-400 border-amber-700/30'
+                      }`}>
                       {pub.statusLabel}
                     </span>
                   </div>
