@@ -56,8 +56,12 @@ export default function Research() {
   return (
     <>
       <Head>
-        <title>Research & Publications — Ali Akarma</title>
-        <meta name="description" content="Full publication archive of Ali Akarma — AI researcher specializing in agentic AI, AI safety, and governance." />
+        <title>Research Archive — Ali Akarma</title>
+        <meta name="description" content="A comprehensive archive of 15+ peer-reviewed publications on AI safety, agentic governance, and autonomous systems." />
+        <link rel="canonical" href="https://aliakarma.codes/research" />
+        <meta property="og:title" content="Research Archive — Ali Akarma" />
+        <meta property="og:description" content="Peer-reviewed publications on AI safety, governance, and deployment." />
+        <meta property="og:url" content="https://aliakarma.codes/research" />
       </Head>
 
       <PageTransition>
