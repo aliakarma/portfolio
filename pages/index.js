@@ -11,6 +11,7 @@ import { profile } from '../data/profile'
 import { publications } from '../data/publications'
 
 const ResearchGraph = dynamic(() => import('../components/ResearchGraph'), { ssr: false })
+import ErrorBoundary from '../components/ErrorBoundary'
 const AUTHOR_REGEX = new RegExp(`(${profile.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`)
 
 /* ─── Animated Counter ─── */
@@ -121,8 +122,12 @@ export default function Home() {
         <title>Ali Akarma — AI Researcher</title>
         <meta
           name="description"
-          content="Ali Akarma — AI Researcher specializing in Agentic AI, AI Safety, and Trustworthy Machine Learning at Islamic University of Madinah."
+          content="Ali Akarma — AI Researcher specializing in designing autonomous AI systems that fail safely by design at the Islamic University of Madinah."
         />
+        <link rel="canonical" href="https://aliakarma.codes" />
+        <meta property="og:title" content="Ali Akarma — AI Researcher" />
+        <meta property="og:description" content="Designing autonomous AI systems that fail safely by design." />
+        <meta property="og:url" content="https://aliakarma.codes" />
       </Head>
 
       <PageTransition>
@@ -441,8 +446,10 @@ export default function Home() {
               <span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Knowledge Graph</span>
             </div>
             <h2 className="font-display text-3xl text-parchment-100 mb-8">Research Landscape</h2>
-            <div className="glass-card p-4 sm:p-6 border border-gold-500/10 overflow-hidden">
-              <ResearchGraph />
+            <div className="glass-card p-4 sm:p-6 border border-gold-500/10 overflow-hidden min-h-[400px]">
+              <ErrorBoundary message="The D3 visualization failed to initialize. Please refresh the page.">
+                <ResearchGraph />
+              </ErrorBoundary>
             </div>
           </section>
         </SectionReveal>
