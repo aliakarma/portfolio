@@ -10,6 +10,7 @@ import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
 import { publications } from '../data/publications'
 
+import Meta from '../components/Meta'
 const ResearchGraph = dynamic(() => import('../components/ResearchGraph'), { ssr: false })
 import ErrorBoundary from '../components/ErrorBoundary'
 const AUTHOR_REGEX = new RegExp(`(${profile.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`)
@@ -118,16 +119,23 @@ export default function Home() {
 
   return (
     <>
+      <Meta 
+        title="Ali Akarma" 
+        description="Ali Akarma is an AI Researcher specializing in designing autonomous AI systems that fail safely by design. Researching Agentic AI and Safety at the Islamic University of Madinah."
+      />
       <Head>
-        <title>Ali Akarma — AI Researcher</title>
-        <meta
-          name="description"
-          content="Ali Akarma — AI Researcher specializing in designing autonomous AI systems that fail safely by design at the Islamic University of Madinah."
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Ali Akarma",
+              "alternateName": ["Akarma", "aliakarma.codes"],
+              "url": "https://aliakarma.codes"
+            })
+          }}
         />
-        <link rel="canonical" href="https://aliakarma.codes" />
-        <meta property="og:title" content="Ali Akarma — AI Researcher" />
-        <meta property="og:description" content="Designing autonomous AI systems that fail safely by design." />
-        <meta property="og:url" content="https://aliakarma.codes" />
       </Head>
 
       <PageTransition>

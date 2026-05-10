@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Meta from '../components/Meta'
 import { motion } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
@@ -171,10 +171,10 @@ const clusterSizes = [
 export default function Skills() {
   return (
     <>
-      <Head>
-        <title>Skills — Ali Akarma</title>
-        <meta name="description" content="Technical skills and expertise of Ali Akarma — AI researcher specializing in agentic AI, safety, and governance." />
-      </Head>
+      <Meta 
+        title="Technical Expertise" 
+        description="Technical skills and expertise of Ali Akarma — AI researcher specializing in agentic AI, safety, and governance."
+      />
 
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Filter, BookOpen, ExternalLink, TrendingUp, FileText, Layers, ChevronDown, ChevronUp } from 'lucide-react'
+import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import PublicationCard from '../components/PublicationCard'
@@ -55,14 +56,11 @@ export default function Research() {
 
   return (
     <>
-      <Head>
-        <title>Research Archive — Ali Akarma</title>
-        <meta name="description" content="A comprehensive archive of 15+ peer-reviewed publications on AI safety, agentic governance, and autonomous systems." />
-        <link rel="canonical" href="https://aliakarma.codes/research" />
-        <meta property="og:title" content="Research Archive — Ali Akarma" />
-        <meta property="og:description" content="Peer-reviewed publications on AI safety, governance, and deployment." />
-        <meta property="og:url" content="https://aliakarma.codes/research" />
-      </Head>
+      <Meta 
+        title="Research Archive" 
+        description="A comprehensive archive of 15+ peer-reviewed publications on AI safety, agentic governance, and autonomous systems."
+      />
+
 
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">

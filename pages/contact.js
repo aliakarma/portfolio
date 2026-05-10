@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Github, Linkedin, BookOpen, Copy, Check, MapPin, MessageSquare, Link2 } from 'lucide-react'
+import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
@@ -106,14 +107,11 @@ export default function Contact() {
 
   return (
     <>
-      <Head>
-        <title>Contact — Ali Akarma</title>
-        <meta name="description" content="Get in touch with Ali Akarma for research collaborations on AI safety, multi-agent systems, and autonomous governance." />
-        <link rel="canonical" href="https://aliakarma.codes/contact" />
-        <meta property="og:title" content="Contact Ali Akarma" />
-        <meta property="og:description" content="Collaborate on AI safety and multi-agent research." />
-        <meta property="og:url" content="https://aliakarma.codes/contact" />
-      </Head>
+      <Meta 
+        title="Contact" 
+        description="Get in touch with Ali Akarma for research collaborations on AI safety, multi-agent systems, and autonomous governance."
+      />
+
 
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">

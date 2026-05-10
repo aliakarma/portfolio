@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { motion } from 'framer-motion'
 import { MapPin, Calendar, Award, BookOpen, Microscope, GraduationCap, Github, Linkedin, Mail, Link2, Quote } from 'lucide-react'
+import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
@@ -19,14 +20,11 @@ export default function About() {
 
   return (
     <>
-      <Head>
-        <title>About — Ali Akarma</title>
-        <meta name="description" content="About Ali Akarma — AI researcher specializing in the gap between autonomous capability and institutional accountability." />
-        <link rel="canonical" href="https://aliakarma.codes/about" />
-        <meta property="og:title" content="About Ali Akarma" />
-        <meta property="og:description" content="Researcher specializing in safety-aligned multi-agent orchestration." />
-        <meta property="og:url" content="https://aliakarma.codes/about" />
-      </Head>
+      <Meta 
+        title="About" 
+        description="About Ali Akarma — AI researcher specializing in the gap between autonomous capability and institutional accountability."
+      />
+
 
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">

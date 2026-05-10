@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Code2, Github, ExternalLink } from 'lucide-react'
+import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import ProjectCard from '../components/ProjectCard'
@@ -159,14 +160,11 @@ export default function Projects() {
 
   return (
     <>
-      <Head>
-        <title>Research Systems & Projects — Ali Akarma</title>
-        <meta name="description" content="Technical implementation of safety-aligned agentic systems: coordinating heterogeneous agents under Lagrangian safety constraints." />
-        <link rel="canonical" href="https://aliakarma.codes/projects" />
-        <meta property="og:title" content="Research Systems — Ali Akarma" />
-        <meta property="og:description" content="Technical implementation of safety-aligned agentic systems." />
-        <meta property="og:url" content="https://aliakarma.codes/projects" />
-      </Head>
+      <Meta 
+        title="Research Systems & Projects" 
+        description="Technical implementation of safety-aligned agentic systems: coordinating heterogeneous agents under Lagrangian safety constraints."
+      />
+
 
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">

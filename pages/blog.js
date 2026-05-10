@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Clock, ArrowRight, Tag, ChevronDown, ChevronUp, MapPin } from 'lucide-react'
+import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { blogPosts } from '../data/blog'
@@ -12,10 +13,11 @@ export default function Blog() {
 
   return (
     <>
-      <Head>
-        <title>Writing — Ali Akarma</title>
-        <meta name="description" content="Research notes and summaries by Ali Akarma — distilled from peer-reviewed publications on agentic AI, safety, and governance." />
-      </Head>
+      <Meta 
+        title="Research Notes" 
+        description="Research notes and summaries by Ali Akarma — distilled from peer-reviewed publications on agentic AI, safety, and governance."
+      />
+
 
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">

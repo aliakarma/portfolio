@@ -23,6 +23,7 @@ export default function Document() {
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#08080f" />
+        <meta property="og:site_name" content="Ali Akarma" />
         <meta property="og:image" content="https://aliakarma.codes/og-image.png" />
         <meta name="twitter:image" content="https://aliakarma.codes/og-image.png" />
 
@@ -35,6 +36,7 @@ export default function Document() {
               "name": "Ali Akarma",
               "jobTitle": "AI Researcher",
               "url": "https://aliakarma.codes",
+              "description": "Ali Akarma is an AI Researcher specializing in Agentic AI, AI Safety, and Trustworthy Machine Learning.",
               "sameAs": [
                 "https://github.com/aliakarma",
                 "https://www.linkedin.com/in/aliakarma",
@@ -43,7 +45,14 @@ export default function Document() {
               "affiliation": {
                 "@type": "Organization",
                 "name": "Islamic University of Madinah"
-              }
+              },
+              "knowsAbout": [
+                "Agentic AI",
+                "AI Safety",
+                "Trustworthy Machine Learning",
+                "Large Language Models",
+                "AI Governance"
+              ]
             })
           }}
         />
