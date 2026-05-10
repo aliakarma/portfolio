@@ -108,7 +108,11 @@ export default function Contact() {
     <>
       <Head>
         <title>Contact — Ali Akarma</title>
-        <meta name="description" content="Contact Ali Akarma for research collaboration, academic discussion, or graduate opportunities." />
+        <meta name="description" content="Get in touch with Ali Akarma for research collaborations on AI safety, multi-agent systems, and autonomous governance." />
+        <link rel="canonical" href="https://aliakarma.codes/contact" />
+        <meta property="og:title" content="Contact Ali Akarma" />
+        <meta property="og:description" content="Collaborate on AI safety and multi-agent research." />
+        <meta property="og:url" content="https://aliakarma.codes/contact" />
       </Head>
 
       <PageTransition>
