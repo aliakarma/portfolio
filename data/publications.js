@@ -48,7 +48,7 @@ export const publications = [
     abstract: "The issue of limited household budgets and nutritional demands continues to be a challenge especially in the middle-income environment where food prices fluctuate. This paper introduces a price aware agentic AI system, which combines personal finance management with diet optimization. With household income and fixed expenditures, medical and well-being status, as well as real-time food costs, the system creates nutritionally sufficient meals plans at comparatively reasonable prices that automatically adjust to market changes. The framework is implemented in a modular multi-agent architecture, which has specific agents (budgeting, nutrition, price monitoring, and health personalization). These agents share the knowledge base and use the substitution graph to ensure that the nutritional quality is maintained at a minimum cost. Simulations with a representative Saudi household case study show a steady 12-18% reduction in costs relative to a static weekly menu, nutrient adequacy of over 95% and high performance with price changes of 20-30%. The findings indicate that the framework can locally combine affordability with nutritional adequacy and provide a viable avenue of capacity-building towards sustainable and fair diet planning in line with Sustainable Development Goals on Zero Hunger and Good Health.",
     bibtex: `@inproceedings{syed2025finagent,
   title={FinAgent: Agentic AI for Personal Finance & Nutrition},
-  author={Toqeer Ali Syed and Akarma, Ali and others},
+  author={Syed, Toqeer Ali and Alshahrani, Abdulaziz and Ullah, Ali and Akarma, Ali and Khan, Sohail and Nauman, Muhammad and Jan, Salman},
   booktitle={Proceedings of the IEEE International Conference on Control and Automation},
   year={2025},
   organization={IEEE},
@@ -75,7 +75,7 @@ export const publications = [
     abstract: "The challenge is growing towards extreme and short-duration rainfall events like a cloudburst that are peculiar to the traditional forecasting systems, in which the predictions and the response are taken as two distinct processes. The paper outlines an agentic artificial intelligence system to study atmospheric water-cycle intelligence, which combines sensing, forecasting, downscaling, hydrological modeling and coordinated response into a single, interconnected, priceless, closed-loop system. The framework uses autonomous but cooperative agents that reason, sense, and act throughout the entire event lifecycle, and use the intelligence of weather prediction to become real-time decision intelligence. Comparison of multi-year radar, satellite, and ground-based evaluation of the northern part of Pakistan demonstrates that the multi-agent configuration enhances forecast reliability, critical success index and warning lead time compared to the baseline models. Population reach was maximised, and errors during evacuation were minimised through communication and routing agents, and adaptive recalibration and transparent auditability were provided by the embedded layer of learning. Collectively, this leads to the conclusion that collaborative AI agents are capable of transforming atmospheric data streams into practicable foresight and provide a platform of scalable adaptive and learning-based climate resilience.",
     bibtex: `@inproceedings{syed2025cloudburst,
   title={Agentic AI Framework for Cloudburst Prediction and Coordinated Response},
-  author={Toqeer Ali Syed and Sohail Khan and Salman Jan and Gohar Ali and Muhammad Nauman and Ali Akarma and Ahmad Ali},
+  author={Syed, Toqeer Ali and Khan, Sohail and Jan, Salman and Ali, Gohar and Nauman, Muhammad and Akarma, Ali and Ali, Ahmad},
   booktitle={Proceedings of the International Conference on Big Data Technologies},
   year={2025}
 }`,
@@ -100,7 +100,7 @@ export const publications = [
     abstract: "Develops an agentic AI pipeline for intelligent inventory replenishment, integrating real-time demand forecasting with autonomous procurement decision-making under supply uncertainty.",
     bibtex: `@inproceedings{syed2025inventory,
   title={Agentic AI for Smart Inventory Replenishment},
-  author={Toqeer Ali Syed and Salman Jan and Gohar Ali and Ali Akarma and Ahmad Ali and Qurat-ul-Ain Mastoi},
+  author={Syed, Toqeer Ali and Jan, Salman and Ali, Gohar and Akarma, Ali and Ali, Ahmad and Mastoi, Qurat-ul-Ain},
   booktitle={Proceedings of the International Conference on Big Data Technologies},
   year={2025}
 }`,
@@ -125,7 +125,7 @@ export const publications = [
     abstract: "Investigates the deployment of agentic AI systems to support individuals with disabilities and neurodivergent conditions, focusing on adaptive interfaces, personalized assistance, and inclusive design principles.",
     bibtex: `@inproceedings{jan2025disabilities,
   title={Agentic AI Framework for Individuals with Disabilities and Neurodivergence: A Multi-Agent System for Healthy Eating, Daily Routines, and Inclusive Well-Being},
-  author={Salman Jan and Toqeer Ali Syed and Gohar Ali and Ali Akarma and Mohammad Riyaz Belgaum and Ahmad Ali},
+  author={Jan, Salman and Syed, Toqeer Ali and Ali, Gohar and Akarma, Ali and Belgaum, Mohammad Riyaz and Ali, Ahmad},
   booktitle={Proceedings of the International Conference on Big Data Technologies},
   year={2025}
 }`,
