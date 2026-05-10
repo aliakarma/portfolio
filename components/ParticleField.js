@@ -82,10 +82,21 @@ export default function ParticleField() {
 
     window.addEventListener('resize', onResize, { passive: true })
 
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animId)
+      } else {
+        animId = requestAnimationFrame(draw)
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
     return () => {
       cancelAnimationFrame(animId)
       clearTimeout(resizeTimer)
       window.removeEventListener('resize', onResize)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [])
 
