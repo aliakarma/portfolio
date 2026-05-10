@@ -79,7 +79,9 @@ export default function Research() {
                 </h1>
                 <p className="font-body text-parchment-300 max-w-2xl mb-8">
                   {publications.length} publications and manuscripts spanning agentic AI architectures,
-                  safety, governance, and real-world deployment in critical systems.
+                  safety, governance, and real-world deployment. I also maintain distilled{' '}
+                  <a href="/blog" className="text-gold-400 hover:underline">research notes</a> for 
+                  key findings and practical implications.
                 </p>
                 <div className="section-divider" />
               </div>
