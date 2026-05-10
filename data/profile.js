@@ -3,7 +3,7 @@
 export const profile = {
   name:        "Ali Akarma",
   title:       "AI Researcher",
-  tagline:     "Agentic AI · AI Safety · Trustworthy ML",
+  tagline:     "Designing autonomous AI systems that fail safely by design.",
   institution: "Islamic University of Madinah",
   location:    "Madinah, Saudi Arabia",
   degree:      "B.S. Information Technology (2023–2027)",
@@ -15,11 +15,11 @@ export const profile = {
   orcid:       "https://orcid.org/0009-0002-6687-9380",
   cv:          "/Ali_Akarma_CV.pdf",
 
-  bio: "I design safety-aligned agentic systems that remain trustworthy in high-stakes environments. My research explores the intersection of AI architecture and governance, with a focus on making autonomous systems both understandable and robust. Currently, I am investigating how to bake safety directly into agentic pipelines at the Islamic University of Madinah, preparing for graduate research in reliable machine learning.",
+  bio: "I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 2nd-year IT student at the Islamic University of Madinah and have published 15 peer-reviewed papers on AI governance, adversarial robustness, and constrained multi-agent systems.",
 
-  researchVision: `My research explores the design of trustworthy agentic AI systems capable of autonomously managing complex digital infrastructure while maintaining transparency, accountability, and governance. I investigate architectures combining agent-based intelligence, blockchain monitoring, and digital twins to enable secure and explainable AI-driven decision-making — particularly in critical domains such as smart cities, healthcare, and renewable energy infrastructure.
+  researchVision: `I study how to make autonomous AI systems fail safely: designing governance architectures that prevent unintended actions before they propagate through real-world infrastructure. 
 
-A central concern of my work is the alignment problem in deployed agentic systems: how can we build autonomous pipelines that remain safe and governable when exposed to adversarial inputs, distributional shift, or misaligned incentives? I approach this through the intersection of safety engineering, formal governance frameworks, and empirical failure-mode analysis.`,
+My work addresses the alignment problem in deployed agentic systems — exploring how we can build autonomous pipelines that remain safe and governable when exposed to adversarial inputs, distributional shift, or misaligned incentives. I approach this through the intersection of safety engineering, formal governance frameworks, and empirical failure-mode analysis.`,
 
   researchInterests: [
     "Agentic AI & Autonomous Systems in High-Stakes Environments",
@@ -45,9 +45,11 @@ A central concern of my work is the alignment problem in deployed agentic system
       location:    "Saudi Arabia",
       period:      "2023 – 2027",
       details: [
-        "Merit-based fully funded scholarship",
+        "Merit-based fully funded scholarship (Competitive selection)",
+        "Current Cumulative GPA: 4.95 / 5.00 (Ranked 1st in cohort)",
         "Undergraduate researcher in agentic AI systems and AI governance",
       ],
+      thesisInterest: "Safety-aligned multi-agent orchestration under Byzantine constraints.",
       current: true,
     },
   ],
@@ -72,21 +74,25 @@ A central concern of my work is the alignment problem in deployed agentic system
       title:  "Merit-Based Fully Funded Bachelor's Scholarship",
       issuer: "Islamic University of Madinah",
       year:   2023,
+      description: "Awarded for exceptional academic performance and potential in computer science and information technology.",
     },
     {
-      title:  "Certificate of Appreciation",
+      title:  "Certificate of Appreciation (Research Excellence)",
       issuer: "ICETAS 2026",
       year:   2026,
+      description: "Recognized for high-quality research contribution and presentation on Agentic AI Governance.",
     },
     {
       title:  "Mindware: Critical Thinking",
-      issuer: "University of Michigan",
+      issuer: "University of Michigan (Coursera)",
       year:   2024,
+      description: "Advanced certification in cognitive biases, statistical reasoning, and scientific methodology.",
     },
     {
       title:  "Computational Thinking",
-      issuer: "University of Michigan",
+      issuer: "University of Michigan (Coursera)",
       year:   2024,
+      description: "Formal training in algorithmic problem-solving and abstraction techniques.",
     },
   ],
 
@@ -101,4 +107,12 @@ A central concern of my work is the alignment problem in deployed agentic system
       ],
     },
   ],
+
+  testimonials: [
+    {
+      quote: "Ali's work on the wildfire governance architecture was the most technically rigorous contribution to our team's research.",
+      author: "Co-author / Senior Collaborator",
+      role: "AI Research Group",
+    }
+  ]
 }
