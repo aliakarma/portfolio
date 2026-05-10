@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 
 export default function ParticleField() {
   const canvasRef = useRef(null)
@@ -28,12 +29,14 @@ export default function ParticleField() {
 
     const makeStars = (count, w, h) =>
       Array.from({ length: count }, () => ({
-        x:     Math.random() * w,
-        y:     Math.random() * h,
-        r:     Math.random() * 1.2 + 0.2,
-        alpha: Math.random() * 0.5 + 0.1,
-        speed: Math.random() * 0.15 + 0.02,
-        drift: (Math.random() - 0.5) * 0.05,
+        x:         Math.random() * w,
+        y:         Math.random() * h,
+        r:         Math.random() * 1.2 + 0.2,
+        alpha:     Math.random() * 0.5 + 0.1,
+        speed:     Math.random() * 0.15 + 0.02,
+        drift:     (Math.random() - 0.5) * 0.05,
+        amplitude: Math.random() * 1.5,
+        offset:    Math.random() * Math.PI * 2,
       }))
 
     let stars = makeStars(PARTICLE_COUNT, W, H)
@@ -42,7 +45,7 @@ export default function ParticleField() {
       ctx.clearRect(0, 0, W, H)
       stars.forEach((s) => {
         s.y     -= s.speed
-        s.x     += s.drift
+        s.x     += s.drift + Math.sin(Date.now() * 0.001 + s.offset) * 0.01 * s.amplitude
         s.alpha += (Math.random() - 0.5) * 0.008
         s.alpha  = Math.max(0.05, Math.min(0.6, s.alpha))
 
@@ -87,11 +90,17 @@ export default function ParticleField() {
   }, [])
 
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"           /* Accessibility Fix: purely decorative, hide from screen readers */
-      className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-      style={{ opacity: 0.6 }}
-    />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 2.5, ease: 'easeOut' }}
+    >
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"           /* Accessibility Fix: purely decorative, hide from screen readers */
+        className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
+        style={{ opacity: 0.6 }}
+      />
+    </motion.div>
   )
 }
