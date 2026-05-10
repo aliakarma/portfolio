@@ -159,12 +159,19 @@ export default function Home() {
                   transition={{ delay: 0.1 }}
                   className="mb-6 sm:mb-8"
                 >
-                  <div className="inline-flex items-center gap-2 px-3 py-1 border border-gold-500/30 bg-gold-500/5 rounded-sm max-w-full">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse flex-shrink-0" aria-hidden="true" />
-                    {/* Responsive Fix: allow badge text to wrap on 320px */}
-                    <span className="font-mono text-xs text-gold-400 uppercase leading-relaxed break-words">
-                      AI Researcher · Islamic University of Madinah
-                    </span>
+                  <div className="flex flex-wrap gap-2">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 border border-gold-500/30 bg-gold-500/5 rounded-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse flex-shrink-0" aria-hidden="true" />
+                      <span className="font-mono text-[10px] sm:text-xs text-gold-400 uppercase tracking-widest">
+                        AI Researcher · IU Madinah
+                      </span>
+                    </div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 border border-gold-500/20 bg-noir-800 rounded-sm">
+                      <Award size={12} className="text-gold-400 flex-shrink-0" />
+                      <span className="font-mono text-[10px] sm:text-xs text-parchment-200 uppercase tracking-widest">
+                        GPA 4.95 · Ranked 1st
+                      </span>
+                    </div>
                   </div>
                 </motion.div>
 
@@ -224,16 +231,22 @@ export default function Home() {
                   {profile.bio}
                 </motion.p>
 
-                {/* Condensed Research Vision — Section 7.4 Fix */}
+                {/* Core Research Thesis Card — Enhanced for Professionalism */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.75 }}
-                  className="mb-10 border-l-2 border-gold-500/30 pl-5 py-1"
+                  className="mb-10 relative"
                 >
-                  <p className="font-display text-lg text-parchment-100 italic leading-relaxed max-w-lg">
-                    "I study how to make autonomous AI systems fail safely: designing governance architectures that prevent unintended actions before they propagate through real-world infrastructure."
-                  </p>
+                  <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gold-500/40" />
+                  <div className="glass-card p-6 border border-gold-500/10 bg-gold-500/[0.02]">
+                    <div className="flex gap-4">
+                      <Quote size={20} className="text-gold-500/40 flex-shrink-0 mt-1" />
+                      <p className="font-display text-lg text-parchment-100 italic leading-relaxed">
+                        I study how to make autonomous AI systems <span className="text-gold-400">fail safely</span>: designing governance architectures that prevent unintended actions before they propagate through real-world infrastructure.
+                      </p>
+                    </div>
+                  </div>
                 </motion.div>
 
                 {/* CTA buttons */}
@@ -301,25 +314,32 @@ export default function Home() {
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, delay: 0.5 }}
-                  className="space-y-3"
+                  className="space-y-4"
                 >
-                  {/* Profile Photo in Hero */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.7, delay: 0.4 }}
-                    className="relative mb-6 group"
-                  >
-                    <div className="w-40 h-40 mx-auto md:mx-0 border-2 border-gold-500/30 bg-noir-700 relative overflow-hidden shadow-2xl shadow-gold-500/10">
-                      <img
-                        src="/profile.jpg"
-                        alt="Ali Akarma"
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                      />
-                      <div className="absolute inset-0 border border-gold-500/20 pointer-events-none" />
-                    </div>
-                    <div className="absolute -bottom-2 -right-2 w-12 h-12 border-r-2 border-b-2 border-gold-500/40 pointer-events-none" />
-                  </motion.div>
+                  {/* Featured Research Focus Card — Premium Academic Detail */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.7, delay: 0.5 }}
+                      className="glass-card p-6 border-gold-500/20 bg-gold-500/[0.03] mb-6"
+                    >
+                      <h4 className="font-mono text-[10px] text-gold-400 uppercase tracking-[0.2em] mb-4">Current Research Frontier</h4>
+                      <div className="space-y-4">
+                        <div className="flex gap-4">
+                          <div className="w-8 h-8 rounded-full bg-gold-500/10 border border-gold-500/20 flex items-center justify-center flex-shrink-0">
+                            <Star size={14} className="text-gold-400" />
+                          </div>
+                          <div>
+                            <p className="font-display text-base text-parchment-100 leading-snug">Autonomous Safety Governance</p>
+                            <p className="font-mono text-[10px] text-parchment-400 mt-1 uppercase">Safety-Critical Multi-Agent Systems</p>
+                          </div>
+                        </div>
+                        <div className="h-px bg-gold-500/10" />
+                        <p className="font-body text-xs text-parchment-300 leading-relaxed italic">
+                          "Investigating cryptographic trust-anchors and constrained reasoning for large-scale agentic deployments."
+                        </p>
+                      </div>
+                    </motion.div>
 
                   {stats.map((stat, i) => (
                     <motion.div
