@@ -2,6 +2,38 @@
 
 export const blogPosts = [
   {
+    id: 101,
+    title: "The Governance Gap: Why Agentic AI Needs More Than Just Code",
+    date: "2026-05-10",
+    category: "Opinion",
+    readTime: "6 min",
+    excerpt: "Building autonomous agents is a technical feat; ensuring they are accountable is a societal one. This post explores why traditional software testing fails for agentic AI and why we need cryptographically-anchored governance loops.",
+    summary: "As we move from 'AI in a box' (LLMs) to 'AI in the loop' (Agents), our metrics for success must shift. Currently, we optimize for task completion rates. But in safety-critical infrastructure, a 99% success rate is a 1% catastrophic failure rate. I argue that we must move toward 'Governance-by-Design'—where institutional accountability is not an external check, but a hard invariant enforced by the agent's own orchestration layer.",
+    keyContributions: [
+      "Distinction between technical safety and institutional accountability",
+      "Critique of current 'completion-rate' benchmarks for autonomous agents",
+      "Proposal for cryptographically-verifiable audit trails in agent orchestration"
+    ],
+    implications: "For researchers, this means prioritizing deterministic governance layers over black-box reasoning. For institutions, it means requiring 'proof-of-authorization' for any autonomous action that impacts physical systems.",
+    tags: ["AI Governance", "Ethics", "Agentic AI"],
+  },
+  {
+    id: 102,
+    title: "Beyond the Chatbox: The Looming Shift from Models to Systems",
+    date: "2026-04-15",
+    category: "Research Commentary",
+    readTime: "5 min",
+    excerpt: "The industry is obsessed with LLM parameters, but the real research frontier is the cognitive architecture around the model. Why the next decade of AI belongs to the systems engineers, not just the model trainers.",
+    summary: "We are reaching a point of diminishing returns in raw model scaling. The 'Agentic Turn' represents a shift from focusing on the *intelligence* to focusing on the *orchestration*. I share my perspective on why the most resilient AI won't be the one with the most parameters, but the one with the most robust perception-reasoning-action loop, particularly in high-noise environments like IoT and disaster response.",
+    keyContributions: [
+      "Analysis of the shift from monolithic models to modular agentic systems",
+      "Arguments for prioritizing system robustness over model size in real-world deployment",
+      "Perspective on the role of 'System-2' reasoning in autonomous decision-making"
+    ],
+    implications: "Future AI talent will need to be as proficient in systems engineering and formal verification as they are in machine learning and data science.",
+    tags: ["Agentic AI", "Future of AI", "Systems Engineering"],
+  },
+  {
     id: 14,
     title: "Governance-Constrained Agentic AI: Blockchain-Enforced Human Oversight for Safety-Critical Wildfire Monitoring",
     date: "2026-01-01",
