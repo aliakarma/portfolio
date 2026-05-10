@@ -15,7 +15,7 @@ export const profile = {
   orcid:       "https://orcid.org/0009-0002-6687-9380",
   cv:          "/Ali_Akarma_CV.pdf",
 
-  bio: "AI researcher focused on trustworthy and safety-aligned agentic systems, with peer-reviewed publications spanning AI architectures, governance, and real-world deployment contexts. Experienced in designing constrained agent pipelines, analyzing failure modes, and studying robustness in high-stakes environments. Preparing for graduate research in reliable machine learning systems.",
+  bio: "I design safety-aligned agentic systems that remain trustworthy in high-stakes environments. My research explores the intersection of AI architecture and governance, with a focus on making autonomous systems both understandable and robust. Currently, I am investigating how to bake safety directly into agentic pipelines at the Islamic University of Madinah, preparing for graduate research in reliable machine learning.",
 
   researchVision: `My research explores the design of trustworthy agentic AI systems capable of autonomously managing complex digital infrastructure while maintaining transparency, accountability, and governance. I investigate architectures combining agent-based intelligence, blockchain monitoring, and digital twins to enable secure and explainable AI-driven decision-making — particularly in critical domains such as smart cities, healthcare, and renewable energy infrastructure.
 
