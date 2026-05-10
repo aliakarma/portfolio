@@ -9,13 +9,6 @@ import { publications } from '../data/publications'
 export default function About() {
   const publications_count = publications.length
 
-  const sidebarLinks = [
-    { icon: <MapPin size={14} />,       text: 'Madinah, Saudi Arabia' },
-    { icon: <GraduationCap size={14} />,text: 'Islamic University of Madinah' },
-    { icon: <BookOpen size={14} />,     text: 'Google Scholar', href: profile.scholar },
-    ...(profile.orcid ? [{ icon: <Link2 size={14} />, text: 'ORCID', href: profile.orcid }] : []),
-    { icon: <Microscope size={14} />,   text: `${publications_count} Publications` },
-  ]
 
   const socialLinks = [
     { icon: <Github   size={16} />, href: profile.github,            label: 'GitHub' },
@@ -209,6 +202,25 @@ export default function About() {
                         </ul>
                       </motion.div>
                     ))}
+                  </div>
+                </SectionReveal>
+
+                <SectionReveal delay={0.22}>
+                  <div>
+                    <h2 className="font-display text-2xl text-parchment-100 mb-6">Technical Methods & Expertise</h2>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {[
+                        { title: 'Agentic AI Systems', desc: 'Designing constrained reasoning pipelines with explicit safety guardrails and policy alignment.' },
+                        { title: 'Safety Engineering', desc: 'Analyzing failure modes and edge cases in autonomous decision-making systems.' },
+                        { title: 'AI Governance', desc: 'Implementing blockchain-based auditing and immutable oversight for AI agents.' },
+                        { title: 'Technical Writing', desc: 'Distilling complex research into peer-reviewed publications and technical reports.' },
+                      ].map((item, i) => (
+                        <div key={i} className="glass-card p-5 border border-gold-500/10">
+                          <h4 className="font-mono text-xs text-gold-400 uppercase tracking-widest mb-2">{item.title}</h4>
+                          <p className="font-body text-sm text-parchment-300 leading-relaxed">{item.desc}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </SectionReveal>
 
