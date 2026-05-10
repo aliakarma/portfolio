@@ -5,66 +5,63 @@ import SectionReveal from '../components/SectionReveal'
 
 const skills = {
   'AI & Machine Learning': [
-    { name: 'Agentic AI Systems',          level: 92 },
-    { name: 'Large Language Models (LLMs)', level: 90 },
-    { name: 'AI Safety & Alignment',        level: 88 },
-    { name: 'Adversarial ML',               level: 80 },
-    { name: 'Multi-Agent Deep RL',          level: 82 },
-    { name: 'Failure Mode Analysis',        level: 88 },
+    { name: 'Agentic AI Systems',          level: 'Expert' },
+    { name: 'Large Language Models (LLMs)', level: 'Expert' },
+    { name: 'AI Safety & Alignment',        level: 'Proficient' },
+    { name: 'Adversarial ML',               level: 'Proficient' },
+    { name: 'Multi-Agent Systems',          level: 'Proficient' },
+    { name: 'Failure Mode Analysis',        level: 'Proficient' },
   ],
   'Programming & Engineering': [
-    { name: 'Python',                level: 90 },
-    { name: 'LangChain / LangGraph', level: 85 },
-    { name: 'PyTorch',               level: 75 },
-    { name: 'FastAPI / REST APIs',   level: 72 },
-    { name: 'Git & GitHub',          level: 88 },
+    { name: 'Python',                level: 'Expert' },
+    { name: 'LangChain / LangGraph', level: 'Proficient' },
+    { name: 'PyTorch',               level: 'Comfortable' },
+    { name: 'FastAPI / REST APIs',   level: 'Comfortable' },
+    { name: 'Git & GitHub',          level: 'Proficient' },
   ],
   'Research & Academic': [
-    { name: 'Academic Writing',         level: 92 },
-    { name: 'Literature Review',        level: 90 },
-    { name: 'Research Methodology',     level: 86 },
-    { name: 'Critical Thinking',        level: 90 },
-    { name: 'Technical Communication',  level: 88 },
+    { name: 'Academic Writing',         level: 'Expert' },
+    { name: 'Literature Review',        level: 'Expert' },
+    { name: 'Research Methodology',     level: 'Proficient' },
+    { name: 'Critical Thinking',        level: 'Expert' },
+    { name: 'Technical Communication',  level: 'Expert' },
   ],
-  'Systems & Platforms': [
-    { name: 'Blockchain / Smart Contracts', level: 72 },
-    { name: 'IoT Systems',                  level: 68 },
-    { name: 'Digital Twins',                level: 76 },
-    { name: 'Cloud Platforms',              level: 65 },
+  'Systems & Governance': [
+    { name: 'Blockchain (Ethereum/Fabric)', level: 'Comfortable' },
+    { name: 'IoT & Edge Intelligence',      level: 'Comfortable' },
+    { name: 'Digital Twins',                level: 'Comfortable' },
+    { name: 'Cloud Infrastructure',         level: 'Familiar' },
   ],
 }
 
-/* ─── Skill Bar ─── */
-function SkillBar({ name, level, delay = 0 }) {
+const LEVEL_MAP = {
+  'Expert':      95,
+  'Proficient':  82,
+  'Comfortable': 68,
+  'Familiar':    50,
+}
+
+/* ─── Skill Row ─── */
+function SkillRow({ name, level, delay = 0 }) {
+  const levelColor = {
+    'Expert':      'text-gold-400 border-gold-500/30 bg-gold-500/10',
+    'Proficient':  'text-parchment-200 border-parchment-400/20 bg-parchment-400/5',
+    'Comfortable': 'text-parchment-300 border-parchment-400/10',
+    'Familiar':    'text-parchment-400 border-parchment-400/5',
+  }[level]
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
+      initial={{ opacity: 0, x: -10 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
-      transition={{ delay, duration: 0.5 }}
-      className="mb-4"
+      transition={{ delay, duration: 0.4 }}
+      className="flex items-center justify-between py-3 border-b border-noir-600/50 last:border-0"
     >
-      <div className="flex justify-between mb-1.5">
-        <span className="font-body text-sm text-parchment-200">{name}</span>
-        <span className="font-mono text-xs text-gold-400/70" aria-hidden="true">{level}%</span>
-      </div>
-      <div
-        className="h-1 bg-noir-600 rounded-full overflow-hidden"
-        role="progressbar"
-        aria-label={`${name} proficiency`}
-        aria-valuenow={level}
-        aria-valuemin={0}
-        aria-valuemax={100}
-      >
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: `${level}%` }}
-          viewport={{ once: true }}
-          transition={{ delay: delay + 0.2, duration: 0.9, ease: 'easeOut' }}
-          className="h-full rounded-full"
-          style={{ background: 'linear-gradient(90deg,#c98a00,#f4c040)' }}
-        />
-      </div>
+      <span className="font-body text-sm text-parchment-200">{name}</span>
+      <span className={`font-mono text-[10px] tracking-widest uppercase px-2 py-0.5 border ${levelColor} rounded-sm`}>
+        {level}
+      </span>
     </motion.div>
   )
 }
@@ -74,16 +71,12 @@ function RadarChart({ data }) {
   const N      = data.length
   const cx     = 150
   const cy     = 150
-  const r      = 105
+  const r      = 85  // Reduced radius to give labels more space
   const angles = data.map((_, i) => (i / N) * Math.PI * 2 - Math.PI / 2)
   const pt     = (angle, rad) => ({ x: cx + rad * Math.cos(angle), y: cy + rad * Math.sin(angle) })
-  const poly   = data.map((d, i) => pt(angles[i], (d.level / 100) * r))
+  const poly   = data.map((d, i) => pt(angles[i], (LEVEL_MAP[d.level] / 100) * r))
 
   return (
-    /*
-      Accessibility Fix: SVG has role="img", a <title> for screen readers,
-      and aria-labelledby linking to the title element.
-    */
     <svg
       viewBox="0 0 300 300"
       className="w-full max-w-xs mx-auto"
@@ -92,7 +85,7 @@ function RadarChart({ data }) {
     >
       <title id="radar-title">
         AI competency radar chart showing proficiency levels:
-        {data.map(d => ` ${d.name} ${d.level}%`).join(',')}
+        {data.map(d => ` ${d.name} (${d.level})`).join(',')}
       </title>
 
       {/* Grid lines */}
@@ -124,20 +117,19 @@ function RadarChart({ data }) {
       {/* Data polygon */}
       <polygon
         points={poly.map(p => `${p.x},${p.y}`).join(' ')}
-        fill="rgba(232,169,0,0.1)"
-        stroke="rgba(244,192,64,0.7)"
+        fill="rgba(232,169,0,0.12)"
+        stroke="rgba(244,192,64,0.8)"
         strokeWidth="1.5"
         aria-hidden="true"
       />
 
-      {/* Data points */}
-      {poly.map((p, i) => (
-        <circle key={i} cx={p.x} cy={p.y} r="3" fill="#f4c040" aria-hidden="true" />
-      ))}
-
       {/* Axis labels */}
       {data.map((d, i) => {
-        const lp = pt(angles[i], r + 22)
+        const angle = angles[i]
+        const lp = pt(angle, r + 28)
+        
+        // Multi-line label support for longer strings
+        const words = d.name.split(' ')
         return (
           <text
             key={i}
@@ -145,12 +137,17 @@ function RadarChart({ data }) {
             y={lp.y}
             textAnchor="middle"
             dominantBaseline="middle"
-            fontSize="8.5"
-            fill="rgba(237,229,208,0.65)"
+            fontSize="8"
+            fill="rgba(237,229,208,0.7)"
             fontFamily="JetBrains Mono, monospace"
             aria-hidden="true"
           >
-            {d.name.length > 14 ? d.name.slice(0, 12) + '…' : d.name}
+            {words.length > 2 ? (
+              <>
+                <tspan x={lp.x} dy="-0.6em">{words.slice(0, 2).join(' ')}</tspan>
+                <tspan x={lp.x} dy="1.2em">{words.slice(2).join(' ')}</tspan>
+              </>
+            ) : d.name}
           </text>
         )
       })}
@@ -217,34 +214,38 @@ export default function Skills() {
               <div className="md:col-span-3 space-y-6">
                 {Object.entries(skills).map(([cat, catSkills], ci) => (
                   <SectionReveal key={cat} delay={ci * 0.1}>
-                    <div className="glass-card p-5 sm:p-6">
-                      <h2 className="font-display text-lg text-parchment-100 mb-5">{cat}</h2>
-                      {catSkills.map((s, i) => (
-                        <SkillBar key={s.name} name={s.name} level={s.level} delay={ci * 0.1 + i * 0.05} />
-                      ))}
+                    <div className="glass-card p-5 sm:p-6 h-full flex flex-col">
+                      <h2 className="font-display text-lg text-parchment-100 mb-4 border-b border-gold-500/10 pb-3">{cat}</h2>
+                      <div className="flex-1">
+                        {catSkills.map((s, i) => (
+                          <SkillRow key={s.name} name={s.name} level={s.level} delay={ci * 0.1 + i * 0.05} />
+                        ))}
+                      </div>
                     </div>
                   </SectionReveal>
                 ))}
               </div>
             </div>
 
-            {/* Skill clusters word cloud */}
+            {/* Research Methods & Frameworks */}
             <SectionReveal>
               <div className="section-divider mb-12" />
-              <h2 className="font-display text-2xl text-parchment-100 mb-8">Skill Clusters</h2>
-              <div className="flex flex-wrap gap-3 justify-center" aria-label="Skill keyword cloud">
-                {clusters.map((item, i) => (
-                  <motion.span
-                    key={item}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.04 }}
-                    whileHover={{ scale: 1.05 }}
-                    className={`font-display ${clusterSizes[i]} text-parchment-300 hover:text-gold-400 cursor-default transition-colors duration-200 px-2`}
-                  >
-                    {item}
-                  </motion.span>
+              <h2 className="font-display text-2xl text-parchment-100 mb-8">Research Methods & Frameworks</h2>
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { label: 'Agentic Workflows', items: ['LangGraph', 'AutoGPT', 'ReAct'] },
+                  { label: 'Safety Analysis', items: ['Failure Modes', 'Jailbreaking', 'Robustness'] },
+                  { label: 'Governance', items: ['Blockchain', 'Constitutional AI', 'Audit Logs'] },
+                  { label: 'Evaluation', items: ['Human-in-loop', 'Benchmarking', 'Red Teaming'] },
+                ].map((group, i) => (
+                  <div key={i} className="p-4 border border-gold-500/5 bg-gold-500/[0.02]">
+                    <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold-500/60 mb-3">{group.label}</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {group.items.map(item => (
+                        <span key={item} className="font-body text-sm text-parchment-300">{item}</span>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </SectionReveal>
