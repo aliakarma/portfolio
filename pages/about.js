@@ -160,7 +160,7 @@ export default function About() {
                             )}
                           </div>
                         </div>
-                        <ul className="space-y-1.5">
+                        <ul className="space-y-1.5 mb-4">
                           {edu.details.map((d, i) => (
                             <li key={i} className="flex items-start gap-2 text-parchment-300">
                               <div className="w-1 h-1 rounded-full bg-gold-400 mt-1.5 flex-shrink-0" aria-hidden="true" />
@@ -168,6 +168,12 @@ export default function About() {
                             </li>
                           ))}
                         </ul>
+                        {edu.thesisInterest && (
+                          <div className="p-3 bg-gold-500/5 border border-gold-500/10 rounded-sm">
+                            <p className="font-mono text-[10px] text-gold-400 uppercase tracking-widest mb-1">Thesis Interest</p>
+                            <p className="font-body text-sm text-parchment-200">{edu.thesisInterest}</p>
+                          </div>
+                        )}
                       </motion.div>
                     ))}
                   </div>
@@ -243,7 +249,8 @@ export default function About() {
                             <div className="min-w-0">
                               <h4 className="font-display text-base text-parchment-100 leading-snug mb-1">{award.title}</h4>
                               <p className="font-mono text-xs text-gold-400/80">{award.issuer}</p>
-                              <p className="font-mono text-xs text-parchment-400 mt-1">{award.year}</p>
+                              <p className="font-body text-xs text-parchment-400 mt-2 leading-relaxed">{award.description}</p>
+                              <p className="font-mono text-[10px] text-parchment-400/50 mt-2">{award.year}</p>
                             </div>
                           </div>
                         </motion.div>
