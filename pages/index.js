@@ -214,10 +214,22 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 }}
-                  className="font-body text-parchment-300 text-base leading-relaxed max-w-xl mb-8 sm:mb-10"
+                  className="font-body text-parchment-300 text-base leading-relaxed max-w-xl mb-8"
                 >
                   {profile.bio}
                 </motion.p>
+
+                {/* Condensed Research Vision — Section 7.4 Fix */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.75 }}
+                  className="mb-10 border-l-2 border-gold-500/30 pl-5 py-1"
+                >
+                  <p className="font-display text-lg text-parchment-100 italic leading-relaxed max-w-lg">
+                    "I study how to make autonomous AI systems fail safely: designing governance architectures that prevent unintended actions before they propagate through real-world infrastructure."
+                  </p>
+                </motion.div>
 
                 {/* CTA buttons */}
                 <motion.div
