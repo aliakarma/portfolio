@@ -20,8 +20,14 @@ export default function ResearchGraph() {
     const init = async () => {
       let d3
       try {
-        d3 = await import('d3')
-      } catch {
+        const [force, selection, drag] = await Promise.all([
+          import('d3-force'),
+          import('d3-selection'),
+          import('d3-drag')
+        ])
+        d3 = { ...force, ...selection, ...drag }
+      } catch (err) {
+        console.error('D3 load error:', err)
         setLoaded(true)
         return
       }
@@ -70,8 +76,8 @@ export default function ResearchGraph() {
         .data(nodes)
         .join('g')
         .attr('cursor', 'pointer')
-        .attr('role', 'img')
-        .attr('aria-label', d => `${d.label}: ${d.description}`)
+        /* Accessibility Fix: remove conflicting aria roles on <g> tags. 
+           The parent <svg> already has role="img" and description. */
         .call(
           d3.drag()
             .on('start', (event, d) => {
