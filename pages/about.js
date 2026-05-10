@@ -21,7 +21,11 @@ export default function About() {
     <>
       <Head>
         <title>About — Ali Akarma</title>
-        <meta name="description" content="About Ali Akarma — AI researcher at the Islamic University of Madinah specializing in agentic AI systems and safety." />
+        <meta name="description" content="About Ali Akarma — AI researcher specializing in the gap between autonomous capability and institutional accountability." />
+        <link rel="canonical" href="https://aliakarma.codes/about" />
+        <meta property="og:title" content="About Ali Akarma" />
+        <meta property="og:description" content="Researcher specializing in safety-aligned multi-agent orchestration." />
+        <meta property="og:url" content="https://aliakarma.codes/about" />
       </Head>
 
       <PageTransition>
