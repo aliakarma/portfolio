@@ -10,7 +10,9 @@ import { publications } from '../data/publications'
 
 /* ─── Project Modal ─── */
 function ProjectModal({ project, onClose }) {
-  const linkedPaper = project.paper ? publications.find(p => p.id === project.paper) : null
+  const linkedPaper = project.paper 
+    ? publications.find(p => p.pdf === project.paper || p.doi === project.paper) 
+    : null
 
   /* Accessibility Fix: close on Escape */
   useEffect(() => {
@@ -18,6 +20,13 @@ function ProjectModal({ project, onClose }) {
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [onClose])
+
+  /* Accessibility Fix: Focus trap for modals — Section 13 High */
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = originalStyle }
+  }, [])
 
   return (
     <motion.div
@@ -27,88 +36,116 @@ function ProjectModal({ project, onClose }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-noir-900/85 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-noir-900/90 backdrop-blur-md"
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.9, y: 20 }}
+        initial={{ scale: 0.95, y: 20 }}
         animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.9, y: 20 }}
+        exit={{ scale: 0.95, y: 20 }}
         onClick={e => e.stopPropagation()}
-        /* Responsive Fix: max-h-[90vh] + overflow-y-auto allows scroll on small screens */
-        className="glass-card max-w-2xl w-full p-5 sm:p-8 border border-gold-500/20 relative max-h-[90vh] overflow-y-auto"
+        className="glass-card max-w-3xl w-full p-6 sm:p-10 border border-gold-500/20 relative max-h-[92vh] overflow-y-auto shadow-2xl"
       >
         <button
           onClick={onClose}
           aria-label="Close project details"
-          className="absolute top-4 right-4 text-parchment-400 hover:text-parchment-100 transition-colors p-1 min-h-[36px] min-w-[36px] flex items-center justify-center"
+          className="absolute top-6 right-6 text-parchment-400 hover:text-parchment-100 transition-colors p-1 min-h-[40px] min-w-[40px] flex items-center justify-center bg-noir-800/50 rounded-full"
         >
-          <X size={18} aria-hidden="true" />
+          <X size={20} aria-hidden="true" />
         </button>
 
-        <div className="flex items-start gap-3 mb-5">
-          <div className="w-10 h-10 border border-gold-500/30 bg-gold-500/10 flex items-center justify-center flex-shrink-0">
-            <Code2 size={16} className="text-gold-400" aria-hidden="true" />
+        <div className="flex items-start gap-4 mb-8">
+          <div className="w-12 h-12 border border-gold-500/30 bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+            <Code2 size={20} className="text-gold-400" aria-hidden="true" />
           </div>
           <div className="min-w-0">
-            <h2 className="font-display text-2xl text-parchment-100">{project.title}</h2>
-            <span className="font-mono text-xs text-gold-400/80">{project.status}</span>
+            <h2 className="font-display text-2xl sm:text-3xl text-parchment-100 leading-tight mb-1">{project.title}</h2>
+            <span className={`font-mono text-[10px] tracking-widest uppercase px-2 py-0.5 border rounded-sm ${
+              project.status === 'Published' ? 'border-emerald-500/30 text-emerald-400 bg-emerald-500/5' : 'border-gold-500/30 text-gold-400 bg-gold-500/5'
+            }`}>
+              {project.status}
+            </span>
           </div>
         </div>
 
-        <p className="font-body text-parchment-300 leading-relaxed mb-6">{project.description}</p>
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="md:col-span-2 space-y-8">
+            <div>
+              <p className="font-mono text-[10px] text-gold-400 tracking-[0.2em] uppercase mb-3">Overview</p>
+              <p className="font-body text-parchment-200 text-base leading-relaxed">{project.description}</p>
+            </div>
 
-        <div className="mb-6">
-          <p className="font-mono text-xs text-parchment-400 tracking-widest uppercase mb-3">Technologies</p>
-          <div className="flex flex-wrap gap-2">
-            {project.technologies.map(tech => (
-              <span key={tech} className="tag-badge">{tech}</span>
-            ))}
+            {/* Storytelling segments — Section 9/13 Fix */}
+            {project.problem && (
+              <div>
+                <p className="font-mono text-[10px] text-gold-400 tracking-[0.2em] uppercase mb-3">The Problem</p>
+                <p className="font-body text-parchment-300 text-sm leading-relaxed">{project.problem}</p>
+              </div>
+            )}
+            
+            {project.approach && (
+              <div>
+                <p className="font-mono text-[10px] text-gold-400 tracking-[0.2em] uppercase mb-3">Technical Approach</p>
+                <p className="font-body text-parchment-300 text-sm leading-relaxed">{project.approach}</p>
+              </div>
+            )}
+
+            {project.results && (
+              <div>
+                <p className="font-mono text-[10px] text-gold-400 tracking-[0.2em] uppercase mb-3">Key Results</p>
+                <p className="font-body text-parchment-300 text-sm leading-relaxed">{project.results}</p>
+              </div>
+            )}
           </div>
-        </div>
 
-        <div className="mb-6">
-          <p className="font-mono text-xs text-parchment-400 tracking-widest uppercase mb-3">Research Themes</p>
-          <div className="flex flex-wrap gap-2">
-            {project.themes.map(t => (
-              <span key={t} className="font-mono text-xs text-parchment-300 border border-parchment-300/20 px-2 py-0.5 rounded-sm">
-                {t}
-              </span>
-            ))}
+          <div className="space-y-8">
+            <div>
+              <p className="font-mono text-[10px] text-gold-400 tracking-[0.2em] uppercase mb-4">Technologies</p>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map(tech => (
+                  <span key={tech} className="tag-badge text-[10px]">{tech}</span>
+                ))}
+              </div>
+            </div>
+
+            {linkedPaper && (
+              <div className="p-4 border border-gold-500/20 bg-gold-500/5 rounded-sm">
+                <p className="font-mono text-[10px] text-gold-400/70 tracking-widest uppercase mb-3">Peer Reviewed</p>
+                <p className="font-display text-sm text-parchment-100 leading-snug mb-3">{linkedPaper.title}</p>
+                <a 
+                  href={linkedPaper.pdf || linkedPaper.doi}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-[10px] text-gold-400 hover:underline flex items-center gap-1"
+                >
+                  Read Publication <ExternalLink size={10} />
+                </a>
+              </div>
+            )}
+
+            <div className="space-y-3 pt-4 border-t border-noir-600">
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full py-3 border border-gold-500/40 text-gold-400 font-mono text-[10px] tracking-widest uppercase hover:bg-gold-500/10 transition-all"
+                >
+                  <Github size={14} aria-hidden="true" /> View Source
+                </a>
+              )}
+              {project.demo && (
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full py-3 bg-gold-500 text-noir-900 font-mono text-[10px] tracking-widest uppercase hover:bg-gold-400 transition-all"
+                >
+                  <ExternalLink size={14} aria-hidden="true" /> Live Demo
+                </a>
+              )}
+            </div>
           </div>
-        </div>
-
-        {linkedPaper && (
-          <div className="mb-6 p-4 border border-gold-500/20 bg-gold-500/5">
-            <p className="font-mono text-xs text-gold-400/70 tracking-widest uppercase mb-2">Related Publication</p>
-            <p className="font-display text-base text-parchment-200 leading-snug">{linkedPaper.title}</p>
-            <p className="font-mono text-xs text-parchment-400 mt-1">{linkedPaper.statusLabel}</p>
-          </div>
-        )}
-
-        <div className="flex flex-wrap gap-3">
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`GitHub repository for ${project.title} (opens in new tab)`}
-              className="flex items-center gap-2 px-4 py-2 border border-gold-500/40 text-gold-400 font-mono text-xs tracking-widest uppercase hover:bg-gold-500/10 transition-all min-h-[44px]"
-            >
-              <Github size={14} aria-hidden="true" /> GitHub
-            </a>
-          )}
-          {project.demo && (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Live demo for ${project.title} (opens in new tab)`}
-              className="flex items-center gap-2 px-4 py-2 bg-gold-500 text-noir-900 font-mono text-xs tracking-widest uppercase hover:bg-gold-400 transition-all min-h-[44px]"
-            >
-              <ExternalLink size={14} aria-hidden="true" /> Demo
-            </a>
-          )}
         </div>
       </motion.div>
     </motion.div>
