@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 export default function Meta({ 
   title, 
   description, 
-  image = 'https://aliakarma.codes/og-image-v2.jpg',
+  image = 'https://aliakarma.codes/og-image.png',
   type = 'website' 
 }) {
   const router = useRouter()
