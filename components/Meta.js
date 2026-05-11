@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 export default function Meta({ 
   title, 
   description, 
-  image = 'https://aliakarma.codes/og-image.png',
+  image = 'https://aliakarma.codes/og-image-v2.jpg',
   type = 'website' 
 }) {
   const router = useRouter()
@@ -16,6 +16,10 @@ export default function Meta({
     <Head>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
+      <meta name="author" content="Ali Akarma" />
+      <meta name="creator" content="Ali Akarma" />
+      <meta name="publisher" content="Ali Akarma" />
+      <meta name="robots" content="index, follow" />
       <link rel="canonical" href={canonical} />
 
       {/* Open Graph */}
@@ -24,6 +28,9 @@ export default function Meta({
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content={type} />
       <meta property="og:image" content={image} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="Ali Akarma - AI Researcher specializing in Agentic AI and AI Safety" />
       <meta property="og:site_name" content="Ali Akarma" />
 
       {/* Twitter */}
@@ -31,6 +38,7 @@ export default function Meta({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+      <meta name="twitter:image:alt" content="Ali Akarma - AI Researcher specializing in Agentic AI and AI Safety" />
     </Head>
   )
 }
