@@ -121,7 +121,7 @@ export default function Home() {
     <>
       <Meta 
         title="Ali Akarma" 
-        description="AI Researcher specializing in Agentic AI and AI Safety"
+        description="AI Researcher specializing in Agentic AI, AI Safety, and AI Governance, focused on building autonomous AI systems that fail safely by design."
       />
       <Head>
         <script
