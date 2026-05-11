@@ -24,7 +24,7 @@ export default function Document() {
               "@type": "Person",
               "name": "Ali Akarma",
               "url": "https://aliakarma.codes",
-              "image": "https://aliakarma.codes/og-image-v2.jpg",
+              "image": "https://aliakarma.codes/og-image.png",
               "jobTitle": "AI Researcher",
               "description": "AI Researcher specializing in Agentic AI and AI Safety.",
               "sameAs": [
