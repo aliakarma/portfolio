@@ -170,6 +170,55 @@ In `data/publications.js`, populate these fields for each paper:
 }
 ```
 
+### Manage Google Scholar Metrics
+
+The portfolio automatically fetches your Google Scholar metrics (citations, h-index, i10-index) and displays them on the homepage.
+
+**Automated Updates:**
+- ✅ Scheduled daily via GitHub Actions (`.github/workflows/update_scholar.yml`)
+- ✅ Runs `npm run scholar:update` to fetch latest metrics
+- ✅ Falls back gracefully if Google Scholar blocks requests (this is normal)
+- ✅ Preserves last known metrics and updates timestamp
+
+**Manual Update (if automated fetch fails):**
+
+When Google Scholar blocks automated requests, manually update your metrics:
+
+```bash
+# Find your metrics at: https://scholar.google.com/citations?user=kQZZJtYAAAAJ
+node scripts/manual_update_scholar.js <citations> <hIndex> <i10Index>
+
+# Example:
+node scripts/manual_update_scholar.js 45 6 2
+```
+
+**Update File Directly:**
+
+Edit `data/scholar.json`:
+```json
+{
+  "citations": 45,
+  "hIndex": 6,
+  "i10Index": 2,
+  "lastUpdated": "2026-05-12T15:33:19.652Z",
+  "fetchFailed": false
+}
+```
+
+**Notes:**
+- `citations` — Total number of citations across all publications
+- `hIndex` — H-index (papers with ≥ h citations each)
+- `i10Index` — i10-index (papers with ≥ 10 citations each)
+- `lastUpdated` — ISO timestamp of last update
+- `fetchFailed` — Flag indicating if automated fetch failed
+
+After updating, commit the changes:
+```bash
+git add data/scholar.json
+git commit -m "update: scholar metrics"
+git push
+```
+
 ---
 
 ## 🛠 Tech Stack
