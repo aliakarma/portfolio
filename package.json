@@ -10,7 +10,8 @@
     "export": "next build",
     "deploy": "next build && touch out/.nojekyll && npx gh-pages -d out --dotfiles",
     "predeploy": "npm run export",
-    "scholar:update": "node scripts/update_scholar.js"
+    "scholar:update": "node scripts/update_scholar.js",
+    "scholar:manual": "node scripts/manual_update_scholar.js"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
