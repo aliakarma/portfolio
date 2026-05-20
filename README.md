@@ -267,6 +267,6 @@ git push
 
 ## 📄 License
 
-MIT — Free to use and adapt for your own academic portfolio..
+MIT — Free to use and adapt for your own academic portfolio.
 
 ---
