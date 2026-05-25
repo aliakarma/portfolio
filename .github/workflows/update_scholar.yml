@@ -2,7 +2,7 @@ name: Update Scholar Stats
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Every day at midnight
+    - cron: '30 2 * * 1' # Every Monday at 2:30 AM UTC (weekly)
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -17,9 +17,7 @@ jobs:
           node-version: '20'
 
       - name: Fetch Scholar Metrics
-        run: |
-          # Use a script that tries multiple TLDs or mirrors if one fails
-          node scripts/update_scholar.js
+        run: node scripts/update_scholar.js
         env:
           SCHOLAR_USER_ID: 'kQZZJtYAAAAJ'
 
