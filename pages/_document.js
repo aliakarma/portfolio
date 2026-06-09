@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import { PROFILE_IMAGE_URL, SITE_NAME, SITE_SHORT_NAME, SITE_URL } from '../data/site'
 
 export default function Document() {
   return (
@@ -21,27 +22,59 @@ export default function Document() {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Ali Akarma",
-              "url": "https://aliakarma.codes",
-              "image": "https://aliakarma.codes/og-image.png",
-              "jobTitle": "AI Researcher",
-              "description": "AI Researcher specializing in Agentic AI and AI Safety.",
-              "sameAs": [
-                "https://www.linkedin.com/in/aliakarma",
-                "https://github.com/aliakarma",
-                "https://scholar.google.com/citations?user=kQZZJtYAAAAJ"
-              ],
-              "affiliation": {
-                "@type": "Organization",
-                "name": "Islamic University of Madinah"
-              },
-              "knowsAbout": [
-                "Agentic AI",
-                "AI Safety",
-                "Trustworthy Machine Learning",
-                "Large Language Models",
-                "AI Governance"
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": `${SITE_URL}/#website`,
+                  "name": SITE_NAME,
+                  "alternateName": SITE_SHORT_NAME,
+                  "url": `${SITE_URL}/`,
+                  "publisher": { "@id": `${SITE_URL}/#organization` }
+                },
+                {
+                  "@type": "Organization",
+                  "@id": `${SITE_URL}/#organization`,
+                  "name": SITE_NAME,
+                  "url": `${SITE_URL}/`,
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": PROFILE_IMAGE_URL
+                  },
+                  "image": PROFILE_IMAGE_URL,
+                  "sameAs": [
+                    "https://www.linkedin.com/in/aliakarma",
+                    "https://github.com/aliakarma",
+                    "https://scholar.google.com/citations?user=kQZZJtYAAAAJ"
+                  ]
+                },
+                {
+                  "@type": "Person",
+                  "@id": `${SITE_URL}/#person`,
+                  "name": SITE_NAME,
+                  "url": `${SITE_URL}/`,
+                  "image": {
+                    "@type": "ImageObject",
+                    "url": PROFILE_IMAGE_URL
+                  },
+                  "jobTitle": "AI Researcher",
+                  "description": "AI Researcher specializing in Agentic AI and AI Safety.",
+                  "sameAs": [
+                    "https://www.linkedin.com/in/aliakarma",
+                    "https://github.com/aliakarma",
+                    "https://scholar.google.com/citations?user=kQZZJtYAAAAJ"
+                  ],
+                  "affiliation": {
+                    "@type": "Organization",
+                    "name": "Islamic University of Madinah"
+                  },
+                  "knowsAbout": [
+                    "Agentic AI",
+                    "AI Safety",
+                    "Trustworthy Machine Learning",
+                    "Large Language Models",
+                    "AI Governance"
+                  ]
+                }
               ]
             })
           }}
