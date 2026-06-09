@@ -1,16 +1,20 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { SITE_NAME, SITE_URL, OG_IMAGE_URL } from '../data/site'
 
 export default function Meta({ 
   title, 
   description, 
-  image = 'https://aliakarma.codes/og-image.png',
-  type = 'website' 
+  image = OG_IMAGE_URL,
+  type = 'website',
+  robots = 'index, follow',
 }) {
   const router = useRouter()
-  const domain = 'https://aliakarma.codes'
-  const canonical = `${domain}${router.asPath === '/' ? '' : router.asPath.split('?')[0]}`
-  const fullTitle = title === 'Ali Akarma' ? title : `${title} | Ali Akarma`
+
+  const asPath = (router?.asPath || '/').split('?')[0].split('#')[0]
+  const canonicalPath = asPath === '/' ? '/' : (asPath.endsWith('/') ? asPath : `${asPath}/`)
+  const canonical = `${SITE_URL}${canonicalPath}`
+  const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`
 
   return (
     <Head>
@@ -19,7 +23,9 @@ export default function Meta({
       <meta name="author" content="Ali Akarma" />
       <meta name="creator" content="Ali Akarma" />
       <meta name="publisher" content="Ali Akarma" />
-      <meta name="robots" content="index, follow" />
+      <meta name="application-name" content={SITE_NAME} />
+      <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
+      <meta name="robots" content={robots} />
       <link rel="canonical" href={canonical} />
 
       {/* Open Graph */}
@@ -31,7 +37,7 @@ export default function Meta({
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content="Ali Akarma - AI Researcher specializing in Agentic AI and AI Safety" />
-      <meta property="og:site_name" content="Ali Akarma" />
+      <meta property="og:site_name" content={SITE_NAME} />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
