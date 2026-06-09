@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react'
-import Head from 'next/head'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
@@ -123,20 +122,6 @@ export default function Home() {
         title="Ali Akarma" 
         description="AI Researcher specializing in Agentic AI, AI Safety, and AI Governance, focused on building autonomous AI systems that fail safely by design."
       />
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Ali Akarma",
-              "alternateName": ["Akarma", "aliakarma.codes"],
-              "url": "https://aliakarma.codes"
-            })
-          }}
-        />
-      </Head>
 
       <PageTransition>
 
