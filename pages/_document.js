@@ -52,19 +52,31 @@ export default function Document() {
                   "@id": `${SITE_URL}/#person`,
                   "name": SITE_NAME,
                   "url": `${SITE_URL}/`,
+                  "mainEntityOfPage": `${SITE_URL}/about/`,
+                  "email": "mailto:aliakarma974@gmail.com",
                   "image": {
                     "@type": "ImageObject",
                     "url": PROFILE_IMAGE_URL
                   },
                   "jobTitle": "AI Researcher",
-                  "description": "AI Researcher specializing in Agentic AI and AI Safety.",
+                  "description": "AI Researcher specializing in Agentic AI, AI Safety, and AI Governance.",
                   "sameAs": [
                     "https://www.linkedin.com/in/aliakarma",
                     "https://github.com/aliakarma",
-                    "https://scholar.google.com/citations?user=kQZZJtYAAAAJ"
+                    "https://scholar.google.com/citations?user=kQZZJtYAAAAJ",
+                    "https://orcid.org/0009-0002-6687-9380"
                   ],
                   "affiliation": {
-                    "@type": "Organization",
+                    "@type": "CollegeOrUniversity",
+                    "name": "Islamic University of Madinah",
+                    "address": {
+                      "@type": "PostalAddress",
+                      "addressLocality": "Madinah",
+                      "addressCountry": "SA"
+                    }
+                  },
+                  "alumniOf": {
+                    "@type": "CollegeOrUniversity",
                     "name": "Islamic University of Madinah"
                   },
                   "knowsAbout": [
@@ -72,7 +84,9 @@ export default function Document() {
                     "AI Safety",
                     "Trustworthy Machine Learning",
                     "Large Language Models",
-                    "AI Governance"
+                    "AI Governance",
+                    "Multi-Agent Systems",
+                    "Digital Twins"
                   ]
                 }
               ]
@@ -80,19 +94,6 @@ export default function Document() {
           }}
         />
 
-        {/* Performance Fix: preconnect for DNS before font requests */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/*
-          Performance Fix: fonts loaded as <link> tags (non-blocking) instead of
-          CSS @import (render-blocking). Saves 200–400ms on first paint.
-          display=swap prevents invisible text during font load.
-        */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@300;400;500&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <body>
         <Main />

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Code2, Github, ExternalLink } from 'lucide-react'
 import Meta from '../components/Meta'
@@ -11,9 +11,11 @@ import { publications } from '../data/publications'
 
 /* ─── Project Modal ─── */
 function ProjectModal({ project, onClose }) {
-  const linkedPaper = project.paper 
-    ? publications.find(p => p.pdf === project.paper || p.doi === project.paper) 
+  const linkedPaper = project.paper
+    ? publications.find(p => p.pdf === project.paper || p.doi === project.paper)
     : null
+
+  const closeRef = useRef(null)
 
   /* Accessibility Fix: close on Escape */
   useEffect(() => {
@@ -22,11 +24,17 @@ function ProjectModal({ project, onClose }) {
     return () => document.removeEventListener('keydown', onKey)
   }, [onClose])
 
-  /* Accessibility Fix: Focus trap for modals — Section 13 High */
+  /* Accessibility: lock background scroll, move focus into the dialog on
+     open, and restore it to the trigger when the dialog closes */
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow
+    const previouslyFocused = document.activeElement
     document.body.style.overflow = 'hidden'
-    return () => { document.body.style.overflow = originalStyle }
+    closeRef.current?.focus()
+    return () => {
+      document.body.style.overflow = originalStyle
+      previouslyFocused?.focus?.()
+    }
   }, [])
 
   return (
@@ -48,6 +56,7 @@ function ProjectModal({ project, onClose }) {
         className="glass-card max-w-3xl w-full p-6 sm:p-10 border border-gold-500/20 relative max-h-[92vh] overflow-y-auto shadow-2xl"
       >
         <button
+          ref={closeRef}
           onClick={onClose}
           aria-label="Close project details"
           className="absolute top-6 right-6 text-parchment-400 hover:text-parchment-100 transition-colors p-1 min-h-[40px] min-w-[40px] flex items-center justify-center bg-noir-800/50 rounded-full"

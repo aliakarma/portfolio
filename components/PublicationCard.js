@@ -1,13 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ChevronDown, ChevronUp, ExternalLink, BookOpen,
   Code2, Database, FileText, Copy, Check, X
 } from 'lucide-react'
 
-import { profile } from '../data/profile'
-
-const AUTHOR_REGEX = new RegExp(`(${profile.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`)
+import AuthorHighlight from './AuthorHighlight'
 
 const STATUS_STYLES = {
   published: 'bg-emerald-900/40 text-emerald-300 border-emerald-600/30',
@@ -40,6 +38,7 @@ const tagClass = (t) =>
 /* ─── BibTeX Modal ─── */
 function BibTeXModal({ bibtex, onClose }) {
   const [copied, setCopied] = useState(false)
+  const closeRef = useRef(null)
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(bibtex)
@@ -47,8 +46,22 @@ function BibTeXModal({ bibtex, onClose }) {
     setTimeout(() => setCopied(false), 2000)
   }
 
-  /* Accessibility Fix: close on Escape */
-  const handleKeyDown = (e) => { if (e.key === 'Escape') onClose() }
+  /*
+    Accessibility: move focus into the dialog on open (so Escape works and
+    screen readers announce it), restore focus to the trigger on close.
+    Escape is bound on document — an onKeyDown on the container only fires
+    when focus is already inside.
+  */
+  useEffect(() => {
+    const previouslyFocused = document.activeElement
+    closeRef.current?.focus()
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      previouslyFocused?.focus?.()
+    }
+  }, [onClose])
 
   return (
     <motion.div
@@ -58,7 +71,6 @@ function BibTeXModal({ bibtex, onClose }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      onKeyDown={handleKeyDown}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-noir-900/85 backdrop-blur-md"
       onClick={onClose}
     >
@@ -70,6 +82,7 @@ function BibTeXModal({ bibtex, onClose }) {
         className="glass-card border border-gold-500/25 w-full max-w-2xl p-4 sm:p-6 relative"
       >
         <button
+          ref={closeRef}
           onClick={onClose}
           aria-label="Close BibTeX viewer"
           className="absolute top-3 right-3 text-parchment-400 hover:text-parchment-100 p-1 min-h-[36px] min-w-[36px] flex items-center justify-center"
@@ -146,11 +159,7 @@ export default function PublicationCard({ pub, index = 0 }) {
 
               {/* AUTHORS */}
               <p className="font-mono text-xs text-parchment-400 mb-3 leading-relaxed">
-                {pub.authorsStr.split(AUTHOR_REGEX).map((part, i) =>
-                  AUTHOR_REGEX.test(part)
-                    ? <span key={i} className="text-gold-400 font-semibold">{part}</span>
-                    : part
-                )}
+                <AuthorHighlight authors={pub.authorsStr} />
               </p>
 
               {/* TAGS */}

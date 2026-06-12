@@ -7,7 +7,7 @@ export const researchNodes = [
     group: "core",
     size: 22,
     description: "Autonomous AI systems that perceive, reason, and act across complex environments",
-    papers: [1, 2, 3, 4, 5, 6, 7],
+    papers: [1, 2, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15],
   },
   {
     id: "ai-safety",
@@ -15,7 +15,7 @@ export const researchNodes = [
     group: "core",
     size: 18,
     description: "Alignment, robustness, and failure-mode analysis for autonomous systems",
-    papers: [1, 3, 12],
+    papers: [1, 3, 12, 13, 14],
   },
   {
     id: "ai-governance",
@@ -23,7 +23,7 @@ export const researchNodes = [
     group: "core",
     size: 16,
     description: "Frameworks for oversight, accountability, and policy in AI deployment",
-    papers: [8, 9, 11],
+    papers: [8, 9, 10, 12, 14, 15],
   },
   {
     id: "blockchain",
@@ -31,7 +31,7 @@ export const researchNodes = [
     group: "method",
     size: 13,
     description: "Immutable audit trails and decentralized trust for AI pipelines",
-    papers: [1],
+    papers: [1, 13, 14],
   },
   {
     id: "digital-twins",
@@ -39,7 +39,7 @@ export const researchNodes = [
     group: "method",
     size: 15,
     description: "Real-time simulation frameworks for physical-cyber system co-management",
-    papers: [6, 10],
+    papers: [6, 11, 12, 15],
   },
   {
     id: "smart-cities",
@@ -47,7 +47,7 @@ export const researchNodes = [
     group: "domain",
     size: 13,
     description: "AI-driven urban infrastructure optimization and management",
-    papers: [10],
+    papers: [11, 12, 15],
   },
   {
     id: "healthcare-ai",
@@ -63,7 +63,7 @@ export const researchNodes = [
     group: "method",
     size: 12,
     description: "Risk-aware cooperative reinforcement learning for complex environments",
-    papers: [12],
+    papers: [3],
   },
   {
     id: "llms",
@@ -71,7 +71,7 @@ export const researchNodes = [
     group: "method",
     size: 14,
     description: "LLM-based orchestration, prompt engineering, and robustness analysis",
-    papers: [2, 5, 7],
+    papers: [2, 4, 5, 7],
   },
   {
     id: "cybersecurity",
@@ -79,7 +79,7 @@ export const researchNodes = [
     group: "domain",
     size: 12,
     description: "AI-driven threat detection for critical infrastructure and IoT",
-    papers: [9],
+    papers: [9, 13],
   },
 ]
 

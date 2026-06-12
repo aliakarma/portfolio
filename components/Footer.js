@@ -28,18 +28,26 @@ export default function Footer() {
           </div>
 
           <nav aria-label="Social media links" className="flex items-center gap-5">
-            {socialLinks.map(s => (
-              <a
-                key={s.label}
-                href={s.href}
-                target={s.href.startsWith('mailto') ? undefined : '_blank'}
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                className="text-parchment-400 hover:text-gold-400 transition-colors p-1 min-h-[36px] min-w-[36px] flex items-center justify-center"
-              >
-                <span aria-hidden="true">{s.icon}</span>
-              </a>
-            ))}
+            {socialLinks.map(s => {
+              const isExternal = s.href.startsWith('http')
+              const linkClass = "text-parchment-400 hover:text-gold-400 transition-colors p-1 min-h-[36px] min-w-[36px] flex items-center justify-center"
+              return isExternal ? (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className={linkClass}
+                >
+                  <span aria-hidden="true">{s.icon}</span>
+                </a>
+              ) : (
+                <Link key={s.label} href={s.href} aria-label={s.label} className={linkClass}>
+                  <span aria-hidden="true">{s.icon}</span>
+                </Link>
+              )
+            })}
           </nav>
 
           <div className="font-mono text-xs text-parchment-400 text-center md:text-right">
