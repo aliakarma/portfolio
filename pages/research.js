@@ -30,6 +30,34 @@ const STATUS_LABELS = {
   review:    'Under Review',
 }
 
+/*
+  ScholarlyArticle structured data — makes each publication individually
+  machine-readable for Google Scholar, academic crawlers, and rich results.
+  Only published/accepted work is included to keep claims verifiable.
+*/
+const SCHOLARLY_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Publications by Ali Akarma',
+  itemListElement: publications
+    .filter(p => p.status === 'published' || p.status === 'accepted')
+    .map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'ScholarlyArticle',
+        headline: p.title,
+        author: p.authorsStr.split(', ').map(name => ({ '@type': 'Person', name })),
+        datePublished: String(p.year),
+        publisher: { '@type': 'Organization', name: p.venue },
+        isPartOf: { '@type': 'Periodical', name: p.venue },
+        about: p.tags,
+        ...(p.abstract ? { abstract: p.abstract } : {}),
+        ...(p.doi ? { sameAs: p.doi, url: p.doi } : {}),
+      },
+    })),
+}
+
 export default function Research() {
   const [statusFilter, setStatusFilter] = useState('All')
   const [typeFilter,   setTypeFilter]   = useState('All')
@@ -56,11 +84,16 @@ export default function Research() {
 
   return (
     <>
-      <Meta 
-        title="Research Archive" 
-        description="A comprehensive archive of 15+ peer-reviewed publications on AI safety, agentic governance, and autonomous systems."
+      <Meta
+        title="Research Archive"
+        description={`Archive of ${publications.length} publications by Ali Akarma on AI safety, agentic AI governance, and autonomous systems — IEEE, Springer, PLOS ONE, and MDPI.`}
       />
-
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHOLARLY_JSONLD) }}
+        />
+      </Head>
 
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">

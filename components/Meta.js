@@ -2,9 +2,9 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { SITE_NAME, SITE_URL, OG_IMAGE_URL } from '../data/site'
 
-export default function Meta({ 
-  title, 
-  description, 
+export default function Meta({
+  title,
+  description,
   image = OG_IMAGE_URL,
   type = 'website',
   robots = 'index, follow',
@@ -14,7 +14,18 @@ export default function Meta({
   const asPath = (router?.asPath || '/').split('?')[0].split('#')[0]
   const canonicalPath = asPath === '/' ? '/' : (asPath.endsWith('/') ? asPath : `${asPath}/`)
   const canonical = `${SITE_URL}${canonicalPath}`
-  const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`
+  const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
+
+  /* BreadcrumbList structured data for subpages — helps Google render
+     breadcrumb trails in search results */
+  const breadcrumbs = canonicalPath !== '/' && {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: title, item: canonical },
+    ],
+  }
 
   return (
     <Head>
@@ -33,6 +44,7 @@ export default function Meta({
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content={type} />
+      <meta property="og:locale" content="en_US" />
       <meta property="og:image" content={image} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
@@ -45,6 +57,13 @@ export default function Meta({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
       <meta name="twitter:image:alt" content="Ali Akarma - AI Researcher specializing in Agentic AI and AI Safety" />
+
+      {breadcrumbs && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+        />
+      )}
     </Head>
   )
 }

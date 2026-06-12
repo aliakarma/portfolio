@@ -5,7 +5,7 @@
   "homepage": "https://aliakarma.github.io",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/generate_sitemap.js && next build",
     "start": "next start",
     "export": "next build",
     "deploy": "next build && touch out/.nojekyll && npx gh-pages -d out --dotfiles",

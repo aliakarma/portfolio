@@ -20,10 +20,23 @@ export default function About() {
 
   return (
     <>
-      <Meta 
-        title="About" 
+      <Meta
+        title="About"
         description="About Ali Akarma — AI researcher specializing in the gap between autonomous capability and institutional accountability."
+        type="profile"
       />
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'ProfilePage',
+              mainEntity: { '@id': 'https://www.aliakarma.codes/#person' },
+            }),
+          }}
+        />
+      </Head>
 
 
       <PageTransition>

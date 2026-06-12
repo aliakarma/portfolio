@@ -66,43 +66,21 @@ const socialLinks = [
 const inputClass = "w-full bg-noir-700 border border-noir-500 hover:border-gold-500/30 focus:border-gold-500/60 text-parchment-100 px-4 py-3 font-mono text-sm outline-none transition-colors placeholder-parchment-400/30 rounded-sm"
 
 export default function Contact() {
-  const [form, setForm]         = useState({ name: '', email: '', subject: '', message: '' })
-  const [isSending, setIsSending] = useState(false)
-  const [sent, setSent]         = useState(false)
-  const [error, setError]       = useState(false)
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
+  const [sent, setSent] = useState(false)
 
-  const handleSubmit = async (e) => {
+  /*
+    This site is a static export with no backend, so the form composes a
+    prefilled email in the visitor's own mail client — it works everywhere
+    and never silently drops a message.
+  */
+  const handleSubmit = (e) => {
     e.preventDefault()
-    setError(false)
-    setIsSending(true)
-
-    try {
-      // Transition from mailto: to real backend submission
-      // Note: Replace with actual endpoint in production
-      const response = await fetch(`https://formspree.io/f/${profile.email.split('@')[0]}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name:    form.name,
-          email:   form.email,
-          subject: form.subject,
-          message: form.message
-        })
-      })
-
-      if (response.ok) {
-        setSent(true)
-        setForm({ name: '', email: '', subject: '', message: '' })
-      } else {
-        throw new Error('Submission failed')
-      }
-    } catch (err) {
-      console.error('Contact error:', err)
-      setError(true)
-    } finally {
-      setIsSending(false)
-      if (sent) setTimeout(() => setSent(false), 5000)
-    }
+    const subject = form.subject || `Message from ${form.name} via aliakarma.codes`
+    const body = `${form.message}\n\n— ${form.name}${form.email ? ` (${form.email})` : ''}`
+    window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    setSent(true)
+    setTimeout(() => setSent(false), 6000)
   }
 
   return (
@@ -275,41 +253,28 @@ export default function Contact() {
 
                       <motion.button
                         type="submit"
-                        disabled={isSending || sent}
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         className={`w-full py-4 font-mono text-xs tracking-widest uppercase font-bold transition-all flex items-center justify-center gap-2 min-h-[52px] shadow-lg ${
                           sent
-                            ? 'bg-emerald-600 text-white cursor-default shadow-emerald-500/20'
-                            : isSending
-                              ? 'bg-noir-600 text-parchment-400 cursor-wait'
-                              : 'bg-gold-500 text-noir-900 hover:bg-gold-400 shadow-gold-500/20'
+                            ? 'bg-emerald-600 text-white shadow-emerald-500/20'
+                            : 'bg-gold-500 text-noir-900 hover:bg-gold-400 shadow-gold-500/20'
                         }`}
                       >
-                        {isSending ? (
-                          <><div className="w-4 h-4 border-2 border-parchment-400 border-t-transparent rounded-full animate-spin" aria-hidden="true" /> Sending…</>
-                        ) : sent ? (
-                          <><Check size={16} aria-hidden="true" /> Message Received</>
+                        {sent ? (
+                          <><Check size={16} aria-hidden="true" /> Opening your email app…</>
                         ) : (
                           'Send Message'
                         )}
                       </motion.button>
 
-                      {error && (
-                        <p className="font-mono text-xs text-red-400 text-center" role="alert">
-                          Something went wrong. Please reach out via{' '}
-                          <a href={`mailto:${profile.email}`} className="text-gold-400 underline">
-                            direct email
-                          </a>
-                          .
-                        </p>
-                      )}
-
-                      {!sent && !error && (
-                        <p className="font-mono text-xs text-parchment-400/50 text-center">
-                          Average response time: 24-48 hours.
-                        </p>
-                      )}
+                      <p className="font-mono text-xs text-parchment-400/50 text-center" aria-live="polite">
+                        {sent
+                          ? <>If nothing opened, email me directly at{' '}
+                              <a href={`mailto:${profile.email}`} className="text-gold-400 underline">{profile.email}</a>.
+                            </>
+                          : 'Opens in your email app · average response time: 24–48 hours.'}
+                      </p>
                     </form>
                   </div>
                 </SectionReveal>

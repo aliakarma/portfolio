@@ -4,12 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ================= ROOT ================= */
-:root {
-  --font-cormorant: 'Cormorant Garamond', serif;
-  --font-source: 'Source Serif 4', serif;
-  --font-jetbrains: 'JetBrains Mono', monospace;
-}
+/*
+  Font variables (--font-cormorant, --font-source, --font-jetbrains) are
+  defined in pages/_app.js from self-hosted next/font instances.
+*/
 
 /* ================= RESET ================= */
 *,

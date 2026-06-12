@@ -10,9 +10,9 @@ import { profile } from '../data/profile'
 import { publications } from '../data/publications'
 
 import Meta from '../components/Meta'
+import AuthorHighlight from '../components/AuthorHighlight'
 const ResearchGraph = dynamic(() => import('../components/ResearchGraph'), { ssr: false })
 import ErrorBoundary from '../components/ErrorBoundary'
-const AUTHOR_REGEX = new RegExp(`(${profile.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`)
 
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ target, suffix = '', delay = 0 }) {
@@ -79,7 +79,7 @@ const stats = [
   },
   {
     icon: <Layers size={16} />,
-    value: 5,
+    value: profile.researchInterests.length,
     suffix: '',
     label: 'Research Areas',
     sub: 'safety, governance, agentic AI',
@@ -118,8 +118,8 @@ export default function Home() {
 
   return (
     <>
-      <Meta 
-        title="Ali Akarma" 
+      <Meta
+        title="Ali Akarma — AI Safety & Agentic AI Researcher"
         description="AI Researcher specializing in Agentic AI, AI Safety, and AI Governance, focused on building autonomous AI systems that fail safely by design."
       />
 
@@ -162,50 +162,58 @@ export default function Home() {
                   </div>
                 </motion.div>
 
-                {/* Name — fluid typography to avoid abrupt breakpoint jumps */}
-                <motion.h1
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.2 }}
-                  className="font-display font-light text-parchment-100 leading-none mb-1"
+                {/* Name — a single h1 keeps the document outline (and SEO) clean */}
+                <h1 className="font-display font-light text-parchment-100 leading-none mb-6 sm:mb-8"
                   style={{ fontSize: 'clamp(2.5rem, 10vw, 6rem)' }}
                 >
-                  Ali
-                </motion.h1>
-                <motion.h1
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.3 }}
-                  className="font-display font-light leading-none mb-6 sm:mb-8"
-                  style={{ fontSize: 'clamp(2.5rem, 10vw, 6rem)' }}
-                >
-                  <span className="gold-shimmer">Akarma</span>
-                </motion.h1>
+                  <motion.span
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.2 }}
+                    className="block mb-1"
+                  >
+                    Ali
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.3 }}
+                    className="block gold-shimmer"
+                  >
+                    Akarma
+                  </motion.span>
+                </h1>
 
-                {/* Typing animation */}
+                {/*
+                  Typing animation — deliberately NOT aria-live: an infinitely
+                  looping region would re-announce to screen readers every few
+                  seconds. A static sr-only line carries the meaning instead.
+                */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.6 }}
                   className="font-mono text-base md:text-lg text-parchment-300 mb-6 min-h-[28px]"
-                  aria-live="polite"
                 >
-                  {prefersReduced ? (
-                    <span className="text-gold-300">Designing Safety-Aligned Agentic Systems.</span>
-                  ) : (
-                    <TypeAnimation
-                      sequence={[
-                        'Designing Safety-Aligned Agentic Systems.', 2200,
-                        'Researching Trustworthy Machine Learning.', 2200,
-                        'Building AI Governance Frameworks.', 2200,
-                        'Studying Failure Modes in Autonomous AI.', 2200,
-                      ]}
-                      wrapper="span"
-                      speed={55}
-                      repeat={Infinity}
-                      className="text-gold-300"
-                    />
-                  )}
+                  <span className="sr-only">Designing Safety-Aligned Agentic Systems.</span>
+                  <span aria-hidden="true">
+                    {prefersReduced ? (
+                      <span className="text-gold-300">Designing Safety-Aligned Agentic Systems.</span>
+                    ) : (
+                      <TypeAnimation
+                        sequence={[
+                          'Designing Safety-Aligned Agentic Systems.', 2200,
+                          'Researching Trustworthy Machine Learning.', 2200,
+                          'Building AI Governance Frameworks.', 2200,
+                          'Studying Failure Modes in Autonomous AI.', 2200,
+                        ]}
+                        wrapper="span"
+                        speed={55}
+                        repeat={Infinity}
+                        className="text-gold-300"
+                      />
+                    )}
+                  </span>
                 </motion.div>
 
                 {/* Bio */}
@@ -310,7 +318,8 @@ export default function Home() {
                     transition={{ duration: 0.7, delay: 0.5 }}
                     className="glass-card p-6 border-gold-500/20 bg-gold-500/[0.03] mb-6"
                   >
-                    <h4 className="font-mono text-[10px] text-gold-400 uppercase tracking-[0.2em] mb-4">Current Research Frontier</h4>
+                    {/* Not a heading — h4 here would break the h1→h2 document outline */}
+                    <p className="font-mono text-[10px] text-gold-400 uppercase tracking-[0.2em] mb-4">Current Research Frontier</p>
                     <div className="space-y-4">
                       <div className="flex gap-4">
                         <div className="w-8 h-8 rounded-full bg-gold-500/10 border border-gold-500/20 flex items-center justify-center flex-shrink-0">
@@ -394,7 +403,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2"
             aria-hidden="true"
           >
             <span className="font-mono text-xs text-parchment-400/40 tracking-widest uppercase">scroll</span>
@@ -502,11 +511,7 @@ export default function Home() {
                     <div className="w-full sm:flex-1 sm:min-w-0">
                       <h3 className="font-display text-lg text-parchment-100 mb-1 leading-snug">{pub.title}</h3>
                       <p className="font-mono text-xs text-parchment-400 mb-2 leading-relaxed">
-                        {pub.authorsStr.split(AUTHOR_REGEX).map((part, idx) => (
-                          AUTHOR_REGEX.test(part)
-                            ? <span key={idx} className="text-gold-400 font-semibold">{part}</span>
-                            : <span key={idx}>{part}</span>
-                        ))}
+                        <AuthorHighlight authors={pub.authorsStr} />
                       </p>
                       <div className="flex flex-wrap gap-1.5">
                         {pub.tags.slice(0, 3).map(tag => (
