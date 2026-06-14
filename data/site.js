@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://www.aliakarma.codes'
+export const SITE_URL = 'https://aliakarma.codes'
 export const SITE_NAME = 'Ali Akarma'
 export const SITE_SHORT_NAME = 'Akarma'
 
