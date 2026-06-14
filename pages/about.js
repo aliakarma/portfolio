@@ -32,7 +32,7 @@ export default function About() {
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'ProfilePage',
-              mainEntity: { '@id': 'https://www.aliakarma.codes/#person' },
+              mainEntity: { '@id': 'https://aliakarma.codes/#person' },
             }),
           }}
         />
