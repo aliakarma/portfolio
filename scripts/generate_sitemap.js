@@ -6,7 +6,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const SITE_URL = 'https://www.aliakarma.codes'
+const SITE_URL = 'https://aliakarma.codes'
 
 const ROUTES = [
   { path: '/',          changefreq: 'weekly',  priority: '1.0' },
