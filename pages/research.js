@@ -13,11 +13,12 @@ const ALL_TAGS = [...new Set(publications.flatMap(p => p.tags))].sort()
 
 const normalize = (value) => String(value ?? '').trim().toLowerCase()
 
-const TYPE_FILTERS    = ['All', 'conference', 'journal', 'book_chapter']
+const TYPE_FILTERS    = ['All', 'first_author', 'conference', 'journal', 'book_chapter']
 const STATUS_FILTERS  = ['All', 'published', 'accepted', 'review']
 
 const TYPE_LABELS = {
   All:          'All Types',
+  first_author: 'First Author Papers',
   conference:   'Conference',
   journal:      'Journal',
   book_chapter: 'Book Chapter',
@@ -69,7 +70,13 @@ export default function Research() {
     return publications
       .filter(p => {
         const s = statusFilter === 'All' || normalize(p.status) === normalize(statusFilter)
-        const t = typeFilter   === 'All' || normalize(p.type)   === normalize(typeFilter)
+        const t =
+          typeFilter === 'All'
+            ? true
+            : typeFilter === 'first_author'
+            ? p.title === "Governance-Constrained Agentic AI: Blockchain-Enforced Human Oversight for Safety-Critical Wildfire Monitoring" ||
+              p.title === "Agents for Agents: An Interrogator-Based Secure Framework for Autonomous Internet of Underwater Things"
+            : normalize(p.type) === normalize(typeFilter)
         const g = !tagFilter || p.tags.some(tag => normalize(tag) === normalize(tagFilter))
         return s && t && g
       })
