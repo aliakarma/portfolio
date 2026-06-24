@@ -132,32 +132,6 @@ export const publications = [
   },
   {
     id: 6,
-    title: "An Agentic Digital-Twin Framework for Customer Churn Prediction and Retention in Retail Banking",
-    authors: ["Toqeer Ali Syed, Ali Akarma, Sami Alshmrany"],
-    authorsStr: "Toqeer Ali Syed, Ali Akarma, Sami Alshmrany",
-    venue: "Springer Nature (Book Chapter)",
-    venueShort: "Springer",
-    type: "book_chapter",
-    year: 2025,
-    status: "accepted",
-    statusLabel: "Book Chapter · Springer",
-    tags: ["Digital Twins", "Agentic AI", "Banking", "Prediction"],
-    doi:      null,
-    pdf:      null,
-    code:     null,
-    dataset:  null,
-    notebook: null,
-    abstract: "Presents an agentic digital-twin framework that continuously simulates customer behavior in retail banking to predict churn and autonomously execute retention strategies with explainable decision trails.",
-    bibtex: `@incollection{akarma2025digitaltwin,
-  title={An Agentic Digital-Twin Framework for Customer Churn Prediction and Retention in Retail Banking},
-  author={Toqeer Ali Syed and Ali Akarma and Sami Alshmrany},
-  booktitle={Advances in Agentic Artificial Intelligence},
-  publisher={Springer Nature},
-  year={2025}
-}`,
-  },
-  {
-    id: 7,
     title: "FinNutriAgent (FNA): An Agentic AI for Budget and Nutrition Planning",
     authors: ["Toqeer Ali Syed, Abdulaziz Alshahrani, Ali Akarma, Sohail Khan, Muhammad Nauman, It Ee Lee, Salman Jan, Ali Ullah"],
     authorsStr: "Toqeer Ali Syed, Abdulaziz Alshahrani, Ali Akarma, Sohail Khan, Muhammad Nauman, It Ee Lee, Salman Jan, Ali Ullah",
@@ -187,7 +161,7 @@ export const publications = [
 }`,
   },
   {
-    id: 8,
+    id: 7,
     title: "Ethical Governance of Agentic AI in Higher Education: Challenges, Institutional Readiness, and a Framework for Responsible Assessment and Research",
     authors: ["Toqeer Ali Syed, Hatem M. El-Boghdadi, Muhammad Tayyab Naqash, Turki Alghamdi, Abdulaziz Alshahrani, It Ee Lee, Ali Akarma"],
     authorsStr: "Toqeer Ali Syed, Hatem M. El-Boghdadi, Muhammad Tayyab Naqash, Turki Alghamdi, Abdulaziz Alshahrani, It Ee Lee, Ali Akarma",
@@ -213,33 +187,7 @@ export const publications = [
 }`,
   },
   {
-    id: 9,
-    title: "Ethical Artificial Intelligence Governance Framework for Trustworthy Cybersecurity in Fifth Generation Renewable Energy Internet of Things Systems",
-    authors: ["Toqeer Ali Syed, Salman Jan, Ali Akarma"],
-    authorsStr: "Toqeer Ali Syed, Salman Jan, Ali Akarma",
-    venue: "Engineering Applications of Artificial Intelligence",
-    venueShort: "EAAI",
-    type: "journal",
-    year: 2026,
-    status: "review",
-    statusLabel: "Under Review · EAAI",
-    tags: ["AI Governance", "Cybersecurity", "IoT", "Energy"],
-    doi:      "https://doi.org/10.5281/zenodo.19099295",
-    pdf:      null,
-    code:     "https://github.com/aliakarma/eagf",
-    dataset:  "https://doi.org/10.5281/zenodo.19099295",
-    notebook: "https://colab.research.google.com/github/aliakarma/eagf/blob/main/notebooks/01_eagf_demo.ipynb",
-    abstract: "Proposes governance principles for AI-driven cybersecurity in renewable energy IoT networks, addressing threat detection, autonomous incident response, and human oversight with formal accountability mechanisms.",
-    bibtex: `@article{toqeer2026iot_governance,
-  title={Ethical AI Governance for Cybersecurity in Renewable Energy IoT Systems},
-  author={Toqeer Ali Syed and Salman Jan and Ali Akarma},
-  journal={Engineering Applications of Artificial Intelligence},
-  year={2026},
-  note={Under Review}
-}`,
-  },
-  {
-    id: 10,
+    id: 8,
     title: "Use of AI Tools: Guidelines to Maintain Academic Integrity",
     authors: ["Hatem M. El-boghdadi, Toqeer Ali Syed, Ali Akarma, Qamar Wali"],
     authorsStr: "Hatem M. El-boghdadi, Toqeer Ali Syed, Ali Akarma, Qamar Wali",
@@ -263,35 +211,8 @@ export const publications = [
   year={2026}
 }`,
   },
-  {
-    id: 11,
-    title: "Agentic AI-Enhanced Digital Twins for Smart Cities",
-    authors: ["Toqeer Ali Syed, Ali Akarma, Ali Alatify, Muhammad Tayyab Naqash, Abdulaziz Alqurashi"],
-    authorsStr: "Toqeer Ali Syed, Ali Akarma, Ali Alatify, Muhammad Tayyab Naqash, Abdulaziz Alqurashi",
-    venue: "PLOS ONE",
-    venueShort: "PLOS ONE",
-    type: "journal",
-    year: 2026,
-    status: "review",
-    statusLabel: "Under Review · PLOS ONE",
-    tags: ["Digital Twins", "Smart Cities", "Agentic AI", "Infrastructure"],
-    doi:      "https://doi.org/10.5281/zenodo.18849073",
-    pdf:      null,
-    code:     "https://github.com/aliakarma/agentic-dt-study",
-    dataset:  "https://doi.org/10.5281/zenodo.18849073",
-    notebook: null,
-    abstract: "Investigates agentic AI integration within digital twin frameworks for smart city management, enabling autonomous optimization of urban infrastructure, traffic systems, and energy grids with real-time simulation.",
-    bibtex: `@article{toqeer2026smartcity_dt,
-  title={Agentic AI-Enhanced Digital Twins for Smart Cities},
-  author={Toqeer Ali Syed and Ali Akarma and Ali Alatify and Muhammad Tayyab Naqash and Abdulaziz Alqurashi},
-  journal={PLOS ONE},
-  year={2026},
-  note={Under Review}
-}`,
-  },
-
    {
-    id: 12,
+    id: 9,
     title: "Autonomous Traffic Signal Optimization Using Digital Twin and Agentic AI for Real-Time Decision-Making",
     authors: ["Salman Jan, Toqeer Ali Syed, Shahid Kamal, Qamar Wali, Ali Akarma"],
     authorsStr: "Salman Jan, Toqeer Ali Syed, Shahid Kamal, Qamar Wali, Ali Akarma",
@@ -315,9 +236,8 @@ export const publications = [
   year={2026}
 }`,
   },
-  
   {
-    id: 13,
+    id: 10,
     title: "Agents for Agents: An Interrogator-Based Secure Framework for Autonomous Internet of Underwater Things",
     authors: ["Ali Akarma, Toqeer Ali Syed, Abdul Khadar Jilani, Salman Jan, Hammad Muneer, Muazzam A. Khan, Changli Yu"],
     authorsStr: "Ali Akarma, Toqeer Ali Syed, Abdul Khadar Jilani, Salman Jan, Hammad Muneer, Muazzam A. Khan, Changli Yu",
@@ -343,7 +263,7 @@ export const publications = [
 }`,
   },
   {
-    id: 14,
+    id: 11,
     title: "Governance-Constrained Agentic AI: Blockchain-Enforced Human Oversight for Safety-Critical Wildfire Monitoring",
     authors: ["Ali Akarma, Toqeer Ali Syed, Salman Jan, Hammad Muneer, Abdul Khadar Jilani"],
     authorsStr: "Ali Akarma, Toqeer Ali Syed, Salman Jan, Hammad Muneer, Abdul Khadar Jilani",
@@ -368,10 +288,8 @@ export const publications = [
   year={2026}
 }`,
   },
-
-
   {
-    id: 15,
+    id: 12,
     title: "Agentic AI for Climate-Resilient Cities: A PRISMA-Guided Review and Digital Twin Framework",
     authors: ["Toqeer Ali Syed, Ali Akarma, Muhammad Tayyab Naqash, Danial Hameed, Shahid Kamal, Antonio Formisano"],
     authorsStr: "Toqeer Ali Syed, Ali Akarma, Muhammad Tayyab Naqash, Danial Hameed, Shahid Kamal, Antonio Formisano",
@@ -400,8 +318,4 @@ export const publications = [
 }
 }`,
   },
-
- 
-
-  
 ]
