@@ -292,4 +292,37 @@ export const publications = [
 }
 }`,
   },
+
+  {
+    id: 12,
+    title: "FedAgent-Chain: A Secure Federated and Agentic AI Framework for Multilingual Disability-Inclusive Employment in AI Cities",
+    authors: ["Toqeer Ali Syed, Muhammad Shoaib Siddiqui, Ali Akarma, Antonio Formisano"],
+    authorsStr: "Toqeer Ali Syed, Muhammad Shoaib Siddiqui, Ali Akarma, Antonio Formisano",
+    venue: "MDPI Smart Cities",
+    venueShort: "MDPI Smart Cities",
+    type: "journal",
+    year: 2026,
+    status: "published",
+    statusLabel: "Journal Article · MDPI Smart Cities",
+    tags: ["Agentic AI", "Fed Agent", "AI Governance", "Federated Learning", "Disabilities", "AI Cities", "Smart Cities"],
+    doi:      "https://doi.org/10.3390/smartcities9070106",
+    pdf:      "https://www.mdpi.com/2624-6511/9/7/106",
+    code:     "https://github.com/aliakarma/fedagent-chain",
+    dataset:  "https://doi.org/10.5281/zenodo.20262507",
+    notebook: null,
+    abstract: "Artificial intelligence is reshaping employment in smart cities, yet centralized hiring platforms can deepen exclusion for persons with disabilities through privacy risk, biased models, weak multilingual support, and limited accommodation awareness. Because disability-related records are highly sensitive, no single institution holds enough representative data to train fair models, and centralizing such data is rarely permissible across borders. We propose FedAgent-Chain, a framework that integrates federated learning, blockchain-based auditability, multilingual processing, rule-based agentic services, and human-in-the-loop governance, extended with an education-to-employment module that builds individualized, accessible job-readiness pathways. Institutions across Saudi Arabia, the United States, China, and Europe train shared models without exchanging raw data. In a prototype evaluation on synthetic records over five seeds, the framework reached a mean F1 of 0.7207 (95% CI: [0.6506, 0.7909]), comparable to a centralized logistic-regression baseline while preserving data locality, with a formal (𝜀=3.2,𝛿=10−5) differential-privacy guarantee after 20 rounds. Multi-dimensional fairness regularization lowered disability-category and work-mode disparity by 32.3% and 40.3% relative to local-only training. We report the fairness behavior transparently, including a case where the penalty does not outperform standard FedAvg on disability-category disparity, and we position cross-institutional integration with accountable governance, rather than raw metric superiority, as the central contribution.",
+    bibtex: `@article{syed2026fedagent,
+AUTHOR = {Syed, Toqeer Ali and Siddiqui, Muhammad Shoaib and Akarma, Ali and Formisano, Antonio},
+TITLE = {FedAgent-Chain: A Secure Federated and Agentic AI Framework for Multilingual Disability-Inclusive Employment in AI Cities},
+JOURNAL = {Smart Cities},
+VOLUME = {9},
+YEAR = {2026},
+NUMBER = {7},
+ARTICLE-NUMBER = {106},
+URL = {https://www.mdpi.com/2624-6511/9/7/106},
+ISSN = {2624-6511},
+DOI = {10.3390/smartcities9070106}
+}
+`,
+  },
 ]
