@@ -325,4 +325,34 @@ DOI = {10.3390/smartcities9070106}
 }
 `,
   },
+
+  {
+    id: 13,
+    title: "ADAPT: An Agentic AI Framework for People with Disabilities and Neurodivergence",
+    authors: ["Muhammad Shoaib Siddiqui, Toqeer Ali Syed, Ali Akarma"],
+    authorsStr: "Muhammad Shoaib Siddiqui, Toqeer Ali Syed, Ali Akarma",
+    venue: "Journal of Disability Research",
+    venueShort: "JDR",
+    type: "journal",
+    year: 2026,
+    status: "published",
+    statusLabel: "Journal Article · Journal of Disability Research",
+    tags: ["Agentic AI", "ADAPT", "Assistive technology", "Neurodivergence", "Disabilities", "Healthy eating", "Personalized healthcare"],
+    doi:      "https://dx.doi.org/10.57197/JDR-2026-0830",
+    pdf:      "https://scienceopen.com/hosted-document?doi=10.57197/JDR-2026-0830",
+    code:     "https://github.com/aliakarma/ADAPT",
+    dataset:  "https://doi.org/10.5281/zenodo.20043931",
+    notebook: null,
+    abstract: "The present paper introduces ADAPT, an agentic artificial intelligence (AI) framework aimed at assisting people with disabilities and neurodivergent conditions to adopt healthier eating habits and organized daily life. It includes four specialized agents (meal planning, adaptive reminders, food guidance, and physiological monitoring), a Large Language Model (LLM)-based decision layer, a Model Context Protocol (MCP) routing layer, and a multimodal interface. Each agent is deployed in a Perception–Reasoning–Action (PRA) loop and communicates with each other using a shared blackboard and a hybrid reasoning component that uses rules and reinforcement learning. In addition to electronic health records (EHRs), nutritional databases, wearable and Internet of Things (IoT) devices, and smart kitchen gadgets, the framework includes modules for explainable AI (XAI) to provide understandable explanations to the user and the caregiver. A concrete use case is presented showing how the implemented prototype can help a neurodivergent person with diabetes by interpreting multimodal inputs, evaluating meal suitability, making real-time replacements, and providing sensory-sensitive prompts. Results of a synthetic simulation-based evaluation (500 simulated profiles, no real user evaluation) show a positive impact on nutritional adherence and reminder responsiveness, and usability was found to be appropriate across various accessibility profiles. The envisioned framework provides a more unified approach to assistive health technologies and a future path toward personalized, safe, and transparent digital health assistance for individuals with disabilities and neurodivergence.",
+    bibtex: `@article{Siddiqui2026ADAPT,
+  author    = {Muhammad Shoaib Siddiqui and Toqeer Ali Syed and Ali Akarma},
+  title     = {ADAPT: An Agentic AI Framework for People with Disabilities and Neurodivergence},
+  journal   = {JDR},
+  year      = {2026},
+  volume    = {5},
+  number    = {2},
+  doi       = {10.57197/JDR-2026-0830}
+}
+`,
+  },
 ]
