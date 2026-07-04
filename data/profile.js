@@ -108,12 +108,4 @@ My work addresses the alignment problem in deployed agentic systems — explorin
       ],
     },
   ],
-
-  testimonials: [
-    {
-      quote: "Ali's work on the wildfire governance architecture was the most technically rigorous contribution to our team's research.",
-      author: "Co-author / Senior Collaborator",
-      role: "AI Research Group",
-    }
-  ]
 }
