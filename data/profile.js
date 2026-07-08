@@ -47,7 +47,7 @@ My work addresses the alignment problem in deployed agentic systems — explorin
       period: "2023 – 2027",
       details: [
         "Merit-based fully funded scholarship (Competitive selection)",
-        "Current Cumulative GPA: 4.23 / 5.00",
+        "Current Cumulative GPA: 4.29 / 5.00",
         "Undergraduate researcher in agentic AI systems and AI governance",
       ],
       thesisInterest: "Safety-aligned multi-agent orchestration under Byzantine constraints.",
