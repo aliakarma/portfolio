@@ -75,7 +75,8 @@ export default function Research() {
             ? true
             : typeFilter === 'first_author'
             ? p.title === "Governance-Constrained Agentic AI: Blockchain-Enforced Human Oversight for Safety-Critical Wildfire Monitoring" ||
-              p.title === "Agents for Agents: An Interrogator-Based Secure Framework for Autonomous Internet of Underwater Things"
+              p.title === "Agents for Agents: An Interrogator-Based Secure Framework for Autonomous Internet of Underwater Things" ||
+              p.title === "Agentic AI-enhanced digital twins for Smart City civil infrastructure: A secure, autonomous and auditable management framework"
             : normalize(p.type) === normalize(typeFilter)
         const g = !tagFilter || p.tags.some(tag => normalize(tag) === normalize(tagFilter))
         return s && t && g
