@@ -9,6 +9,13 @@ import SectionReveal from '../components/SectionReveal'
 // Just add a new object to the top of this array.
 const newsData = [
   {
+    id: 16,
+    date: 'July 20, 2026',
+    title: 'New paper:Integrating High-Level Requirements to Low-Level Tests with Machine-Readable V&V Specifications ',
+    venue: 'APSEC 2026',
+
+  },
+  {
     id: 15,
     date: 'June 1, 2026',
     title: 'Started Internship at King Fahd University of Petroleum and Minerals (KFUPM)',
