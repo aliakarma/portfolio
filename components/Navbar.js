@@ -80,7 +80,7 @@ export default function Navbar() {
                   <span className="font-display text-gold-400 text-base font-bold" aria-hidden="true">A</span>
                 ) : (
                   <img
-                    src="/profile.jpg"
+                    src="/Profile.png"
                     alt="Ali Akarma"
                     width={40}
                     height={40}
@@ -154,32 +154,37 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            style={{ top: navHeight }}   /* Responsive Fix: dynamic positioning */
-            className="fixed left-0 right-0 z-40 bg-noir-800/97 backdrop-blur-md border-b border-gold-500/10 overflow-hidden"
+            style={{ top: `${navHeight}px` }}
+            className="fixed left-0 right-0 z-40 bg-noir-900/98 backdrop-blur-lg border-b border-gold-500/20 md:hidden overflow-hidden shadow-2xl"
           >
-            <div className="flex flex-col px-4 sm:px-6 py-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={router.pathname === link.href ? 'page' : undefined}
-                  className={`py-3 font-mono text-xs tracking-widest uppercase border-b border-noir-600/50 min-h-[44px] flex items-center ${
-                    router.pathname === link.href ? 'text-gold-400' : 'text-parchment-300'
-                  }`}
+            <div className="px-6 py-6 space-y-1" role="list">
+              {navLinks.map((link) => {
+                const active = router.pathname === link.href
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    role="listitem"
+                    aria-current={active ? 'page' : undefined}
+                    className={`block py-3 font-mono text-sm tracking-widest uppercase border-b border-parchment-300/10 ${
+                      active ? 'text-gold-400 font-semibold' : 'text-parchment-200 hover:text-gold-300'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              })}
+              <div className="pt-4">
+                <a
+                  href="/Ali_Akarma_CV.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Download CV (opens in new tab)"
+                  className="flex items-center justify-center gap-2 w-full py-3 bg-gold-500/15 border border-gold-500/40 text-gold-400 font-mono text-xs tracking-widest uppercase rounded-sm"
                 >
-                  {link.label}
-                </Link>
-              ))}
-              <a
-                href="/Ali_Akarma_CV.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Download CV (opens in new tab)"
-                className="py-3 font-mono text-xs tracking-widest uppercase text-gold-400 flex items-center gap-2 min-h-[44px]"
-              >
-                <FileText size={11} aria-hidden="true" /> Download CV
-              </a>
+                  <FileText size={14} aria-hidden="true" /> Download CV
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

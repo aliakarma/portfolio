@@ -69,7 +69,7 @@ export default function About() {
                   <div className="relative mb-8">
                     <div className="w-48 h-48 mx-auto md:mx-0 border border-gold-500/30 bg-noir-700 flex items-center justify-center relative overflow-hidden">
                       <img
-                        src="/profile.jpg"
+                        src="/Profile.png"
                         alt="Ali Akarma"
                         width={192}
                         height={192}

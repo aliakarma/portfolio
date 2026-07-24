@@ -10,7 +10,7 @@
       ]
     },
     {
-      "source": "/(profile.jpg|og-image.jpg|favicon.ico|apple-touch-icon.png|android-chrome-192x192.png|android-chrome-512x512.png)",
+      "source": "/(Profile.png|profile.jpg|og-image.jpg|favicon.ico|apple-touch-icon.png|android-chrome-192x192.png|android-chrome-512x512.png)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
       ]
