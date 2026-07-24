@@ -3,11 +3,12 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { Github, Linkedin, Mail, BookOpen, ArrowRight, FileText, Star, Quote, TrendingUp, Award, Layers } from 'lucide-react'
+import { Github, Linkedin, Mail, BookOpen, ArrowRight, FileText, Star, Quote, Layers } from 'lucide-react'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
 import { publications } from '../data/publications'
+import { underReviewPublications } from '../data/underReview'
 
 import Meta from '../components/Meta'
 import AuthorHighlight from '../components/AuthorHighlight'
@@ -57,22 +58,10 @@ const socialLinks = [
   { icon: <Mail size={18} />, href: `mailto:${profile.email}`, label: 'Email' },
 ]
 
-/*
-  Performance Fix: stats are now derived from publications data instead of
-  hardcoded numbers. Adding a new publication updates the hero counter automatically.
-*/
-const conferenceVenues = [...new Set(
-  publications
-    .filter(p => p.type === 'conference')
-    .map(p => p.venueShort)
-)]
-
-const journalCount = publications.filter(p => p.type === 'journal').length
-
 const stats = [
   {
     icon: <FileText size={16} />,
-    value: publications.length,
+    value: publications.length + underReviewPublications.length,
     suffix: '',
     label: 'Publications',
     sub: 'peer-reviewed & in pipeline',
@@ -83,21 +72,6 @@ const stats = [
     suffix: '',
     label: 'Research Areas',
     sub: 'safety, governance, agentic AI',
-  },
-  {
-    icon: <Award size={16} />,
-    value: conferenceVenues.length,
-    suffix: '',
-    label: 'Conferences',
-    // Responsive Fix: shorter sub-label prevents overflow on 320px stat cards
-    sub: 'IEEE ICCA, ICBDT, ICETAS',
-  },
-  {
-    icon: <TrendingUp size={16} />,
-    value: journalCount,
-    suffix: '',
-    label: 'Journals',
-    sub: 'Springer, PLOS ONE, MDPI, IEEE',
   },
 ]
 
@@ -223,7 +197,9 @@ export default function Home() {
                   transition={{ delay: 0.7 }}
                   className="font-body text-parchment-300 text-base leading-relaxed max-w-xl mb-8"
                 >
-                  {profile.bio}
+                  I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 4th-year IT student at the Islamic University of Madinah and have published{' '}
+                  <span className="text-gold-400 font-semibold">{publications.length + underReviewPublications.length}</span>{' '}
+                  peer-reviewed papers and manuscripts on AI governance, adversarial robustness, and constrained multi-agent systems.
                 </motion.p>
 
                 {/* Core Research Thesis Card — Enhanced for Professionalism */}

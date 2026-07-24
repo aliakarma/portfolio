@@ -6,9 +6,10 @@ import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
 import { publications } from '../data/publications'
+import { underReviewPublications } from '../data/underReview'
 
 export default function About() {
-  const publications_count = publications.length
+  const totalPapers = publications.length + underReviewPublications.length
 
 
   const socialLinks = [
@@ -83,7 +84,7 @@ export default function About() {
                       { icon: <GraduationCap size={14} />, text: 'Islamic University of Madinah' },
                       { icon: <BookOpen      size={14} />, text: 'Google Scholar', href: profile.scholar },
                       ...(profile.orcid ? [{ icon: <Link2 size={14} />, text: 'ORCID', href: profile.orcid }] : []),
-                      { icon: <Microscope    size={14} />, text: `${publications_count} Publications` },
+                      { icon: <Microscope    size={14} />, text: `${totalPapers} Publications` },
                     ].map((item, i) => (
                       <div key={i} className="flex items-start gap-3 text-parchment-300">
                         <div className="text-gold-400 flex-shrink-0 mt-0.5" aria-hidden="true">{item.icon}</div>
@@ -139,7 +140,11 @@ export default function About() {
                 <SectionReveal delay={0.1}>
                   <div>
                     <h2 className="font-display text-2xl text-parchment-100 mb-4">Biography</h2>
-                    <p className="font-body text-parchment-300 text-base leading-relaxed">{profile.bio}</p>
+                    <p className="font-body text-parchment-300 text-base leading-relaxed">
+                      I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 4th-year IT student at the Islamic University of Madinah and have published{' '}
+                      <span className="text-gold-400 font-semibold">{totalPapers}</span>{' '}
+                      peer-reviewed papers and manuscripts on AI governance, adversarial robustness, and constrained multi-agent systems.
+                    </p>
                     <p className="font-body text-parchment-300 text-base leading-relaxed mt-4">
                       Currently pursuing a B.S. in Information Technology on a merit-based fully funded scholarship,
                       Ali has authored or co-authored papers across IEEE conferences, Springer, PLOS ONE, and MDPI —

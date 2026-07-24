@@ -15,7 +15,7 @@ export const profile = {
   orcid: "https://orcid.org/0009-0002-6687-9380",
   cv: "/Ali_Akarma_CV.pdf",
 
-  bio: "I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 3rd-year IT student at the Islamic University of Madinah and have published 15 peer-reviewed papers on AI governance, adversarial robustness, and constrained multi-agent systems.",
+  bio: "I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 4th-year IT student at the Islamic University of Madinah and have published peer-reviewed papers and manuscripts on AI governance, adversarial robustness, and constrained multi-agent systems.",
 
   researchVision: `I study how to make autonomous AI systems fail safely: designing governance architectures that prevent unintended actions before they propagate through real-world infrastructure. 
 
@@ -57,6 +57,15 @@ My work addresses the alignment problem in deployed agentic systems — explorin
 
   experience: [
     {
+      role: "Research Intern",
+      institution: "King Fahd University of Petroleum and Minerals (KFUPM)",
+      period: "Jun 2026 – Present",
+      bullets: [
+        "Investigating AI decision-making verification for wildfire suppression and mitigation strategies in Middle East environments using reinforcement learning and multi-agent systems.",
+        "Developing evaluation protocols for safety, reliability, and trustworthiness of autonomous agent policies under distributional shift and adversarial conditions.",
+      ],
+    },
+    {
       role: "Undergraduate AI Researcher",
       institution: "Islamic University of Madinah",
       period: "Jan 2025 – Present",
@@ -66,6 +75,15 @@ My work addresses the alignment problem in deployed agentic systems — explorin
         "Explored LLM-based components within agentic pipelines: prompt design, orchestration, and robustness considerations.",
         "Investigated governance mechanisms for preventing unsafe behaviors triggered by untrusted or adversarial data sources.",
         "Analyzed system trustworthiness in scenarios analogous to log analysis, automated triage, and decision support pipelines.",
+      ],
+    },
+    {
+      role: "Research Intern",
+      institution: "IEEE EMBS E-JUST SBC",
+      period: "May 2026 – Jul 2026",
+      bullets: [
+        "Engineered biomedical image processing pipelines for automated feature extraction, noise reduction, and enhancement in diagnostic imaging datasets.",
+        "Implemented deep learning architectures for image segmentation and classification, optimizing preprocessing workflows to improve model reliability.",
       ],
     },
   ],

@@ -7,14 +7,16 @@ import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import PublicationCard from '../components/PublicationCard'
 import { publications } from '../data/publications'
+import { underReviewPublications } from '../data/underReview'
 import { profile } from '../data/profile'
 
-const ALL_TAGS = [...new Set(publications.flatMap(p => p.tags))].sort()
+const allPublications = [...publications, ...underReviewPublications]
+const ALL_TAGS = [...new Set(allPublications.flatMap(p => p.tags))].sort()
 
 const normalize = (value) => String(value ?? '').trim().toLowerCase()
 
 const TYPE_FILTERS    = ['All', 'first_author', 'conference', 'journal', 'book_chapter']
-const STATUS_FILTERS  = ['All', 'published', 'accepted', 'review']
+const STATUS_FILTERS  = ['All', 'published', 'accepted', 'under_review']
 
 const TYPE_LABELS = {
   All:          'All Types',
@@ -25,10 +27,10 @@ const TYPE_LABELS = {
 }
 
 const STATUS_LABELS = {
-  All:       'All',
-  published: 'Published',
-  accepted:  'Accepted',
-  review:    'Under Review',
+  All:          'All',
+  published:    'Published',
+  accepted:     'Accepted',
+  under_review: 'Under Review',
 }
 
 /*
@@ -67,14 +69,22 @@ export default function Research() {
   const [showTags,     setShowTags]     = useState(false)
 
   const filtered = useMemo(() => {
-    return publications
+    // Under-review papers are kept separate and ONLY shown when 'Under Review' status filter is active
+    const sourceList = statusFilter === 'under_review' ? underReviewPublications : publications
+
+    return sourceList
       .filter(p => {
-        const s = statusFilter === 'All' || normalize(p.status) === normalize(statusFilter)
+        const pStatus = normalize(p.status)
+        const s =
+          statusFilter === 'All' ||
+          statusFilter === 'under_review' ||
+          pStatus === normalize(statusFilter)
         const t =
           typeFilter === 'All'
             ? true
             : typeFilter === 'first_author'
-            ? p.title === "Governance-Constrained Agentic AI: Blockchain-Enforced Human Oversight for Safety-Critical Wildfire Monitoring" ||
+            ? (p.authorsStr && p.authorsStr.startsWith('Ali Akarma')) ||
+              p.title === "Governance-Constrained Agentic AI: Blockchain-Enforced Human Oversight for Safety-Critical Wildfire Monitoring" ||
               p.title === "Agents for Agents: An Interrogator-Based Secure Framework for Autonomous Internet of Underwater Things" ||
               p.title === "Agentic AI-enhanced digital twins for Smart City civil infrastructure: A secure, autonomous and auditable management framework"
             : normalize(p.type) === normalize(typeFilter)
@@ -87,7 +97,8 @@ export default function Research() {
   const counts = {
     published: publications.filter(p => p.status === 'published').length,
     accepted:  publications.filter(p => p.status === 'accepted').length,
-    review:    publications.filter(p => p.status === 'review').length,
+    review:    underReviewPublications.length,
+    total:     allPublications.length,
   }
 
   return (
@@ -121,7 +132,7 @@ export default function Research() {
                   Research <span className="gold-text italic">Archive</span>
                 </h1>
                 <p className="font-body text-parchment-300 max-w-2xl mb-8">
-                  {publications.length} publications and manuscripts spanning agentic AI architectures,
+                  {publications.length} peer-reviewed publications (plus manuscripts under active review) spanning agentic AI architectures,
                   safety, governance, and real-world deployment. I also maintain distilled{' '}
                   <a href="/blog" className="text-gold-400 hover:underline">research notes</a> for 
                   key findings and practical implications.
@@ -137,7 +148,7 @@ export default function Research() {
                   { icon: <FileText  size={16} />, value: counts.published, label: 'Published',    bg: 'bg-emerald-900/20 border-emerald-600/20' },
                   { icon: <TrendingUp size={16}/>, value: counts.accepted,  label: 'Accepted',     bg: 'bg-sky-900/20 border-sky-600/20' },
                   { icon: <Layers    size={16} />, value: counts.review,    label: 'Under Review', bg: 'bg-amber-900/20 border-amber-600/20' },
-                  { icon: <BookOpen  size={16} />, value: publications.length, label: 'Total',     bg: 'bg-gold-900/20 border-gold-600/20' },
+                  { icon: <BookOpen  size={16} />, value: counts.total,     label: 'Total',        bg: 'bg-gold-900/20 border-gold-600/20' },
                 ].map(m => (
                   <div key={m.label} className={`glass-card border p-3 sm:p-4 flex items-center gap-2 sm:gap-3 ${m.bg}`}>
                     <div className="text-gold-400 flex-shrink-0" aria-hidden="true">{m.icon}</div>
@@ -307,7 +318,7 @@ export default function Research() {
 
             {/* COUNT — Fix: full opacity for WCAG contrast compliance */}
             <p className="font-mono text-xs text-parchment-400 mb-5" aria-live="polite" aria-atomic="true">
-              Showing <span className="text-gold-400 font-semibold">{filtered.length}</span> of {publications.length} publications
+              Showing <span className="text-gold-400 font-semibold">{filtered.length}</span> of {statusFilter === 'under_review' ? underReviewPublications.length : publications.length} {statusFilter === 'under_review' ? 'manuscripts' : 'publications'}
             </p>
 
             {/* LIST */}

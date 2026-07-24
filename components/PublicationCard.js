@@ -8,9 +8,10 @@ import {
 import AuthorHighlight from './AuthorHighlight'
 
 const STATUS_STYLES = {
-  published: 'bg-emerald-900/40 text-emerald-300 border-emerald-600/30',
-  accepted:  'bg-sky-900/40 text-sky-300 border-sky-600/30',
-  review:    'bg-amber-900/40 text-amber-300 border-amber-600/30',
+  published:    'bg-emerald-900/40 text-emerald-300 border-emerald-600/30',
+  accepted:     'bg-sky-900/40 text-sky-300 border-sky-600/30',
+  review:       'bg-amber-900/40 text-amber-300 border-amber-600/30',
+  under_review: 'bg-amber-900/40 text-amber-300 border-amber-600/30',
 }
 
 const TYPE_LABELS = {

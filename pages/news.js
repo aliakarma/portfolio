@@ -6,14 +6,12 @@ import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 
 // Edit your future news items here!
-// Just add a new object to the top of this array.
+// Each item only requires id, date, and title.
 const newsData = [
   {
     id: 16,
     date: 'July 20, 2026',
-    title: 'New paper:Integrating High-Level Requirements to Low-Level Tests with Machine-Readable V&V Specifications ',
-    venue: 'APSEC 2026',
-
+    title: 'New paper: Integrating High-Level Requirements to Low-Level Tests with Machine-Readable V&V Specifications — APSEC 2026',
   },
   {
     id: 15,
@@ -23,86 +21,72 @@ const newsData = [
   {
     id: 14,
     date: 'July 17, 2026',
-    title: 'New paper: Agentic AI-enhanced digital twins for Smart City civil infrastructure: A secure, autonomous and auditable management framework',
-    venue: 'PLoS One',
+    title: 'New paper: Agentic AI-enhanced digital twins for Smart City civil infrastructure: A secure, autonomous and auditable management framework — PLoS One',
   },
   {
     id: 13,
     date: 'June 30, 2026',
-    title: 'New paper: ADAPT: An Agentic AI Framework for People with Disabilities and Neurodivergence',
-    venue: 'Journal of Disability Research',
+    title: 'New paper: ADAPT: An Agentic AI Framework for People with Disabilities and Neurodivergence — Journal of Disability Research',
   },
   {
     id: 12,
     date: 'June 26, 2026',
-    title: 'New paper: FedAgent-Chain: A Secure Federated and Agentic AI Framework for Multilingual Disability-Inclusive Employment in AI Cities',
-    venue: 'MDPI Smart Cities',
+    title: 'New paper: FedAgent-Chain: A Secure Federated and Agentic AI Framework for Multilingual Disability-Inclusive Employment in AI Cities — MDPI Smart Cities',
   },
   {
     id: 11,
     date: 'April 27, 2026',
-    title: 'New paper: Agentic AI for Climate-Resilient Cities: A PRISMA-Guided Review and Digital Twin Framework',
-    venue: 'MDPI Sustainability',
+    title: 'New paper: Agentic AI for Climate-Resilient Cities: A PRISMA-Guided Review and Digital Twin Framework — MDPI Sustainability',
   },
   {
     id: 10,
     date: 'April 26, 2026',
-    title: 'New paper: Autonomous Traffic Signal Optimization Using Digital Twin and Agentic AI for Real-Time Decision-Making to Uphold Roadway Efficiency',
-    venue: 'MECON 2026',
+    title: 'New paper: Autonomous Traffic Signal Optimization Using Digital Twin and Agentic AI for Real-Time Decision-Making to Uphold Roadway Efficiency — MECON 2026',
   },
   {
     id: 9,
     date: 'April 5, 2026',
-    title: 'New paper: Governance-Constrained Agentic AI: Blockchain-Enforced Human Oversight for Safety-Critical Wildfire Monitoring',
-    venue: 'ICETAS 2026',
+    title: 'New paper: Governance-Constrained Agentic AI: Blockchain-Enforced Human Oversight for Safety-Critical Wildfire Monitoring — ICETAS 2026',
   },
   {
     id: 8,
     date: 'April 5, 2026',
-    title: 'New paper: Agents for Agents: An Interrogator-Based Secure Framework for Autonomous Internet of Underwater Things',
-    venue: 'ICETAS 2026',
+    title: 'New paper: Agents for Agents: An Interrogator-Based Secure Framework for Autonomous Internet of Underwater Things — ICETAS 2026',
   },
   {
     id: 7,
     date: 'June 6, 2026',
-    title: 'New paper: FinNutriAgent (FNA): An Agentic AI for Budget and Nutrition Planning',
-    venue: 'ETASR',
+    title: 'New paper: FinNutriAgent (FNA): An Agentic AI for Budget and Nutrition Planning — ETASR',
   },
   {
     id: 6,
     date: 'April 13, 2026',
-    title: 'New paper: Use of AI Tools: Guidelines to Maintain Academic Integrity',
-    venue: 'Springer',
+    title: 'New paper: Use of AI Tools: Guidelines to Maintain Academic Integrity — Springer',
   },
   {
     id: 5,
     date: 'December 22, 2025',
-    title: 'New paper: FinAgent: Agentic AI for Personal Finance & Nutrition',
-    venue: 'IEEE ICCA',
+    title: 'New paper: FinAgent: Agentic AI for Personal Finance & Nutrition — IEEE ICCA',
   },
   {
     id: 4,
     date: 'December 22, 2025',
-    title: 'New paper: Blockchain-Monitored Agentic AI Architecture for Trusted Perception–Reasoning–Action Pipelines',
-    venue: 'IEEE ICCA',
+    title: 'New paper: Blockchain-Monitored Agentic AI Architecture for Trusted Perception–Reasoning–Action Pipelines — IEEE ICCA',
   },
   {
     id: 3,
     date: 'November 27, 2025',
-    title: 'New paper: Agentic AI Framework for Individuals with Disabilities and Neurodivergence: A Multi-Agent System for Healthy Eating, Daily Routines, and Inclusive Well-Being',
-    venue: 'ICBDT',
+    title: 'New paper: Agentic AI Framework for Individuals with Disabilities and Neurodivergence: A Multi-Agent System for Healthy Eating, Daily Routines, and Inclusive Well-Being — ICBDT',
   },
   {
     id: 2,
     date: 'November 28, 2025',
-    title: 'New paper: Agentic AI for Smart Inventory Replenishment',
-    venue: 'ICBDT',
+    title: 'New paper: Agentic AI for Smart Inventory Replenishment — ICBDT',
   },
   {
     id: 1,
     date: 'November 27, 2025',
-    title: 'New paper: Agentic AI Framework for Cloudburst Prediction and Coordinated Response',
-    venue: 'ICBDT',
+    title: 'New paper: Agentic AI Framework for Cloudburst Prediction and Coordinated Response — ICBDT',
   },
 ]
 
@@ -169,12 +153,27 @@ export default function News() {
                           <span>{item.date}</span>
                         </div>
                         <h3 className="font-display text-lg text-parchment-100 leading-snug flex-1">
-                          {item.title}
-                          {item.venue && (
-                            <span className="font-mono text-sm text-parchment-400 ml-2">
-                              — Published in <span className="text-gold-400">{item.venue}</span>
-                            </span>
-                          )}
+                          {(() => {
+                            const dashIndex = item.title.indexOf(' — ') !== -1 
+                              ? item.title.indexOf(' — ') 
+                              : item.title.indexOf('—');
+                            
+                            if (dashIndex !== -1) {
+                              const mainText = item.title.substring(0, dashIndex);
+                              const isSpaced = item.title.substring(dashIndex, dashIndex + 3) === ' — ';
+                              const venueText = item.title.substring(dashIndex + (isSpaced ? 3 : 1));
+                              
+                              return (
+                                <>
+                                  {mainText}{' '}
+                                  <span className="text-gold-400 font-mono text-sm sm:text-base">
+                                    — {venueText.trim()}
+                                  </span>
+                                </>
+                              );
+                            }
+                            return item.title;
+                          })()}
                         </h3>
                       </div>
                     </motion.div>
