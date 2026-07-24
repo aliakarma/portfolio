@@ -71,7 +71,7 @@ const stats = [
     value: profile.researchInterests.length,
     suffix: '',
     label: 'Research Areas',
-    sub: 'safety, governance, agentic AI',
+    sub: 'Agentic AI • Safety & Alignment • Adversarial Misuse • Governance & Oversight • Cybersecurity • Digital Twins',
   },
 ]
 
@@ -333,7 +333,7 @@ export default function Home() {
                           <AnimatedCounter target={stat.value} suffix={stat.suffix} delay={0.8 + i * 0.1} />
                         </div>
                         <div className="font-mono text-xs text-parchment-100 truncate">{stat.label}</div>
-                        <div className="font-mono text-xs text-parchment-400/50 truncate">{stat.sub}</div>
+                        <div className="font-mono text-[11px] text-parchment-400/60 leading-relaxed mt-0.5">{stat.sub}</div>
                       </div>
                     </motion.div>
                   ))}

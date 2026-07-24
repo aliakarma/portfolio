@@ -27,29 +27,5 @@ export const underReviewPublications = [
   year={2026}
 }`,
   },
-  {
-    id: 102,
-    title: "Agentic AI for Climate-Resilient Cities: A PRISMA-Guided Rapid Review with a Derived Digital Twin Reference Architecture",
-    authors: ["Toqeer Ali Syed, Ali Akarma, Muhammad Tayyab Naqash, Danial Hameed, Shahid Kamal, Antonio Formisano"],
-    authorsStr: "Toqeer Ali Syed, Ali Akarma, Muhammad Tayyab Naqash, Danial Hameed, Shahid Kamal, Antonio Formisano",
-    venue: "Under Review · MDPI Sustainability",
-    venueShort: "MDPI Sustainability (Under Review)",
-    type: "journal",
-    year: 2026,
-    status: "under_review",
-    statusLabel: "Under Review · MDPI Sustainability",
-    tags: ["Agentic AI", "Digital Twins", "Smart Cities", "SDGs", "PRISMA", "AI Governance"],
-    doi: null,
-    pdf: null,
-    code: null,
-    dataset: null,
-    notebook: null,
-    abstract: "Cities now absorb the compounding pressure of rapid urban growth and accelerating climate risk, and the intelligent systems deployed to manage that pressure remain overwhelmingly single-domain and reactive. This paper is a review. Its primary contribution is a PRISMA-guided rapid review that applies explicit, operationalized screening criteria to separate genuinely agentic artificial intelligence from conventional machine learning in work targeting SDG 11 (Sustainable Cities and Communities) and SDG 13 (Climate Action). Agentic AI is treated throughout as a class of autonomous, goal-directed systems characterized by four measurable properties: task-level autonomy (A), goal-directed planning (G), tool use or environmental interaction (T), and multi-agent coordination (M). Each study was scored against the four criteria, and a system exhibiting at least two was classified as fully agentic. A two-tier Boolean strategy across five databases plus backward citation tracking returned 920 records for the period January 2018 to March 2026, of which 60 met the eligibility criteria and were carried into synthesis across smart mobility, infrastructure planning, waste management, emergency response, climate monitoring, emissions tracking, renewable energy forecasting, and multi-hazard early warning. Of these, 14 fully satisfy the agentic threshold and constitute the primary implemented evidence, while the remainder comprise conceptual proposals and prior reviews. The corpus is stratified by study type so that evidence from implemented systems is never conflated with evidence from conceptual proposals or prior reviews, and a threshold sensitivity analysis reports how corpus composition responds to alternative agentic cut-offs. Two supporting contributions follow from the synthesis rather than standing beside it: a reference architecture that specifies how an agentic layer and an urban digital twin exchange state, including the synchronization rule, the action feedback path, and the inter-layer message contract; and a synthetic-testbed feasibility study that probes one architectural assumption, namely that multimodal fusion under a transformer backbone improves hazard classification over single-modality convolutional processing.",
-    bibtex: `@article{syed2026agenticclimate,
-  title={Agentic AI for Climate-Resilient Cities: A PRISMA-Guided Rapid Review with a Derived Digital Twin Reference Architecture},
-  author={Syed, Toqeer Ali and Akarma, Ali and Naqash, Muhammad Tayyab and Hameed, Danial and Kamal, Shahid and Formisano, Antonio},
-  journal={Under Review at MDPI Sustainability},
-  year={2026}
-}`,
-  },
+
 ]
