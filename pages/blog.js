@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Clock, ArrowRight, Tag, ChevronDown, ChevronUp, MapPin } from 'lucide-react'
+import { Clock, ArrowRight, Tag, ChevronDown, ChevronUp, MapPin, Image as ImageIcon, ExternalLink } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
@@ -145,6 +145,40 @@ export default function Blog() {
                                 <div>
                                   <p className="font-mono text-xs text-gold-400/60 tracking-widest uppercase mb-2">Practical Implications</p>
                                   <p className="font-body text-sm text-parchment-300 leading-relaxed">{post.implications}</p>
+                                </div>
+                              )}
+
+                              {post.graphicalAbstract && (
+                                <div>
+                                  <div className="flex items-center justify-between mb-2">
+                                    <p className="font-mono text-xs text-gold-400/60 tracking-widest uppercase flex items-center gap-1.5">
+                                      <ImageIcon size={12} className="text-gold-400" aria-hidden="true" />
+                                      Graphical Abstract
+                                    </p>
+                                    <a
+                                      href={post.graphicalAbstract}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="font-mono text-[11px] text-gold-400 hover:underline flex items-center gap-1"
+                                    >
+                                      <ExternalLink size={10} aria-hidden="true" /> Open in New Tab
+                                    </a>
+                                  </div>
+                                  <div className="relative group rounded-md overflow-hidden border border-gold-500/20 bg-noir-900/60 p-1">
+                                    <a
+                                      href={post.graphicalAbstract}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      title="Click to open Graphical Abstract in a new tab"
+                                    >
+                                      <img
+                                        src={post.graphicalAbstract}
+                                        alt={`Graphical Abstract for ${post.title}`}
+                                        className="w-full h-auto max-h-[420px] object-contain rounded-md transition-transform duration-300 group-hover:scale-[1.01]"
+                                        loading="lazy"
+                                      />
+                                    </a>
+                                  </div>
                                 </div>
                               )}
 
