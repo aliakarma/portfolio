@@ -3,7 +3,7 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { Github, Linkedin, Mail, BookOpen, ArrowRight, FileText, Star, Quote, Layers } from 'lucide-react'
+import { Github, Linkedin, Mail, BookOpen, ArrowRight, FileText, Star, Quote, Layers, Award } from 'lucide-react'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
@@ -72,6 +72,20 @@ const stats = [
     suffix: '',
     label: 'Research Areas',
     sub: 'Agentic AI • Safety & Alignment • Adversarial Misuse • Governance & Oversight • Cybersecurity • Digital Twins',
+  },
+  {
+    icon: <BookOpen size={16} />,
+    value: 7,
+    suffix: '',
+    label: 'Journal Venues',
+    sub: 'Nature Scientific Reports • PLoS ONE • MDPI Smart Cities • MDPI Sustainability • JDR • ETASR • IJEEE',
+  },
+  {
+    icon: <Award size={16} />,
+    value: 4,
+    suffix: '',
+    label: 'Conference Venues',
+    sub: 'IEEE ICCA • ICBDT • ICETAS • MECON 2026',
   },
 ]
 
@@ -352,7 +366,7 @@ export default function Home() {
                       </div>
                       {profile.scholarMetrics.lastUpdated && (
                         <span className="font-mono text-[8px] text-parchment-400/40 uppercase">
-                          Updated {new Date(profile.scholarMetrics.lastUpdated).toLocaleDateString()}
+                          Updated {new Date(profile.scholarMetrics.lastUpdated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                         </span>
                       )}
                     </div>
