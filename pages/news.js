@@ -9,6 +9,11 @@ import SectionReveal from '../components/SectionReveal'
 // Each item only requires id, date, and title.
 const newsData = [
   {
+    id: 17,
+    date: 'July 26, 2026',
+    title: 'New paper: EAGF: A Four-Pillar Ethical AI Governance Framework for Trustworthy Cybersecurity in 5G Renewable Energy IoT Systems — Nature Scientific Reports',
+  },
+  {
     id: 16,
     date: 'July 20, 2026',
     title: 'New paper: Integrating High-Level Requirements to Low-Level Tests with Machine-Readable V&V Specifications — APSEC 2026',

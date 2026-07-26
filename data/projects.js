@@ -70,8 +70,8 @@ export const projects = [
     tags: ["Governance", "Cybersecurity", "IoT"],
     themes: ["AI Governance", "AI Safety", "XAI"],
     featured: false,
-    status: "Under Review",
-    paper: null,
+    status: "Published",
+    paper: "https://doi.org/10.1038/s41598-026-63383-5",
   },
   {
     id: 6,
