@@ -398,7 +398,7 @@ DOI = {10.3390/smartcities9070106}
     statusLabel: "Journal Article · Nature Scientific Reports",
     tags: ["AI Governance", "Cybersecurity", "IoT", "AI Safety", "Ethics"],
     doi: "https://doi.org/10.1038/s41598-026-63383-5",
-    pdf: null,
+    pdf: "https://www.nature.com/articles/s41598-026-63383-5_reference.pdf",
     code: "https://github.com/aliakarma/eagf",
     dataset: null,
     notebook: null,
