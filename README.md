@@ -163,7 +163,7 @@ All content is separated from UI in the `data/` folder:
 In `data/publications.js`, populate these fields for each paper:
 ```js
 {
-  doi:      "https://doi.org/10.xxxx/xxxxx",
+  doi:      "https://doi.org/10.xxxx/xxxxxx",
   pdf:      "https://arxiv.org/pdf/xxxx.xxxxx",
   code:     "https://github.com/aliakarma/paper-repo",
   notebook: "https://colab.research.google.com/...",
