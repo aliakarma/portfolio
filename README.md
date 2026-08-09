@@ -1,8 +1,8 @@
-# Ali Akarma — Academic Portfolio v2.0
+# Ali Akarma — Academic Portfolio
 
 > A production-quality, fully interactive academic portfolio for an AI researcher specializing in Agentic AI, AI Safety, and Trustworthy Machine Learning.
 
-**→ Live:** [aliakarma.codes](https://www.aliakarma.codes/) *(after deployment)*
+**→ Live:** [aliakarma.codes](https://www.aliakarma.codes/)
 
 ---
 
