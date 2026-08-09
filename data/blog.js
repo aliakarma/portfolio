@@ -2,6 +2,25 @@
 
 export const blogPosts = [
   {
+    id: 22,
+    title: "VNVSpec: Connecting High-Level Requirements to the Low-Level Tests Machines Actually Run",
+    date: "2026-08-09",
+    category: "AI Assurance & Verification",
+    readTime: "9 min",
+    excerpt: "Software teams have excellent unit-testing tooling; systems engineering has rigorous V&V discipline. The two almost never connect, leaving the link between what users asked for and what CI verifies to be maintained by hand. VNVSpec makes V&V specifications machine-readable and executable.",
+    summary: "pytest, JUnit, and Jest made it cheap to write low-level tests and run them on every commit, while systems engineering developed rigorous verification and validation principles for aligning requirements with deliverables. In practice the two worlds rarely meet, and for AI-enabled and cyber-physical systems that gap is increasingly costly: regulators now ask for traceable evidence that high-level requirements are met, but raw test results carry none of the structure such evidence requires. VNVSpec is an open-source framework in which users state high-level requirements directly or import them from catalogs derived from published standards, decompose them into module-level requirements with explicit metrics and acceptance criteria, and link them to test results through a traceability graph that compiles into verdicts and audit-ready reports.",
+    keyContributions: [
+      "Machine-readable, executable V&V specifications linking high-level requirements to the low-level tests already running in CI",
+      "Requirement quality checking plus decomposition into module-level requirements with explicit metrics and acceptance criteria",
+      "Traceability graph that compiles collected test evidence into verdicts and audit-ready reports",
+      "Self-application evaluation: continuously assessed in CI against its own specification of 36 requirements verified by 449 tests, scaling linearly to roughly 10,000 requirements",
+    ],
+    implications: "Compliance evidence stops being a document written after the fact and becomes a by-product of the test suite a team already runs. The same traceability machinery extends to black-box AI models and AI coding agents, where 'did this system meet the stated requirement?' is exactly the question that raw pass/fail output cannot answer.",
+    tags: ["V&V", "Requirements Engineering", "AI Safety", "Testing", "AI Governance"],
+    venue: "arXiv Preprint 2026",
+    graphicalAbstract: "/graphical-abstracts/VNVSpec.png",
+  },
+  {
     id: 21,
     title: "EAGF: A Four-Pillar Ethical AI Governance Framework for 5G Renewable Energy IoT",
     date: "2026-07-26",
