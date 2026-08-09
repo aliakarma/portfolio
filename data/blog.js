@@ -17,7 +17,7 @@ export const blogPosts = [
     ],
     implications: "Compliance evidence stops being a document written after the fact and becomes a by-product of the test suite a team already runs. The same traceability machinery extends to black-box AI models and AI coding agents, where 'did this system meet the stated requirement?' is exactly the question that raw pass/fail output cannot answer.",
     tags: ["V&V", "Requirements Engineering", "AI Safety", "Testing", "AI Governance"],
-    venue: "arXiv Preprint 2026",
+    venue: "IEEE/SICE SII 2027 (Under Review)",
     graphicalAbstract: "/graphical-abstracts/VNVSpec.png",
   },
   {

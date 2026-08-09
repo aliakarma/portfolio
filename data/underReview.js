@@ -7,12 +7,12 @@ export const underReviewPublications = [
     title: "Integrating High-Level Requirements to Low-Level Tests with Machine-Readable V&V Specifications",
     authors: ["Mansur Arief, Nur Ahmad Khatim, Ali Akarma, Ahmad Alfan Alfian Irfan"],
     authorsStr: "Mansur Arief, Nur Ahmad Khatim, Ali Akarma, Ahmad Alfan Alfian Irfan",
-    venue: "Under Review · arXiv Preprint (arXiv:2607.17686)",
-    venueShort: "arXiv Preprint (Under Review)",
-    type: "journal",
-    year: 2026,
+    venue: "Under Review · 2027 IEEE/SICE International Symposium on System Integration (SII 2027)",
+    venueShort: "IEEE/SICE SII (Under Review)",
+    type: "conference",
+    year: 2027,
     status: "under_review",
-    statusLabel: "Under Review · arXiv:2607.17686",
+    statusLabel: "Under Review · IEEE/SICE SII 2027",
     tags: ["AI Safety", "AI Governance", "Architecture", "Agentic AI"],
     doi: "https://doi.org/10.48550/arXiv.2607.17686",
     pdf: "https://arxiv.org/pdf/2607.17686",
@@ -26,7 +26,8 @@ export const underReviewPublications = [
   author={Arief, Mansur and Khatim, Nur Ahmad and Akarma, Ali and Irfan, Ahmad Alfan Alfian},
   journal={arXiv preprint arXiv:2607.17686},
   year={2026},
-  doi={10.48550/arXiv.2607.17686}
+  doi={10.48550/arXiv.2607.17686},
+  note={Under review at the 2027 IEEE/SICE International Symposium on System Integration (SII 2027)}
 }`,
   },
 
