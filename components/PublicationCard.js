@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 
 import AuthorHighlight from './AuthorHighlight'
+import { fullSizeUrl } from './GraphicalAbstract'
 
 const STATUS_STYLES = {
   published:    'bg-emerald-900/40 text-emerald-300 border-emerald-600/30',
@@ -280,7 +281,7 @@ export default function PublicationCard({ pub, index = 0 }) {
 
             {pub.graphicalAbstract && (
               <a
-                href={pub.graphicalAbstract}
+                href={fullSizeUrl(pub.graphicalAbstract)}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View Graphical Abstract for ${pub.title} (opens in new tab)`}

@@ -10,6 +10,7 @@
     "export": "next build",
     "deploy": "next build && touch out/.nojekyll && npx gh-pages -d out --dotfiles",
     "predeploy": "npm run export",
+    "images": "node scripts/optimize_images.js",
     "scholar:update": "node scripts/update_scholar.js",
     "scholar:manual": "node scripts/manual_update_scholar.js"
   },
@@ -29,6 +30,7 @@
     "autoprefixer": "10.4.19",
     "gh-pages": "6.0.0",
     "postcss": "^8.5.10",
+    "sharp": "^0.35.3",
     "tailwindcss": "3.4.3"
   },
   "overrides": {

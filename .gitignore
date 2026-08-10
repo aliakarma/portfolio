@@ -32,6 +32,12 @@ Thumbs.db
 *.swp
 *.swo
 
+# Image sources — originals for scripts/optimize_images.js.
+# Kept on disk so variants can be re-encoded at different settings, but not
+# committed (~100 MB) and not served: only public/ is deployed.
+assets/
+
 # Misc
 *.pem
 ali_akarma_portfolio_audit.md
+.gstack/

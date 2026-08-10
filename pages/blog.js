@@ -5,6 +5,7 @@ import { Clock, ArrowRight, Tag, ChevronDown, ChevronUp, MapPin, Image as ImageI
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
+import GraphicalAbstract, { fullSizeUrl } from '../components/GraphicalAbstract'
 import { blogPosts } from '../data/blog'
 import { profile } from '../data/profile'
 
@@ -156,7 +157,7 @@ export default function Blog() {
                                       Graphical Abstract
                                     </p>
                                     <a
-                                      href={post.graphicalAbstract}
+                                      href={fullSizeUrl(post.graphicalAbstract)}
                                       target="_blank"
                                       rel="noopener noreferrer"
                                       className="font-mono text-[11px] text-gold-400 hover:underline flex items-center gap-1"
@@ -165,19 +166,11 @@ export default function Blog() {
                                     </a>
                                   </div>
                                   <div className="relative group rounded-md overflow-hidden border border-gold-500/20 bg-noir-900/60 p-1">
-                                    <a
-                                      href={post.graphicalAbstract}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      title="Click to open Graphical Abstract in a new tab"
-                                    >
-                                      <img
-                                        src={post.graphicalAbstract}
-                                        alt={`Graphical Abstract for ${post.title}`}
-                                        className="w-full h-auto max-h-[420px] object-contain rounded-md transition-transform duration-300 group-hover:scale-[1.01]"
-                                        loading="lazy"
-                                      />
-                                    </a>
+                                    <GraphicalAbstract
+                                      slug={post.graphicalAbstract}
+                                      title={post.title}
+                                      className="w-full h-auto max-h-[420px] object-contain rounded-md transition-transform duration-300 group-hover:scale-[1.01]"
+                                    />
                                   </div>
                                 </div>
                               )}

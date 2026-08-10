@@ -68,13 +68,17 @@ export default function About() {
                   {/* Profile photo — explicit dimensions prevent CLS */}
                   <div className="relative mb-8">
                     <div className="w-48 h-48 mx-auto md:mx-0 border border-gold-500/30 bg-noir-700 flex items-center justify-center relative overflow-hidden">
-                      <img
-                        src="/Profile.png"
-                        alt="Ali Akarma"
-                        width={192}
-                        height={192}
-                        className="w-48 h-48 object-cover"
-                      />
+                      <picture className="contents">
+                        <source srcSet="/profile-384.avif" type="image/avif" />
+                        <source srcSet="/profile-384.webp" type="image/webp" />
+                        <img
+                          src="/profile-384.png"
+                          alt="Ali Akarma"
+                          width={192}
+                          height={192}
+                          className="w-48 h-48 object-cover"
+                        />
+                      </picture>
                     </div>
                   </div>
 

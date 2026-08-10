@@ -18,7 +18,7 @@ export const blogPosts = [
     implications: "Compliance evidence stops being a document written after the fact and becomes a by-product of the test suite a team already runs. The same traceability machinery extends to black-box AI models and AI coding agents, where 'did this system meet the stated requirement?' is exactly the question that raw pass/fail output cannot answer.",
     tags: ["V&V", "Requirements Engineering", "AI Safety", "Testing", "AI Governance"],
     venue: "IEEE/SICE SII 2027 (Under Review)",
-    graphicalAbstract: "/graphical-abstracts/VNVSpec.png",
+    graphicalAbstract: "vnvspec",
   },
   {
     id: 21,
@@ -37,7 +37,7 @@ export const blogPosts = [
     implications: "Proves that regulatory compliance (EU AI Act) can be built directly into the AI training-and-deployment lifecycle of critical infrastructure with negligible operational overhead.",
     tags: ["AI Governance", "Cybersecurity", "IoT", "AI Safety", "Ethics"],
     venue: "Nature Scientific Reports 2026",
-    graphicalAbstract: "/graphical-abstracts/EAGF.png",
+    graphicalAbstract: "eagf",
   },
   {
     id: 10,
@@ -56,7 +56,7 @@ export const blogPosts = [
     implications: "As megacities face intensifying pressure from population growth and climate change, AI-enhanced digital twins represent the most scalable approach to urban management. The simulation-first policy testing paradigm also provides an accountability layer for autonomous urban decisions.",
     tags: ["Digital Twins", "Smart Cities", "Agentic AI", "Infrastructure"],
     venue: "PLOS ONE 2026",
-    graphicalAbstract: "/graphical-abstracts/Agentic%20DT.png",
+    graphicalAbstract: "agentic-dt",
   },
   {
     id: 20,
@@ -75,7 +75,7 @@ export const blogPosts = [
     implications: "Offers a standardized, accessible blueprint for building personal health management systems that cater directly to neurodiverse populations, bridging the gap between clinical data and daily assistive technology.",
     tags: ["Agentic AI", "ADAPT", "Assistive Technology", "Neurodivergence", "Healthcare"],
     venue: "Journal of Disability Research 2026",
-    graphicalAbstract: "/graphical-abstracts/ADAPT.png",
+    graphicalAbstract: "adapt",
   },
   {
     id: 19,
@@ -94,7 +94,7 @@ export const blogPosts = [
     implications: "Demonstrates how privacy-preserving federated learning combined with agentic governance can solve sensitive cross-border workforce inclusion challenges without compromising data sovereignty.",
     tags: ["Federated Learning", "Agentic AI", "AI Governance", "Disabilities", "Smart Cities"],
     venue: "MDPI Smart Cities 2026",
-    graphicalAbstract: "/graphical-abstracts/FedAgent-Chain.png",
+    graphicalAbstract: "fedagent-chain",
   },
   {
     id: 7,
@@ -113,7 +113,7 @@ export const blogPosts = [
     implications: "Multi-objective agentic planning has wide applicability—from personalized healthcare regimen planning to resource allocation in humanitarian aid. FinNutriAgent demonstrates that LLM-based agents can handle formal constraint satisfaction when properly scaffolded.",
     tags: ["Agentic AI", "Finance", "Nutrition", "Planning"],
     venue: "ETASR 2026",
-    graphicalAbstract: "/graphical-abstracts/FinNutri%20Agent.png",
+    graphicalAbstract: "finnutri-agent",
   },
   {
     id: 18,
@@ -132,7 +132,7 @@ export const blogPosts = [
     implications: "Provides municipal leaders and urban AI researchers with a comprehensive roadmap for moving from fragmented, domain-specific AI models to holistic, multi-agent climate resilience platforms.",
     tags: ["Agentic AI", "SDGs", "AI Governance", "Digital Twins", "Climate Resilience"],
     venue: "MDPI Sustainability 2026",
-    graphicalAbstract: "/graphical-abstracts/Climate%20Resilient%20Cities.png",
+    graphicalAbstract: "climate-resilient-cities",
   },
   {
     id: 17,
@@ -151,7 +151,7 @@ export const blogPosts = [
     implications: "Integrating LLM reasoning with MCP tool calls and digital twin verification provides a blueprint for safe autonomous control of municipal infrastructure, ensuring that high-level policies translate into deterministic, low-latency physical actions.",
     tags: ["Agentic AI", "AI Governance", "Digital Twin", "Smart Cities"],
     venue: "MECON 2026",
-    graphicalAbstract: "/graphical-abstracts/Traffic.png",
+    graphicalAbstract: "traffic",
   },
   {
     id: 11,
@@ -170,7 +170,7 @@ export const blogPosts = [
     implications: "Without institutional guidance, AI tool use in academia will stratify rather than democratize access to academic success. Clear, fair guidelines benefit students, faculty, and administrators equally—and position academic institutions as responsible stewards of the AI transition rather than passive bystanders.",
     tags: ["AI Governance", "Academic Integrity", "Ethics", "Guidelines"],
     venue: "Springer 2026",
-    graphicalAbstract: "/graphical-abstracts/Use%20of%20AI%20Tools.png",
+    graphicalAbstract: "use-of-ai-tools",
   },
   {
     id: 14,
@@ -190,7 +190,7 @@ export const blogPosts = [
     implications: "For emergency management agencies, this framework offers a principled path to deploying autonomous aerial monitoring that regulators and the public can trust. The model's design principle—accountability embedded in the control loop rather than bolted on afterwards—is generalizable to any safety-critical autonomous system.",
     tags: ["AI Safety", "Blockchain", "AI Governance", "Disaster Response"],
     venue: "MDPI ICETAS 2026",
-    graphicalAbstract: "/graphical-abstracts/Wildfire.png",
+    graphicalAbstract: "wildfire",
   },
   {
     id: 13,
@@ -209,7 +209,7 @@ export const blogPosts = [
     implications: "As underwater IoT deployments expand to environmental monitoring, infrastructure inspection, and defense applications, zero-trust architectures like this become essential. The low-overhead transformer approach is also applicable to resource-constrained terrestrial IoT and satellite swarm networks.",
     tags: ["Agentic AI", "Blockchain", "Cybersecurity", "IoT"],
     venue: "MDPI ICETAS 2026",
-    graphicalAbstract: "/graphical-abstracts/Agents%20for%20Agents.png",
+    graphicalAbstract: "agents-for-agents",
   },
   {
     id: 2,
@@ -228,7 +228,7 @@ export const blogPosts = [
     implications: "AI-driven nutrition-finance optimization has direct applications for food-bank meal planning, hospital dietary services, and social welfare programs in price-volatile economies—aligning with the UN SDG goals of Zero Hunger and Good Health.",
     tags: ["Agentic AI", "Finance", "LLMs", "Applications"],
     venue: "IEEE ICCA 2025",
-    graphicalAbstract: "/graphical-abstracts/FinAgent.png",
+    graphicalAbstract: "finagent",
   },
   {
     id: 1,
@@ -247,7 +247,7 @@ export const blogPosts = [
     implications: "The framework provides a universal blueprint for deploying agentic AI in regulated industries—from hospital automation to smart grid management—where regulators require cryptographic proof of policy compliance at every decision step.",
     tags: ["Agentic AI", "Blockchain", "Architecture", "AI Safety"],
     venue: "IEEE ICCA 2025",
-    graphicalAbstract: "/graphical-abstracts/BlockChain.png",
+    graphicalAbstract: "blockchain",
   },
   {
     id: 4,
@@ -266,7 +266,7 @@ export const blogPosts = [
     implications: "For manufacturers and retailers facing increasingly volatile supply chains, autonomous replenishment agents can dramatically reduce carrying costs while improving service levels—a compelling case for agentic AI in operations management.",
     tags: ["Agentic AI", "Supply Chain", "Automation", "LLMs"],
     venue: "ICBDT 2025",
-    graphicalAbstract: "/graphical-abstracts/Inventory.png",
+    graphicalAbstract: "inventory",
   },
   {
     id: 5,
@@ -285,7 +285,7 @@ export const blogPosts = [
     implications: "As AI assistants proliferate, inclusive design from the ground up—rather than retrofitted accessibility features—can meaningfully improve quality of life for hundreds of millions of people worldwide. This framework is a template for human-centered AI that takes neurodiversity seriously.",
     tags: ["Agentic AI", "Accessibility", "Inclusion", "LLMs"],
     venue: "ICBDT 2025",
-    graphicalAbstract: "/graphical-abstracts/Disabilities.png",
+    graphicalAbstract: "disabilities",
   },
   {
     id: 3,
@@ -304,6 +304,6 @@ export const blogPosts = [
     implications: "Integrated sensing-to-response pipelines are the future of climate resilience infrastructure, especially in mountainous regions like northern Pakistan where urban expansion increases cloudburst risk. The framework is extensible to any rapid-onset natural disaster.",
     tags: ["Agentic AI", "Disaster Response", "Prediction", "Safety"],
     venue: "ICBDT 2025",
-    graphicalAbstract: "/graphical-abstracts/Cloudburst.png",
+    graphicalAbstract: "cloudburst",
   },
 ]

@@ -10,7 +10,13 @@
       ]
     },
     {
-      "source": "/(Profile.png|profile.jpg|og-image.jpg|favicon.ico|apple-touch-icon.png|android-chrome-192x192.png|android-chrome-512x512.png)",
+      "source": "/(profile-384.avif|profile-384.webp|profile-384.png|og-image.jpg|favicon.ico|apple-touch-icon.png|android-chrome-192x192.png|android-chrome-512x512.png)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+      ]
+    },
+    {
+      "source": "/graphical-abstracts/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
       ]

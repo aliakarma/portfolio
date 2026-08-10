@@ -79,14 +79,20 @@ export default function Navbar() {
                 {imgError ? (
                   <span className="font-display text-gold-400 text-base font-bold" aria-hidden="true">A</span>
                 ) : (
-                  <img
-                    src="/Profile.png"
-                    alt="Ali Akarma"
-                    width={40}
-                    height={40}
-                    className="w-full h-full object-cover"
-                    onError={() => setImgError(true)}
-                  />
+                  /* display:contents — without it the <picture> box breaks the
+                     h-full chain and the avatar overflows its container */
+                  <picture className="contents">
+                    <source srcSet="/profile-384.avif" type="image/avif" />
+                    <source srcSet="/profile-384.webp" type="image/webp" />
+                    <img
+                      src="/profile-384.png"
+                      alt="Ali Akarma"
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-cover"
+                      onError={() => setImgError(true)}
+                    />
+                  </picture>
                 )}
               </div>
               <span className="font-display text-parchment-100 text-lg font-medium tracking-wide">
