@@ -1,5 +1,4 @@
-import Head from 'next/head'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Newspaper, Calendar } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'

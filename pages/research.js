@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Filter, BookOpen, ExternalLink, TrendingUp, FileText, Layers, ChevronDown, ChevronUp } from 'lucide-react'
@@ -156,7 +157,7 @@ export default function Research() {
                 <p className="font-body text-parchment-300 max-w-2xl mb-8">
                   {publications.length} peer-reviewed publications (plus manuscripts under active review) spanning agentic AI architectures,
                   safety, governance, and real-world deployment. I also maintain distilled{' '}
-                  <a href="/blog" className="text-gold-400 hover:underline">research notes</a> for 
+                  <Link href="/blog" className="text-gold-400 hover:underline">research notes</Link> for
                   key findings and practical implications.
                 </p>
                 <div className="section-divider" />

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { motion } from 'framer-motion'
-import { MapPin, Calendar, Award, BookOpen, Microscope, GraduationCap, Github, Linkedin, Mail, Link2, Quote } from 'lucide-react'
+import { MapPin, Calendar, Award, BookOpen, Microscope, GraduationCap, Github, Linkedin, Mail, Link2 } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'

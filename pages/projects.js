@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Code2, Github, ExternalLink } from 'lucide-react'

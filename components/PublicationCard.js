@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ChevronDown, ChevronUp, ExternalLink, BookOpen,
-  Code2, Database, FileText, Copy, Check, X, Image
+  Code2, Database, FileText, Copy, Check, X, Image as ImageIcon
 } from 'lucide-react'
 
 import AuthorHighlight from './AuthorHighlight'
@@ -287,7 +287,7 @@ export default function PublicationCard({ pub, index = 0 }) {
                 aria-label={`View Graphical Abstract for ${pub.title} (opens in new tab)`}
                 className="flex items-center gap-1 text-xs font-mono text-parchment-400 hover:text-gold-400 min-h-[36px] px-1"
               >
-                <Image size={11} aria-hidden="true" /> Graphical Abstract
+                <ImageIcon size={11} aria-hidden="true" /> Graphical Abstract
               </a>
             )}
 

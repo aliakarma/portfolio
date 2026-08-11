@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Github, Linkedin, BookOpen, Copy, Check, MapPin, MessageSquare, Link2 } from 'lucide-react'

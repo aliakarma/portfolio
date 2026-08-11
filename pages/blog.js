@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Clock, ArrowRight, Tag, ChevronDown, ChevronUp, MapPin, Image as ImageIcon, ExternalLink } from 'lucide-react'

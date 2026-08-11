@@ -7,6 +7,7 @@
     "build": "node scripts/generate_sitemap.js && next build",
     "start": "next start",
     "export": "next build",
+    "lint": "eslint .",
     "images": "node scripts/optimize_images.js",
     "scholar:update": "node scripts/update_scholar.js",
     "scholar:manual": "node scripts/manual_update_scholar.js"
@@ -25,6 +26,8 @@
   },
   "devDependencies": {
     "autoprefixer": "10.4.19",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.0",
     "postcss": "^8.5.26",
     "sharp": "^0.35.3",
     "tailwindcss": "3.4.3"

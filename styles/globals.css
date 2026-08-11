@@ -224,6 +224,42 @@ svg {
   outline-offset: 2px;
 }
 
+/*
+  <main> carries tabindex="-1" so the skip link can move focus into it.
+  That makes it programmatically focusable but not tab-reachable, and it
+  should never paint a focus ring around the whole page.
+*/
+main:focus {
+  outline: none;
+}
+
+/* ================= SKIP LINK ================= */
+/*
+  Offscreen until focused. z-index clears the navbar (50) and the noise
+  overlay (100) so it can't be painted over when it appears.
+*/
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  background: #e8a900;
+  color: #08080f;
+  font-family: var(--font-jetbrains);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transform: translateY(calc(-100% - 1rem));
+  transition: transform 0.15s ease-out;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 /* ================= REDUCED MOTION ================= */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -232,5 +268,14 @@ svg {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /*
+    html { scroll-behavior: smooth } sits outside this block, so in-page
+    navigation kept animating for users who asked for reduced motion.
+    Framer Motion is handled separately via <MotionConfig reducedMotion="user">.
+  */
+  html {
+    scroll-behavior: auto !important;
   }
 }
