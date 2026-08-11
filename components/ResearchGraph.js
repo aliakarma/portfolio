@@ -64,13 +64,31 @@ export default function ResearchGraph() {
         .attr('stroke-width', d => d.weight * 0.8)
 
       /*
-        Responsive Fix: helper to clamp tooltip position within the visible viewport
-        so it doesn't render partially off-screen near right/bottom edges.
+        Clamps the tooltip inside the visible viewport.
+
+        Takes CLIENT coordinates, not page coordinates: the tooltip is
+        positioned `fixed`, which resolves against the viewport, while
+        pageX/pageY are measured from the top of the document. The graph sits
+        well below the fold, so feeding it pageY pushed the tooltip roughly a
+        full scroll-height beneath the screen and it was never visible.
+
+        Both axes are clamped so the box can't hang off any edge — the width
+        matches the tooltip's max-w-xs (20rem) and the height is a generous
+        estimate, since the copy length varies per node.
       */
-      const clampTooltip = (pageX, pageY) => ({
-        x: Math.min(pageX, (window.innerWidth  || document.documentElement.clientWidth)  - 260),
-        y: Math.max(pageY - 10, 10),
-      })
+      const TOOLTIP_W = 320
+      const TOOLTIP_H = 170
+      const CURSOR_DX = 12
+      const EDGE = 8
+
+      const clampTooltip = (clientX, clientY) => {
+        const vw = window.innerWidth || document.documentElement.clientWidth
+        const vh = window.innerHeight || document.documentElement.clientHeight
+        return {
+          x: Math.max(EDGE, Math.min(clientX, vw - TOOLTIP_W - CURSOR_DX - EDGE)),
+          y: Math.max(EDGE, Math.min(clientY - 10, vh - TOOLTIP_H - EDGE)),
+        }
+      }
 
       const node = svg.append('g').selectAll('g')
         .data(nodes)
@@ -93,11 +111,11 @@ export default function ResearchGraph() {
         /* Mouse events (desktop) */
         .on('mouseenter', (event, d) => {
           setHovered(d.id)
-          const { x, y } = clampTooltip(event.pageX, event.pageY)
+          const { x, y } = clampTooltip(event.clientX, event.clientY)
           setTooltip({ node: d, x, y })
         })
         .on('mousemove', (event) => {
-          const { x, y } = clampTooltip(event.pageX, event.pageY)
+          const { x, y } = clampTooltip(event.clientX, event.clientY)
           setTooltip(prev => prev ? { ...prev, x, y } : prev)
         })
         .on('mouseleave', () => {
@@ -112,7 +130,7 @@ export default function ResearchGraph() {
           event.preventDefault()
           const touch = event.touches[0]
           setHovered(d.id)
-          const { x, y } = clampTooltip(touch.pageX, touch.pageY)
+          const { x, y } = clampTooltip(touch.clientX, touch.clientY)
           setTooltip({ node: d, x, y })
         }, { passive: false })
         .on('touchend', () => {
