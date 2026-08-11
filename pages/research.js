@@ -9,6 +9,7 @@ import PublicationCard from '../components/PublicationCard'
 import { publications } from '../data/publications'
 import { underReviewPublications } from '../data/underReview'
 import { profile } from '../data/profile'
+import { jsonLd } from '../lib/jsonld'
 
 const allPublications = [...publications, ...underReviewPublications]
 const ALL_TAGS = [...new Set(allPublications.flatMap(p => p.tags))].sort()
@@ -69,8 +70,17 @@ export default function Research() {
   const [showTags,     setShowTags]     = useState(false)
 
   const filtered = useMemo(() => {
-    // Under-review papers are kept separate and ONLY shown when 'Under Review' status filter is active
-    const sourceList = statusFilter === 'under_review' ? underReviewPublications : publications
+    /*
+      'All' spans the full record, including manuscripts under review, so the
+      list agrees with the 'Total' stat card above it. The named status
+      filters draw only from the set they describe.
+    */
+    const sourceList =
+      statusFilter === 'All'
+        ? allPublications
+        : statusFilter === 'under_review'
+        ? underReviewPublications
+        : publications
 
     return sourceList
       .filter(p => {
@@ -79,20 +89,32 @@ export default function Research() {
           statusFilter === 'All' ||
           statusFilter === 'under_review' ||
           pStatus === normalize(statusFilter)
+        /*
+          First authorship is a property of the paper, so it lives on the
+          record as `isFirstAuthor`. This previously matched three full title
+          strings inline, which meant correcting a typo in any of those titles
+          silently dropped the paper out of the filter.
+        */
         const t =
           typeFilter === 'All'
             ? true
             : typeFilter === 'first_author'
-            ? (p.authorsStr && p.authorsStr.startsWith('Ali Akarma')) ||
-              p.title === "Governance-Constrained Agentic AI: Blockchain-Enforced Human Oversight for Safety-Critical Wildfire Monitoring" ||
-              p.title === "Agents for Agents: An Interrogator-Based Secure Framework for Autonomous Internet of Underwater Things" ||
-              p.title === "Agentic AI-enhanced digital twins for Smart City civil infrastructure: A secure, autonomous and auditable management framework"
+            ? p.isFirstAuthor === true
             : normalize(p.type) === normalize(typeFilter)
         const g = !tagFilter || p.tags.some(tag => normalize(tag) === normalize(tagFilter))
         return s && t && g
       })
       .sort((a, b) => b.year - a.year || b.id - a.id)
   }, [statusFilter, typeFilter, tagFilter])
+
+  /* Denominator for the "Showing X of Y" line — mirrors whichever set the
+     active status filter draws from, so the two numbers always agree. */
+  const sourceTotal =
+    statusFilter === 'All'
+      ? allPublications.length
+      : statusFilter === 'under_review'
+      ? underReviewPublications.length
+      : publications.length
 
   const counts = {
     published: publications.filter(p => p.status === 'published').length,
@@ -110,7 +132,7 @@ export default function Research() {
       <Head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHOLARLY_JSONLD) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(SCHOLARLY_JSONLD) }}
         />
       </Head>
 
@@ -318,7 +340,7 @@ export default function Research() {
 
             {/* COUNT — Fix: full opacity for WCAG contrast compliance */}
             <p className="font-mono text-xs text-parchment-400 mb-5" aria-live="polite" aria-atomic="true">
-              Showing <span className="text-gold-400 font-semibold">{filtered.length}</span> of {statusFilter === 'under_review' ? underReviewPublications.length : publications.length} {statusFilter === 'under_review' ? 'manuscripts' : 'publications'}
+              Showing <span className="text-gold-400 font-semibold">{filtered.length}</span> of {sourceTotal} {statusFilter === 'under_review' ? 'manuscripts' : 'publications'}
             </p>
 
             {/* LIST */}

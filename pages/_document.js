@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 import { PROFILE_IMAGE_URL, SITE_NAME, SITE_SHORT_NAME, SITE_URL } from '../data/site'
+import { jsonLd } from '../lib/jsonld'
 
 export default function Document() {
   return (
@@ -20,7 +21,7 @@ export default function Document() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: jsonLd({
               "@context": "https://schema.org",
               "@graph": [
                 {

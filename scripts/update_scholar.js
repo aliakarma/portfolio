@@ -177,27 +177,42 @@ async function fetchGoogleScholar() {
   return null;
 }
 
-// ─── Merge strategy: take the maximum of all sources ─────────────────────────
+// ─── Merge strategy: take the maximum of the LIVE sources ────────────────────
 
 function mergeMetrics(sources, existing) {
-  // Collect all valid data points (including existing cached data)
-  const all = [...sources.filter(Boolean)];
-  if (existing && !existing.fetchFailed) {
-    all.push({ citations: existing.citations, hIndex: existing.hIndex, i10Index: existing.i10Index, source: 'cached' });
+  // Only live results are merged. The cached value is deliberately excluded:
+  // folding it into the max() made the figure a ratchet that could rise but
+  // never fall, so a correction or a retracted citation would be reported
+  // indefinitely. Cache is a fallback for total fetch failure, not a floor.
+  const all = sources.filter(Boolean);
+
+  if (all.length === 0) {
+    // Every source failed — keep showing the last known good numbers rather
+    // than reporting a spurious drop to zero.
+    if (existing && !existing.fetchFailed) {
+      console.log('\n⚠ All live sources failed — retaining cached metrics.');
+      return {
+        citations: existing.citations,
+        hIndex: existing.hIndex,
+        i10Index: existing.i10Index,
+      };
+    }
+    return null;
   }
 
-  if (all.length === 0) return null;
-
-  // Take the maximum of each metric across all sources.
-  // Google Scholar typically has higher counts than Semantic Scholar,
-  // so using max() ensures we always show the best available data.
+  // Google Scholar indexes more venues than Semantic Scholar, so where both
+  // respond the higher figure is the more complete one.
   const merged = {
     citations: Math.max(...all.map(s => s.citations || 0)),
     hIndex: Math.max(...all.map(s => s.hIndex || 0)),
     i10Index: Math.max(...all.map(s => s.i10Index || 0)),
   };
 
-  console.log('\n📊 Merged metrics (max across all sources):');
+  if (existing && !existing.fetchFailed && merged.citations < existing.citations) {
+    console.log(`\nℹ Citations decreased (${existing.citations} → ${merged.citations}) — reporting the live figure.`);
+  }
+
+  console.log('\n📊 Merged metrics (max across live sources):');
   for (const s of all) {
     console.log(`   ${s.source}: citations=${s.citations}, h=${s.hIndex}, i10=${s.i10Index}`);
   }

@@ -16,7 +16,7 @@ const newsData = [
   {
     id: 16,
     date: 'July 20, 2026',
-    title: 'New paper: Integrating High-Level Requirements to Low-Level Tests with Machine-Readable V&V Specifications — APSEC 2026',
+    title: 'New paper: Integrating High-Level Requirements to Low-Level Tests with Machine-Readable V&V Specifications — IEEE/SICE SII 2027',
   },
   {
     id: 15,

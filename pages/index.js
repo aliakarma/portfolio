@@ -58,6 +58,26 @@ const socialLinks = [
   { icon: <Mail size={18} />, href: `mailto:${profile.email}`, label: 'Email' },
 ]
 
+/*
+  Venue lists derive from the publication data rather than being hand-counted,
+  so the homepage can't drift out of step as papers are added.
+
+  Scoped to `publications` (peer-reviewed and accepted) — under-review
+  manuscripts have no confirmed venue yet, which is why the totals here are
+  narrower than the publication count above. Most recent venue first.
+*/
+const venuesByType = (type) => [
+  ...new Set(
+    [...publications]
+      .sort((a, b) => b.id - a.id)
+      .filter(p => p.type === type)
+      .map(p => p.venueShort)
+  ),
+]
+
+const journalVenues = venuesByType('journal')
+const conferenceVenues = venuesByType('conference')
+
 const stats = [
   {
     icon: <FileText size={16} />,
@@ -75,17 +95,17 @@ const stats = [
   },
   {
     icon: <BookOpen size={16} />,
-    value: 7,
+    value: journalVenues.length,
     suffix: '',
     label: 'Journal Venues',
-    sub: 'Nature Scientific Reports • PLoS ONE • MDPI Smart Cities • MDPI Sustainability • JDR • ETASR • IJEEE',
+    sub: journalVenues.join(' • '),
   },
   {
     icon: <Award size={16} />,
-    value: 4,
+    value: conferenceVenues.length,
     suffix: '',
     label: 'Conference Venues',
-    sub: 'IEEE ICCA • ICBDT • ICETAS • MECON 2026',
+    sub: conferenceVenues.join(' • '),
   },
 ]
 

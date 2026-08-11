@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { SITE_NAME, SITE_URL, OG_IMAGE_URL } from '../data/site'
+import { jsonLd } from '../lib/jsonld'
 
 export default function Meta({
   title,
@@ -61,7 +62,7 @@ export default function Meta({
       {breadcrumbs && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbs) }}
         />
       )}
     </Head>

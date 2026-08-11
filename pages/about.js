@@ -7,6 +7,8 @@ import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
 import { publications } from '../data/publications'
 import { underReviewPublications } from '../data/underReview'
+import { SITE_URL } from '../data/site'
+import { jsonLd } from '../lib/jsonld'
 
 export default function About() {
   const totalPapers = publications.length + underReviewPublications.length
@@ -30,10 +32,10 @@ export default function About() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: jsonLd({
               '@context': 'https://schema.org',
               '@type': 'ProfilePage',
-              mainEntity: { '@id': 'https://aliakarma.codes/#person' },
+              mainEntity: { '@id': `${SITE_URL}/#person` },
             }),
           }}
         />

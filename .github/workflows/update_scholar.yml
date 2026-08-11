@@ -8,6 +8,11 @@ on:
 jobs:
   update-stats:
     runs-on: ubuntu-latest
+    # Least privilege: this job only commits data/scholar.json back to the
+    # repo. Without an explicit block the job inherits the repository default,
+    # which may grant write access to issues, packages, deployments and more.
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
