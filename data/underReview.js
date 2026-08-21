@@ -31,4 +31,33 @@ export const underReviewPublications = [
 }`,
   },
 
+  {
+    id: 102,
+    title: "Dijkstra as an Oracle for Online Stochastic Shortest Path Navigation with Provable Guarantees",
+    authors: ["Mansur M. Arief, Ali Akarma, Ahmad Alfan Alfian Irfan"],
+    authorsStr: "Mansur M. Arief, Ali Akarma, Ahmad Alfan Alfian Irfan",
+    venue: "Under Review · IEEE Transactions on Automation Science and Engineering (T-ASE)",
+    venueShort: "IEEE T-ASE (Under Review)",
+    type: "journal",
+    year: 2026,
+    status: "under_review",
+    statusLabel: "Under Review · IEEE T-ASE",
+    tags: ["Robotics", "Path Planning", "Reinforcement Learning", "Online Learning", "Safety"],
+    doi: "https://doi.org/10.48550/arXiv.2608.17703",
+    pdf: "https://arxiv.org/pdf/2608.17703",
+    code: "https://github.com/ai-vnv/DORASolvers.jl",
+    dataset: null,
+    notebook: null,
+    graphicalAbstract: null,
+    abstract: "Mobile robots that operate in side by side with humans and critical facilities must reach their goals at low cost, despite often unknown true traversal costs of the map apriori and imperfect actuation. Planners that solve the underlying stochastic shortest path problem exactly, such as value iteration, require computation that grows with the diameter of the map, whereas Dijkstra’s algorithm is fast but is usually considered inexact once transitions are stochastic. This study shows that Dijkstra’s algorithm can remain an exact planning engine under a condition that is much weaker than the causality condition often invoked in the literature, namely nonnegativity of a reduced cost defined on the determinized map. Building on this characterization, an online learner DORA (Dijkstra Oracle Reduced-cost Algorithm) is proposed for robot navigation that calls a shortest path oracle a fixed number of times per episode, never estimates a transition kernel, and adds a logarithmic survival weight when the probability of contact with a dynamic obstacle must stay within a budget. In the numerical experiments involving three other benchmarks that cover grid world navigation, directional drilling, and drone surveillance, the learner matches optimistic value iteration that is given the true transition kernel while performing 4.5 to 19.3 times less planner work, reduces contacts during learning by a factor of seventeen relative to determinize and replan, and keeps the contact rate within budgets that span two orders of magnitude. These results indicate that shortest path search supports safe and efficient online navigation and path planning tasks.",
+    bibtex: `@article{arief2026dijkstra,
+  title={Dijkstra as an Oracle for Online Stochastic Shortest Path Navigation with Provable Guarantees},
+  author={Arief, Mansur M and Akarma, Ali and Irfan, Ahmad Alfan Alfian},
+  journal={arXiv preprint arXiv:2608.17703},
+  year={2026},
+  doi={10.48550/arXiv.2608.17703},
+  note={Under review at IEEE Transactions on Automation Science and Engineering}
+}`,
+  },
+
 ]
