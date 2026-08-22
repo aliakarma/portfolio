@@ -2,6 +2,25 @@
 
 export const blogPosts = [
   {
+    id: 23,
+    title: "Dijkstra as an Oracle: Exact Shortest-Path Planning for Stochastic Robot Navigation",
+    date: "2026-08-22",
+    category: "Robotics & Planning",
+    readTime: "9 min",
+    excerpt: "Dijkstra's algorithm is fast but is usually written off as inexact once robot motion becomes stochastic. This paper shows it stays an exact planning engine under a condition far weaker than the causality assumption the literature normally invokes — and builds DORA, an online learner that calls a shortest-path oracle a fixed number of times per episode and never estimates a transition kernel.",
+    summary: "Mobile robots working alongside people and critical facilities need to reach their goals cheaply despite not knowing true traversal costs in advance and despite imperfect actuation. Solving the underlying stochastic shortest path problem exactly with value iteration costs computation that grows with the diameter of the map, while Dijkstra's algorithm is fast but conventionally considered inexact under stochastic transitions. This work characterizes exactly when that conventional wisdom is wrong: Dijkstra remains an exact planning engine whenever a reduced cost defined on the determinized map is nonnegative — a condition much weaker than the causality condition usually assumed. Building on that characterization, DORA (Dijkstra Oracle Reduced-cost Algorithm) learns online by calling a shortest-path oracle a fixed number of times per episode, never estimating a transition kernel, and adding a logarithmic survival weight when the probability of contact with a dynamic obstacle has to stay inside a budget.",
+    keyContributions: [
+      "A weaker exactness condition for Dijkstra under stochastic transitions: nonnegativity of a reduced cost on the determinized map, replacing the stronger causality condition commonly invoked",
+      "DORA, an online learner that calls a shortest-path oracle a fixed number of times per episode and never estimates a transition kernel",
+      "A logarithmic survival weight that keeps the probability of contact with a dynamic obstacle within a specified budget",
+      "Evaluation across grid world navigation, directional drilling, and drone surveillance: matches optimistic value iteration given the true transition kernel while doing 4.5 to 19.3 times less planner work, and cuts contacts during learning by a factor of seventeen relative to determinize-and-replan",
+    ],
+    implications: "Planner work, not model accuracy, is often the binding constraint for robots that must replan online. Because the exactness condition is checkable on the determinized map and the oracle is called a fixed number of times per episode, ordinary shortest-path search — already fast, well understood, and widely implemented — becomes a defensible basis for safe online navigation, with contact rates held inside budgets spanning two orders of magnitude.",
+    tags: ["Robotics", "Path Planning", "Reinforcement Learning", "Online Learning", "Safety"],
+    venue: "IEEE T-ASE 2026 (Under Review)",
+    graphicalAbstract: "dijkstra",
+  },
+  {
     id: 22,
     title: "VNVSpec: Connecting High-Level Requirements to the Low-Level Tests Machines Actually Run",
     date: "2026-08-09",
