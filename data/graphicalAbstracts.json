@@ -62,5 +62,9 @@
   "wildfire": {
     "width": 1600,
     "height": 893
+  },
+  "dijkstra": {
+    "width": 1600,
+    "height": 893
   }
 }
