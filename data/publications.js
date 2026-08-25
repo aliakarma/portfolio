@@ -21,12 +21,12 @@ export const publications = [
     graphicalAbstract: "blockchain",
     abstract: "The application of agentic AI systems in autonomous decision-making is growing in the areas of healthcare, smart cities, digital forensics, and supply chain management. Even though these systems are flexible and offer real-time reasoning, they also raise concerns of trust and oversight, and integrity of the information and activities upon which they are founded. The paper suggests a single architecture model comprising of LangChain-based multi-agent system with a permissioned blockchain to guarantee constant monitoring, policy enforcement, and immutable auditability of agentic action. The framework relates the perception conceptualization-action cycle to a blockchain layer of governance that verifies the inputs, evaluates recommended actions, and documents the outcomes of the execution. A Hyperledger Fabric-based system, action executors MCP-integrated, and LangChain agent are introduced and experiments of smart inventory management, traffic-signal control, and healthcare monitoring are done. The results suggest that blockchain-security verification is efficient in preventing unauthorized practices, offers traceability throughout the whole decision-making process, and maintains operational latency within reasonable ranges. The suggested framework provides a universal system of implementing high-impact agentic AI applications that are autonomous yet responsible.",
     bibtex: `@inproceedings{jan2025blockchain,
-  title={Blockchain-Monitored Agentic AI Architecture for Trusted Perception–Reasoning–Action Pipelines},
-  author={Jan, Salman and Akarma, Ali and Razzaqi, Hassan Ali and Belgaum, Mohammad Riyaz},
-  booktitle={Proceedings of the IEEE International Conference on Control and Automation},
-  year={2025},
-  organization={IEEE},
-  doi={10.1109/ICCA66035.2025.11430865}
+  author       = {Jan, Salman and Razzaqi, Hassan Ali and Akarma, Ali and Belgaum, Mohammad Riyaz},
+  title        = {A Blockchain-Monitored Agentic AI Architecture for Trusted Perception-Reasoning-Action Pipelines},
+  booktitle    = {Proceedings of the 2025 IEEE International Conference on Computing and Applications (ICCA)},
+  year         = {2025},
+  organization = {IEEE},
+  doi          = {10.1109/ICCA66035.2025.11430865}
 }`,
   },
   {
@@ -49,12 +49,13 @@ export const publications = [
     graphicalAbstract: "finagent",
     abstract: "The issue of limited household budgets and nutritional demands continues to be a challenge especially in the middle-income environment where food prices fluctuate. This paper introduces a price aware agentic AI system, which combines personal finance management with diet optimization. With household income and fixed expenditures, medical and well-being status, as well as real-time food costs, the system creates nutritionally sufficient meals plans at comparatively reasonable prices that automatically adjust to market changes. The framework is implemented in a modular multi-agent architecture, which has specific agents (budgeting, nutrition, price monitoring, and health personalization). These agents share the knowledge base and use the substitution graph to ensure that the nutritional quality is maintained at a minimum cost. Simulations with a representative Saudi household case study show a steady 12-18% reduction in costs relative to a static weekly menu, nutrient adequacy of over 95% and high performance with price changes of 20-30%. The findings indicate that the framework can locally combine affordability with nutritional adequacy and provide a viable avenue of capacity-building towards sustainable and fair diet planning in line with Sustainable Development Goals on Zero Hunger and Good Health.",
     bibtex: `@inproceedings{syed2025finagent,
-  title={FinAgent: Agentic AI for Personal Finance & Nutrition},
-  author={Syed, Toqeer Ali and Alshahrani, Abdulaziz and Ullah, Ali and Akarma, Ali and Khan, Sohail and Nauman, Muhammad and Jan, Salman},
-  booktitle={Proceedings of the IEEE International Conference on Control and Automation},
-  year={2025},
-  organization={IEEE},
-  doi={10.1109/ICCA66035.2025.11430760}
+  author       = {Syed, Toqeer Ali and Alshahrani, Abdulaziz and Ullah, Ali and Akarma, Ali and Khan, Sohail and Nauman, Muhammad and Jan, Salman},
+  title        = {FinAgent: An Agentic AI Framework Integrating Personal Finance and Nutrition Planning},
+  booktitle    = {Proceedings of the 2025 IEEE International Conference on Computing and Applications (ICCA)},
+  year         = {2025},
+  pages        = {1--7},
+  organization = {IEEE},
+  doi          = {10.1109/ICCA66035.2025.11430760}
 }`,
   },
   {
@@ -76,11 +77,12 @@ export const publications = [
     notebook: "https://colab.research.google.com/github/aliakarma/agentic-weather-rl/blob/main/notebooks/colab_demo.ipynb",
     graphicalAbstract: "cloudburst",
     abstract: "The challenge is growing towards extreme and short-duration rainfall events like a cloudburst that are peculiar to the traditional forecasting systems, in which the predictions and the response are taken as two distinct processes. The paper outlines an agentic artificial intelligence system to study atmospheric water-cycle intelligence, which combines sensing, forecasting, downscaling, hydrological modeling and coordinated response into a single, interconnected, priceless, closed-loop system. The framework uses autonomous but cooperative agents that reason, sense, and act throughout the entire event lifecycle, and use the intelligence of weather prediction to become real-time decision intelligence. Comparison of multi-year radar, satellite, and ground-based evaluation of the northern part of Pakistan demonstrates that the multi-agent configuration enhances forecast reliability, critical success index and warning lead time compared to the baseline models. Population reach was maximised, and errors during evacuation were minimised through communication and routing agents, and adaptive recalibration and transparent auditability were provided by the embedded layer of learning. Collectively, this leads to the conclusion that collaborative AI agents are capable of transforming atmospheric data streams into practicable foresight and provide a platform of scalable adaptive and learning-based climate resilience.",
-    bibtex: `@inproceedings{syed2025cloudburst,
-  title={Agentic AI Framework for Cloudburst Prediction and Coordinated Response},
-  author={Syed, Toqeer Ali and Khan, Sohail and Jan, Salman and Ali, Gohar and Nauman, Muhammad & Akarma, Ali & Ali, Ahmad},
-  booktitle={Proceedings of the International Conference on Big Data Technologies},
-  year={2025}
+    bibtex: `@article{syed2025cloudburst,
+  author  = {Syed, Toqeer Ali and Khan, Sohail and Jan, Salman and Ali, Gohar and Nauman, Muhammad and Akarma, Ali and Ali, Ahmad},
+  title   = {Agentic AI Framework for Cloudburst Prediction and Coordinated Response},
+  journal = {arXiv preprint arXiv:2511.22767},
+  year    = {2025},
+  doi     = {10.48550/arXiv.2511.22767}
 }`,
   },
   {
@@ -102,12 +104,13 @@ export const publications = [
     notebook: null,
     graphicalAbstract: "inventory",
     abstract: "In the contemporary retail, the variety of the products available (e.g. clothing, groceries, cosmetics, frozen goods) make it difficult to predict the demand, prevent stockouts, and find high-potential products. We suggest an agentic AI model that will be used to monitor the inventory, initiate purchase attempts to the appropriate suppliers, and scan for trending or high-margin products to incorporate. The system applies demand forecasting, supplier selection optimization, multi-agent negotiation and continuous learning. We apply a prototype to a setting in the store of a middle scale mart, test its performance on both three conventional and artificial data tables, and compare the results to the base heuristics. Our findings indicate that there is a decrease in stockouts, reduction of inventory holding costs and improvement in product mix turnover. We address constraints, scalability as well as improvement prospect.",
-    bibtex: `@inproceedings{syed2025inventory,
-  title={Agentic AI for Smart Inventory Replenishment},
-  author={Syed, Toqeer Ali and Jan, Salman and Ali, Gohar and Akarma, Ali and Ali, Ahmad and Mastoi, Qurat-ul-Ain},
-  booktitle={Proceedings of the International Conference on Big Data Technologies},
-  year={2025}
-}`,
+    bibtex: `@article{syed2025inventory,
+  author  = {Syed, Toqeer Ali and Jan, Salman and Ali, Gohar and Akarma, Ali and Ali, Ahmad and Mastoi, Qurat-ul-Ain},
+  title   = {Agentic AI Framework for Smart Inventory Replenishment},
+  journal = {arXiv preprint arXiv:2511.23366},
+  year    = {2025},
+  doi     = {10.48550/arXiv.2511.23366}
+  }`,
   },
   {
     id: 5,
@@ -128,11 +131,12 @@ export const publications = [
     notebook: null,
     graphicalAbstract: "disabilities",
     abstract: "The presented paper suggests a detailed Agentic Artificial Intelligence (AI) model that would enable people with disabilities and neurodivergence to lead a healthier lifestyle and have a more regular day. The system will use a multi-layer structure; it will include an Application and Interface Layer, an Agents Layer, and a Data Source Layer to provide adaptive, transparent, and inclusive support. Fundamentally, a hybrid reasoning engine will synchronize four special-purpose agents, which include: a personalized-nutrition-based, called a Meal Planner Agent; an adaptive-scheduling-based, called a Reminder Agent; an interactive-assistance-during-grocery-shopping-and-cooking, called a Food Guidance Agent; and a continuous-intake-and-physiological-tracking, called a Monitoring Agent. All the agents interact through a central communicative system called the Blackboard/Event Bus, which allows autonomous interaction and real-time feedback loops with multimedia user interfaces. Privacy-sensitive data sources, including electronic health records (EHRs), nutritional databases, wearable sensors and smart kitchen internet of things, are also included in the framework and placed into a policy-controlled layer, which ensures data safety and compliance with consent. Collaborative care and clinician dashboards allow common supervision, discussable artificial intelligence (XAI) modules give brief explanations why a decision was made, making users responsible and reliant.The proposed agentic AI framework is an extension beyond traditional assistive systems since it incorporates inclusiveness, personalization, and accessibility at all levels. It displays the intersection of multi-agent reasoning, multi-modal interfaces, and human-centered design that will enable the development of autonomy, health and digital equity among people with disabilities and neurodivergence.The outcomes of implementation indicate that it can be used to achieve greater adherence, lessen the dependency between caregivers and patients, and empower proactive and personalized health care.",
-    bibtex: `@inproceedings{jan2025disabilities,
-  title={Agentic AI Framework for Individuals with Disabilities and Neurodivergence: A Multi-Agent System for Healthy Eating, Daily Routines, and Inclusive Well-Being},
-  author={Jan, Salman and Syed, Toqeer Ali and Ali, Gohar and Akarma, Ali and Belgaum, Mohammad Riyaz and Ali, Ahmad},
-  booktitle={Proceedings of the International Conference on Big Data Technologies},
-  year={2025}
+    bibtex: `@article{jan2025agentic,
+  title   = {Agentic AI Framework for Individuals with Disabilities and Neurodivergence: A Multi-Agent System for Healthy Eating, Daily Routines, and Inclusive Well-Being},
+  author  = {Jan, Salman and Syed, Toqeer Ali and Ali, Gohar and Akarma, Ali and Belgaum, Mohammad Riyaz and Ali, Ahmad},
+  journal = {arXiv preprint arXiv:2511.22737},
+  year    = {2025},
+  doi     = {10.48550/arXiv.2511.22737}
 }`,
   },
   {
@@ -186,10 +190,13 @@ export const publications = [
     graphicalAbstract: "use-of-ai-tools",
     abstract: "The rapid adoption of AI tools such as ChatGPT has significantly transformed academic practices, offering considerable benefits for both students and faculty in computing disciplines. These tools have been shown to enhance learning efficiency, academic self-efficacy, and confidence. However, their increasing use also raises pressing concerns regarding the preservation of academic integrity -- an essential pillar of the educational process. This paper explores the implications of widespread AI tool usage within computing colleges, with a particular focus on how to align their use with the principles of academic honesty. We begin by classifying common assessment techniques employed in computing education and examine how each may be impacted by AI-assisted tools. Building on this foundation, we propose a set of general guidelines applicable across various assessment formats to help instructors responsibly integrate AI tools into their pedagogy. Furthermore, we provide targeted, assessment-specific recommendations designed to uphold educational objectives while mitigating risks of academic misconduct. These guidelines serve as a practical framework for instructors aiming to balance the pedagogical advantages of AI tools with the imperative of maintaining academic integrity in computing education. Finally, we introduce a formal model that provides a structured mathematical framework for evaluating student assessments in the presence of AI-assisted tools.",
     bibtex: `@article{el2026use,
-  title={Use of AI Tools: Guidelines to Maintain Academic Integrity in Computing Colleges},
-  author={El-boghdadi, Hatem M and Syed, Toqeer Ali and Akarma, Ali and Wali, Qamar},
-  journal={arXiv preprint arXiv:2604.11111},
-  year={2026}
+  author  = {El-boghdadi, Hatem M. and Syed, Toqeer Ali and Akarma, Ali and Wali, Qamar},
+  title   = {Use of AI Tools: Guidelines to Maintain Academic Integrity in Computing Colleges},
+  journal = {International Journal of Energy, Environment, and Economics},
+  year    = {2025},
+  volume  = {33},
+  number  = {4},
+  issn    = {1054-853X}
 }`,
   },
   {
@@ -211,11 +218,15 @@ export const publications = [
     notebook: null,
     graphicalAbstract: "traffic",
     abstract: "This article outlines a new framework of traffic light optimization through a digital twin of the transportinfrastructure, managed by agentic AI to ensure real-time autonomous decisions. The framework relies on physical sensorsand edge computing to measure real-time traffic information and simulate traffic flow in a constantly updated digital twin.The traffic light is automatically controlled through the digital twin according to traffic congestion, travel delay and trafficpatterns. This approach is implemented as a three-layer system: perception, conceptualization and action. The perceptionlayer receives data on physical systems; the conceptualization layer uses LangChain to process the data; and the actionlayer links to the Model Context Protocol (MCP) and traffic management APIs to implement optimised traffic signal controlalgorithms. The results show that the framework minimizes waiting time at traffic lights and positively affects theeffectiveness of the entire traffic flow, which is better than the fixed-time and reinforcement learning-based baselines.",
-    bibtex: `@article{jan2026autonomous,
-  title={Autonomous Traffic Signal Optimization Using Digital Twin and Agentic AI for Real-Time Decision-Making to Uphold Roadway Efficiency},
-  author={Jan, Salman and Syed, Toqeer Ali and Kamal, Shahid and Wali, Qamar and Akarma, Ali},
-  journal={arXiv preprint arXiv:2604.27753},
-  year={2026}
+    bibtex: `@misc{jan2026autonomous,
+  author        = {Jan, Salman and Syed, Toqeer Ali and Kamal, Shahid and Wali, Qamar and Akarma, Ali},
+  title         = {Autonomous Traffic Signal Optimization Using Digital Twin and Agentic AI for Real-Time Decision-Making},
+  year          = {2026},
+  eprint        = {2604.27753},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  doi           = {10.48550/arXiv.2604.27753},
+  url           = {https://arxiv.org/abs/2604.27753}
 }`,
   },
   {
@@ -238,12 +249,14 @@ export const publications = [
     notebook: null,
     graphicalAbstract: "agents-for-agents",
     abstract: "Autonomous underwater vehicles (AUVs) and sensor nodes increasingly support decentralized sensing and coordination in the Internet of Underwater Things (IoUT), yet most deployments rely on static trust once authentication is established, leaving long-duration missions vulnerable to compromised or behaviorally deviating agents. In this paper, an interrogator-based structure is presented that incorporates the idea of behavioral trust monitoring into underwater multi-agent operation without interfering with autonomy. A privileged interrogator module is a passive communication metadata analyzer that uses a lightweight transformer model to calculate dynamic trust scores, which are used to authorize the forwarding of mission-critical data. Suspicious agents cause proportional monitoring and conditional restrictions, which allow fast containment and maintain network continuity. The evidence of trust is stored in a permissioned blockchain consortium which offers identity management without tampering and is decentralized without causing the overhead of public consensus mechanisms. Simulation-based analysis shows that the evaluation of the result compares to a relative improvement of 21.7% in the detection accuracy compared to the static trust baselines with limited energy overhead.",
-    bibtex: `@inproceedings{akarma2026agents,
-  title={Agents for Agents: An Interrogator-Based Secure Framework for Autonomous Internet of Underwater Things},
-  author={Ali Akarma and Toqeer Ali Syed and Abdul Khadar Jilani and Salman Jan and Hammad Muneer and Muazzam A. Khan and Changli Yu},
-  booktitle={International Conference on Engineering, Technologies \\& Applied Sciences (ICETAS 2026)},
-  publisher={MDPI},
-  year={2026}
+    bibtex: `@misc{akarma2026agents,
+  author        = {Akarma, Ali and Syed, Toqeer Ali and Jilani, Abdul Khadar and Jan, Salman and Muneer, Hammad and Khan, Muazzam A. and Yu, Changli},
+  title         = {Agents for Agents: An Interrogator-Based Secure Framework for Autonomous Internet of Underwater Things},
+  year          = {2026},
+  eprint        = {2604.04262},
+  archivePrefix = {arXiv},
+  doi           = {10.48550/arXiv.2604.04262},
+  url           = {https://arxiv.org/abs/2604.04262}
 }`,
   },
   {
@@ -266,12 +279,14 @@ export const publications = [
     notebook: null,
     graphicalAbstract: "wildfire",
     abstract: "AI-based sensing and autonomous monitoring have become main components of wildfire early detection, but current systems do not provide adaptive inter-agent coordination, structurally defined human control, and cryptographically verifiable responsibility. This paper provides a blockchain-based governance-conscious agentic AI architecture for trusted wildfire early warning. The monitoring of wildfires is modeled as a constrained partially observable Markov decision process (POMDP) that accounts for detection latency, false alarm reduction, and resource consumption with clear governance constraints. Hierarchical multi-agent coordination means dynamic risk-adaptive reallocation of unmanned aerial vehicles (UAVs). With risk-adaptive policies, a permissioned blockchain layer sets mandatory human-authorization as a state-transition invariant as a smart contract. Formal assurances include integrity of alerts, human control, non-repudiation, and Byzantine fault tolerance. Security analysis shows resistance to alert injections, replays, and tampering attacks. This work is a step towards a principled design paradigm of reliable AI systems by incorporating accountability into the agentic control loop of disaster intelligence systems that demand safety in their application.",
-    bibtex: `@inproceedings{akarma2026wildfire,
-  title={Governance-Constrained Agentic AI: Blockchain-Enforced Human Oversight for Safety-Critical Wildfire Monitoring},
-  author={Ali Akarma and Toqeer Ali Syed and Salman Jan and Hammad Muneer and Abdul Khadar Jilani},
-  booktitle={International Conference on Engineering, Technologies \\& Applied Sciences (ICETAS 2026)},
-  publisher={MDPI},
-  year={2026}
+    bibtex: `@misc{akarma2026wildfire,
+  author        = {Akarma, Ali and Syed, Toqeer Ali and Jan, Salman and Muneer, Hammad and Jilani, Abdul Khadar},
+  title         = {Governance-Constrained Agentic AI: Blockchain-Enforced Human Oversight for Safety-Critical Wildfire Monitoring},
+  year          = {2026},
+  eprint        = {2604.04265},
+  archivePrefix = {arXiv},
+  doi           = {10.48550/arXiv.2604.04265},
+  url           = {https://arxiv.org/abs/2604.04265}
 }`,
   },
   {
@@ -296,13 +311,12 @@ export const publications = [
     bibtex: `@article{toqeer2026climate,
 	doi = {10.20944/preprints202604.1837.v1},
 	url = {https://doi.org/10.20944/preprints202604.1837.v1},
-	year = 2026,
+	year = {2026},
 	month = {April},
 	publisher = {Preprints},
 	author = {Toqeer Ali Syed and Ali Akarma and Muhammad Tayyab Naqash and Danial Hameed and Shahid Kamal and Antonio Formisano},
 	title = {Agentic AI for Climate-Resilient Cities: A PRISMA-Guided Review and Digital Twin Framework},
 	journal = {Preprints}
-}
 }`,
   },
 
@@ -336,8 +350,7 @@ ARTICLE-NUMBER = {106},
 URL = {https://www.mdpi.com/2624-6511/9/7/106},
 ISSN = {2624-6511},
 DOI = {10.3390/smartcities9070106}
-}
-`,
+}`,
   },
 
   {
@@ -360,15 +373,15 @@ DOI = {10.3390/smartcities9070106}
     graphicalAbstract: "adapt",
     abstract: "The present paper introduces ADAPT, an agentic artificial intelligence (AI) framework aimed at assisting people with disabilities and neurodivergent conditions to adopt healthier eating habits and organized daily life. It includes four specialized agents (meal planning, adaptive reminders, food guidance, and physiological monitoring), a Large Language Model (LLM)-based decision layer, a Model Context Protocol (MCP) routing layer, and a multimodal interface. Each agent is deployed in a Perception–Reasoning–Action (PRA) loop and communicates with each other using a shared blackboard and a hybrid reasoning component that uses rules and reinforcement learning. In addition to electronic health records (EHRs), nutritional databases, wearable and Internet of Things (IoT) devices, and smart kitchen gadgets, the framework includes modules for explainable AI (XAI) to provide understandable explanations to the user and the caregiver. A concrete use case is presented showing how the implemented prototype can help a neurodivergent person with diabetes by interpreting multimodal inputs, evaluating meal suitability, making real-time replacements, and providing sensory-sensitive prompts. Results of a synthetic simulation-based evaluation (500 simulated profiles, no real user evaluation) show a positive impact on nutritional adherence and reminder responsiveness, and usability was found to be appropriate across various accessibility profiles. The envisioned framework provides a more unified approach to assistive health technologies and a future path toward personalized, safe, and transparent digital health assistance for individuals with disabilities and neurodivergence.",
     bibtex: `@article{Siddiqui2026ADAPT,
-  author    = {Muhammad Shoaib Siddiqui and Toqeer Ali Syed and Ali Akarma},
-  title     = {ADAPT: An Agentic AI Framework for People with Disabilities and Neurodivergence},
-  journal   = {JDR},
-  year      = {2026},
-  volume    = {5},
-  number    = {2},
-  doi       = {10.57197/JDR-2026-0830}
-}
-`,
+  author  = {Siddiqui, Muhammad Shoaib and Syed, Toqeer Ali and Akarma, Ali},
+  title   = {ADAPT: An Agentic AI Framework for People with Disabilities and Neurodivergence},
+  journal = {Journal of Disability Research},
+  year    = {2026},
+  volume  = {5},
+  number  = {2},
+  pages   = {e20260830},
+  doi     = {10.57197/JDR-2026-0830}
+}`,
   },
   {
     id: 14,
@@ -422,12 +435,12 @@ DOI = {10.3390/smartcities9070106}
     graphicalAbstract: "eagf",
     abstract: "AI-driven anomaly detectors in 5G renewable energy IoT and industrial systems lack unified governance: they operate opaquely, exhibit protocol-class bias, and expose training data to inference attacks. This paper presents the Ethical AI Governance Framework (EAGF), which maps four EU AI Act pillars: transparency, fairness, privacy, and accountability to computable engineering metrics that are jointly governed within one training-and-deployment lifecycle: fairness and privacy are co-optimized via a Pareto-guided multi-objective procedure with domain-adaptive fairness loss selection, transparency is structurally controlled through clarity-triggered pruning, and accountability is audited post hoc, with all four scores aggregated into a composite Trust Index (TI). Evaluated across two domains: on a biometric task (10,021 images, ten seeds), EAGF raises TI by +38.97% (0.565 → 0.785), improves recall parity by +15.1%, and enhances privacy by +18.8%; on the real-world Edge-IIoTset intrusion-detection benchmark (157,800 samples, five seeds), EAGF achieves +69.3% TI gain (0.358 → 0.606) and +56.4% FPR parity improvement, with only +0.2 ms forward-pass inference overhead. Joint multi-pillar governance substantially outperforms model-level-only approaches across both domains; the accountability infrastructure contributes a large and explicitly quantified fraction of total TI gains, underscoring that governance readiness requires both algorithmic and operational investments.",
     bibtex: `@article{jan2026eagf,
-  title={EAGF: A Four-Pillar Ethical AI Governance Framework for Trustworthy Cybersecurity in 5G Renewable Energy IoT Systems},
-  author={Jan, Salman and Akarma, Ali and Syed, Toqeer Ali and Muhammad, Munir Azam and Kamal, Shahid},
-  journal={Scientific Reports},
-  year={2026},
-  publisher={Nature Publishing Group},
-  doi={10.1038/s41598-026-63383-5}
+  title     = {EAGF: A Four-Pillar Ethical AI Governance Framework for Trustworthy Cybersecurity in 5G Renewable Energy IoT Systems},
+  author    = {Jan, Salman and Akarma, Ali and Syed, Toqeer Ali and Muhammad, Munir Azam and Kamal, Shahid},
+  journal   = {Scientific Reports},
+  year      = {2026},
+  publisher = {Springer Nature},
+  doi       = {10.1038/s41598-026-63383-5}
 }`,
   },
 ]
