@@ -1,20 +1,35 @@
+/**
+ * Google Scholar metrics updater.
+ *
+ * Single source of truth: the metrics table on the public Google Scholar
+ * profile. No secondary bibliographic databases are consulted — they index a
+ * different (smaller) slice of the literature, so blending them in produced
+ * figures that disagreed with the profile page the site links to.
+ *
+ * If Scholar cannot be read (it rate-limits datacenter IPs, so this is
+ * expected to happen from CI), the script writes nothing and exits non-zero.
+ * data/scholar.json keeps whatever it held, and the numbers can be refreshed
+ * by hand with scripts/manual_update_scholar.js.
+ */
+
 const fs = require('fs');
 const path = require('path');
 
 // ─── Configuration ───────────────────────────────────────────────────────────
 
-const GOOGLE_SCHOLAR_USER_ID = process.env.SCHOLAR_USER_ID || 'kQZZJtYAAAAJ';
-const SEMANTIC_SCHOLAR_AUTHOR_ID = '2395534852';
+const SCHOLAR_USER_ID = process.env.SCHOLAR_USER_ID || 'kQZZJtYAAAAJ';
 
+// Regional mirrors serve the same profile. Rotating through them gives a
+// blocked request somewhere else to try before we give up.
 const SCHOLAR_MIRRORS = [
   'https://scholar.google.com',
   'https://scholar.google.co.uk',
   'https://scholar.google.ca',
   'https://scholar.google.com.au',
   'https://scholar.google.de',
-  'https://scholar.google.fr',
-  'https://scholar.google.es',
+  'https://scholar.google.nl',
   'https://scholar.google.co.in',
+  'https://scholar.google.com.br',
 ];
 
 const USER_AGENTS = [
@@ -23,6 +38,9 @@ const USER_AGENTS = [
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0',
 ];
+
+const REQUEST_TIMEOUT_MS = 20000;
+const DATA_FILE = path.join(process.cwd(), 'data', 'scholar.json');
 
 // ─── Utilities ───────────────────────────────────────────────────────────────
 
@@ -39,14 +57,14 @@ function randomUA() {
   return USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)];
 }
 
-function randomDelay(minMs, maxMs) {
+function delay(minMs, maxMs) {
   const ms = Math.floor(Math.random() * (maxMs - minMs + 1)) + minMs;
   return new Promise(r => setTimeout(r, ms));
 }
 
-async function fetchWithTimeout(url, options = {}, timeoutMs = 15000) {
+async function fetchWithTimeout(url, options = {}) {
   const controller = new AbortController();
-  const tid = setTimeout(() => controller.abort(), timeoutMs);
+  const tid = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   try {
     return await fetch(url, { signal: controller.signal, ...options });
   } finally {
@@ -55,79 +73,79 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 15000) {
 }
 
 function loadCurrentData() {
-  const fp = path.join(process.cwd(), 'data', 'scholar.json');
   try {
-    if (fs.existsSync(fp)) return JSON.parse(fs.readFileSync(fp, 'utf-8'));
-  } catch { /* ignore */ }
+    if (fs.existsSync(DATA_FILE)) return JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
+  } catch { /* a corrupt cache is the same as no cache */ }
   return null;
 }
 
-// ─── Source 1: Semantic Scholar API (Primary — always works) ─────────────────
+// ─── Parsing ─────────────────────────────────────────────────────────────────
 
-async function fetchSemanticScholar() {
-  console.log('\n📚 Source 1: Semantic Scholar API');
+// The profile's metrics table is:
+//
+//   |            | All | Since 2021 |
+//   | Citations  |  57 |         57 |
+//   | h-index    |   5 |          5 |
+//   | i10-index  |   2 |          2 |
+//
+// Read it row by row rather than matching each label against the surrounding
+// markup: the label text sits inside an <a> carrying a long title attribute,
+// and regexes that spanned that attribute matched the wrong cell whenever
+// Google reflowed the HTML.
+function parseMetricsTable(html) {
+  const table = html.match(/<table[^>]*\bid="gsc_rsb_st"[^>]*>([\s\S]*?)<\/table>/i);
+  if (!table) return null;
 
-  const url = `https://api.semanticscholar.org/graph/v1/author/${SEMANTIC_SCHOLAR_AUTHOR_ID}?fields=name,citationCount,hIndex,paperCount,papers.citationCount`;
-  console.log(`  → GET ${url}`);
+  const metrics = {};
+  const rowRe = /<tr>([\s\S]*?)<\/tr>/gi;
+  let row;
 
-  try {
-    const res = await fetchWithTimeout(url, {
-      headers: { 'Accept': 'application/json' },
-    }, 15000);
+  while ((row = rowRe.exec(table[1])) !== null) {
+    // [label, all-time value, recent value] — we want the all-time column.
+    const cells = [...row[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map(c =>
+      c[1].replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim()
+    );
+    if (cells.length < 2) continue;
 
-    if (!res.ok) {
-      console.log(`  ✗ HTTP ${res.status}`);
-      return null;
-    }
+    const label = cells[0].toLowerCase();
+    const value = parseInt(cells[1].replace(/[^\d]/g, ''), 10);
+    if (Number.isNaN(value)) continue;
 
-    const data = await res.json();
-    const citations = data.citationCount ?? null;
-    const hIndex = data.hIndex ?? null;
-
-    // Compute i10-index: count papers with ≥ 10 citations
-    let i10Index = 0;
-    if (data.papers && Array.isArray(data.papers)) {
-      i10Index = data.papers.filter(p => (p.citationCount || 0) >= 10).length;
-    }
-
-    if (citations !== null && hIndex !== null) {
-      console.log(`  ✓ citations=${citations}, h-index=${hIndex}, i10-index=${i10Index}`);
-      return { citations, hIndex, i10Index, source: 'semantic_scholar' };
-    }
-
-    console.log(`  ✗ Missing data in response`);
-  } catch (e) {
-    console.log(`  ✗ ${e.name === 'AbortError' ? 'Timeout' : e.message}`);
+    if (label.startsWith('citations')) metrics.citations = value;
+    else if (label.startsWith('h-index')) metrics.hIndex = value;
+    else if (label.startsWith('i10-index')) metrics.i10Index = value;
   }
-  return null;
+
+  return metrics;
 }
 
-// ─── Source 2: Google Scholar scraping (Secondary — best-effort) ─────────────
-
-function parseScholarMetric(html, label) {
-  const patterns = [
-    new RegExp(`>${label}</a></td><td class="gsc_rsb_std">(\\d+)</td>`, 'i'),
-    new RegExp(`>${label}</a>\\s*</td>\\s*<td[^>]*>(\\d+)</td>`, 'i'),
-    new RegExp(`${label}</a></td><td[^>]*>(\\d+)</td>`, 'i'),
-    new RegExp(`${label}[\\s\\S]*?<td class="gsc_rsb_std">(\\d+)</td>`, 'i'),
-    new RegExp(`${label}[\\s\\S]*?<td[^>]*gsc_rsb_std[^>]*>(\\d+)</td>`, 'i'),
-  ];
-  for (const re of patterns) {
-    const m = html.match(re);
-    if (m) return parseInt(m[1], 10);
-  }
-  return null;
+// Guards against a partially rendered or interstitial page parsing into
+// plausible-looking nonsense.
+function isSane(m) {
+  if (m.citations == null || m.hIndex == null || m.i10Index == null) return false;
+  if ([m.citations, m.hIndex, m.i10Index].some(v => v < 0 || v > 1e7)) return false;
+  if (m.hIndex > m.citations) return false;
+  if (m.i10Index > m.citations) return false;
+  return true;
 }
+
+function looksBlocked(html) {
+  return (
+    html.length < 5000 ||
+    /not a robot|unusual traffic|\/sorry\/index|recaptcha/i.test(html)
+  );
+}
+
+// ─── Fetch ───────────────────────────────────────────────────────────────────
 
 async function fetchGoogleScholar() {
-  console.log('\n🔍 Source 2: Google Scholar scraping (best-effort)');
-
-  const mirrors = shuffle(SCHOLAR_MIRRORS).slice(0, 4); // Only try 4 random mirrors
+  const mirrors = shuffle(SCHOLAR_MIRRORS);
+  console.log(`\nReading Google Scholar profile ${SCHOLAR_USER_ID}`);
 
   for (let i = 0; i < mirrors.length; i++) {
     const mirror = mirrors[i];
-    const url = `${mirror}/citations?user=${GOOGLE_SCHOLAR_USER_ID}&hl=en&oi=ao`;
-    console.log(`  → Trying: ${mirror}`);
+    const url = `${mirror}/citations?user=${SCHOLAR_USER_ID}&hl=en`;
+    console.log(`  -> ${mirror}`);
 
     try {
       const res = await fetchWithTimeout(url, {
@@ -135,151 +153,95 @@ async function fetchGoogleScholar() {
           'User-Agent': randomUA(),
           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
           'Accept-Language': 'en-US,en;q=0.9',
-          'DNT': '1',
-          'Connection': 'keep-alive',
           'Upgrade-Insecure-Requests': '1',
           'Sec-Fetch-Dest': 'document',
           'Sec-Fetch-Mode': 'navigate',
           'Sec-Fetch-Site': 'none',
           'Sec-Fetch-User': '?1',
-          'Cache-Control': 'max-age=0',
         },
         redirect: 'follow',
-      }, 15000);
+      });
 
-      if (!res.ok) { console.log(`    ✗ HTTP ${res.status}`); continue; }
+      if (!res.ok) {
+        console.log(`     x HTTP ${res.status}`);
+      } else {
+        const html = await res.text();
 
-      const html = await res.text();
+        if (looksBlocked(html)) {
+          console.log('     x blocked (captcha / consent interstitial)');
+        } else {
+          const metrics = parseMetricsTable(html);
 
-      if (html.includes("not a robot") || html.includes('unusual traffic') || html.includes('captcha') || html.length < 2000) {
-        console.log(`    ✗ Blocked`);
-        if (i < mirrors.length - 1) await randomDelay(2000, 5000);
-        continue;
+          if (!metrics) {
+            console.log('     x metrics table not present');
+          } else if (!isSane(metrics)) {
+            console.log(`     x implausible values: ${JSON.stringify(metrics)}`);
+          } else {
+            console.log(`     ok citations=${metrics.citations}, h-index=${metrics.hIndex}, i10-index=${metrics.i10Index}`);
+            return metrics;
+          }
+        }
       }
-
-      const citations = parseScholarMetric(html, 'Citations');
-      const hIndex = parseScholarMetric(html, 'h-index');
-      const i10Index = parseScholarMetric(html, 'i10-index');
-
-      if (citations !== null && hIndex !== null) {
-        console.log(`    ✓ citations=${citations}, h-index=${hIndex}, i10-index=${i10Index || 0}`);
-        return { citations, hIndex, i10Index: i10Index || 0, source: 'google_scholar' };
-      }
-
-      console.log(`    ✗ Could not parse metrics`);
     } catch (e) {
-      console.log(`    ✗ ${e.name === 'AbortError' ? 'Timeout' : e.message}`);
+      console.log(`     x ${e.name === 'AbortError' ? 'timeout' : e.message}`);
     }
 
-    if (i < mirrors.length - 1) await randomDelay(2000, 5000);
+    if (i < mirrors.length - 1) await delay(3000, 7000);
   }
 
   return null;
 }
 
-// ─── Merge strategy: take the maximum of the LIVE sources ────────────────────
-
-function mergeMetrics(sources, existing) {
-  // Only live results are merged. The cached value is deliberately excluded:
-  // folding it into the max() made the figure a ratchet that could rise but
-  // never fall, so a correction or a retracted citation would be reported
-  // indefinitely. Cache is a fallback for total fetch failure, not a floor.
-  const all = sources.filter(Boolean);
-
-  if (all.length === 0) {
-    // Every source failed — keep showing the last known good numbers rather
-    // than reporting a spurious drop to zero.
-    if (existing && !existing.fetchFailed) {
-      console.log('\n⚠ All live sources failed — retaining cached metrics.');
-      return {
-        citations: existing.citations,
-        hIndex: existing.hIndex,
-        i10Index: existing.i10Index,
-      };
-    }
-    return null;
-  }
-
-  // Google Scholar indexes more venues than Semantic Scholar, so where both
-  // respond the higher figure is the more complete one.
-  const merged = {
-    citations: Math.max(...all.map(s => s.citations || 0)),
-    hIndex: Math.max(...all.map(s => s.hIndex || 0)),
-    i10Index: Math.max(...all.map(s => s.i10Index || 0)),
-  };
-
-  if (existing && !existing.fetchFailed && merged.citations < existing.citations) {
-    console.log(`\nℹ Citations decreased (${existing.citations} → ${merged.citations}) — reporting the live figure.`);
-  }
-
-  console.log('\n📊 Merged metrics (max across live sources):');
-  for (const s of all) {
-    console.log(`   ${s.source}: citations=${s.citations}, h=${s.hIndex}, i10=${s.i10Index}`);
-  }
-  console.log(`   → Final: citations=${merged.citations}, h=${merged.hIndex}, i10=${merged.i10Index}`);
-
-  return merged;
-}
-
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 async function run() {
-  console.log('╔══════════════════════════════════════════════════════╗');
-  console.log('║  Scholar Metrics Update (Weekly)                     ║');
-  console.log('║  Primary: Semantic Scholar API · Fallback: GScholar  ║');
-  console.log('╚══════════════════════════════════════════════════════╝');
+  console.log('Google Scholar metrics update');
   console.log(`Time: ${new Date().toISOString()}`);
 
-  const filePath = path.join(process.cwd(), 'data', 'scholar.json');
   const existing = loadCurrentData();
-
   if (existing) {
-    console.log(`\nCached data: citations=${existing.citations}, h=${existing.hIndex}, i10=${existing.i10Index}`);
-    console.log(`Last updated: ${existing.lastUpdated}`);
+    console.log(`Current: citations=${existing.citations}, h=${existing.hIndex}, i10=${existing.i10Index} (updated ${existing.lastUpdated})`);
   }
 
-  // Fetch from both sources concurrently
-  // Semantic Scholar is the reliable primary source
-  // Google Scholar is a best-effort bonus that may have higher numbers
-  const [semanticResult, googleResult] = await Promise.all([
-    fetchSemanticScholar(),
-    fetchGoogleScholar(),
-  ]);
+  const metrics = await fetchGoogleScholar();
 
-  const merged = mergeMetrics([semanticResult, googleResult], existing);
-
-  if (merged) {
-    const output = {
-      citations: merged.citations,
-      hIndex: merged.hIndex,
-      i10Index: merged.i10Index,
-      lastUpdated: new Date().toISOString(),
-      fetchFailed: false,
-    };
-    fs.writeFileSync(filePath, JSON.stringify(output, null, 2) + '\n');
-    console.log('\n✅ Scholar metrics updated successfully!');
-  } else {
-    // This should essentially never happen since Semantic Scholar
-    // is a reliable API, but just in case:
-    console.log('\n⚠ No data from any source.');
-    if (existing) {
-      console.log('ℹ Keeping existing cached metrics.');
-    } else {
-      fs.writeFileSync(filePath, JSON.stringify({
-        citations: 0, hIndex: 0, i10Index: 0,
-        lastUpdated: new Date().toISOString(),
-        fetchFailed: true,
-      }, null, 2) + '\n');
-      console.log('ℹ Created placeholder. Run: node scripts/manual_update_scholar.js <c> <h> <i10>');
-    }
+  if (!metrics) {
+    console.error('\nGoogle Scholar could not be read from any mirror.');
+    console.error('data/scholar.json was left untouched.');
+    console.error('Update it by hand with:');
+    console.error('  npm run scholar:manual -- <citations> <hIndex> <i10Index>');
+    console.error(`Figures are at https://scholar.google.com/citations?user=${SCHOLAR_USER_ID}&hl=en`);
+    process.exit(1);
   }
 
-  console.log('\nDone.');
-  process.exit(0);
+  const unchanged =
+    existing &&
+    existing.citations === metrics.citations &&
+    existing.hIndex === metrics.hIndex &&
+    existing.i10Index === metrics.i10Index;
+
+  // Written even when the figures match, so lastUpdated records when they were
+  // last confirmed against Scholar. The site shows that date, and a stale one
+  // there should mean "the check stopped running", not "nothing got cited".
+  if (unchanged) {
+    console.log('\nFigures unchanged — refreshing the confirmation date.');
+  } else if (existing && metrics.citations < existing.citations) {
+    console.log(`\nCitations decreased (${existing.citations} -> ${metrics.citations}); Scholar is authoritative, writing the live figure.`);
+  }
+
+  fs.writeFileSync(DATA_FILE, JSON.stringify({
+    citations: metrics.citations,
+    hIndex: metrics.hIndex,
+    i10Index: metrics.i10Index,
+    lastUpdated: new Date().toISOString(),
+    source: 'google_scholar',
+    fetchFailed: false,
+  }, null, 2) + '\n');
+
+  console.log('\ndata/scholar.json updated from Google Scholar.');
 }
 
 run().catch(err => {
   console.error('Unexpected error:', err);
-  // Never fail the workflow — existing data stays valid
-  process.exit(0);
+  process.exit(1);
 });

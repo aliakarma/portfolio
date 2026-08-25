@@ -172,24 +172,35 @@ In `data/publications.js`, populate these fields for each paper:
 
 ### Manage Google Scholar Metrics
 
-The portfolio automatically fetches your Google Scholar metrics (citations, h-index, i10-index) and displays them on the homepage.
+The portfolio reads citations, h-index and i10-index from the metrics table on the
+public Google Scholar profile and displays them on the homepage.
+
+**Google Scholar is the only source.** Other bibliographic databases index a
+smaller slice of the literature, so mixing them in produced figures that
+disagreed with the profile the site links to.
 
 **Automated Updates:**
-- ✅ Scheduled daily via GitHub Actions (`.github/workflows/update_scholar.yml`)
-- ✅ Runs `npm run scholar:update` to fetch latest metrics
-- ✅ Falls back gracefully if Google Scholar blocks requests (this is normal)
-- ✅ Preserves last known metrics and updates timestamp
+- ✅ Scheduled weekly via GitHub Actions (`.github/workflows/update_scholar.yml`)
+- ✅ Runs `npm run scholar:update`, retrying up to 3 times across Scholar mirrors
+- ✅ `data/scholar.json` is only written after a clean read — a blocked fetch never overwrites good numbers
+- ✅ `lastUpdated` is refreshed on every successful read, so the date on the site means "confirmed against Scholar on"
+- ⚠️ If all attempts are blocked the workflow **fails on purpose**, so GitHub notifies you to update manually
 
-**Manual Update (if automated fetch fails):**
+**Manual Update (if the workflow fails):**
 
-When Google Scholar blocks automated requests, manually update your metrics:
+Google Scholar rate-limits datacenter IPs and GitHub's runners share a pool of
+them, so scheduled runs can be blocked. Two ways to fix it:
 
 ```bash
-# Find your metrics at: https://scholar.google.com/citations?user=kQZZJtYAAAAJ
-node scripts/manual_update_scholar.js <citations> <hIndex> <i10Index>
+# From your own machine, where Scholar is usually reachable:
+npm run scholar:update
+
+# Or type the numbers in by hand, from
+# https://scholar.google.com/citations?user=kQZZJtYAAAAJ
+npm run scholar:manual -- <citations> <hIndex> <i10Index>
 
 # Example:
-node scripts/manual_update_scholar.js 45 6 2
+npm run scholar:manual -- 57 5 2
 ```
 
 **Update File Directly:**
@@ -197,19 +208,21 @@ node scripts/manual_update_scholar.js 45 6 2
 Edit `data/scholar.json`:
 ```json
 {
-  "citations": 45,
-  "hIndex": 6,
+  "citations": 57,
+  "hIndex": 5,
   "i10Index": 2,
-  "lastUpdated": "2026-05-12T15:33:19.652Z",
+  "lastUpdated": "2026-08-25T11:05:08.601Z",
+  "source": "google_scholar",
   "fetchFailed": false
 }
 ```
 
 **Notes:**
-- `citations` — Total number of citations across all publications
+- `citations` — Total number of citations across all publications (Scholar's "All" column)
 - `hIndex` — H-index (papers with ≥ h citations each)
 - `i10Index` — i10-index (papers with ≥ 10 citations each)
-- `lastUpdated` — ISO timestamp of last update
+- `lastUpdated` — ISO timestamp of the last confirmed read
+- `source` — `google_scholar` (scraped) or `manual` (typed in)
 - `fetchFailed` — Flag indicating if automated fetch failed
 
 After updating, commit the changes:

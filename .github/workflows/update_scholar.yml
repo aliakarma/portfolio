@@ -21,12 +21,28 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Fetch Scholar Metrics
-        run: node scripts/update_scholar.js
+      # Google Scholar rate-limits datacenter IPs, and GitHub's runners share a
+      # pool of them, so a single blocked attempt is not evidence the profile
+      # changed. Retry a few times, spaced out; the script picks fresh mirrors
+      # each run and writes nothing unless it gets a clean read.
+      - name: Fetch Scholar metrics
         env:
           SCHOLAR_USER_ID: 'kQZZJtYAAAAJ'
+        run: |
+          for attempt in 1 2 3; do
+            echo "::group::Attempt $attempt"
+            if node scripts/update_scholar.js; then
+              echo "::endgroup::"
+              exit 0
+            fi
+            echo "::endgroup::"
+            [ "$attempt" -lt 3 ] && sleep 120
+          done
+          echo "::error title=Google Scholar unreachable::Could not read the Scholar profile after 3 attempts. data/scholar.json is unchanged — update it manually with 'npm run scholar:manual -- <citations> <hIndex> <i10Index>'."
+          exit 1
 
-      - name: Commit and Push if changed
+      - name: Commit and push if changed
+        if: success()
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'

@@ -42,7 +42,7 @@ Example:
 Where to find your metrics:
   1. Visit: https://scholar.google.com/citations?user=kQZZJtYAAAAJ
   2. Look for the metrics section showing:
-     - "All since 2023" section
+     - the "All" column of the metrics table
      - Citations count (e.g., "45 citations")
      - h-index value (e.g., "h-index: 6")
      - i10-index value (e.g., "i10-index: 2")
@@ -74,11 +74,12 @@ you can commit the changes to git.
     hIndex,
     i10Index,
     lastUpdated: new Date().toISOString(),
+    source: 'manual',
     fetchFailed: false
   };
 
   try {
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2) + '\n');
     console.log('✓ Scholar metrics updated successfully!');
     console.log(`  - Citations: ${citations}`);
     console.log(`  - h-index: ${hIndex}`);
