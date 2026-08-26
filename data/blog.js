@@ -2,6 +2,25 @@
 
 export const blogPosts = [
   {
+    id: 24,
+    title: "Agentic AI for Inclusive Assistive Ecosystems: Architecture, Governance, and Personalized Support for People with Disabilities",
+    date: "2026-08-26",
+    category: "Assistive AI & Governance",
+    readTime: "9 min",
+    excerpt: "Current assistive technologies often operate as fragmented, reactive tools. This book chapter introduces an agentic AI ecosystem combining multi-agent coordination, privacy-preserving governance, and personalized daily routines to empower individuals with disabilities with greater independence.",
+    summary: "Assistive technologies for individuals with disabilities frequently suffer from fragmentation, lack of contextual reasoning, and rigid interfaces. Published in the IGI Global book 'Improving Disability Support and Institutional Performance with AI', this chapter proposes a comprehensive Agentic AI framework designed to deliver inclusive, autonomous, and personalized assistive ecosystems. By coordinating specialized agents for routine scheduling, health and nutrition support, and daily task management under a unified Perception–Reasoning–Action loop, the system dynamically adapts to individual accessibility requirements. A robust governance layer incorporates privacy-preserving policies, human-in-the-loop oversight, and auditable verification to ensure ethical, safe, and trustworthy operation.",
+    keyContributions: [
+      "Multi-agent architecture coordinating autonomous specialized agents for personalized daily routine management, health support, and accessibility accommodations",
+      "Perception–Reasoning–Action (PRA) loop integrating multimodal inputs and adaptive contextual reasoning",
+      "Governance-first design incorporating privacy-preserving data pipelines, human-in-the-loop oversight, and auditable verification",
+      "Scalable framework bridging the gap between autonomous AI capabilities and safe, inclusive real-world deployment for people with disabilities",
+    ],
+    implications: "Demonstrates how agentic AI architectures can move beyond isolated assistance toward holistic, governance-conscious ecosystems that enhance autonomy, reduce caregiver fatigue, and uphold dignity and equity for people with disabilities.",
+    tags: ["Agentic AI", "AI Governance", "Disabilities", "Accessibility", "AI Safety", "Inclusion"],
+    venue: "IGI Global 2026",
+    graphicalAbstract: "agentic-ai-chapter",
+  },
+  {
     id: 23,
     title: "Dijkstra as an Oracle: Exact Shortest-Path Planning for Stochastic Robot Navigation",
     date: "2026-08-22",

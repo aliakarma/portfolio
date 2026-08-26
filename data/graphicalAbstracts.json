@@ -15,7 +15,7 @@
     "width": 1600,
     "height": 893
   },
-  "disabilities": {
+  "cloudburst": {
     "width": 1600,
     "height": 893
   },
@@ -23,11 +23,19 @@
     "width": 1600,
     "height": 893
   },
-  "eagf": {
+  "agentic-ai-chapter": {
     "width": 1600,
     "height": 893
   },
-  "cloudburst": {
+  "dijkstra": {
+    "width": 1600,
+    "height": 893
+  },
+  "disabilities": {
+    "width": 1600,
+    "height": 893
+  },
+  "eagf": {
     "width": 1600,
     "height": 893
   },
@@ -35,11 +43,11 @@
     "width": 1600,
     "height": 893
   },
-  "finnutri-agent": {
+  "finagent": {
     "width": 1600,
     "height": 893
   },
-  "finagent": {
+  "finnutri-agent": {
     "width": 1600,
     "height": 893
   },
@@ -60,10 +68,6 @@
     "height": 893
   },
   "wildfire": {
-    "width": 1600,
-    "height": 893
-  },
-  "dijkstra": {
     "width": 1600,
     "height": 893
   }

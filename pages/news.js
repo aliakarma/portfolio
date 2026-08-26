@@ -8,6 +8,11 @@ import SectionReveal from '../components/SectionReveal'
 // Each item only requires id, date, and title.
 const newsData = [
   {
+    id: 18,
+    date: 'August 26, 2026',
+    title: 'New chapter: Agentic AI for Inclusive Assistive Ecosystems: Architecture, Governance, and Personalized Support for People with Disabilities — IGI Global',
+  },
+  {
     id: 17,
     date: 'July 26, 2026',
     title: 'New paper: EAGF: A Four-Pillar Ethical AI Governance Framework for Trustworthy Cybersecurity in 5G Renewable Energy IoT Systems — Nature Scientific Reports',
