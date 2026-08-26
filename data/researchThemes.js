@@ -7,7 +7,7 @@ export const researchNodes = [
     group: "core",
     size: 22,
     description: "Autonomous AI systems that perceive, reason, and act across complex environments",
-    papers: [1, 2, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15],
+    papers: [1, 2, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15, 16],
   },
   {
     id: "ai-safety",
@@ -15,7 +15,7 @@ export const researchNodes = [
     group: "core",
     size: 18,
     description: "Alignment, robustness, and failure-mode analysis for autonomous systems",
-    papers: [1, 3, 12, 13, 14],
+    papers: [1, 3, 12, 13, 14, 16],
   },
   {
     id: "ai-governance",
@@ -23,7 +23,7 @@ export const researchNodes = [
     group: "core",
     size: 16,
     description: "Frameworks for oversight, accountability, and policy in AI deployment",
-    papers: [8, 9, 10, 12, 14, 15],
+    papers: [8, 9, 10, 12, 14, 15, 16],
   },
   {
     id: "blockchain",
@@ -55,7 +55,7 @@ export const researchNodes = [
     group: "domain",
     size: 11,
     description: "Agentic AI for assistive healthcare and disability support",
-    papers: [5],
+    papers: [5, 13, 16],
   },
   {
     id: "marl",
