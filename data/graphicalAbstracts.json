@@ -3,19 +3,11 @@
     "width": 1600,
     "height": 893
   },
-  "agentic-dt": {
-    "width": 1600,
-    "height": 893
-  },
   "adapt": {
     "width": 1600,
     "height": 893
   },
-  "blockchain": {
-    "width": 1600,
-    "height": 893
-  },
-  "cloudburst": {
+  "agentic-dt": {
     "width": 1600,
     "height": 893
   },
@@ -24,6 +16,14 @@
     "height": 893
   },
   "agentic-ai-chapter": {
+    "width": 1600,
+    "height": 893
+  },
+  "blockchain": {
+    "width": 1600,
+    "height": 893
+  },
+  "cloudburst": {
     "width": 1600,
     "height": 893
   },
@@ -51,19 +51,19 @@
     "width": 1600,
     "height": 893
   },
-  "inventory": {
-    "width": 1600,
-    "height": 893
-  },
   "traffic": {
     "width": 1600,
     "height": 893
   },
-  "vnvspec": {
+  "inventory": {
     "width": 1600,
     "height": 893
   },
   "use-of-ai-tools": {
+    "width": 1600,
+    "height": 893
+  },
+  "vnvspec": {
     "width": 1600,
     "height": 893
   },
