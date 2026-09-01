@@ -113,8 +113,10 @@ export default function Research() {
         if (aIsReview && !bIsReview) return 1
         if (!aIsReview && bIsReview) return -1
 
-        // Within the same status category, sort newest first (year descending, then id descending)
-        return b.year - a.year || b.id - a.id
+        // Within the same status category, sort newest first (exact date descending, then id descending)
+        const timeA = a.date ? new Date(a.date).getTime() : new Date(`${a.year || 2025}-01-01`).getTime()
+        const timeB = b.date ? new Date(b.date).getTime() : new Date(`${b.year || 2025}-01-01`).getTime()
+        return timeB - timeA || b.id - a.id
       })
   }, [statusFilter, typeFilter, tagFilter])
 

@@ -121,7 +121,11 @@ export default function Home() {
   }, [])
 
   const recent = [...publications]
-    .sort((a, b) => b.id - a.id)
+    .sort((a, b) => {
+      const timeA = a.date ? new Date(a.date).getTime() : new Date(`${a.year || 2025}-01-01`).getTime()
+      const timeB = b.date ? new Date(b.date).getTime() : new Date(`${b.year || 2025}-01-01`).getTime()
+      return timeB - timeA || b.id - a.id
+    })
     .slice(0, 3)
 
   return (

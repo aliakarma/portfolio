@@ -168,7 +168,7 @@ export default function PublicationCard({ pub, index = 0 }) {
                   {TYPE_LABELS[pub.type] || pub.type}
                 </span>
                 <span className="font-mono text-xs text-parchment-400/60">
-                  {pub.venueShort} · {pub.year}
+                  {pub.venueShort} · {pub.date || pub.year}
                 </span>
               </div>
 
