@@ -8,6 +8,11 @@ import SectionReveal from '../components/SectionReveal'
 // Each item only requires id, date, and title.
 const newsData = [
   {
+    id: 19,
+    date: 'September 1, 2026',
+    title: 'New paper: Agentic AI for Climate-Resilient Cities: A PRISMA-Guided Review and Digital Twin Framework — MDPI Sustainability',
+  },
+  {
     id: 18,
     date: 'August 26, 2026',
     title: 'New chapter: Agentic AI for Inclusive Assistive Ecosystems: Architecture, Governance, and Personalized Support for People with Disabilities — IGI Global',
@@ -45,7 +50,7 @@ const newsData = [
   {
     id: 11,
     date: 'April 27, 2026',
-    title: 'New paper: Agentic AI for Climate-Resilient Cities: A PRISMA-Guided Review and Digital Twin Framework — MDPI Sustainability',
+    title: 'Preprint released: Agentic AI for Climate-Resilient Cities: A PRISMA-Guided Review and Digital Twin Framework — Preprints.org',
   },
   {
     id: 10,

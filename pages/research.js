@@ -105,7 +105,17 @@ export default function Research() {
         const g = !tagFilter || p.tags.some(tag => normalize(tag) === normalize(tagFilter))
         return s && t && g
       })
-      .sort((a, b) => b.year - a.year || b.id - a.id)
+      .sort((a, b) => {
+        const aIsReview = normalize(a.status) === 'under_review'
+        const bIsReview = normalize(b.status) === 'under_review'
+
+        // Under-review papers always appear at the end of the list
+        if (aIsReview && !bIsReview) return 1
+        if (!aIsReview && bIsReview) return -1
+
+        // Within the same status category, sort newest first (year descending, then id descending)
+        return b.year - a.year || b.id - a.id
+      })
   }, [statusFilter, typeFilter, tagFilter])
 
   /* Denominator for the "Showing X of Y" line — mirrors whichever set the
