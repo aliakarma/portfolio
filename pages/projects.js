@@ -1,12 +1,44 @@
+import Head from 'next/head'
+import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Code2, Github, ExternalLink } from 'lucide-react'
+import { X, Code2, Github, ExternalLink, BookOpen, ArrowRight, Layers } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import ProjectCard from '../components/ProjectCard'
 import { projects } from '../data/projects'
 import { publications } from '../data/publications'
+import { SITE_URL } from '../data/site'
+import { jsonLd } from '../lib/jsonld'
+
+/* Schema.org ItemList with SoftwareSourceCode for machine-readable research software indexing */
+const PROJECTS_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Research Systems and Software Implementations | Ali Akarma',
+  url: `${SITE_URL}/projects/`,
+  description: 'Technical implementations of safety-aligned agentic systems, multi-agent frameworks, and trustworthy ML testbeds by Ali Akarma.',
+  numberOfItems: projects.length,
+  itemListElement: projects.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'SoftwareSourceCode',
+      name: p.title,
+      description: p.description,
+      programmingLanguage: p.technologies,
+      keywords: p.tags,
+      author: {
+        '@type': 'Person',
+        name: 'Ali Akarma',
+        url: `${SITE_URL}/`,
+      },
+      ...(p.github ? { codeRepository: p.github } : {}),
+      ...(p.demo ? { targetProduct: { '@type': 'WebApplication', url: p.demo } } : {}),
+    },
+  })),
+}
 
 /* ─── Project Modal ─── */
 function ProjectModal({ project, onClose }) {
@@ -172,7 +204,12 @@ export default function Projects() {
         title="Research Systems & Projects" 
         description="Technical implementation of safety-aligned agentic systems: coordinating heterogeneous agents under Lagrangian safety constraints."
       />
-
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(PROJECTS_JSONLD) }}
+        />
+      </Head>
 
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">
@@ -230,6 +267,51 @@ export default function Projects() {
                     <ProjectCard project={project} onClick={() => setSelected(project)} />
                   </motion.div>
                 ))}
+              </div>
+            </SectionReveal>
+
+            {/* Cross-linking to Research Archive & Research Notes */}
+            <SectionReveal delay={0.2}>
+              <div className="mt-16 grid sm:grid-cols-2 gap-4">
+                <Link
+                  href="/research/"
+                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
+                >
+                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
+                    <BookOpen size={18} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
+                      Peer-Reviewed Research Archive
+                    </h3>
+                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
+                      Read full academic papers, citations, BibTeX entries, and published DOIs behind these systems.
+                    </p>
+                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
+                      Explore Publications <ArrowRight size={11} aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/blog/"
+                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
+                >
+                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
+                    <Layers size={18} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
+                      Research Notes &amp; Summaries
+                    </h3>
+                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
+                      Read concise breakdowns of threat models, experimental benchmarks, and practical takeaways.
+                    </p>
+                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
+                      Read Research Notes <ArrowRight size={11} aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
               </div>
             </SectionReveal>
 

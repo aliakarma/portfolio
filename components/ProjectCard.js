@@ -56,6 +56,14 @@ export default function ProjectCard({ project, onClick }) {
           {project.description}
         </p>
 
+        {/* Machine-readable context for search bots and screen readers */}
+        {(project.problem || project.approach) && (
+          <div className="sr-only">
+            {project.problem && <p>Problem: {project.problem}</p>}
+            {project.approach && <p>Technical Approach: {project.approach}</p>}
+          </div>
+        )}
+
         {/* Tags */}
         <div className="flex flex-wrap gap-1.5 mb-4">
           {project.tags.map((tag) => (

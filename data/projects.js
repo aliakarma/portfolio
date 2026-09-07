@@ -15,7 +15,7 @@ export const projects = [
     tags: ["Disaster Response", "RL", "Safety"],
     themes: ["Agentic AI", "AI Safety", "MARL"],
     featured: true,
-    status: "Under Review",
+    status: "Accepted",
     paper: "https://arxiv.org/pdf/2511.22767",
   },
   {
@@ -31,8 +31,8 @@ export const projects = [
     tags: ["Smart Cities", "Digital Twins", "Infrastructure"],
     themes: ["Digital Twins", "Smart Cities", "Agentic AI"],
     featured: true,
-    status: "Under Review",
-    paper: null,
+    status: "Published",
+    paper: "https://doi.org/10.1371/journal.pone.0353610",
   },
   {
     id: 3,
@@ -45,7 +45,7 @@ export const projects = [
     themes: ["Agentic AI", "Optimization"],
     featured: true,
     status: "Published",
-    paper: null,
+    paper: "https://doi.org/10.48084/etasr.15640",
   },
   {
     id: 4,
@@ -122,7 +122,7 @@ export const projects = [
     tags: ["IoUT", "Trust Inference", "Cybersecurity"],
     themes: ["Agentic AI", "AI Safety", "Blockchain"],
     featured: false,
-    status: "Under Review",
+    status: "Accepted",
     paper: "https://arxiv.org/pdf/2604.04262",
   },
   {
@@ -148,7 +148,7 @@ export const projects = [
     tags: ["Retail", "Inventory", "Optimization"],
     themes: ["Agentic AI", "Optimization", "AI Governance"],
     featured: false,
-    status: "Research",
+    status: "Accepted",
     paper: "https://arxiv.org/pdf/2511.23366",
   },
   {
@@ -161,8 +161,8 @@ export const projects = [
     tags: ["Wildfire Monitoring", "Safety-Critical AI", "Governance"],
     themes: ["Agentic AI", "AI Safety", "AI Governance"],
     featured: false,
-    status: "Published",
-    paper: "https://arxiv.org/pdf/2604.04262",
+    status: "Accepted",
+    paper: "https://arxiv.org/pdf/2604.04265",
   },
   {
     id: 13,
@@ -189,7 +189,7 @@ export const projects = [
     themes: ["Agentic AI", "Healthcare AI", "Accessibility"],
     featured: false,
     status: "Published",
-    paper: null,
+    paper: "https://dx.doi.org/10.57197/JDR-2026-0830",
   },
   {
     id: 15,
@@ -243,8 +243,8 @@ export const projects = [
     tags: ["Federated Learning", "Privacy", "Security"],
     themes: ["AI Safety", "Security", "Federated Learning"],
     featured: false,
-    status: "Published",
-    paper: null,
+    status: "Accepted",
+    paper: "https://arxiv.org/pdf/2609.02971",
   },
 
   {
@@ -258,7 +258,7 @@ export const projects = [
     themes: ["Agentic AI", "Federated Learning"],
     featured: true,
     status: "Published",
-    paper: null,
+    paper: "https://doi.org/10.3390/smartcities9070106",
   },
   {
     id: 20,

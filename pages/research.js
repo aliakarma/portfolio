@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Filter, BookOpen, ExternalLink, TrendingUp, FileText, Layers, ChevronDown, ChevronUp } from 'lucide-react'
+import { Filter, BookOpen, ExternalLink, TrendingUp, FileText, Layers, ChevronDown, ChevronUp, Code2, ArrowRight } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
@@ -370,6 +370,51 @@ export default function Research() {
                 No publications match the selected filters.
               </div>
             )}
+
+            {/* Cross-linking to Applied Systems & Research Notes */}
+            <SectionReveal delay={0.2}>
+              <div className="mt-16 pt-12 border-t border-gold-500/10 grid sm:grid-cols-2 gap-4">
+                <Link
+                  href="/projects/"
+                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
+                >
+                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
+                    <Code2 size={18} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
+                      Applied Research Systems
+                    </h3>
+                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
+                      See these research methodologies implemented in software, simulation testbeds, and multi-agent frameworks.
+                    </p>
+                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
+                      Explore 24 Systems <ArrowRight size={11} aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/blog/"
+                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
+                >
+                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
+                    <Layers size={18} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
+                      Research Notes &amp; Summaries
+                    </h3>
+                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
+                      Read concise article breakdowns covering the problem motivation, key contributions, and graphical abstracts.
+                    </p>
+                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
+                      Read 25 Research Notes <ArrowRight size={11} aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            </SectionReveal>
 
           </div>
         </div>

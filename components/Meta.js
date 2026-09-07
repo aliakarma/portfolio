@@ -8,7 +8,7 @@ export default function Meta({
   description,
   image = OG_IMAGE_URL,
   type = 'website',
-  robots = 'index, follow',
+  robots = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
 }) {
   const router = useRouter()
 
@@ -38,6 +38,8 @@ export default function Meta({
       <meta name="application-name" content={SITE_NAME} />
       <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
       <meta name="robots" content={robots} />
+      <meta name="googlebot" content={robots} />
+      <meta name="bingbot" content={robots} />
       <link rel="canonical" href={canonical} />
 
       {/* Open Graph */}

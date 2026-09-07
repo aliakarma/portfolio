@@ -1,12 +1,44 @@
+import Head from 'next/head'
+import Link from 'next/link'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Clock, ArrowRight, Tag, ChevronDown, ChevronUp, MapPin, Image as ImageIcon, ExternalLink } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Clock, ArrowRight, Tag, ChevronDown, ChevronUp, MapPin, Image as ImageIcon, ExternalLink, BookOpen, Code2 } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import GraphicalAbstract, { fullSizeUrl } from '../components/GraphicalAbstract'
 import { blogPosts } from '../data/blog'
 import { profile } from '../data/profile'
+import { SITE_URL } from '../data/site'
+import { jsonLd } from '../lib/jsonld'
+
+/* Schema.org Blog and BlogPosting structured data for rich search engine indexing */
+const BLOG_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Research Notes | Ali Akarma',
+  url: `${SITE_URL}/blog/`,
+  description: 'Research notes, paper summaries, and technical breakdowns of peer-reviewed AI safety, agentic AI, and trustworthy ML research by Ali Akarma.',
+  publisher: {
+    '@type': 'Person',
+    name: 'Ali Akarma',
+    url: `${SITE_URL}/`,
+  },
+  blogPost: blogPosts.map((post) => ({
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    url: `${SITE_URL}/blog/#note-${post.id}`,
+    keywords: post.tags,
+    articleSection: post.category,
+    author: {
+      '@type': 'Person',
+      name: 'Ali Akarma',
+      url: `${SITE_URL}/`,
+    },
+  })),
+}
 
 export default function Blog() {
   const [expanded, setExpanded] = useState(null)
@@ -15,9 +47,14 @@ export default function Blog() {
     <>
       <Meta 
         title="Research Notes" 
-        description="Research notes and summaries by Ali Akarma — distilled from peer-reviewed publications on agentic AI, safety, and governance."
+        description="Research notes and summaries by Ali Akarma — distilled from 25 peer-reviewed publications on agentic AI, safety, and governance."
       />
-
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(BLOG_JSONLD) }}
+        />
+      </Head>
 
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">
@@ -50,6 +87,7 @@ export default function Blog() {
                 return (
                   <motion.article
                     key={post.id}
+                    id={`note-${post.id}`}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -99,6 +137,7 @@ export default function Blog() {
                         <button
                           onClick={() => setExpanded(isOpen ? null : post.id)}
                           aria-expanded={isOpen}
+                          aria-controls={`post-content-${post.id}`}
                           aria-label={isOpen ? `Collapse ${post.title}` : `Expand ${post.title}`}
                           className="flex items-center gap-1.5 font-mono text-xs text-parchment-400 hover:text-gold-400 transition-colors flex-shrink-0 min-h-[36px] min-w-[60px] justify-end px-1"
                         >
@@ -109,81 +148,124 @@ export default function Blog() {
                         </button>
                       </div>
 
-                      {/* Expanded detail */}
-                      <AnimatePresence>
-                        {isOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="mt-5 pt-5 border-t border-gold-500/10 space-y-5">
+                      {/* Expanded detail — fully rendered into static HTML so search engines index full text */}
+                      <div
+                        id={`post-content-${post.id}`}
+                        aria-hidden={!isOpen}
+                        className={`transition-all duration-300 overflow-hidden ${
+                          isOpen
+                            ? 'max-h-[3500px] opacity-100 mt-5 pt-5 border-t border-gold-500/10'
+                            : 'max-h-0 opacity-0 pointer-events-none'
+                        }`}
+                      >
+                        <div className="space-y-5">
 
-                              {post.summary && (
-                                <div>
-                                  <p className="font-mono text-xs text-gold-400/60 tracking-widest uppercase mb-2">Overview</p>
-                                  <p className="font-body text-sm text-parchment-300 leading-relaxed">{post.summary}</p>
-                                </div>
-                              )}
-
-                              {post.keyContributions && (
-                                <div>
-                                  <p className="font-mono text-xs text-gold-400/60 tracking-widest uppercase mb-2">Key Contributions</p>
-                                  <ul className="space-y-1.5">
-                                    {post.keyContributions.map((c, j) => (
-                                      <li key={j} className="flex items-start gap-2 font-body text-sm text-parchment-300 leading-relaxed">
-                                        <span className="text-gold-400 mt-1 flex-shrink-0" aria-hidden="true">›</span>{c}
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )}
-
-                              {post.implications && (
-                                <div>
-                                  <p className="font-mono text-xs text-gold-400/60 tracking-widest uppercase mb-2">Practical Implications</p>
-                                  <p className="font-body text-sm text-parchment-300 leading-relaxed">{post.implications}</p>
-                                </div>
-                              )}
-
-                              {post.graphicalAbstract && (
-                                <div>
-                                  <div className="flex items-center justify-between mb-2">
-                                    <p className="font-mono text-xs text-gold-400/60 tracking-widest uppercase flex items-center gap-1.5">
-                                      <ImageIcon size={12} className="text-gold-400" aria-hidden="true" />
-                                      Graphical Abstract
-                                    </p>
-                                    <a
-                                      href={fullSizeUrl(post.graphicalAbstract)}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="font-mono text-[11px] text-gold-400 hover:underline flex items-center gap-1"
-                                    >
-                                      <ExternalLink size={10} aria-hidden="true" /> Open in New Tab
-                                    </a>
-                                  </div>
-                                  <div className="relative group rounded-md overflow-hidden border border-gold-500/20 bg-noir-900/60 p-1">
-                                    <GraphicalAbstract
-                                      slug={post.graphicalAbstract}
-                                      title={post.title}
-                                      className="w-full h-auto max-h-[420px] object-contain rounded-md transition-transform duration-300 group-hover:scale-[1.01]"
-                                    />
-                                  </div>
-                                </div>
-                              )}
-
+                          {post.summary && (
+                            <div>
+                              <p className="font-mono text-xs text-gold-400/60 tracking-widest uppercase mb-2">Overview</p>
+                              <p className="font-body text-sm text-parchment-300 leading-relaxed">{post.summary}</p>
                             </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                          )}
+
+                          {post.keyContributions && (
+                            <div>
+                              <p className="font-mono text-xs text-gold-400/60 tracking-widest uppercase mb-2">Key Contributions</p>
+                              <ul className="space-y-1.5">
+                                {post.keyContributions.map((c, j) => (
+                                  <li key={j} className="flex items-start gap-2 font-body text-sm text-parchment-300 leading-relaxed">
+                                    <span className="text-gold-400 mt-1 flex-shrink-0" aria-hidden="true">›</span>{c}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {post.implications && (
+                            <div>
+                              <p className="font-mono text-xs text-gold-400/60 tracking-widest uppercase mb-2">Practical Implications</p>
+                              <p className="font-body text-sm text-parchment-300 leading-relaxed">{post.implications}</p>
+                            </div>
+                          )}
+
+                          {post.graphicalAbstract && (
+                            <div>
+                              <div className="flex items-center justify-between mb-2">
+                                <p className="font-mono text-xs text-gold-400/60 tracking-widest uppercase flex items-center gap-1.5">
+                                  <ImageIcon size={12} className="text-gold-400" aria-hidden="true" />
+                                  Graphical Abstract
+                                </p>
+                                <a
+                                  href={fullSizeUrl(post.graphicalAbstract)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="font-mono text-[11px] text-gold-400 hover:underline flex items-center gap-1"
+                                >
+                                  <ExternalLink size={10} aria-hidden="true" /> Open in New Tab
+                                </a>
+                              </div>
+                              <div className="relative group rounded-md overflow-hidden border border-gold-500/20 bg-noir-900/60 p-1">
+                                <GraphicalAbstract
+                                  slug={post.graphicalAbstract}
+                                  title={post.title}
+                                  className="w-full h-auto max-h-[420px] object-contain rounded-md transition-transform duration-300 group-hover:scale-[1.01]"
+                                />
+                              </div>
+                            </div>
+                          )}
+
+                        </div>
+                      </div>
 
                     </div>
                   </motion.article>
                 )
               })}
             </div>
+
+            {/* Cross-linking to Research Archive & Projects */}
+            <SectionReveal delay={0.25}>
+              <div className="mt-12 grid sm:grid-cols-2 gap-4">
+                <Link
+                  href="/research/"
+                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
+                >
+                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
+                    <BookOpen size={18} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
+                      Peer-Reviewed Publications
+                    </h3>
+                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
+                      Read full academic papers with official DOIs, BibTeX citations, and publication PDFs.
+                    </p>
+                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
+                      Explore Research Archive <ArrowRight size={11} aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/projects/"
+                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
+                >
+                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
+                    <Code2 size={18} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
+                      Applied Research Systems
+                    </h3>
+                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
+                      Browse open-source implementations, multi-agent frameworks, and simulation testbeds.
+                    </p>
+                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
+                      View Research Systems <ArrowRight size={11} aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            </SectionReveal>
 
             <SectionReveal delay={0.3}>
               <div className="mt-16 glass-card p-8 text-center border border-gold-500/20">

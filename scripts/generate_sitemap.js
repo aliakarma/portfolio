@@ -9,13 +9,13 @@ const path = require('path')
 const SITE_URL = 'https://aliakarma.codes'
 
 const ROUTES = [
-  { path: '/',          changefreq: 'weekly',  priority: '1.0' },
-  { path: '/about/',    changefreq: 'monthly', priority: '0.8' },
-  { path: '/research/', changefreq: 'weekly',  priority: '0.9' },
-  { path: '/projects/', changefreq: 'monthly', priority: '0.7' },
-  { path: '/blog/',     changefreq: 'weekly',  priority: '0.8' },
-  { path: '/news/',     changefreq: 'monthly', priority: '0.6' },
-  { path: '/contact/',  changefreq: 'monthly', priority: '0.5' },
+  { path: '/',          changefreq: 'daily',   priority: '1.0' },
+  { path: '/research/', changefreq: 'weekly',  priority: '0.95' },
+  { path: '/projects/', changefreq: 'weekly',  priority: '0.90' },
+  { path: '/blog/',     changefreq: 'weekly',  priority: '0.90' },
+  { path: '/news/',     changefreq: 'weekly',  priority: '0.85' },
+  { path: '/about/',    changefreq: 'weekly',  priority: '0.85' },
+  { path: '/contact/',  changefreq: 'weekly',  priority: '0.80' },
 ]
 
 const today = new Date().toISOString().slice(0, 10)

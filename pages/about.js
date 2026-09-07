@@ -1,18 +1,18 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { MapPin, Calendar, Award, BookOpen, Microscope, GraduationCap, Github, Linkedin, Mail, Link2 } from 'lucide-react'
+import { MapPin, Calendar, Award, BookOpen, Microscope, GraduationCap, Github, Linkedin, Mail, Link2, Code2, ArrowRight } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
 import { publications } from '../data/publications'
 import { underReviewPublications } from '../data/underReview'
-import { SITE_URL } from '../data/site'
+import { SITE_URL, PROFILE_IMAGE_URL } from '../data/site'
 import { jsonLd } from '../lib/jsonld'
 
 export default function About() {
   const totalPapers = publications.length + underReviewPublications.length
-
 
   const socialLinks = [
     { icon: <Github   size={16} />, href: profile.github,            label: 'GitHub' },
@@ -20,6 +20,38 @@ export default function About() {
     { icon: <Mail     size={16} />, href: `mailto:${profile.email}`, label: 'Email' },
     ...(profile.orcid ? [{ icon: <Link2 size={16} />, href: profile.orcid, label: 'ORCID Profile' }] : []),
   ]
+
+  const ABOUT_JSONLD = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    name: 'About Ali Akarma',
+    url: `${SITE_URL}/about/`,
+    mainEntity: {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#person`,
+      name: 'Ali Akarma',
+      url: `${SITE_URL}/`,
+      image: PROFILE_IMAGE_URL,
+      jobTitle: 'AI Researcher',
+      description: 'AI Researcher specializing in Agentic AI, AI Safety, and AI Governance.',
+      affiliation: {
+        '@type': 'CollegeOrUniversity',
+        name: 'Islamic University of Madinah',
+      },
+      alumniOf: {
+        '@type': 'CollegeOrUniversity',
+        name: 'Islamic University of Madinah',
+      },
+      knowsAbout: profile.researchInterests,
+      award: profile.awards.map(a => `${a.title} (${a.issuer}, ${a.year})`),
+      sameAs: [
+        profile.linkedin,
+        profile.github,
+        profile.scholar,
+        ...(profile.orcid ? [profile.orcid] : []),
+      ],
+    },
+  }
 
   return (
     <>
@@ -31,13 +63,7 @@ export default function About() {
       <Head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: jsonLd({
-              '@context': 'https://schema.org',
-              '@type': 'ProfilePage',
-              mainEntity: { '@id': `${SITE_URL}/#person` },
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(ABOUT_JSONLD) }}
         />
       </Head>
 
@@ -285,6 +311,49 @@ export default function About() {
                   </div>
                 </SectionReveal>
 
+                {/* Cross-navigation to Research, Projects, and Contact */}
+                <SectionReveal delay={0.3}>
+                  <div className="pt-8 border-t border-gold-500/10 grid sm:grid-cols-3 gap-4">
+                    <Link
+                      href="/research/"
+                      className="glass-card p-5 border border-gold-500/15 hover:border-gold-500/40 transition-all group"
+                    >
+                      <BookOpen size={18} className="text-gold-400 mb-2" aria-hidden="true" />
+                      <h4 className="font-display text-base text-parchment-100 group-hover:text-gold-300 transition-colors">
+                        Research Archive
+                      </h4>
+                      <p className="font-body text-xs text-parchment-400 mt-1">
+                        17+ peer-reviewed publications and manuscripts.
+                      </p>
+                    </Link>
+
+                    <Link
+                      href="/projects/"
+                      className="glass-card p-5 border border-gold-500/15 hover:border-gold-500/40 transition-all group"
+                    >
+                      <Code2 size={18} className="text-gold-400 mb-2" aria-hidden="true" />
+                      <h4 className="font-display text-base text-parchment-100 group-hover:text-gold-300 transition-colors">
+                        Research Systems
+                      </h4>
+                      <p className="font-body text-xs text-parchment-400 mt-1">
+                        24 applied AI safety implementations &amp; codebases.
+                      </p>
+                    </Link>
+
+                    <Link
+                      href="/contact/"
+                      className="glass-card p-5 border border-gold-500/15 hover:border-gold-500/40 transition-all group"
+                    >
+                      <Mail size={18} className="text-gold-400 mb-2" aria-hidden="true" />
+                      <h4 className="font-display text-base text-parchment-100 group-hover:text-gold-300 transition-colors">
+                        Get In Touch
+                      </h4>
+                      <p className="font-body text-xs text-parchment-400 mt-1">
+                        Collaboration inquiries &amp; graduate opportunities.
+                      </p>
+                    </Link>
+                  </div>
+                </SectionReveal>
 
               </div>
             </div>

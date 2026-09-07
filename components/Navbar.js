@@ -6,12 +6,12 @@ import { Menu, X, FileText } from 'lucide-react'
 
 const navLinks = [
   { label: 'Home',     href: '/' },
-  { label: 'About',    href: '/about' },
-  { label: 'News',     href: '/news' },
-  { label: 'Research', href: '/research' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Notes',    href: '/blog' },
-  { label: 'Contact',  href: '/contact' },
+  { label: 'About',    href: '/about/' },
+  { label: 'News',     href: '/news/' },
+  { label: 'Research', href: '/research/' },
+  { label: 'Projects', href: '/projects/' },
+  { label: 'Notes',    href: '/blog/' },
+  { label: 'Contact',  href: '/contact/' },
 ]
 
 export default function Navbar() {
@@ -102,9 +102,12 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav links */}
+          {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-0.5" role="list">
             {navLinks.map((link) => {
-              const active = router.pathname === link.href
+              const currentPath = router.pathname.endsWith('/') ? router.pathname : `${router.pathname}/`
+              const linkPath = link.href.endsWith('/') ? link.href : `${link.href}/`
+              const active = currentPath === linkPath || (link.href === '/' && router.pathname === '/')
               return (
                 <Link
                   key={link.href}
@@ -137,6 +140,15 @@ export default function Navbar() {
             </a>
           </div>
 
+          {/* Crawler and screen-reader accessible navigation ensuring all search bots index every route */}
+          <nav aria-label="Accessible site navigation" className="sr-only">
+            {navLinks.map((link) => (
+              <Link key={`sr-${link.href}`} href={link.href}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
           {/* Mobile hamburger — min 44px touch target */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -165,7 +177,9 @@ export default function Navbar() {
           >
             <div className="px-6 py-6 space-y-1" role="list">
               {navLinks.map((link) => {
-                const active = router.pathname === link.href
+                const currentPath = router.pathname.endsWith('/') ? router.pathname : `${router.pathname}/`
+                const linkPath = link.href.endsWith('/') ? link.href : `${link.href}/`
+                const active = currentPath === linkPath || (link.href === '/' && router.pathname === '/')
                 return (
                   <Link
                     key={link.href}

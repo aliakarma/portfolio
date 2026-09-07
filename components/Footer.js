@@ -56,7 +56,32 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="section-divider mt-8" />
+        {/* Site directory navigation for users and search engine crawlers */}
+        <nav aria-label="Footer navigation" className="my-8 pt-8 border-t border-gold-500/10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+          <Link href="/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
+            Home
+          </Link>
+          <Link href="/about/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
+            About
+          </Link>
+          <Link href="/research/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
+            Research Archive
+          </Link>
+          <Link href="/projects/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
+            Research Systems
+          </Link>
+          <Link href="/blog/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
+            Research Notes
+          </Link>
+          <Link href="/news/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
+            News Feed
+          </Link>
+          <Link href="/contact/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
+            Contact
+          </Link>
+        </nav>
+
+        <div className="section-divider mt-4" />
         <p className="text-center font-mono text-xs text-parchment-400/60 mt-4">Madinah, Saudi Arabia</p>
       </div>
     </footer>

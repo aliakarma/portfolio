@@ -7,6 +7,7 @@ export default function Document() {
     <Html lang="en" className="dark">
       <Head>
         <meta charSet="utf-8" />
+        <meta name="google-site-verification" content="google0403a632ca2d950b" />
         <meta
           name="keywords"
           content="Ali Akarma, AI Research, Agentic AI, AI Safety, LLMs, Machine Learning, Islamic University of Madinah"

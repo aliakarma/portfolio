@@ -16,7 +16,7 @@
 | 📜 **Scroll Reveal** | Intersection Observer-based staggered animations |
 | 🧪 **Research Vision** | Highlighted section with full research statement |
 | 🕸️ **Knowledge Graph** | D3.js force-directed research theme network |
-| 📚 **Publication Dashboard** | 12 papers with filtering by status, type, topic |
+| 📚 **Publication Dashboard** | 19 publications & manuscripts with filtering by status, type, topic |
 | 📋 **BibTeX Viewer** | One-click BibTeX copy for every publication |
 | 🔬 **Reproducibility Panel** | Code/Dataset/Notebook links per paper |
 | 📊 **Citation Metrics** | Scholar metrics dashboard (h-index, citations, i10) |
@@ -34,16 +34,18 @@ portfolio/
 │
 ├── data/                        ← All content lives here
 │   ├── profile.js               ← Personal info, bio, education, awards
-│   ├── publications.js          ← All 12 papers with BibTeX, abstracts
-│   ├── projects.js              ← 6 research projects
+│   ├── publications.js          ← Accepted & published papers with BibTeX, abstracts
+│   ├── underReview.js           ← Manuscripts under peer review
+│   ├── projects.js              ← 24 research projects with linked publications
 │   ├── researchThemes.js        ← Knowledge graph nodes & edges
-│   └── blog.js                  ← Writing / blog posts
+│   └── blog.js                  ← 19 research notes / blog posts
 │
 ├── components/
 │   ├── Navbar.js                ← Floating nav with scroll behavior
 │   ├── Footer.js                ← Site footer with social links
 │   ├── PublicationCard.js       ← Rich card: abstract, BibTeX, reproducibility
-│   ├── ProjectCard.js           ← Project card with modal
+│   ├── ProjectCard.js           ← Project card with modal & linked publication
+│   ├── GraphicalAbstract.js     ← Responsive AVIF/WebP graphical abstracts
 │   ├── ResearchGraph.js         ← D3.js force-directed knowledge graph
 │   ├── PageTransition.js        ← Framer Motion page wrapper
 │   ├── SectionReveal.js         ← Scroll-triggered reveal animation
@@ -54,16 +56,17 @@ portfolio/
 │   ├── about.js                 ← Bio, education, experience, awards
 │   ├── research.js              ← Full publication dashboard + metrics
 │   ├── projects.js              ← Project grid with modal details
-│   ├── skills.js                ← Radar chart + skill bars + clusters
-│   ├── blog.js                  ← Writing section
+│   ├── blog.js                  ← Writing section (research notes)
+│   ├── news.js                  ← Chronological news & presentation updates
 │   ├── contact.js               ← Contact form + copy email
 │   ├── 404.js                   ← Custom 404
 │   ├── _app.js
 │   └── _document.js
 │
 ├── public/
-│   ├── profile.jpg              ← Add your photo here
-│   └── Ali_Akarma_CV.pdf        ← Add your CV here
+│   ├── profile-384.png          ← Optimized profile photo (AVIF, WebP, PNG)
+│   ├── graphical-abstracts/     ← Web-ready graphical abstracts (AVIF, WebP)
+│   └── Ali_Akarma_CV.pdf        ← Academic CV
 │
 ├── styles/
 │   └── globals.css              ← Scholarly Noir theme variables

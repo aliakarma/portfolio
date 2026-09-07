@@ -1,0 +1,22 @@
+# Ali Akarma — AI Safety & Agentic AI Researcher
+
+> Official website and academic portfolio: https://aliakarma.codes/
+
+Ali Akarma is an AI Researcher specializing in Agentic AI, AI Safety, and AI Governance. His research focuses on designing autonomous multi-agent architectures that fail safely by design, with explicit oversight, cryptographic trust-anchors, and verifiable runtime constraints.
+
+## Core Sections & Canonical URLs
+
+- **Home**: [https://aliakarma.codes/](https://aliakarma.codes/) — Research vision, core theses, and interactive research knowledge graph.
+- **About**: [https://aliakarma.codes/about/](https://aliakarma.codes/about/) — Academic biography, education at Islamic University of Madinah, research experience, technical expertise, and awards.
+- **Research Archive**: [https://aliakarma.codes/research/](https://aliakarma.codes/research/) — Archive of 17+ peer-reviewed publications across IEEE conferences, Springer, PLOS ONE, and MDPI, with full abstracts, DOIs, BibTeX, and PDFs.
+- **Research Systems & Projects**: [https://aliakarma.codes/projects/](https://aliakarma.codes/projects/) — 24 applied research systems implementing safety-critical multi-agent coordination, federated learning defenses, and governance frameworks.
+- **Research Notes**: [https://aliakarma.codes/blog/](https://aliakarma.codes/blog/) — 25 distilled research articles breaking down peer-reviewed publications, key contributions, practical implications, and graphical abstracts.
+- **News Feed**: [https://aliakarma.codes/news/](https://aliakarma.codes/news/) — Chronological timeline of paper acceptances, conference presentations, and research milestones.
+- **Contact**: [https://aliakarma.codes/contact/](https://aliakarma.codes/contact/) — Collaboration inquiries, graduate research opportunities, and academic contact details.
+
+## External Profiles
+
+- Google Scholar: https://scholar.google.com/citations?user=kQZZJtYAAAAJ
+- GitHub: https://github.com/aliakarma
+- LinkedIn: https://www.linkedin.com/in/aliakarma
+- ORCID: https://orcid.org/0009-0002-6687-9380

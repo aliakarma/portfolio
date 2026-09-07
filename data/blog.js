@@ -2,6 +2,26 @@
 
 export const blogPosts = [
   {
+    id: 25,
+    title: "Privacy Leakage in Federated Learning: Client Identity Inference and Defenses for Inertial Sensing in Vehicular Networks",
+    date: "2026-09-06",
+    category: "Federated Learning & Privacy",
+    readTime: "8 min",
+    excerpt: "Federated learning is widely heralded as privacy-preserving because raw sensor data never leaves the edge. This paper presented at IEEE VTC 2026 reveals that undefended weight deltas allow an honest-but-curious server to identify clients with near-perfect accuracy (≈1.000), and formulates rigorous clip-then-noise and ensemble defenses with formal (ε, δ)-DP guarantees.",
+    summary: "As connected vehicles move toward 5G/6G edge intelligence, federated learning (FL) is promoted as a privacy-preserving framework for collaborative model training across vehicles and roadside infrastructure without centralizing raw telemetry. However, gradient updates transmitted to the aggregation server retain distinct behavioral signatures. Presented at the IEEE 104th Vehicular Technology Conference (VTC2026-Fall), this research systematically investigates server-side client identity inference from weight deltas using inertial measurement unit (IMU) telemetry on the UCI HAR benchmark as an accessible proxy for onboard connected vehicle streams. Across five attack classifiers and five non-IID client partitions, an honest-but-curious server recovers client identities with near-perfect accuracy (≈1.000) from undefended updates. To neutralize this vulnerability, the paper evaluates a lightweight clip-then-noise defense swept across Gaussian noise levels under fixed clipping (C = 1.0) with formal (ε, δ)-differential privacy accounted via Rényi DP, alongside an Ensemble FL architecture providing a 1/K structural anonymity-set bound. The findings reveal a practical operating region (σ ∈ [0.1, 0.2]) that suppresses attack accuracy to near-random while incurring less than 5% relative utility loss.",
+    keyContributions: [
+      "Empirical demonstration of identity leakage: Proves that undefended weight deltas in federated learning leak sufficient behavioral patterns for an honest-but-curious server to achieve ≈1.000 client identification accuracy across five non-IID partitions and five attack classifiers",
+      "Clip-then-noise defense with Rényi DP accounting: Evaluates Gaussian noise perturbations (σ ∈ [0.00, 1.00]) under fixed L2 clipping (C = 1.0), identifying a Pareto-optimal operating sweet spot (σ ∈ [0.1, 0.2]) that drives attacker advantage to near-random while preserving >95% relative model utility",
+      "Ensemble FL structural privacy: Introduces an ensemble partitioning strategy that enforces a 1/K anonymity-set bound without adding noise, providing complementary defense against server-side de-anonymization",
+      "Cryptographically verifiable evaluation: Guarantees rigorous evaluation through SHA-256 gradient disjointness verification between train and evaluation sets, count-normalized attacker-advantage metrics, and evaluation across multiple random seeds",
+      "Open-source research pipeline: Released full reproducible implementation and evaluation scripts on GitHub (aliakarma/PPFL-Sensors)",
+    ],
+    implications: "Confirms that privacy cannot be taken for granted in vehicular edge AI simply because raw sensor data is kept local. In safety-critical V2X environments where vehicle location, driving habits, and identities must remain untraceable, federated systems require principled differential-privacy noise injection or structural ensemble aggregation to protect user anonymity against curious server operators.",
+    tags: ["Federated Learning", "AI Safety", "Privacy", "Cybersecurity", "Vehicular Networks"],
+    venue: "IEEE VTC 2026",
+    graphicalAbstract: "plfl",
+  },
+  {
     id: 24,
     title: "Agentic AI for Inclusive Assistive Ecosystems: Architecture, Governance, and Personalized Support for People with Disabilities",
     date: "2026-08-26",

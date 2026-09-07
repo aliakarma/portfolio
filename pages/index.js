@@ -3,12 +3,15 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { Github, Linkedin, Mail, BookOpen, ArrowRight, FileText, Star, Quote, Layers, Award } from 'lucide-react'
+import { Github, Linkedin, Mail, BookOpen, ArrowRight, FileText, Star, Quote, Layers, Award, Code2, Newspaper, Clock } from 'lucide-react'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
 import { publications } from '../data/publications'
 import { underReviewPublications } from '../data/underReview'
+import { projects } from '../data/projects'
+import { blogPosts } from '../data/blog'
+import { newsData } from './news'
 
 import Meta from '../components/Meta'
 import AuthorHighlight from '../components/AuthorHighlight'
@@ -128,6 +131,10 @@ export default function Home() {
     })
     .slice(0, 3)
 
+  const featuredProjects = projects.filter(p => p.featured).slice(0, 3)
+  const recentBlog = blogPosts.slice(0, 2)
+  const recentNews = [...newsData].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3)
+
   return (
     <>
       <Meta
@@ -237,7 +244,10 @@ export default function Home() {
                 >
                   I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 4th-year IT student at the Islamic University of Madinah and have published{' '}
                   <span className="text-gold-400 font-semibold">{publications.length + underReviewPublications.length}</span>{' '}
-                  peer-reviewed papers and manuscripts on AI governance, adversarial robustness, and constrained multi-agent systems.
+                  peer-reviewed papers and manuscripts on AI governance, adversarial robustness, and constrained multi-agent systems.{' '}
+                  <Link href="/about/" className="text-gold-400 hover:underline inline-flex items-center gap-1 font-mono text-xs">
+                    Read background &rarr;
+                  </Link>
                 </motion.p>
 
                 {/* Core Research Thesis Card — Enhanced for Professionalism */}
@@ -263,14 +273,26 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 }}
-                  className="flex flex-wrap gap-3 mb-8 sm:mb-10"
+                  className="flex flex-wrap items-center gap-3 mb-8 sm:mb-10"
                 >
                   <Link
-                    href="/research"
+                    href="/research/"
                     className="group flex items-center gap-2 px-6 sm:px-8 py-3 bg-gold-500 text-noir-900 font-mono text-xs font-bold tracking-widest uppercase hover:bg-gold-400 transition-all min-h-[48px] shadow-lg shadow-gold-500/20"
                   >
                     View Research
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  </Link>
+                  <Link
+                    href="/projects/"
+                    className="flex items-center gap-2 px-5 py-3 border border-gold-500/40 text-gold-400 font-mono text-xs font-bold tracking-widest uppercase hover:bg-gold-500/10 transition-all min-h-[48px]"
+                  >
+                    Research Systems
+                  </Link>
+                  <Link
+                    href="/contact/"
+                    className="flex items-center gap-2 px-5 py-3 border border-parchment-300/20 text-parchment-300 font-mono text-xs font-bold tracking-widest uppercase hover:border-gold-500/40 hover:text-gold-400 transition-all min-h-[48px]"
+                  >
+                    Contact
                   </Link>
                   <div className="flex gap-2">
                     <a
@@ -546,11 +568,214 @@ export default function Home() {
 
             <div className="mt-6 text-center">
               <Link
-                href="/research"
+                href="/research/"
                 className="inline-flex items-center gap-2 font-mono text-xs text-gold-400 tracking-widest uppercase hover:text-gold-300 transition-colors min-h-[44px]"
               >
                 View Full Publication Archive <ArrowRight size={12} aria-hidden="true" />
               </Link>
+            </div>
+          </section>
+        </SectionReveal>
+
+        {/* ═══ FEATURED RESEARCH SYSTEMS ═══ */}
+        <SectionReveal>
+          <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pb-24">
+            <div className="section-divider mb-12" />
+            <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
+              <div>
+                <div className="flex items-center gap-4 mb-2">
+                  <div className="w-8 h-px bg-gold-500/60" aria-hidden="true" />
+                  <span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Systems & Code</span>
+                </div>
+                <h2 className="font-display text-3xl text-parchment-100">Featured Research Systems</h2>
+              </div>
+              <Link
+                href="/projects/"
+                className="font-mono text-xs text-gold-400 tracking-widest uppercase hover-underline flex items-center gap-1 self-end min-h-[44px]"
+              >
+                All {projects.length} Systems <ArrowRight size={12} aria-hidden="true" />
+              </Link>
+            </div>
+
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6">
+              {featuredProjects.map((project, i) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="glass-card p-6 flex flex-col justify-between group hover:border-gold-500/30 transition-all"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="w-8 h-8 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 flex-shrink-0">
+                        <Code2 size={14} aria-hidden="true" />
+                      </div>
+                      <span className="font-mono text-[10px] text-gold-400/80 border border-gold-500/20 px-2 py-0.5 rounded-sm">
+                        {project.status}
+                      </span>
+                    </div>
+                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="font-body text-xs text-parchment-400 line-clamp-3 leading-relaxed mb-4">
+                      {project.description}
+                    </p>
+                  </div>
+                  <div>
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {project.tags.slice(0, 3).map(tag => (
+                        <span key={tag} className="tag-badge">{tag}</span>
+                      ))}
+                    </div>
+                    <Link
+                      href="/projects/"
+                      className="font-mono text-xs text-gold-400/80 group-hover:text-gold-300 flex items-center gap-1"
+                    >
+                      System Details <ArrowRight size={10} aria-hidden="true" />
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center">
+              <Link
+                href="/projects/"
+                className="inline-flex items-center gap-2 font-mono text-xs text-gold-400 tracking-widest uppercase hover:text-gold-300 transition-colors min-h-[44px]"
+              >
+                Explore All Research Systems &amp; Projects <ArrowRight size={12} aria-hidden="true" />
+              </Link>
+            </div>
+          </section>
+        </SectionReveal>
+
+        {/* ═══ RESEARCH NOTES PREVIEW ═══ */}
+        <SectionReveal>
+          <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pb-24">
+            <div className="section-divider mb-12" />
+            <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
+              <div>
+                <div className="flex items-center gap-4 mb-2">
+                  <div className="w-8 h-px bg-gold-500/60" aria-hidden="true" />
+                  <span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Writing</span>
+                </div>
+                <h2 className="font-display text-3xl text-parchment-100">Latest Research Notes</h2>
+              </div>
+              <Link
+                href="/blog/"
+                className="font-mono text-xs text-gold-400 tracking-widest uppercase hover-underline flex items-center gap-1 self-end min-h-[44px]"
+              >
+                All {blogPosts.length} Notes <ArrowRight size={12} aria-hidden="true" />
+              </Link>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {recentBlog.map((post, i) => (
+                <motion.div
+                  key={post.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="glass-card pub-card-accent p-6 pl-7 flex flex-col justify-between group hover:border-gold-500/30 transition-all"
+                >
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="font-mono text-xs text-gold-400/80 border border-gold-500/20 px-2 py-0.5 rounded-sm">
+                        {post.category}
+                      </span>
+                      <span className="font-mono text-xs text-parchment-400/60 flex items-center gap-1">
+                        <Clock size={10} aria-hidden="true" /> {post.readTime}
+                      </span>
+                    </div>
+                    <h3 className="font-display text-xl text-parchment-100 group-hover:text-gold-200 transition-colors mb-2 leading-snug">
+                      {post.title}
+                    </h3>
+                    <p className="font-body text-sm text-parchment-300 line-clamp-3 leading-relaxed mb-4">
+                      {post.excerpt}
+                    </p>
+                  </div>
+                  <Link
+                    href={`/blog/#note-${post.id}`}
+                    className="font-mono text-xs text-gold-400 tracking-widest uppercase inline-flex items-center gap-1 group-hover:underline mt-2"
+                  >
+                    Read Note Breakdown <ArrowRight size={11} aria-hidden="true" />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+        </SectionReveal>
+
+        {/* ═══ RECENT NEWS & MILESTONES ═══ */}
+        <SectionReveal>
+          <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pb-24">
+            <div className="section-divider mb-12" />
+            <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
+              <div>
+                <div className="flex items-center gap-4 mb-2">
+                  <div className="w-8 h-px bg-gold-500/60" aria-hidden="true" />
+                  <span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Timeline</span>
+                </div>
+                <h2 className="font-display text-3xl text-parchment-100">Recent Milestones</h2>
+              </div>
+              <Link
+                href="/news/"
+                className="font-mono text-xs text-gold-400 tracking-widest uppercase hover-underline flex items-center gap-1 self-end min-h-[44px]"
+              >
+                View Full Timeline <ArrowRight size={12} aria-hidden="true" />
+              </Link>
+            </div>
+
+            <div className="relative border-l border-gold-500/20 ml-3 space-y-6 pb-2">
+              {recentNews.map((item) => (
+                <div key={item.id} className="relative pl-6">
+                  <span className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-gold-500 ring-4 ring-noir-900" aria-hidden="true" />
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+                    <span className="font-mono text-xs text-gold-400 whitespace-nowrap">{item.date}</span>
+                    <p className="font-display text-base text-parchment-100 leading-snug flex-1">
+                      {item.title}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </SectionReveal>
+
+        {/* ═══ COLLABORATION CTA BANNER ═══ */}
+        <SectionReveal>
+          <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pb-24">
+            <div className="glass-card p-8 sm:p-12 border border-gold-500/25 bg-gold-500/[0.03] text-center relative overflow-hidden">
+              <div className="max-w-2xl mx-auto">
+                <div className="inline-flex items-center gap-2 px-3 py-1 border border-gold-500/30 bg-gold-500/10 rounded-sm mb-4">
+                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" aria-hidden="true" />
+                  <span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Open for Collaborations</span>
+                </div>
+                <h2 className="font-display text-3xl sm:text-4xl text-parchment-100 mb-4">
+                  Building Safety-Aligned <span className="gold-text italic">Autonomous AI</span>
+                </h2>
+                <p className="font-body text-parchment-300 text-sm sm:text-base leading-relaxed mb-8">
+                  Currently open to research collaborations, academic exchanges, and graduate opportunities in AI safety,
+                  multi-agent systems, and trustworthy machine learning.
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-4">
+                  <Link
+                    href="/contact/"
+                    className="px-8 py-3 bg-gold-500 text-noir-900 font-mono text-xs font-bold tracking-widest uppercase hover:bg-gold-400 transition-all min-h-[44px] shadow-lg shadow-gold-500/20"
+                  >
+                    Get In Touch
+                  </Link>
+                  <Link
+                    href="/about/"
+                    className="px-6 py-3 border border-gold-500/40 text-gold-400 font-mono text-xs tracking-widest uppercase hover:bg-gold-500/10 transition-all min-h-[44px]"
+                  >
+                    About The Researcher
+                  </Link>
+                </div>
+              </div>
             </div>
           </section>
         </SectionReveal>

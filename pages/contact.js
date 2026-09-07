@@ -1,10 +1,44 @@
+import Head from 'next/head'
+import Link from 'next/link'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Github, Linkedin, BookOpen, Copy, Check, MapPin, MessageSquare, Link2 } from 'lucide-react'
+import { Mail, Github, Linkedin, BookOpen, Copy, Check, MapPin, MessageSquare, Link2, Code2, ArrowRight } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
+import { SITE_URL } from '../data/site'
+import { jsonLd } from '../lib/jsonld'
+
+const CONTACT_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Ali Akarma',
+  url: `${SITE_URL}/contact/`,
+  description: 'Get in touch with Ali Akarma for academic collaborations on AI safety, multi-agent systems, and autonomous governance.',
+  mainEntity: {
+    '@type': 'Person',
+    name: 'Ali Akarma',
+    url: `${SITE_URL}/`,
+    email: 'mailto:aliakarma974@gmail.com',
+    jobTitle: 'AI Researcher',
+    affiliation: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Islamic University of Madinah',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Madinah',
+      addressCountry: 'SA',
+    },
+    sameAs: [
+      'https://www.linkedin.com/in/aliakarma',
+      'https://github.com/aliakarma',
+      'https://scholar.google.com/citations?user=kQZZJtYAAAAJ',
+      'https://orcid.org/0009-0002-6687-9380',
+    ],
+  },
+}
 
 /* ─── Copy Email Button ─── */
 function CopyEmail() {
@@ -88,7 +122,12 @@ export default function Contact() {
         title="Contact" 
         description="Get in touch with Ali Akarma for research collaborations on AI safety, multi-agent systems, and autonomous governance."
       />
-
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(CONTACT_JSONLD) }}
+        />
+      </Head>
 
       <PageTransition>
         <div className="min-h-screen pt-28 pb-24">
@@ -279,6 +318,52 @@ export default function Contact() {
                 </SectionReveal>
               </div>
             </div>
+
+            {/* Quick cross-navigation */}
+            <SectionReveal delay={0.25}>
+              <div className="mt-16 pt-12 border-t border-gold-500/10 grid sm:grid-cols-2 gap-4">
+                <Link
+                  href="/research/"
+                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
+                >
+                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
+                    <BookOpen size={18} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
+                      Peer-Reviewed Research Archive
+                    </h3>
+                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
+                      Review published papers, abstracts, DOIs, and citations before reaching out.
+                    </p>
+                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
+                      Explore Publications <ArrowRight size={11} aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/projects/"
+                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
+                >
+                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
+                    <Code2 size={18} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
+                      Applied Research Systems
+                    </h3>
+                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
+                      Explore autonomous systems, agentic architectures, and codebase repositories.
+                    </p>
+                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
+                      View Systems <ArrowRight size={11} aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            </SectionReveal>
+
           </div>
         </div>
       </PageTransition>

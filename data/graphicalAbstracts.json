@@ -11,14 +11,6 @@
     "width": 1600,
     "height": 893
   },
-  "climate-resilient-cities": {
-    "width": 1600,
-    "height": 893
-  },
-  "agentic-ai-chapter": {
-    "width": 1600,
-    "height": 893
-  },
   "blockchain": {
     "width": 1600,
     "height": 893
@@ -27,11 +19,19 @@
     "width": 1600,
     "height": 893
   },
-  "dijkstra": {
+  "climate-resilient-cities": {
+    "width": 1600,
+    "height": 893
+  },
+  "agentic-ai-chapter": {
     "width": 1600,
     "height": 893
   },
   "disabilities": {
+    "width": 1600,
+    "height": 893
+  },
+  "dijkstra": {
     "width": 1600,
     "height": 893
   },
@@ -51,15 +51,19 @@
     "width": 1600,
     "height": 893
   },
-  "traffic": {
-    "width": 1600,
-    "height": 893
-  },
   "inventory": {
     "width": 1600,
     "height": 893
   },
+  "traffic": {
+    "width": 1600,
+    "height": 893
+  },
   "use-of-ai-tools": {
+    "width": 1600,
+    "height": 893
+  },
+  "plfl": {
     "width": 1600,
     "height": 893
   },

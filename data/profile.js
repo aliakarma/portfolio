@@ -90,12 +90,6 @@ My work addresses the alignment problem in deployed agentic systems — explorin
 
   awards: [
     {
-      title: "Merit-Based Fully Funded Bachelor's Scholarship",
-      issuer: "Islamic University of Madinah",
-      year: 2023,
-      description: "Awarded for exceptional academic performance and potential in computer science and information technology.",
-    },
-    {
       title: "Certificate of Appreciation (Research Excellence)",
       issuer: "ICETAS 2026",
       year: 2026,
@@ -112,6 +106,12 @@ My work addresses the alignment problem in deployed agentic systems — explorin
       issuer: "University of Michigan (Coursera)",
       year: 2024,
       description: "Formal training in algorithmic problem-solving and abstraction techniques.",
+    },
+    {
+      title: "Merit-Based Fully Funded Bachelor's Scholarship",
+      issuer: "Islamic University of Madinah",
+      year: 2023,
+      description: "Awarded for exceptional academic performance and potential in computer science and information technology.",
     },
   ],
 
