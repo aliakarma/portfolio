@@ -110,7 +110,11 @@ svg {
 @media (prefers-reduced-motion: reduce) {
   .gold-shimmer {
     animation: none;
-    background: linear-gradient(135deg, #f4c040 0%, #e8a900 50%, #f4c040 100%);
+    /* background-image, not the `background` shorthand: the shorthand resets
+       background-clip to border-box, which painted a solid gold block over
+       the name instead of gradient text for reduced-motion users. */
+    background-image: linear-gradient(135deg, #f4c040 0%, #e8a900 50%, #f4c040 100%);
+    background-size: auto;
   }
 }
 
@@ -208,6 +212,15 @@ svg {
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
+}
+
+/* Navbar slide-in. CSS so it runs from first paint, not after hydration. */
+@keyframes nav-enter {
+  from { opacity: 0; transform: translateY(-80px); }
+}
+
+.nav-enter {
+  animation: nav-enter 0.6s ease-out;
 }
 
 /* ================= SAFE AREA (iOS notch support) ================= */

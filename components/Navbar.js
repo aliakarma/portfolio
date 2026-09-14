@@ -55,14 +55,17 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
+      {/*
+        The slide-in is a CSS animation (.nav-enter in globals.css), not a
+        Framer Motion initial state. A JS initial state is server-rendered as
+        opacity:0, so the navbar stayed invisible until hydration finished —
+        seconds on a slow phone. CSS starts the same animation at first paint.
+      */}
+      <nav
         ref={navRef}
         role="navigation"
         aria-label="Primary navigation"
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`nav-enter fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? 'bg-noir-900/92 backdrop-blur-md border-b border-gold-500/10 py-3'
             : 'bg-transparent py-5'
@@ -160,7 +163,7 @@ export default function Navbar() {
             {mobileOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
           </button>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile dropdown — positioned exactly below the navbar using measured height */}
       <AnimatePresence>
