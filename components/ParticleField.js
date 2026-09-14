@@ -41,12 +41,29 @@ export default function ParticleField() {
 
     let stars = makeStars(PARTICLE_COUNT, W, H)
 
-    function draw() {
+    /*
+      Performance: drawn at 30 fps. Stars drift a fraction of a pixel per
+      frame, so the extra frames were invisible, yet each one repainted a
+      full-viewport canvas beneath every backdrop-blurred card — the second
+      largest idle cost on the homepage. Movement scales with elapsed time
+      (in 60 fps steps), so the drift speed is unchanged and no longer runs
+      twice as fast on 120 Hz displays.
+    */
+    const FRAME_MS = 1000 / 30
+    let last = 0
+
+    function draw(now) {
+      animId = requestAnimationFrame(draw)
+      /* 4 ms of slack so a 60 Hz display reliably draws every other frame */
+      if (now - last < FRAME_MS - 4) return
+      const steps = last ? Math.min((now - last) / (1000 / 60), 4) : 1
+      last = now
+
       ctx.clearRect(0, 0, W, H)
       stars.forEach((s) => {
-        s.y     -= s.speed
-        s.x     += s.drift + Math.sin(Date.now() * 0.001 + s.offset) * 0.01 * s.amplitude
-        s.alpha += (Math.random() - 0.5) * 0.008
+        s.y     -= s.speed * steps
+        s.x     += (s.drift + Math.sin(now * 0.001 + s.offset) * 0.01 * s.amplitude) * steps
+        s.alpha += (Math.random() - 0.5) * 0.008 * steps
         s.alpha  = Math.max(0.05, Math.min(0.6, s.alpha))
 
         if (s.y < -2)  { s.y = H + 2; s.x = Math.random() * W }
@@ -58,10 +75,9 @@ export default function ParticleField() {
         ctx.fillStyle = `rgba(232, 169, 0, ${s.alpha})`
         ctx.fill()
       })
-      animId = requestAnimationFrame(draw)
     }
 
-    draw()
+    animId = requestAnimationFrame(draw)
 
     /*
       Performance Fix: debounced resize handler prevents rapid canvas resets
@@ -86,6 +102,7 @@ export default function ParticleField() {
       if (document.hidden) {
         cancelAnimationFrame(animId)
       } else {
+        last = 0
         animId = requestAnimationFrame(draw)
       }
     }
