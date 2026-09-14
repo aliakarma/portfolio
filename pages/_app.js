@@ -14,9 +14,14 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
   origins from the critical path and eliminates layout shift from
   late-loading fonts (size-adjusted fallbacks are generated at build).
 */
+/*
+  Cormorant Garamond is a variable font spanning exactly 300–700, so Google
+  already served one file per style for the old five-weight list. Declaring
+  it variable fetches the same files with one @font-face per subset instead
+  of five identical copies.
+*/
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
   style: ['normal', 'italic'],
   display: 'swap',
 })

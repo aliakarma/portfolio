@@ -3,7 +3,7 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { Github, Linkedin, Mail, BookOpen, ArrowRight, FileText, Star, Quote, Layers, Award, Code2, Newspaper, Clock } from 'lucide-react'
+import { Github, Linkedin, Mail, BookOpen, ArrowRight, FileText, Star, Quote, Layers, Award, Code2, Clock } from 'lucide-react'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
@@ -61,58 +61,64 @@ const socialLinks = [
   { icon: <Mail size={18} />, href: `mailto:${profile.email}`, label: 'Email' },
 ]
 
+/* Copies only the listed fields; undefined becomes null so props serialize. */
+const pick = (obj, keys) => Object.fromEntries(keys.map(k => [k, obj[k] ?? null]))
+
 /*
-  Venue lists derive from the publication data rather than being hand-counted,
-  so the homepage can't drift out of step as papers are added.
-
-  Scoped to `publications` (peer-reviewed and accepted) — under-review
-  manuscripts have no confirmed venue yet, which is why the totals here are
-  narrower than the publication count above. Most recent venue first.
+  Everything derived from the content data is computed at build time and
+  passed in as props. The homepage shows three papers, three projects, two
+  notes and three news items, but importing the data into the page itself
+  shipped every abstract, BibTeX entry and note body as JavaScript.
 */
-const venuesByType = (type) => [
-  ...new Set(
-    [...publications]
-      .sort((a, b) => b.id - a.id)
-      .filter(p => p.type === type)
-      .map(p => p.venueShort)
-  ),
-]
+export async function getStaticProps() {
+  /*
+    Venue lists derive from the publication data rather than being hand-counted,
+    so the homepage can't drift out of step as papers are added.
 
-const journalVenues = venuesByType('journal')
-const conferenceVenues = venuesByType('conference')
+    Scoped to `publications` (peer-reviewed and accepted) — under-review
+    manuscripts have no confirmed venue yet, which is why the totals here are
+    narrower than the publication count above. Most recent venue first.
+  */
+  const venuesByType = (type) => [
+    ...new Set(
+      [...publications]
+        .sort((a, b) => b.id - a.id)
+        .filter(p => p.type === type)
+        .map(p => p.venueShort)
+    ),
+  ]
 
-const stats = [
-  {
-    icon: <FileText size={16} />,
-    value: publications.length + underReviewPublications.length,
-    suffix: '',
-    label: 'Publications',
-    sub: 'peer-reviewed & in pipeline',
-  },
-  {
-    icon: <Layers size={16} />,
-    value: profile.researchInterests.length,
-    suffix: '',
-    label: 'Research Areas',
-    sub: 'Agentic AI • Safety & Alignment • Adversarial Misuse • Governance & Oversight • Cybersecurity • Digital Twins',
-  },
-  {
-    icon: <BookOpen size={16} />,
-    value: journalVenues.length,
-    suffix: '',
-    label: 'Journal Venues',
-    sub: journalVenues.join(' • '),
-  },
-  {
-    icon: <Award size={16} />,
-    value: conferenceVenues.length,
-    suffix: '',
-    label: 'Conference Venues',
-    sub: conferenceVenues.join(' • '),
-  },
-]
+  const recent = [...publications]
+    .sort((a, b) => {
+      const timeA = a.date ? new Date(a.date).getTime() : new Date(`${a.year || 2025}-01-01`).getTime()
+      const timeB = b.date ? new Date(b.date).getTime() : new Date(`${b.year || 2025}-01-01`).getTime()
+      return timeB - timeA || b.id - a.id
+    })
+    .slice(0, 3)
 
-export default function Home() {
+  return {
+    props: {
+      paperCount: publications.length + underReviewPublications.length,
+      publishedCount: publications.length,
+      projectCount: projects.length,
+      blogCount: blogPosts.length,
+      journalVenues: venuesByType('journal'),
+      conferenceVenues: venuesByType('conference'),
+      recent: recent.map(p => pick(p, ['id', 'title', 'authorsStr', 'tags', 'status', 'statusLabel'])),
+      featuredProjects: projects.filter(p => p.featured).slice(0, 3)
+        .map(p => pick(p, ['id', 'title', 'status', 'description', 'tags'])),
+      recentBlog: blogPosts.slice(0, 2)
+        .map(p => pick(p, ['id', 'title', 'category', 'readTime', 'excerpt'])),
+      recentNews: [...newsData].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3),
+    },
+  }
+}
+
+export default function Home({
+  paperCount, publishedCount, projectCount, blogCount,
+  journalVenues, conferenceVenues,
+  recent, featuredProjects, recentBlog, recentNews,
+}) {
   const [prefersReduced, setPrefersReduced] = useState(false)
 
   useEffect(() => {
@@ -123,17 +129,36 @@ export default function Home() {
     return () => mediaQuery.removeEventListener('change', handler)
   }, [])
 
-  const recent = [...publications]
-    .sort((a, b) => {
-      const timeA = a.date ? new Date(a.date).getTime() : new Date(`${a.year || 2025}-01-01`).getTime()
-      const timeB = b.date ? new Date(b.date).getTime() : new Date(`${b.year || 2025}-01-01`).getTime()
-      return timeB - timeA || b.id - a.id
-    })
-    .slice(0, 3)
-
-  const featuredProjects = projects.filter(p => p.featured).slice(0, 3)
-  const recentBlog = blogPosts.slice(0, 2)
-  const recentNews = [...newsData].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3)
+  const stats = [
+    {
+      icon: <FileText size={16} />,
+      value: paperCount,
+      suffix: '',
+      label: 'Publications',
+      sub: 'peer-reviewed & in pipeline',
+    },
+    {
+      icon: <Layers size={16} />,
+      value: profile.researchInterests.length,
+      suffix: '',
+      label: 'Research Areas',
+      sub: 'Agentic AI • Safety & Alignment • Adversarial Misuse • Governance & Oversight • Cybersecurity • Digital Twins',
+    },
+    {
+      icon: <BookOpen size={16} />,
+      value: journalVenues.length,
+      suffix: '',
+      label: 'Journal Venues',
+      sub: journalVenues.join(' • '),
+    },
+    {
+      icon: <Award size={16} />,
+      value: conferenceVenues.length,
+      suffix: '',
+      label: 'Conference Venues',
+      sub: conferenceVenues.join(' • '),
+    },
+  ]
 
   return (
     <>
@@ -243,7 +268,7 @@ export default function Home() {
                   className="font-body text-parchment-300 text-base leading-relaxed max-w-xl mb-8"
                 >
                   I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 4th-year IT student at the Islamic University of Madinah and have published{' '}
-                  <span className="text-gold-400 font-semibold">{publications.length + underReviewPublications.length}</span>{' '}
+                  <span className="text-gold-400 font-semibold">{paperCount}</span>{' '}
                   peer-reviewed papers and manuscripts on AI governance, adversarial robustness, and constrained multi-agent systems.{' '}
                   <Link href="/about/" className="text-gold-400 hover:underline inline-flex items-center gap-1 font-mono text-xs">
                     Read background &rarr;
@@ -529,7 +554,7 @@ export default function Home() {
                 href="/research"
                 className="font-mono text-xs text-gold-400 tracking-widest uppercase hover-underline flex items-center gap-1 self-end min-h-[44px]"
               >
-                All {publications.length} Papers <ArrowRight size={12} aria-hidden="true" />
+                All {publishedCount} Papers <ArrowRight size={12} aria-hidden="true" />
               </Link>
             </div>
 
@@ -593,7 +618,7 @@ export default function Home() {
                 href="/projects/"
                 className="font-mono text-xs text-gold-400 tracking-widest uppercase hover-underline flex items-center gap-1 self-end min-h-[44px]"
               >
-                All {projects.length} Systems <ArrowRight size={12} aria-hidden="true" />
+                All {projectCount} Systems <ArrowRight size={12} aria-hidden="true" />
               </Link>
             </div>
 
@@ -667,7 +692,7 @@ export default function Home() {
                 href="/blog/"
                 className="font-mono text-xs text-gold-400 tracking-widest uppercase hover-underline flex items-center gap-1 self-end min-h-[44px]"
               >
-                All {blogPosts.length} Notes <ArrowRight size={12} aria-hidden="true" />
+                All {blogCount} Notes <ArrowRight size={12} aria-hidden="true" />
               </Link>
             </div>
 

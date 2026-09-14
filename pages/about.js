@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { MapPin, Calendar, Award, BookOpen, Microscope, GraduationCap, Github, Linkedin, Mail, Link2, Code2, ArrowRight } from 'lucide-react'
+import { MapPin, Calendar, Award, BookOpen, Microscope, GraduationCap, Github, Linkedin, Mail, Link2, Code2 } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
@@ -11,9 +11,15 @@ import { underReviewPublications } from '../data/underReview'
 import { SITE_URL, PROFILE_IMAGE_URL } from '../data/site'
 import { jsonLd } from '../lib/jsonld'
 
-export default function About() {
-  const totalPapers = publications.length + underReviewPublications.length
+/*
+  Only the count is needed here. Computing it at build time keeps the full
+  publication records (abstracts, BibTeX) out of this page's JavaScript.
+*/
+export async function getStaticProps() {
+  return { props: { totalPapers: publications.length + underReviewPublications.length } }
+}
 
+export default function About({ totalPapers }) {
   const socialLinks = [
     { icon: <Github   size={16} />, href: profile.github,            label: 'GitHub' },
     { icon: <Linkedin size={16} />, href: profile.linkedin,          label: 'LinkedIn' },
@@ -65,6 +71,13 @@ export default function About() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(ABOUT_JSONLD) }}
         />
+        {/*
+          The profile photo is this page's LCP element. The navbar avatar
+          references the same file earlier in the document, so the request
+          otherwise starts at low image priority. `type` makes browsers
+          without AVIF skip the preload and use the <picture> fallback.
+        */}
+        <link rel="preload" as="image" href="/profile-384.avif" type="image/avif" fetchpriority="high" />
       </Head>
 
 

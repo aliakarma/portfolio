@@ -40,12 +40,22 @@ const PROJECTS_JSONLD = {
   })),
 }
 
-/* ─── Project Modal ─── */
-function ProjectModal({ project, onClose }) {
-  const linkedPaper = project.paper
-    ? publications.find(p => p.pdf === project.paper || p.doi === project.paper)
-    : null
+/*
+  The modal shows only a linked paper's title and link, so resolve those at
+  build time. Importing the publication records into the page itself shipped
+  every abstract and BibTeX entry to the browser for a handful of titles.
+*/
+export async function getStaticProps() {
+  const linkedPapers = {}
+  for (const project of projects) {
+    const paper = project.paper && publications.find(p => p.pdf === project.paper || p.doi === project.paper)
+    if (paper) linkedPapers[project.id] = { title: paper.title, href: paper.pdf || paper.doi }
+  }
+  return { props: { linkedPapers } }
+}
 
+/* ─── Project Modal ─── */
+function ProjectModal({ project, linkedPaper, onClose }) {
   const closeRef = useRef(null)
 
   /* Accessibility Fix: close on Escape */
@@ -154,7 +164,7 @@ function ProjectModal({ project, onClose }) {
                 <p className="font-mono text-[10px] text-gold-400/70 tracking-widest uppercase mb-3">Peer Reviewed</p>
                 <p className="font-display text-sm text-parchment-100 leading-snug mb-3">{linkedPaper.title}</p>
                 <a 
-                  href={linkedPaper.pdf || linkedPaper.doi}
+                  href={linkedPaper.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-mono text-[10px] text-gold-400 hover:underline flex items-center gap-1"
@@ -193,7 +203,7 @@ function ProjectModal({ project, onClose }) {
   )
 }
 
-export default function Projects() {
+export default function Projects({ linkedPapers }) {
   const [selected, setSelected] = useState(null)
   const featured = projects.filter(p => p.featured)
   const other    = projects.filter(p => !p.featured)
@@ -320,7 +330,7 @@ export default function Projects() {
 
         <AnimatePresence>
           {selected && (
-            <ProjectModal project={selected} onClose={() => setSelected(null)} />
+            <ProjectModal project={selected} linkedPaper={linkedPapers[selected.id]} onClose={() => setSelected(null)} />
           )}
         </AnimatePresence>
       </PageTransition>
