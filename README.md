@@ -244,7 +244,7 @@ git push
 | [Next.js](https://nextjs.org) | 14 | React framework + static export |
 | [TailwindCSS](https://tailwindcss.com) | 3 | Utility-first styling |
 | [Framer Motion](https://www.framer.com/motion/) | 11 | Animations & transitions |
-| [D3.js](https://d3js.org) | 7 | Research knowledge graph |
+| [D3.js](https://d3js.org) (`d3-force`, `d3-selection`, `d3-drag`) | 3 | Research knowledge graph |
 | [Lucide React](https://lucide.dev) | — | Icons |
 | Google Fonts | — | Cormorant Garamond, Source Serif 4, JetBrains Mono |
 | react-type-animation | 3 | Typing effect |
