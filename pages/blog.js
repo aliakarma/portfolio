@@ -42,6 +42,19 @@ const BLOG_JSONLD = {
 
 export default function Blog() {
   const [expanded, setExpanded] = useState(null)
+  /*
+    Posts opened at least once. Until then a post's graphical abstract is
+    display:none: it sits inside a max-h-0 overflow-hidden panel, and a
+    zero-height clip still counts as "intersecting" for loading="lazy", so
+    scrolling this page used to download all ~3.5 MB of abstracts while every
+    post was collapsed. The <img> stays in the static HTML for crawlers.
+  */
+  const [opened, setOpened] = useState(() => new Set())
+
+  const toggle = (id) => {
+    setExpanded(expanded === id ? null : id)
+    if (!opened.has(id)) setOpened(new Set(opened).add(id))
+  }
 
   return (
     <>
@@ -135,7 +148,7 @@ export default function Blog() {
                         </div>
                         {/* Responsive Fix: flex-shrink-0 + min-w keeps button from being squeezed */}
                         <button
-                          onClick={() => setExpanded(isOpen ? null : post.id)}
+                          onClick={() => toggle(post.id)}
                           aria-expanded={isOpen}
                           aria-controls={`post-content-${post.id}`}
                           aria-label={isOpen ? `Collapse ${post.title}` : `Expand ${post.title}`}
@@ -188,7 +201,7 @@ export default function Blog() {
                           )}
 
                           {post.graphicalAbstract && (
-                            <div>
+                            <div className={opened.has(post.id) ? undefined : 'hidden'}>
                               <div className="flex items-center justify-between mb-2">
                                 <p className="font-mono text-xs text-gold-400/60 tracking-widest uppercase flex items-center gap-1.5">
                                   <ImageIcon size={12} className="text-gold-400" aria-hidden="true" />

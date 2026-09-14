@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useDeferredValue } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Filter, BookOpen, ExternalLink, TrendingUp, FileText, Layers, ChevronDown, ChevronUp, Code2, ArrowRight } from 'lucide-react'
 import Meta from '../components/Meta'
@@ -70,7 +70,21 @@ export default function Research() {
   /* Responsive Fix: tags panel collapses on mobile to reduce filter height */
   const [showTags,     setShowTags]     = useState(false)
 
+  /*
+    INP: a filter click used to re-render every PublicationCard (and run
+    Framer's layout measurement for each) before the pressed button could
+    repaint — 150–370 ms per click at 4x CPU. The buttons read the live state;
+    the list reads these deferred copies, so the click paints immediately and
+    the list follows in an interruptible background render.
+  */
+  const deferredStatus = useDeferredValue(statusFilter)
+  const deferredType   = useDeferredValue(typeFilter)
+  const deferredTag    = useDeferredValue(tagFilter)
+
   const filtered = useMemo(() => {
+    const statusFilter = deferredStatus
+    const typeFilter   = deferredType
+    const tagFilter    = deferredTag
     /*
       'All' spans the full record, including manuscripts under review, so the
       list agrees with the 'Total' stat card above it. The named status
@@ -118,14 +132,14 @@ export default function Research() {
         const timeB = b.date ? new Date(b.date).getTime() : new Date(`${b.year || 2025}-01-01`).getTime()
         return timeB - timeA || b.id - a.id
       })
-  }, [statusFilter, typeFilter, tagFilter])
+  }, [deferredStatus, deferredType, deferredTag])
 
   /* Denominator for the "Showing X of Y" line — mirrors whichever set the
      active status filter draws from, so the two numbers always agree. */
   const sourceTotal =
-    statusFilter === 'All'
+    deferredStatus === 'All'
       ? allPublications.length
-      : statusFilter === 'under_review'
+      : deferredStatus === 'under_review'
       ? underReviewPublications.length
       : publications.length
 
@@ -135,6 +149,19 @@ export default function Research() {
     review:    underReviewPublications.length,
     total:     allPublications.length,
   }
+
+  /* Memoized on the deferred result so the urgent render skips the list —
+     including its layout wrapper, whose re-render alone makes Framer
+     re-measure every card. */
+  const publicationList = useMemo(() => (
+    <motion.div layout="position" className="space-y-4">
+      <AnimatePresence mode="popLayout">
+        {filtered.map((pub, i) => (
+          <PublicationCard key={pub.id} pub={pub} index={i} />
+        ))}
+      </AnimatePresence>
+    </motion.div>
+  ), [filtered])
 
   return (
     <>
@@ -353,17 +380,11 @@ export default function Research() {
 
             {/* COUNT — Fix: full opacity for WCAG contrast compliance */}
             <p className="font-mono text-xs text-parchment-400 mb-5" aria-live="polite" aria-atomic="true">
-              Showing <span className="text-gold-400 font-semibold">{filtered.length}</span> of {sourceTotal} {statusFilter === 'under_review' ? 'manuscripts' : 'publications'}
+              Showing <span className="text-gold-400 font-semibold">{filtered.length}</span> of {sourceTotal} {deferredStatus === 'under_review' ? 'manuscripts' : 'publications'}
             </p>
 
             {/* LIST */}
-            <motion.div layout="position" className="space-y-4">
-              <AnimatePresence mode="popLayout">
-                {filtered.map((pub, i) => (
-                  <PublicationCard key={pub.id} pub={pub} index={i} />
-                ))}
-              </AnimatePresence>
-            </motion.div>
+            {publicationList}
 
             {filtered.length === 0 && (
               <div className="text-center py-20 text-parchment-400 font-mono text-sm" role="status">
