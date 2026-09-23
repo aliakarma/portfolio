@@ -246,10 +246,10 @@ export default function About({ totalPapers }) {
 
                 <SectionReveal delay={0.2}>
                   <div>
-                    <h2 className="font-display text-2xl text-parchment-100 mb-6">Research Experience</h2>
+                    <h2 className="font-display text-2xl text-parchment-100 mb-6">Research & Professional Experience</h2>
                     {profile.experience.map(exp => (
                       <motion.div
-                        key={exp.role}
+                        key={`${exp.role}-${exp.institution}`}
                         whileHover={{ x: 4 }}
                         className="glass-card pub-card-accent p-5 sm:p-6 pl-7 mb-4"
                       >
@@ -257,6 +257,7 @@ export default function About({ totalPapers }) {
                           <div className="min-w-0">
                             <h3 className="font-display text-xl text-parchment-100">{exp.role}</h3>
                             <p className="font-mono text-xs text-gold-400 mt-1">{exp.institution}</p>
+                            {exp.location && <p className="font-mono text-xs text-parchment-400">{exp.location}</p>}
                           </div>
                           <div className="flex items-center gap-2 flex-shrink-0">
                             <Calendar size={12} className="text-parchment-400" aria-hidden="true" />

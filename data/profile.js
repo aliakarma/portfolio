@@ -47,7 +47,7 @@ My work addresses the alignment problem in deployed agentic systems — explorin
       period: "2023 – 2027",
       details: [
         "Merit-based fully funded scholarship (Competitive selection)",
-        "Current Cumulative GPA: 4.29 / 5.00",
+        "Current Cumulative GPA: 4.31 / 5.00",
         "Undergraduate researcher in agentic AI systems and AI governance",
       ],
       thesisInterest: "Safety-aligned multi-agent orchestration under Byzantine constraints.",
@@ -61,8 +61,8 @@ My work addresses the alignment problem in deployed agentic systems — explorin
       institution: "King Fahd University of Petroleum and Minerals (KFUPM)",
       period: "Jun 2026 – Present",
       bullets: [
-        "Investigating AI decision-making verification for wildfire suppression and mitigation strategies in Middle East environments using reinforcement learning and multi-agent systems.",
-        "Developing evaluation protocols for safety, reliability, and trustworthiness of autonomous agent policies under distributional shift and adversarial conditions.",
+        "Developing and evaluating HiVA, a value-aware hierarchical multi-agent RL system for wildfire suppression using Cell2Fire, with robustness testing across 16 distribution-shift conditions, including California↔Saudi transfer, rotated wind, ignition, and asset-layout changes.",
+        "Contributing to the agentic extension of VNVspec, a machine-readable AI V&V framework, by developing typed governance controls for prompt security, tool authorization, memory leakage, human oversight, and multi-agent coordination.",
       ],
     },
     {
@@ -75,6 +75,21 @@ My work addresses the alignment problem in deployed agentic systems — explorin
         "Explored LLM-based components within agentic pipelines: prompt design, orchestration, and robustness considerations.",
         "Investigated governance mechanisms for preventing unsafe behaviors triggered by untrusted or adversarial data sources.",
         "Analyzed system trustworthiness in scenarios analogous to log analysis, automated triage, and decision support pipelines.",
+      ],
+    },
+    {
+      role: "Summer Intern",
+      institution: "Xgrid.co",
+      location: "Lahore, Punjab, Pakistan (Hybrid)",
+      period: "Jun 2026 – Jul 2026",
+      bullets: [
+        "Developed a governance-aware autonomous Canary Deployment Simulator in Python for staged, cross-region software rollouts, integrating deployment orchestration, health analysis, rollback, and operational safety controls.",
+        "Implemented automated failure detection and rollback workflows, including configuration-drift validation, forced/manual rollback, failure injection, and recovery handling for degraded deployments.",
+        "Designed thread-safe deployment coordination with synchronized cluster state, asynchronous abort handling, idempotent rollback protection, and concurrency-safe audit logging.",
+        "Built a governance and approval layer capable of blocking unsafe deployment transitions, enforcing risk-based policies, and requiring simulated human approval at critical rollout stages.",
+        "Implemented operational resilience features including point-in-time cluster snapshots, region quarantine, staged recovery planning, deterministic event replay, causal audit tracing, and observability metrics.",
+        "Developed automated testing and CI/CD quality controls covering unit, integration, stress, formatting, linting, coverage, and release validation workflows.",
+        "Applied systematic code review and stress testing to identify and resolve concurrency, rollback consistency, and event-lineage issues in the deployment system.",
       ],
     },
     {
