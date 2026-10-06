@@ -12,6 +12,11 @@ import { jsonLd } from '../lib/jsonld'
 // Each item only requires id, date, and title.
 export const newsData = [
   {
+    id: 22,
+    date: 'September 22, 2026',
+    title: 'Paper accepted: Governance-Aware Autonomous Retail Coordination in Artificial Intelligence Cities Using Multi-Agent Reinforcement Learning, Blockchain Accountability, and Federated Learning — Frontiers in Artificial Intelligence',
+  },
+  {
     id: 20,
     date: 'September 6, 2026',
     title: 'Presented paper: Privacy Leakage in Federated Learning: Gradient-Based Client Identity Inference and Defenses for Inertial Sensing in Vehicular Edge Networks — IEEE VTC 2026',

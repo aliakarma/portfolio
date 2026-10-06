@@ -9,6 +9,7 @@ import SectionReveal from '../components/SectionReveal'
 import PublicationCard from '../components/PublicationCard'
 import { publications } from '../data/publications'
 import { underReviewPublications } from '../data/underReview'
+import { blogPosts } from '../data/blog'
 import { profile } from '../data/profile'
 import { jsonLd } from '../lib/jsonld'
 
@@ -430,7 +431,7 @@ export default function Research() {
                       Read concise article breakdowns covering the problem motivation, key contributions, and graphical abstracts.
                     </p>
                     <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
-                      Read 25 Research Notes <ArrowRight size={11} aria-hidden="true" />
+                      Read {blogPosts.length} Research Notes <ArrowRight size={11} aria-hidden="true" />
                     </span>
                   </div>
                 </Link>

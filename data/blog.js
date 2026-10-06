@@ -2,6 +2,26 @@
 
 export const blogPosts = [
   {
+    id: 26,
+    title: "Governance-Aware Autonomous Retail Coordination in AI Cities: Multi-Agent RL, Blockchain Accountability, and Federated Learning",
+    date: "2026-09-22",
+    category: "Autonomous Systems & AI Governance",
+    readTime: "9 min",
+    excerpt: "When autonomous systems take operational authority over urban commerce, accountability and human oversight matter as much as efficiency. Accepted in Frontiers in Artificial Intelligence, this paper introduces AAIRM, integrating multi-agent PPO policies, a permissioned Blockchain Trust Ledger for tamper-evident provenance, and Federated Demand Learning for data sovereignty.",
+    summary: "As smart cities transition toward autonomous urban commerce, automated procurement and inventory management systems are granted operational authority over high-frequency supply decisions. However, unconstrained autonomy introduces grave risks of untracked inventory drift, supplier disputes, and data sovereignty violations across competing retailers. Accepted in Frontiers in Artificial Intelligence, this research presents AAIRM (Governance-Aware Autonomous Retail Coordination), a comprehensive framework formulated around three non-negotiable requirements for trustworthy procurement: tamper-evident decision provenance, data sovereignty, and adaptive demand coordination. The architecture couples a multi-agent Proximal Policy Optimization (PPO) ordering policy with a permissioned Blockchain Trust Ledger (BTL) for immutable multi-party audit trails and a Federated Demand Learning (FDL) layer. Validated on a multi-category synthetic environment and the public M5 retail benchmark, AAIRM achieves a 13.2% reduction in normalized inventory costs over traditional reorder-point/economic-order-quantity (ROP–EOQ) baselines while establishing verifiable cryptographic provenance across all automated actions.",
+    keyContributions: [
+      "Tripartite AAIRM Architecture: Integrates multi-agent reinforcement learning (PPO) ordering policies, permissioned Blockchain Trust Ledger (BTL) governance, and Federated Demand Learning (FDL) into a unified urban commerce coordination loop",
+      "Tamper-Evident Provenance & Auditability: Employs a permissioned blockchain ledger to record cryptographic commitments of agent observations, policy evaluations, and executed procurement orders, preventing unauthorized execution and post-hoc dispute ambiguity",
+      "Decentralized Federated Demand Learning: Implements an FDL layer that aggregates cross-retailer demand forecasts without centralizing sensitive commercial transaction records, preserving retail data sovereignty",
+      "Empirical Cost-Optimal Inventory Control: Demonstrates a 13.2% normalized inventory cost reduction over classical ROP–EOQ baselines on the M5 benchmark under non-stationary multi-category demand conditions",
+      "Pragmatic Operational Guardrails: Explicitly establishes simulation-grounded safety boundaries and audit hooks required before autonomous procurement agents can be deployed in production city-scale commerce",
+    ],
+    implications: "Proves that operational efficiency and governance are not zero-sum in autonomous smart city operations. By embedding blockchain-anchored audit trails and federated learning into the reinforcement learning loop, urban commerce systems can operate with high responsiveness while ensuring complete transparency, auditability, and regulatory compliance.",
+    tags: ["Agentic AI", "AI Governance", "Multi-Agent RL", "Blockchain", "Federated Learning", "Smart Cities"],
+    venue: "Frontiers in Artificial Intelligence (Accepted)",
+    graphicalAbstract: "inventory",
+  },
+  {
     id: 25,
     title: "Privacy Leakage in Federated Learning: Client Identity Inference and Defenses for Inertial Sensing in Vehicular Networks",
     date: "2026-09-06",
