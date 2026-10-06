@@ -60,7 +60,7 @@ export default function Blog() {
     <>
       <Meta 
         title="Research Notes" 
-        description="Research notes and summaries by Ali Akarma — distilled from 25 peer-reviewed publications on agentic AI, safety, and governance."
+        description={`Research notes and summaries by Ali Akarma — distilled from ${blogPosts.length} peer-reviewed publications on agentic AI, safety, and governance.`}
       />
       <Head>
         <script
