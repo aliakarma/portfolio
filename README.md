@@ -211,9 +211,9 @@ npm run scholar:manual -- 57 5 2
 Edit `data/scholar.json`:
 ```json
 {
-  "citations": 57,
-  "hIndex": 5,
-  "i10Index": 2,
+  "citations": 119,
+  "hIndex": 8,
+  "i10Index": 5,
   "lastUpdated": "2026-08-25T11:05:08.601Z",
   "source": "google_scholar",
   "fetchFailed": false
