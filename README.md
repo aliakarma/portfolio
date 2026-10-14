@@ -166,8 +166,8 @@ All content is separated from UI in the `data/` folder:
 In `data/publications.js`, populate these fields for each paper:
 ```js
 {
-  doi:      "https://doi.org/10.xxxx/xxxx",
-  pdf:      "https://arxiv.org/pdf/xxxx.xxxx",
+  doi:      "https://doi.org/10.xxxxx/xxxx",
+  pdf:      "https://arxiv.org/pdf/xxxx.xxx",
   code:     "https://github.com/aliakarma/paper-repo",
   notebook: "https://colab.research.google.com/...",
 }
@@ -211,9 +211,9 @@ npm run scholar:manual -- 57 5 2
 Edit `data/scholar.json`:
 ```json
 {
-  "citations": 57,
-  "hIndex": 5,
-  "i10Index": 2,
+  "citations": 119,
+  "hIndex": 8,
+  "i10Index": 5,
   "lastUpdated": "2026-08-25T11:05:08.601Z",
   "source": "google_scholar",
   "fetchFailed": false
