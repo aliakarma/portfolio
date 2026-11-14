@@ -1,109 +1,35 @@
-// data/researchThemes.js — nodes and edges for the research knowledge graph
+// data/researchThemes.js — the themes drawn in the homepage research graph.
+//
+// Each theme is one publication tag (see data/tags.js). Nothing else is typed
+// in: paper counts, node sizes and the links between themes are computed from
+// the papers at build time (researchGraph() in lib/content.js). Tag a new
+// paper and its themes grow on the next build.
 
-export const researchNodes = [
-  {
-    id: "agentic-ai",
-    label: "Agentic AI",
-    group: "core",
-    size: 22,
-    description: "Autonomous AI systems that perceive, reason, and act across complex environments",
-    papers: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 15, 16],
-  },
-  {
-    id: "ai-safety",
-    label: "AI Safety",
-    group: "core",
-    size: 18,
-    description: "Alignment, robustness, and failure-mode analysis for autonomous systems",
-    papers: [1, 3, 9, 10, 12, 13, 14, 16, 17],
-  },
-  {
-    id: "ai-governance",
-    label: "AI Governance",
-    group: "core",
-    size: 16,
-    description: "Frameworks for oversight, accountability, and policy in AI deployment",
-    papers: [1, 7, 8, 9, 10, 11, 13, 14, 15, 16],
-  },
-  {
-    id: "blockchain",
-    label: "Blockchain Monitoring",
-    group: "method",
-    size: 13,
-    description: "Immutable audit trails and decentralized trust for AI pipelines",
-    papers: [1, 9, 10, 11, 13],
-  },
-  {
-    id: "digital-twins",
-    label: "Digital Twins",
-    group: "method",
-    size: 15,
-    description: "Real-time simulation frameworks for physical-cyber system co-management",
-    papers: [8, 13, 16],
-  },
-  {
-    id: "smart-cities",
-    label: "Smart Cities",
-    group: "domain",
-    size: 13,
-    description: "AI-driven urban infrastructure optimization and management",
-    papers: [1, 8, 11, 13, 16],
-  },
-  {
-    id: "healthcare-ai",
-    label: "Healthcare AI",
-    group: "domain",
-    size: 11,
-    description: "Agentic AI for assistive healthcare and disability support",
-    papers: [2, 5, 6, 12, 15],
-  },
-  {
-    id: "marl",
-    label: "Multi-Agent RL",
-    group: "method",
-    size: 12,
-    description: "Risk-aware cooperative reinforcement learning for complex environments",
-    papers: [3, 10],
-  },
-  {
-    id: "llms",
-    label: "Large Language Models",
-    group: "method",
-    size: 14,
-    description: "LLM-based orchestration, prompt engineering, and robustness analysis",
-    papers: [2, 4, 5, 7, 12],
-  },
-  {
-    id: "cybersecurity",
-    label: "Cybersecurity",
-    group: "domain",
-    size: 12,
-    description: "AI-driven threat detection for critical infrastructure and IoT",
-    papers: [9, 14, 17],
-  },
-]
+export const researchThemes = [
+  // Research directions
+  { tag: 'Agentic AI',     group: 'direction', description: 'Autonomous agents that plan, call tools, and act across multi-step tasks' },
+  { tag: 'Trustworthy AI', group: 'direction', description: 'Accountability, fairness, transparency, and auditability in deployed AI' },
+  { tag: 'AI V&V',         group: 'direction', description: 'Machine-checkable requirements, test traceability, and provable guarantees' },
+  { tag: 'Secure AI',      group: 'direction', description: 'Attacks on AI systems and defenses against injection, tampering, and privacy leakage' },
+  { tag: 'AI Governance',  group: 'direction', description: 'Human oversight, policy enforcement, and regulation-aligned controls' },
+  { tag: 'AI Safety',      group: 'direction', description: 'Constraints and failure-mode analysis that keep autonomous systems within safe bounds' },
 
-export const researchEdges = [
-  { source: "agentic-ai",    target: "ai-safety",     weight: 3 },
-  { source: "agentic-ai",    target: "blockchain",     weight: 2 },
-  { source: "agentic-ai",    target: "digital-twins",  weight: 2 },
-  { source: "agentic-ai",    target: "llms",           weight: 3 },
-  { source: "agentic-ai",    target: "marl",           weight: 2 },
-  { source: "agentic-ai",    target: "smart-cities",   weight: 2 },
-  { source: "agentic-ai",    target: "healthcare-ai",  weight: 1 },
-  { source: "ai-governance", target: "ai-safety",      weight: 3 },
-  { source: "ai-governance", target: "cybersecurity",  weight: 2 },
-  { source: "ai-governance", target: "llms",           weight: 2 },
-  { source: "digital-twins", target: "smart-cities",   weight: 2 },
-  { source: "digital-twins", target: "ai-safety",      weight: 1 },
-  { source: "blockchain",    target: "ai-safety",      weight: 2 },
-  { source: "marl",          target: "ai-safety",      weight: 2 },
-  { source: "cybersecurity", target: "ai-safety",      weight: 1 },
-  { source: "llms",          target: "healthcare-ai",  weight: 1 },
+  // Methods
+  { tag: 'LLMs',                   group: 'method', description: 'LLM-based orchestration with LangChain, LangGraph, and MCP' },
+  { tag: 'Reinforcement Learning', group: 'method', description: 'Learned control policies under cost, safety, and feasibility constraints' },
+  { tag: 'Federated Learning',     group: 'method', description: 'Training across institutions without pooling raw data' },
+  { tag: 'Blockchain',             group: 'method', description: 'Tamper-evident audit trails and enforced approval steps for agent actions' },
+  { tag: 'Digital Twins',          group: 'method', description: 'Continuously updated simulations that agents monitor and act through' },
+
+  // Application domains
+  { tag: 'Smart Cities',      group: 'domain', description: 'Urban infrastructure, mobility, retail, and water systems' },
+  { tag: 'Assistive AI',      group: 'domain', description: 'Agentic support for people with disabilities and neurodivergence' },
+  { tag: 'Cybersecurity',     group: 'domain', description: 'Intrusion detection and trust monitoring for IoT and critical infrastructure' },
+  { tag: 'Disaster Response', group: 'domain', description: 'Early warning and coordinated response for wildfires and cloudbursts' },
 ]
 
 export const groupColors = {
-  core:   "#e8a900",
-  method: "#7dd3fc",
-  domain: "#86efac",
+  direction: '#e8a900',
+  method:    '#7dd3fc',
+  domain:    '#86efac',
 }

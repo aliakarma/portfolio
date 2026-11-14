@@ -15,19 +15,15 @@
     "width": 1600,
     "height": 893
   },
-  "aairm": {
-    "width": 1600,
-    "height": 857
-  },
   "blockchain": {
     "width": 1600,
     "height": 893
   },
-  "climate-resilient-cities": {
+  "aairm": {
     "width": 1600,
-    "height": 893
+    "height": 857
   },
-  "cloudburst": {
+  "climate-resilient-cities": {
     "width": 1600,
     "height": 893
   },
@@ -39,15 +35,19 @@
     "width": 1600,
     "height": 893
   },
+  "cloudburst": {
+    "width": 1600,
+    "height": 893
+  },
+  "fedagent-chain": {
+    "width": 1600,
+    "height": 893
+  },
   "eagf": {
     "width": 1600,
     "height": 893
   },
   "finagent": {
-    "width": 1600,
-    "height": 893
-  },
-  "fedagent-chain": {
     "width": 1600,
     "height": 893
   },
@@ -63,19 +63,23 @@
     "width": 1600,
     "height": 893
   },
-  "use-of-ai-tools": {
-    "width": 1600,
-    "height": 893
-  },
   "plfl": {
     "width": 1600,
     "height": 893
   },
-  "wildfire": {
+  "use-of-ai-tools": {
     "width": 1600,
     "height": 893
   },
   "vnvspec": {
+    "width": 1600,
+    "height": 893
+  },
+  "polymeric": {
+    "width": 1600,
+    "height": 857
+  },
+  "wildfire": {
     "width": 1600,
     "height": 893
   }

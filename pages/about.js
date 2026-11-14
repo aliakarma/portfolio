@@ -1,25 +1,20 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { MapPin, Calendar, Award, BookOpen, Microscope, GraduationCap, Github, Linkedin, Mail, Link2, Code2 } from 'lucide-react'
+import { MapPin, Calendar, Award, BookOpen, Microscope, GraduationCap, Github, Linkedin, Mail, Link2 } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
-import { publications } from '../data/publications'
-import { underReviewPublications } from '../data/underReview'
 import { SITE_URL, PROFILE_IMAGE_URL } from '../data/site'
 import { jsonLd } from '../lib/jsonld'
+import { siteCounts, venuesByType } from '../lib/content'
 
-/*
-  Only the count is needed here. Computing it at build time keeps the full
-  publication records (abstracts, BibTeX) out of this page's JavaScript.
-*/
+/* Counts and venues are computed at build time from the data files. */
 export async function getStaticProps() {
-  return { props: { totalPapers: publications.length + underReviewPublications.length } }
+  return { props: { counts: siteCounts(), journals: venuesByType('journal') } }
 }
 
-export default function About({ totalPapers }) {
+export default function About({ counts, journals }) {
   const socialLinks = [
     { icon: <Github   size={16} />, href: profile.github,            label: 'GitHub' },
     { icon: <Linkedin size={16} />, href: profile.linkedin,          label: 'LinkedIn' },
@@ -30,25 +25,21 @@ export default function About({ totalPapers }) {
   const ABOUT_JSONLD = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
-    name: 'About Ali Akarma',
+    name: `About ${profile.name}`,
     url: `${SITE_URL}/about/`,
     mainEntity: {
       '@type': 'Person',
       '@id': `${SITE_URL}/#person`,
-      name: 'Ali Akarma',
+      name: profile.name,
       url: `${SITE_URL}/`,
       image: PROFILE_IMAGE_URL,
-      jobTitle: 'AI Researcher',
-      description: 'AI Researcher specializing in Agentic AI, AI Safety, and AI Governance.',
+      jobTitle: profile.title,
+      description: profile.summary,
       affiliation: {
         '@type': 'CollegeOrUniversity',
-        name: 'Islamic University of Madinah',
+        name: profile.institution,
       },
-      alumniOf: {
-        '@type': 'CollegeOrUniversity',
-        name: 'Islamic University of Madinah',
-      },
-      knowsAbout: profile.researchInterests,
+      knowsAbout: profile.researchInterests.map(i => i.label),
       award: profile.awards.map(a => `${a.title} (${a.issuer}, ${a.year})`),
       sameAs: [
         profile.linkedin,
@@ -63,7 +54,7 @@ export default function About({ totalPapers }) {
     <>
       <Meta
         title="About"
-        description="About Ali Akarma — AI researcher specializing in the gap between autonomous capability and institutional accountability."
+        description={`About ${profile.name}: background, research experience, and awards. ${profile.summary}`}
         type="profile"
       />
       <Head>
@@ -125,11 +116,11 @@ export default function About({ totalPapers }) {
 
                   <div className="space-y-3 mb-8">
                     {[
-                      { icon: <MapPin        size={14} />, text: 'Madinah, Saudi Arabia' },
-                      { icon: <GraduationCap size={14} />, text: 'Islamic University of Madinah' },
+                      { icon: <MapPin        size={14} />, text: profile.location },
+                      { icon: <GraduationCap size={14} />, text: profile.institution },
                       { icon: <BookOpen      size={14} />, text: 'Google Scholar', href: profile.scholar },
                       ...(profile.orcid ? [{ icon: <Link2 size={14} />, text: 'ORCID', href: profile.orcid }] : []),
-                      { icon: <Microscope    size={14} />, text: `${totalPapers} Publications` },
+                      { icon: <Microscope    size={14} />, text: `${counts.published} Publications · ${counts.underReview} Under Review` },
                     ].map((item, i) => (
                       <div key={i} className="flex items-start gap-3 text-parchment-300">
                         <div className="text-gold-400 flex-shrink-0 mt-0.5" aria-hidden="true">{item.icon}</div>
@@ -168,10 +159,10 @@ export default function About({ totalPapers }) {
                   <div>
                     <h3 className="font-mono text-xs text-gold-400 tracking-widest uppercase mb-4">Research Areas</h3>
                     <div className="space-y-2">
-                      {profile.researchInterests.map(interest => (
-                        <div key={interest} className="flex items-start gap-2 text-parchment-300">
+                      {profile.researchInterests.map(({ label }) => (
+                        <div key={label} className="flex items-start gap-2 text-parchment-300">
                           <div className="w-1 h-1 rounded-full bg-gold-400 mt-2 flex-shrink-0" aria-hidden="true" />
-                          <span className="font-body text-sm leading-relaxed">{interest}</span>
+                          <span className="font-body text-sm leading-relaxed">{label}</span>
                         </div>
                       ))}
                     </div>
@@ -186,16 +177,11 @@ export default function About({ totalPapers }) {
                   <div>
                     <h2 className="font-display text-2xl text-parchment-100 mb-4">Biography</h2>
                     <p className="font-body text-parchment-300 text-base leading-relaxed">
-                      I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 4th-year IT student at the Islamic University of Madinah and have published{' '}
-                      <span className="text-gold-400 font-semibold">{totalPapers}</span>{' '}
-                      peer-reviewed papers and manuscripts on AI governance, adversarial robustness, and constrained multi-agent systems.
+                      {profile.bio(counts)}
                     </p>
                     <p className="font-body text-parchment-300 text-base leading-relaxed mt-4">
-                      Currently pursuing a B.S. in Information Technology on a merit-based fully funded scholarship,
-                      Ali has authored or co-authored papers across IEEE conferences, Springer, PLOS ONE, and MDPI —
-                      spanning agentic architectures, digital twins, AI governance, and safety-critical deployment.
-                      His research is motivated by a conviction that powerful AI systems must be understandable,
-                      governable, and safe by design.
+                      My papers have appeared in {journals.join(', ')} and at IEEE and international conferences.
+                      I study on a merit-based, fully funded scholarship.
                     </p>
                   </div>
                 </SectionReveal>
@@ -279,14 +265,9 @@ export default function About({ totalPapers }) {
 
                 <SectionReveal delay={0.22}>
                   <div>
-                    <h2 className="font-display text-2xl text-parchment-100 mb-6">Technical Methods & Expertise</h2>
+                    <h2 className="font-display text-2xl text-parchment-100 mb-6">Methods &amp; Expertise</h2>
                     <div className="grid sm:grid-cols-2 gap-4">
-                      {[
-                        { title: 'Agentic AI Systems', desc: 'Designing constrained reasoning pipelines with explicit safety guardrails and policy alignment.' },
-                        { title: 'Safety Engineering', desc: 'Analyzing failure modes and edge cases in autonomous decision-making systems.' },
-                        { title: 'AI Governance', desc: 'Implementing blockchain-based auditing and immutable oversight for AI agents.' },
-                        { title: 'Technical Writing', desc: 'Distilling complex research into peer-reviewed publications and technical reports.' },
-                      ].map((item, i) => (
+                      {profile.expertise.map((item, i) => (
                         <div key={i} className="glass-card p-5 border border-gold-500/10">
                           <h4 className="font-mono text-xs text-gold-400 uppercase tracking-widest mb-2">{item.title}</h4>
                           <p className="font-body text-sm text-parchment-300 leading-relaxed">{item.desc}</p>
@@ -322,50 +303,6 @@ export default function About({ totalPapers }) {
                         </motion.div>
                       ))}
                     </div>
-                  </div>
-                </SectionReveal>
-
-                {/* Cross-navigation to Research, Projects, and Contact */}
-                <SectionReveal delay={0.3}>
-                  <div className="pt-8 border-t border-gold-500/10 grid sm:grid-cols-3 gap-4">
-                    <Link
-                      href="/research/"
-                      className="glass-card p-5 border border-gold-500/15 hover:border-gold-500/40 transition-all group"
-                    >
-                      <BookOpen size={18} className="text-gold-400 mb-2" aria-hidden="true" />
-                      <h4 className="font-display text-base text-parchment-100 group-hover:text-gold-300 transition-colors">
-                        Research Archive
-                      </h4>
-                      <p className="font-body text-xs text-parchment-400 mt-1">
-                        17+ peer-reviewed publications and manuscripts.
-                      </p>
-                    </Link>
-
-                    <Link
-                      href="/projects/"
-                      className="glass-card p-5 border border-gold-500/15 hover:border-gold-500/40 transition-all group"
-                    >
-                      <Code2 size={18} className="text-gold-400 mb-2" aria-hidden="true" />
-                      <h4 className="font-display text-base text-parchment-100 group-hover:text-gold-300 transition-colors">
-                        Research Systems
-                      </h4>
-                      <p className="font-body text-xs text-parchment-400 mt-1">
-                        24 applied AI safety implementations &amp; codebases.
-                      </p>
-                    </Link>
-
-                    <Link
-                      href="/contact/"
-                      className="glass-card p-5 border border-gold-500/15 hover:border-gold-500/40 transition-all group"
-                    >
-                      <Mail size={18} className="text-gold-400 mb-2" aria-hidden="true" />
-                      <h4 className="font-display text-base text-parchment-100 group-hover:text-gold-300 transition-colors">
-                        Get In Touch
-                      </h4>
-                      <p className="font-body text-xs text-parchment-400 mt-1">
-                        Collaboration inquiries &amp; graduate opportunities.
-                      </p>
-                    </Link>
                   </div>
                 </SectionReveal>
 

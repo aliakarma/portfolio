@@ -8,6 +8,7 @@ const path = require('path')
 
 const SITE_URL = 'https://aliakarma.codes'
 
+// Keep in step with data/nav.js (this script runs outside Next.js, so it cannot import it).
 const ROUTES = [
   { path: '/',          changefreq: 'daily',   priority: '1.0' },
   { path: '/research/', changefreq: 'weekly',  priority: '0.95' },

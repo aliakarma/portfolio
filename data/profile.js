@@ -1,9 +1,16 @@
 import scholarData from './scholar.json'
 
+/*
+  Every sentence that describes the research lives here, and every page reads
+  it from here: hero, about, meta descriptions, structured data, footer.
+  Change the wording once and the whole site follows. Counts (papers, notes,
+  systems) are never typed in; they are computed from the data files.
+*/
 export const profile = {
   name: "Ali Akarma",
   title: "AI Researcher",
-  tagline: "Designing autonomous AI systems that fail safely by design.",
+  // Used in page titles and search snippets.
+  headline: "Agentic AI, Trustworthy AI & AI V&V Researcher",
   institution: "Islamic University of Madinah",
   location: "Madinah, Saudi Arabia",
   degree: "B.S. Information Technology (2023–2027)",
@@ -11,23 +18,57 @@ export const profile = {
   github: "https://github.com/aliakarma",
   scholar: "https://scholar.google.com/citations?user=kQZZJtYAAAAJ&hl=en",
   linkedin: "https://www.linkedin.com/in/aliakarma",
-  // Fix: ORCID added — important credibility signal for academic visitors
   orcid: "https://orcid.org/0009-0002-6687-9380",
   cv: "/Ali_Akarma_CV.pdf",
 
-  bio: "I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 4th-year IT student at the Islamic University of Madinah and have published peer-reviewed papers and manuscripts on AI governance, adversarial robustness, and constrained multi-agent systems.",
+  // One sentence for meta descriptions and schema.org "description".
+  summary: "AI researcher working on agentic AI, trustworthy AI, AI verification and validation (V&V), and secure AI.",
 
-  researchVision: `I study how to make autonomous AI systems fail safely: designing governance architectures that prevent unintended actions before they propagate through real-world infrastructure. 
+  // Pull quote on the homepage.
+  thesis: "I study what it takes to trust an autonomous AI system: stating what it must and must not do, testing that it does so, and building the controls that stop it when it does not.",
 
-My work addresses the alignment problem in deployed agentic systems — exploring how we can build autonomous pipelines that remain safe and governable when exposed to adversarial inputs, distributional shift, or misaligned incentives. I approach this through the intersection of safety engineering, formal governance frameworks, and empirical failure-mode analysis.`,
+  // Takes live counts so the numbers can never go stale.
+  bio: ({ published, underReview }) =>
+    `I build and test agentic AI systems that can be checked, secured, and held to account. My recent work covers machine-readable verification and validation (V&V) specifications, governance controls for multi-agent systems, and attacks on and defenses for the machine learning that autonomous systems depend on. I am a final-year Information Technology student at the Islamic University of Madinah and a research intern at KFUPM, with ${published} peer-reviewed publications and ${underReview} more manuscripts under review.`,
 
+  researchVision: `Agentic AI systems now plan, call tools, and act on real infrastructure with little human review. My research asks what evidence we should require before trusting such a system, and how to keep that trust once it is deployed.
+
+I work on this from three directions. Verification and validation: turning high-level requirements into machine-checkable specifications and linking them to the tests that run, as in VNVSpec. Secure AI: measuring how agentic and federated systems leak data or can be manipulated, and testing defenses against those attacks. Accountable autonomy: building human-authorization gates, tamper-evident audit trails, and constrained policies into the agent's control loop rather than adding them afterwards.`,
+
+  // `label` is the full name; `short` is used where space is tight.
   researchInterests: [
-    "Agentic AI & Autonomous Systems in High-Stakes Environments",
-    "AI Safety & Alignment of Large Language Models",
-    "Prompt Injection, Jailbreaks & Adversarial Misuse",
-    "Governance, Oversight & Constitutional AI",
-    "Secure AI for Cybersecurity & Critical Infrastructure",
-    "Digital Twins & Smart City AI",
+    { label: "Agentic AI & Multi-Agent Systems",                        short: "Agentic AI" },
+    { label: "Trustworthy & Accountable AI",                            short: "Trustworthy AI" },
+    { label: "AI Verification & Validation (V&V)",                      short: "AI V&V" },
+    { label: "Secure AI: Prompt Injection, Privacy & Adversarial Attacks", short: "Secure AI" },
+    { label: "AI Governance & Human Oversight",                         short: "AI Governance" },
+    { label: "Safe Autonomy & Constrained Decision-Making",             short: "Safe Autonomy" },
+  ],
+
+  // Rotating line under the name in the homepage hero.
+  heroLines: [
+    "Verifying agentic AI systems.",
+    "Securing autonomous AI pipelines.",
+    "Building accountable multi-agent systems.",
+    "Testing AI against its requirements.",
+  ],
+
+  // "Current research" card in the homepage hero.
+  currentFocus: {
+    title: "Verifiable Agentic AI",
+    subtitle: "AI V&V · Governance controls · Secure agents",
+    text: "Extending machine-readable V&V specifications to agentic systems, with typed controls for prompt security, tool authorization, memory leakage, human oversight, and multi-agent coordination.",
+  },
+
+  // Collaboration call-to-action (homepage banner and contact page).
+  collaboration: "Open to research collaborations and graduate opportunities in agentic AI, AI verification and validation, and secure, trustworthy AI.",
+
+  // "Methods & Expertise" cards on the About page.
+  expertise: [
+    { title: "Agentic AI Systems", desc: "Multi-agent pipelines built with LangChain, LangGraph, and MCP, designed with restricted action spaces and explicit policy checks." },
+    { title: "AI Verification & Validation", desc: "Machine-readable requirements, traceability from requirements to tests, and evidence reports for AI-enabled systems." },
+    { title: "Secure & Private ML", desc: "Threat modelling, prompt-injection defenses, and privacy attacks and defenses for federated learning." },
+    { title: "Governance & Accountability", desc: "Human-authorization gates, permissioned-blockchain audit trails, and fairness and privacy metrics mapped to regulatory requirements." },
   ],
 
   // Scholar metrics (automated via scripts/update_scholar.js)
@@ -35,7 +76,6 @@ My work addresses the alignment problem in deployed agentic systems — explorin
     citations: scholarData.citations,
     hIndex: scholarData.hIndex,
     i10Index: scholarData.i10Index,
-    since: 2025,
     lastUpdated: scholarData.lastUpdated,
   },
 
@@ -48,9 +88,9 @@ My work addresses the alignment problem in deployed agentic systems — explorin
       details: [
         "Merit-based fully funded scholarship (Competitive selection)",
         "Current Cumulative GPA: 4.31 / 5.00",
-        "Undergraduate researcher in agentic AI systems and AI governance",
+        "Undergraduate researcher in agentic AI, AI verification and validation, and secure AI",
       ],
-      thesisInterest: "Safety-aligned multi-agent orchestration under Byzantine constraints.",
+      thesisInterest: "Verification and governance of multi-agent AI systems under adversarial conditions.",
       current: true,
     },
   ],

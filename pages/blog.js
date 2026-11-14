@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Clock, ArrowRight, Tag, ChevronDown, ChevronUp, MapPin, Image as ImageIcon, ExternalLink, BookOpen, Code2 } from 'lucide-react'
+import { Clock, ArrowRight, Tag, ChevronDown, ChevronUp, MapPin, Image as ImageIcon, ExternalLink } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
@@ -11,17 +11,23 @@ import { blogPosts } from '../data/blog'
 import { profile } from '../data/profile'
 import { SITE_URL } from '../data/site'
 import { jsonLd } from '../lib/jsonld'
+import { siteCounts, papersByNote } from '../lib/content'
+
+/* Each note's paper (label + link) is resolved at build time from its publicationId. */
+export async function getStaticProps() {
+  return { props: { counts: siteCounts(), papers: papersByNote() } }
+}
 
 /* Schema.org Blog and BlogPosting structured data for rich search engine indexing */
 const BLOG_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
-  name: 'Research Notes | Ali Akarma',
+  name: `Research Notes | ${profile.name}`,
   url: `${SITE_URL}/blog/`,
-  description: 'Research notes, paper summaries, and technical breakdowns of peer-reviewed AI safety, agentic AI, and trustworthy ML research by Ali Akarma.',
+  description: `Plain-language summaries of papers by ${profile.name} on agentic AI, trustworthy AI, AI verification and validation, and secure AI.`,
   publisher: {
     '@type': 'Person',
-    name: 'Ali Akarma',
+    name: profile.name,
     url: `${SITE_URL}/`,
   },
   blogPost: blogPosts.map((post) => ({
@@ -34,13 +40,13 @@ const BLOG_JSONLD = {
     articleSection: post.category,
     author: {
       '@type': 'Person',
-      name: 'Ali Akarma',
+      name: profile.name,
       url: `${SITE_URL}/`,
     },
   })),
 }
 
-export default function Blog() {
+export default function Blog({ papers }) {
   const [expanded, setExpanded] = useState(null)
   /*
     Posts opened at least once. Until then a post's graphical abstract is
@@ -60,7 +66,7 @@ export default function Blog() {
     <>
       <Meta 
         title="Research Notes" 
-        description={`Research notes and summaries by Ali Akarma — distilled from ${blogPosts.length} peer-reviewed publications on agentic AI, safety, and governance.`}
+        description={`${blogPosts.length} plain-language summaries of papers by ${profile.name} on agentic AI, trustworthy AI, AI verification and validation, and secure AI.`}
       />
       <Head>
         <script
@@ -86,8 +92,8 @@ export default function Blog() {
                   Research <span className="gold-text italic">Notes</span>
                 </h1>
                 <p className="font-body text-parchment-300 max-w-2xl mb-6">
-                  {blogPosts.length} articles drawn from published research — each paper distilled into a concise,
-                  reader-friendly post covering key findings, contributions, and practical implications.
+                  {blogPosts.length} plain-language summaries of my papers and preprints. Each covers the problem,
+                  the main contributions, and what the results mean in practice, with a link to the full paper.
                 </p>
                 <div className="section-divider" />
               </div>
@@ -96,6 +102,7 @@ export default function Blog() {
             <div className="space-y-5" role="feed" aria-label="Research articles">
               {blogPosts.map((post, i) => {
                 const isOpen = expanded === post.id
+                const paper = papers[post.id]
 
                 return (
                   <motion.article
@@ -105,7 +112,7 @@ export default function Blog() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
-                    className="glass-card pub-card-accent pl-7 group"
+                    className="glass-card pub-card-accent pl-7 group scroll-mt-28"
                   >
                     <div className="p-5">
 
@@ -120,9 +127,9 @@ export default function Blog() {
                         <span className="font-mono text-xs text-parchment-400/40">
                           {post.date.slice(0, 'YYYY-MM'.length)}
                         </span>
-                        {post.venue && (
+                        {paper && (
                           <span className="flex items-center gap-1 font-mono text-xs text-parchment-400/50 border border-parchment-400/15 px-2 py-0.5 rounded-sm">
-                            <MapPin size={9} aria-hidden="true" />{post.venue}
+                            <MapPin size={9} aria-hidden="true" />{paper.label}
                           </span>
                         )}
                       </div>
@@ -136,6 +143,14 @@ export default function Blog() {
                       <p className="font-body text-sm text-parchment-300 leading-relaxed mb-4">
                         {post.excerpt}
                       </p>
+                      {paper && (
+                        <Link
+                          href={paper.href}
+                          className="inline-flex items-center gap-1 font-mono text-xs text-gold-400 hover:underline mb-4 min-h-[36px]"
+                        >
+                          Read the paper: abstract, PDF, code &amp; BibTeX <ArrowRight size={11} aria-hidden="true" />
+                        </Link>
+                      )}
 
                       {/* Tags + expand toggle */}
                       <div className="flex items-center justify-between pt-3 border-t border-noir-600/60 gap-3">
@@ -234,51 +249,6 @@ export default function Blog() {
                 )
               })}
             </div>
-
-            {/* Cross-linking to Research Archive & Projects */}
-            <SectionReveal delay={0.25}>
-              <div className="mt-12 grid sm:grid-cols-2 gap-4">
-                <Link
-                  href="/research/"
-                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
-                >
-                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
-                    <BookOpen size={18} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
-                      Peer-Reviewed Publications
-                    </h3>
-                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
-                      Read full academic papers with official DOIs, BibTeX citations, and publication PDFs.
-                    </p>
-                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
-                      Explore Research Archive <ArrowRight size={11} aria-hidden="true" />
-                    </span>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/projects/"
-                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
-                >
-                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
-                    <Code2 size={18} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
-                      Applied Research Systems
-                    </h3>
-                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
-                      Browse open-source implementations, multi-agent frameworks, and simulation testbeds.
-                    </p>
-                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
-                      View Research Systems <ArrowRight size={11} aria-hidden="true" />
-                    </span>
-                  </div>
-                </Link>
-              </div>
-            </SectionReveal>
 
             <SectionReveal delay={0.3}>
               <div className="mt-16 glass-card p-8 text-center border border-gold-500/20">

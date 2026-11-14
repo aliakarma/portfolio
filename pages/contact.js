@@ -1,42 +1,34 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Github, Linkedin, BookOpen, Copy, Check, MapPin, MessageSquare, Link2, Code2, ArrowRight } from 'lucide-react'
+import { Mail, Github, Linkedin, BookOpen, Copy, Check, MapPin, MessageSquare, Link2 } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
 import { SITE_URL } from '../data/site'
 import { jsonLd } from '../lib/jsonld'
+import { siteCounts } from '../lib/content'
+
+export async function getStaticProps() {
+  return { props: { counts: siteCounts() } }
+}
 
 const CONTACT_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
-  name: 'Contact Ali Akarma',
+  name: `Contact ${profile.name}`,
   url: `${SITE_URL}/contact/`,
-  description: 'Get in touch with Ali Akarma for academic collaborations on AI safety, multi-agent systems, and autonomous governance.',
+  description: profile.collaboration,
   mainEntity: {
     '@type': 'Person',
-    name: 'Ali Akarma',
+    name: profile.name,
     url: `${SITE_URL}/`,
-    email: 'mailto:aliakarma974@gmail.com',
-    jobTitle: 'AI Researcher',
-    affiliation: {
-      '@type': 'CollegeOrUniversity',
-      name: 'Islamic University of Madinah',
-    },
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Madinah',
-      addressCountry: 'SA',
-    },
-    sameAs: [
-      'https://www.linkedin.com/in/aliakarma',
-      'https://github.com/aliakarma',
-      'https://scholar.google.com/citations?user=kQZZJtYAAAAJ',
-      'https://orcid.org/0009-0002-6687-9380',
-    ],
+    email: `mailto:${profile.email}`,
+    jobTitle: profile.title,
+    affiliation: { '@type': 'CollegeOrUniversity', name: profile.institution },
+    address: { '@type': 'PostalAddress', addressLocality: 'Madinah', addressCountry: 'SA' },
+    sameAs: [profile.linkedin, profile.github, profile.scholar, profile.orcid].filter(Boolean),
   },
 }
 
@@ -91,7 +83,7 @@ const socialLinks = [
   { label: 'GitHub',         sub: '@aliakarma',             icon: <Github    size={20} />, href: profile.github,   color: 'text-parchment-200'   },
   { label: 'LinkedIn',       sub: 'Professional network',   icon: <Linkedin  size={20} />, href: profile.linkedin, color: 'text-blue-400'        },
   ...(profile.orcid ? [
-    { label: 'ORCID',        sub: '0009-0002-6687-9380',    icon: <Link2     size={20} />, href: profile.orcid,    color: 'text-emerald-400'     },
+    { label: 'ORCID',        sub: profile.orcid.split('/').pop(), icon: <Link2 size={20} />, href: profile.orcid,    color: 'text-emerald-400'     },
   ] : []),
 ]
 
@@ -120,7 +112,7 @@ export default function Contact() {
     <>
       <Meta 
         title="Contact" 
-        description="Get in touch with Ali Akarma for research collaborations on AI safety, multi-agent systems, and autonomous governance."
+        description={`Contact ${profile.name}. ${profile.collaboration}`}
       />
       <Head>
         <script
@@ -147,8 +139,7 @@ export default function Contact() {
                   Get In <span className="gold-text italic">Touch</span>
                 </h1>
                 <p className="font-body text-parchment-300 max-w-xl">
-                  Open to research collaborations, academic discussions, and graduate opportunities.
-                  Reach out about AI safety, agentic systems, or governance research.
+                  {profile.collaboration}
                 </p>
                 <div className="section-divider mt-8" />
               </div>
@@ -165,7 +156,7 @@ export default function Contact() {
                       <CopyEmail />
                       <div className="flex items-center gap-3 glass-card p-4">
                         <MapPin size={18} className="text-gold-400 flex-shrink-0" aria-hidden="true" />
-                        <span className="font-mono text-sm text-parchment-200">Madinah, Saudi Arabia</span>
+                        <span className="font-mono text-sm text-parchment-200">{profile.location}</span>
                       </div>
                     </div>
                   </div>
@@ -205,8 +196,8 @@ export default function Contact() {
                       <span className="font-mono text-xs text-green-400 tracking-wide">Available for collaboration</span>
                     </div>
                     <p className="font-body text-sm text-parchment-300">
-                      Seeking graduate research opportunities and collaborations in AI safety,
-                      agentic systems, and trustworthy ML.
+                      Seeking graduate research positions and collaborations in agentic AI,
+                      AI verification and validation, and secure AI.
                     </p>
                   </div>
                 </SectionReveal>
@@ -318,51 +309,6 @@ export default function Contact() {
                 </SectionReveal>
               </div>
             </div>
-
-            {/* Quick cross-navigation */}
-            <SectionReveal delay={0.25}>
-              <div className="mt-16 pt-12 border-t border-gold-500/10 grid sm:grid-cols-2 gap-4">
-                <Link
-                  href="/research/"
-                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
-                >
-                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
-                    <BookOpen size={18} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
-                      Peer-Reviewed Research Archive
-                    </h3>
-                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
-                      Review published papers, abstracts, DOIs, and citations before reaching out.
-                    </p>
-                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
-                      Explore Publications <ArrowRight size={11} aria-hidden="true" />
-                    </span>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/projects/"
-                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
-                >
-                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
-                    <Code2 size={18} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
-                      Applied Research Systems
-                    </h3>
-                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
-                      Explore autonomous systems, agentic architectures, and codebase repositories.
-                    </p>
-                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
-                      View Systems <ArrowRight size={11} aria-hidden="true" />
-                    </span>
-                  </div>
-                </Link>
-              </div>
-            </SectionReveal>
 
           </div>
         </div>

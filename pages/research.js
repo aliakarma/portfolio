@@ -1,20 +1,22 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { useState, useMemo, useDeferredValue } from 'react'
+import { useState, useMemo, useDeferredValue, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Filter, BookOpen, ExternalLink, TrendingUp, FileText, Layers, ChevronDown, ChevronUp, Code2, ArrowRight } from 'lucide-react'
+import { Filter, BookOpen, ExternalLink, TrendingUp, FileText, Layers, ChevronDown, ChevronUp } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import PublicationCard from '../components/PublicationCard'
-import { publications } from '../data/publications'
-import { underReviewPublications } from '../data/underReview'
-import { blogPosts } from '../data/blog'
 import { profile } from '../data/profile'
 import { jsonLd } from '../lib/jsonld'
+import { publications, underReviewPublications, allPublications, byNewest, isFirstAuthor } from '../lib/publications'
+import { siteCounts, noteIdsByPaper } from '../lib/content'
 
-const allPublications = [...publications, ...underReviewPublications]
 const ALL_TAGS = [...new Set(allPublications.flatMap(p => p.tags))].sort()
+
+export async function getStaticProps() {
+  return { props: { counts: siteCounts(), noteIds: noteIdsByPaper() } }
+}
 
 const normalize = (value) => String(value ?? '').trim().toLowerCase()
 
@@ -54,22 +56,30 @@ const SCHOLARLY_JSONLD = {
         '@type': 'ScholarlyArticle',
         headline: p.title,
         author: p.authorsStr.split(', ').map(name => ({ '@type': 'Person', name })),
-        datePublished: String(p.year),
-        publisher: { '@type': 'Organization', name: p.venue },
-        isPartOf: { '@type': 'Periodical', name: p.venue },
+        datePublished: new Date(p.date).toISOString().slice(0, 10),
+        isPartOf: { '@type': p.type === 'journal' ? 'Periodical' : p.type === 'book_chapter' ? 'Book' : 'Event', name: p.venue },
         about: p.tags,
         ...(p.abstract ? { abstract: p.abstract } : {}),
-        ...(p.doi ? { sameAs: p.doi, url: p.doi } : {}),
+        ...((p.doi || p.url) ? { sameAs: p.doi || p.url, url: p.doi || p.url } : {}),
       },
     })),
 }
 
-export default function Research() {
+export default function Research({ counts: siteTotals, noteIds }) {
   const [statusFilter, setStatusFilter] = useState('All')
   const [typeFilter,   setTypeFilter]   = useState('All')
   const [tagFilter,    setTagFilter]    = useState(null)
   /* Responsive Fix: tags panel collapses on mobile to reduce filter height */
   const [showTags,     setShowTags]     = useState(false)
+
+  /* Deep link from the research graph and topic links: /research/?tag=AI%20V%26V */
+  useEffect(() => {
+    const tag = new URLSearchParams(window.location.search).get('tag')
+    if (tag && ALL_TAGS.includes(tag)) {
+      setTagFilter(tag)
+      setShowTags(true)
+    }
+  }, [])
 
   /*
     INP: a filter click used to re-render every PublicationCard (and run
@@ -105,17 +115,12 @@ export default function Research() {
           statusFilter === 'All' ||
           statusFilter === 'under_review' ||
           pStatus === normalize(statusFilter)
-        /*
-          First authorship is a property of the paper, so it lives on the
-          record as `isFirstAuthor`. This previously matched three full title
-          strings inline, which meant correcting a typo in any of those titles
-          silently dropped the paper out of the filter.
-        */
+        /* First authorship comes from author order (plus coFirstAuthor), see lib/publications.js */
         const t =
           typeFilter === 'All'
             ? true
             : typeFilter === 'first_author'
-            ? p.isFirstAuthor === true
+            ? isFirstAuthor(p)
             : normalize(p.type) === normalize(typeFilter)
         const g = !tagFilter || p.tags.some(tag => normalize(tag) === normalize(tagFilter))
         return s && t && g
@@ -128,10 +133,7 @@ export default function Research() {
         if (aIsReview && !bIsReview) return 1
         if (!aIsReview && bIsReview) return -1
 
-        // Within the same status category, sort newest first (exact date descending, then id descending)
-        const timeA = a.date ? new Date(a.date).getTime() : new Date(`${a.year || 2025}-01-01`).getTime()
-        const timeB = b.date ? new Date(b.date).getTime() : new Date(`${b.year || 2025}-01-01`).getTime()
-        return timeB - timeA || b.id - a.id
+        return byNewest(a, b)
       })
   }, [deferredStatus, deferredType, deferredTag])
 
@@ -158,17 +160,17 @@ export default function Research() {
     <motion.div layout="position" className="space-y-4">
       <AnimatePresence mode="popLayout">
         {filtered.map((pub, i) => (
-          <PublicationCard key={pub.id} pub={pub} index={i} />
+          <PublicationCard key={pub.id} pub={pub} index={i} noteId={noteIds[pub.id] ?? null} />
         ))}
       </AnimatePresence>
     </motion.div>
-  ), [filtered])
+  ), [filtered, noteIds])
 
   return (
     <>
       <Meta
         title="Research Archive"
-        description={`Archive of ${publications.length} publications by Ali Akarma on AI safety, agentic AI governance, and autonomous systems — IEEE, Springer, PLOS ONE, and MDPI.`}
+        description={`${siteTotals.published} peer-reviewed publications and ${siteTotals.underReview} manuscripts under review by ${profile.name} on agentic AI, trustworthy AI, AI verification and validation, and secure AI.`}
       />
       <Head>
         <script
@@ -195,10 +197,10 @@ export default function Research() {
                   Research <span className="gold-text italic">Archive</span>
                 </h1>
                 <p className="font-body text-parchment-300 max-w-2xl mb-8">
-                  {publications.length} peer-reviewed publications (plus manuscripts under active review) spanning agentic AI architectures,
-                  safety, governance, and real-world deployment. I also maintain distilled{' '}
-                  <Link href="/blog" className="text-gold-400 hover:underline">research notes</Link> for
-                  key findings and practical implications.
+                  {siteTotals.published} peer-reviewed publications and {siteTotals.underReview} manuscripts under review on agentic AI,
+                  trustworthy AI, AI verification and validation, and secure AI. Filter by status, type, or topic. Most papers
+                  also have a plain-language{' '}
+                  <Link href="/blog/" className="text-gold-400 hover:underline">research note</Link>.
                 </p>
                 <div className="section-divider" />
               </div>
@@ -392,51 +394,6 @@ export default function Research() {
                 No publications match the selected filters.
               </div>
             )}
-
-            {/* Cross-linking to Applied Systems & Research Notes */}
-            <SectionReveal delay={0.2}>
-              <div className="mt-16 pt-12 border-t border-gold-500/10 grid sm:grid-cols-2 gap-4">
-                <Link
-                  href="/projects/"
-                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
-                >
-                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
-                    <Code2 size={18} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
-                      Applied Research Systems
-                    </h3>
-                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
-                      See these research methodologies implemented in software, simulation testbeds, and multi-agent frameworks.
-                    </p>
-                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
-                      Explore 24 Systems <ArrowRight size={11} aria-hidden="true" />
-                    </span>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/blog/"
-                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
-                >
-                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
-                    <Layers size={18} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
-                      Research Notes &amp; Summaries
-                    </h3>
-                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
-                      Read concise article breakdowns covering the problem motivation, key contributions, and graphical abstracts.
-                    </p>
-                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
-                      Read {blogPosts.length} Research Notes <ArrowRight size={11} aria-hidden="true" />
-                    </span>
-                  </div>
-                </Link>
-              </div>
-            </SectionReveal>
 
           </div>
         </div>

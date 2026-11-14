@@ -6,6 +6,7 @@ const STATUS_COLORS = {
   'Accepted':     'text-sky-400 bg-sky-900/20 border-sky-700/30',
   'Under Review': 'text-amber-400 bg-amber-900/20 border-amber-700/30',
   'Research':     'text-violet-400 bg-violet-900/20 border-violet-700/30',
+  'Open Source':  'text-parchment-300 bg-parchment-400/5 border-parchment-400/25',
 }
 
 export default function ProjectCard({ project, onClick }) {

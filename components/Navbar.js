@@ -3,16 +3,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, FileText } from 'lucide-react'
-
-const navLinks = [
-  { label: 'Home',     href: '/' },
-  { label: 'About',    href: '/about/' },
-  { label: 'News',     href: '/news/' },
-  { label: 'Research', href: '/research/' },
-  { label: 'Projects', href: '/projects/' },
-  { label: 'Notes',    href: '/blog/' },
-  { label: 'Contact',  href: '/contact/' },
-]
+import { PAGES as navLinks } from '../data/nav'
+import { profile } from '../data/profile'
 
 export default function Navbar() {
   const [scrolled, setScrolled]       = useState(false)
@@ -105,7 +97,6 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav links */}
-          {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-0.5" role="list">
             {navLinks.map((link) => {
               const currentPath = router.pathname.endsWith('/') ? router.pathname : `${router.pathname}/`
@@ -133,7 +124,7 @@ export default function Navbar() {
               )
             })}
             <a
-              href="/Ali_Akarma_CV.pdf"
+              href={profile.cv}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Download CV (opens in new tab)"
@@ -142,15 +133,6 @@ export default function Navbar() {
               <FileText size={11} aria-hidden="true" /> CV
             </a>
           </div>
-
-          {/* Crawler and screen-reader accessible navigation ensuring all search bots index every route */}
-          <nav aria-label="Accessible site navigation" className="sr-only">
-            {navLinks.map((link) => (
-              <Link key={`sr-${link.href}`} href={link.href}>
-                {link.label}
-              </Link>
-            ))}
-          </nav>
 
           {/* Mobile hamburger — min 44px touch target */}
           <button
@@ -199,7 +181,7 @@ export default function Navbar() {
               })}
               <div className="pt-4">
                 <a
-                  href="/Ali_Akarma_CV.pdf"
+                  href={profile.cv}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Download CV (opens in new tab)"

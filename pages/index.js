@@ -7,16 +7,14 @@ import { Github, Linkedin, Mail, BookOpen, ArrowRight, FileText, Star, Quote, La
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import { profile } from '../data/profile'
-import { publications } from '../data/publications'
-import { underReviewPublications } from '../data/underReview'
-import { projects } from '../data/projects'
-import { blogPosts } from '../data/blog'
-import { newsData } from './news'
-
 import Meta from '../components/Meta'
 import AuthorHighlight from '../components/AuthorHighlight'
-const ResearchGraph = dynamic(() => import('../components/ResearchGraph'), { ssr: false })
 import ErrorBoundary from '../components/ErrorBoundary'
+import ExploreNext from '../components/ExploreNext'
+import { siteCounts, venuesByType, paperSummary, resolvedProjects, newsItems, researchGraph } from '../lib/content'
+import { publications, byNewest } from '../lib/publications'
+import { blogPosts } from '../data/blog'
+const ResearchGraph = dynamic(() => import('../components/ResearchGraph'), { ssr: false })
 
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ target, suffix = '', delay = 0 }) {
@@ -61,63 +59,31 @@ const socialLinks = [
   { icon: <Mail size={18} />, href: `mailto:${profile.email}`, label: 'Email' },
 ]
 
-/* Copies only the listed fields; undefined becomes null so props serialize. */
-const pick = (obj, keys) => Object.fromEntries(keys.map(k => [k, obj[k] ?? null]))
-
 /*
-  Everything derived from the content data is computed at build time and
-  passed in as props. The homepage shows three papers, three projects, two
-  notes and three news items, but importing the data into the page itself
-  shipped every abstract, BibTeX entry and note body as JavaScript.
+  Everything shown here is derived from the data files at build time and
+  passed in as props. Imports used only here are stripped from the browser
+  bundle, and no number on the page is typed in by hand.
 */
 export async function getStaticProps() {
-  /*
-    Venue lists derive from the publication data rather than being hand-counted,
-    so the homepage can't drift out of step as papers are added.
-
-    Scoped to `publications` (peer-reviewed and accepted) — under-review
-    manuscripts have no confirmed venue yet, which is why the totals here are
-    narrower than the publication count above. Most recent venue first.
-  */
-  const venuesByType = (type) => [
-    ...new Set(
-      [...publications]
-        .sort((a, b) => b.id - a.id)
-        .filter(p => p.type === type)
-        .map(p => p.venueShort)
-    ),
-  ]
-
-  const recent = [...publications]
-    .sort((a, b) => {
-      const timeA = a.date ? new Date(a.date).getTime() : new Date(`${a.year || 2025}-01-01`).getTime()
-      const timeB = b.date ? new Date(b.date).getTime() : new Date(`${b.year || 2025}-01-01`).getTime()
-      return timeB - timeA || b.id - a.id
-    })
-    .slice(0, 3)
-
   return {
     props: {
-      paperCount: publications.length + underReviewPublications.length,
-      publishedCount: publications.length,
-      projectCount: projects.length,
-      blogCount: blogPosts.length,
+      counts: siteCounts(),
       journalVenues: venuesByType('journal'),
       conferenceVenues: venuesByType('conference'),
-      recent: recent.map(p => pick(p, ['id', 'title', 'authorsStr', 'tags', 'status', 'statusLabel'])),
-      featuredProjects: projects.filter(p => p.featured).slice(0, 3)
-        .map(p => pick(p, ['id', 'title', 'status', 'description', 'tags'])),
+      recent: [...publications].sort(byNewest).slice(0, 3).map(paperSummary),
+      featuredProjects: resolvedProjects().filter(p => p.featured).slice(0, 3)
+        .map(({ id, title, status, description, tags }) => ({ id, title, status, description, tags })),
       recentBlog: blogPosts.slice(0, 2)
-        .map(p => pick(p, ['id', 'title', 'category', 'readTime', 'excerpt'])),
-      recentNews: [...newsData].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3),
+        .map(({ id, title, category, readTime, excerpt }) => ({ id, title, category, readTime, excerpt })),
+      recentNews: newsItems().slice(0, 3),
+      graph: researchGraph(),
     },
   }
 }
 
 export default function Home({
-  paperCount, publishedCount, projectCount, blogCount,
-  journalVenues, conferenceVenues,
-  recent, featuredProjects, recentBlog, recentNews,
+  counts, journalVenues, conferenceVenues,
+  recent, featuredProjects, recentBlog, recentNews, graph,
 }) {
   const [prefersReduced, setPrefersReduced] = useState(false)
 
@@ -132,17 +98,17 @@ export default function Home({
   const stats = [
     {
       icon: <FileText size={16} />,
-      value: paperCount,
+      value: counts.papers,
       suffix: '',
-      label: 'Publications',
-      sub: 'peer-reviewed & in pipeline',
+      label: 'Papers',
+      sub: `${counts.published} peer-reviewed · ${counts.underReview} under review`,
     },
     {
       icon: <Layers size={16} />,
       value: profile.researchInterests.length,
       suffix: '',
       label: 'Research Areas',
-      sub: 'Agentic AI • Safety & Alignment • Adversarial Misuse • Governance & Oversight • Cybersecurity • Digital Twins',
+      sub: profile.researchInterests.map(i => i.short).join(' • '),
     },
     {
       icon: <BookOpen size={16} />,
@@ -163,8 +129,8 @@ export default function Home({
   return (
     <>
       <Meta
-        title="Ali Akarma — AI Safety & Agentic AI Researcher"
-        description="AI Researcher specializing in Agentic AI, AI Safety, and AI Governance, focused on building autonomous AI systems that fail safely by design."
+        title={`${profile.name} — ${profile.headline}`}
+        description={profile.summary}
       />
 
       <PageTransition>
@@ -239,18 +205,13 @@ export default function Home({
                   transition={{ delay: 0.6 }}
                   className="font-mono text-base md:text-lg text-parchment-300 mb-6 min-h-[28px]"
                 >
-                  <span className="sr-only">Designing Safety-Aligned Agentic Systems.</span>
+                  <span className="sr-only">{profile.heroLines[0]}</span>
                   <span aria-hidden="true">
                     {prefersReduced ? (
-                      <span className="text-gold-300">Designing Safety-Aligned Agentic Systems.</span>
+                      <span className="text-gold-300">{profile.heroLines[0]}</span>
                     ) : (
                       <TypeAnimation
-                        sequence={[
-                          'Designing Safety-Aligned Agentic Systems.', 2200,
-                          'Researching Trustworthy Machine Learning.', 2200,
-                          'Building AI Governance Frameworks.', 2200,
-                          'Studying Failure Modes in Autonomous AI.', 2200,
-                        ]}
+                        sequence={profile.heroLines.flatMap(line => [line, 2200])}
                         wrapper="span"
                         speed={55}
                         repeat={Infinity}
@@ -267,9 +228,7 @@ export default function Home({
                   transition={{ delay: 0.7 }}
                   className="font-body text-parchment-300 text-base leading-relaxed max-w-xl mb-8"
                 >
-                  I build agentic AI systems that know their own limits. My work focuses on the gap between autonomous capability and institutional accountability — designing architectures where AI agents can be stopped, audited, and corrected when they behave unexpectedly. I'm a 4th-year IT student at the Islamic University of Madinah and have published{' '}
-                  <span className="text-gold-400 font-semibold">{paperCount}</span>{' '}
-                  peer-reviewed papers and manuscripts on AI governance, adversarial robustness, and constrained multi-agent systems.{' '}
+                  {profile.bio(counts)}{' '}
                   <Link href="/about/" className="text-gold-400 hover:underline inline-flex items-center gap-1 font-mono text-xs">
                     Read background &rarr;
                   </Link>
@@ -287,7 +246,7 @@ export default function Home({
                     <div className="flex gap-4">
                       <Quote size={20} className="text-gold-500/40 flex-shrink-0 mt-1" />
                       <p className="font-display text-lg text-parchment-100 italic leading-relaxed">
-                        I study how to make autonomous AI systems <span className="text-gold-400">fail safely</span>: designing governance architectures that prevent unintended actions before they propagate through real-world infrastructure.
+                        {profile.thesis}
                       </p>
                     </div>
                   </div>
@@ -380,20 +339,20 @@ export default function Home({
                     className="glass-card p-6 border-gold-500/20 bg-gold-500/[0.03] mb-6"
                   >
                     {/* Not a heading — h4 here would break the h1→h2 document outline */}
-                    <p className="font-mono text-[10px] text-gold-400 uppercase tracking-[0.2em] mb-4">Current Research Frontier</p>
+                    <p className="font-mono text-[10px] text-gold-400 uppercase tracking-[0.2em] mb-4">Current Research</p>
                     <div className="space-y-4">
                       <div className="flex gap-4">
                         <div className="w-8 h-8 rounded-full bg-gold-500/10 border border-gold-500/20 flex items-center justify-center flex-shrink-0">
                           <Star size={14} className="text-gold-400" />
                         </div>
                         <div>
-                          <p className="font-display text-base text-parchment-100 leading-snug">Autonomous Safety Governance</p>
-                          <p className="font-mono text-[10px] text-parchment-400 mt-1 uppercase">Safety-Critical Multi-Agent Systems</p>
+                          <p className="font-display text-base text-parchment-100 leading-snug">{profile.currentFocus.title}</p>
+                          <p className="font-mono text-[10px] text-parchment-400 mt-1 uppercase">{profile.currentFocus.subtitle}</p>
                         </div>
                       </div>
                       <div className="h-px bg-gold-500/10" />
                       <p className="font-body text-xs text-parchment-300 leading-relaxed italic">
-                        "Investigating cryptographic trust-anchors and constrained reasoning for large-scale agentic deployments."
+                        {profile.currentFocus.text}
                       </p>
                     </div>
                   </motion.div>
@@ -476,6 +435,9 @@ export default function Home({
           </motion.div>
         </section>
 
+        {/* ═══ EXPLORE: every section of the site, with live counts ═══ */}
+        <ExploreNext current="/" counts={counts} heading="Explore the site" className="pb-4" />
+
         {/* ═══ RESEARCH VISION ═══ */}
         <SectionReveal>
           <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-20">
@@ -504,7 +466,7 @@ export default function Home({
                     </p>
                   ))}
                   <div className="mt-6 pt-4 border-t border-gold-500/10 flex flex-wrap gap-2">
-                    {profile.researchInterests.map(interest => (
+                    {profile.researchInterests.map(({ label: interest }) => (
                       <motion.span
                         key={interest}
                         whileHover={{ scale: 1.02 }}
@@ -529,10 +491,13 @@ export default function Home({
               <div className="w-8 h-px bg-gold-500/60" aria-hidden="true" />
               <span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Knowledge Graph</span>
             </div>
-            <h2 className="font-display text-3xl text-parchment-100 mb-8">Research Landscape</h2>
+            <h2 className="font-display text-3xl text-parchment-100 mb-2">Research Landscape</h2>
+            <p className="font-body text-sm text-parchment-400 mb-8 max-w-2xl">
+              Themes across all {graph.paperCount} papers, sized by paper count. Two themes are linked when at least two papers share them. Select a theme to open its papers.
+            </p>
             <div className="glass-card p-4 sm:p-6 border border-gold-500/10 overflow-hidden min-h-[400px]">
               <ErrorBoundary message="The D3 visualization failed to initialize. Please refresh the page.">
-                <ResearchGraph />
+                <ResearchGraph graph={graph} />
               </ErrorBoundary>
             </div>
           </section>
@@ -551,10 +516,10 @@ export default function Home({
                 <h2 className="font-display text-3xl text-parchment-100">Recent Publications</h2>
               </div>
               <Link
-                href="/research"
+                href="/research/"
                 className="font-mono text-xs text-gold-400 tracking-widest uppercase hover-underline flex items-center gap-1 self-end min-h-[44px]"
               >
-                All {publishedCount} Papers <ArrowRight size={12} aria-hidden="true" />
+                All {counts.papers} Papers <ArrowRight size={12} aria-hidden="true" />
               </Link>
             </div>
 
@@ -570,7 +535,9 @@ export default function Home({
                 >
                   <div className="flex flex-col sm:flex-row sm:flex-wrap items-start justify-between gap-3">
                     <div className="w-full sm:flex-1 sm:min-w-0">
-                      <h3 className="font-display text-lg text-parchment-100 mb-1 leading-snug">{pub.title}</h3>
+                      <h3 className="font-display text-lg text-parchment-100 mb-1 leading-snug">
+                        <Link href={pub.href} className="hover:text-gold-300 transition-colors">{pub.title}</Link>
+                      </h3>
                       <p className="font-mono text-xs text-parchment-400 mb-2 leading-relaxed">
                         <AuthorHighlight authors={pub.authorsStr} />
                       </p>
@@ -584,7 +551,7 @@ export default function Home({
                       : pub.status === 'accepted' ? 'bg-sky-900/30 text-sky-400 border-sky-700/30'
                         : 'bg-amber-900/30 text-amber-400 border-amber-700/30'
                       }`}>
-                      {pub.statusLabel}
+                      {pub.label}
                     </span>
                   </div>
                 </motion.div>
@@ -618,7 +585,7 @@ export default function Home({
                 href="/projects/"
                 className="font-mono text-xs text-gold-400 tracking-widest uppercase hover-underline flex items-center gap-1 self-end min-h-[44px]"
               >
-                All {projectCount} Systems <ArrowRight size={12} aria-hidden="true" />
+                All {counts.projects} Systems <ArrowRight size={12} aria-hidden="true" />
               </Link>
             </div>
 
@@ -692,7 +659,7 @@ export default function Home({
                 href="/blog/"
                 className="font-mono text-xs text-gold-400 tracking-widest uppercase hover-underline flex items-center gap-1 self-end min-h-[44px]"
               >
-                All {blogCount} Notes <ArrowRight size={12} aria-hidden="true" />
+                All {counts.notes} Notes <ArrowRight size={12} aria-hidden="true" />
               </Link>
             </div>
 
@@ -761,7 +728,8 @@ export default function Home({
                   <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
                     <span className="font-mono text-xs text-gold-400 whitespace-nowrap">{item.date}</span>
                     <p className="font-display text-base text-parchment-100 leading-snug flex-1">
-                      {item.title}
+                      {item.href ? <Link href={item.href} className="hover:text-gold-300 transition-colors">{item.title}</Link> : item.title}
+                      {item.venue && <span className="text-gold-400 font-mono text-sm"> — {item.venue}</span>}
                     </p>
                   </div>
                 </div>
@@ -780,11 +748,10 @@ export default function Home({
                   <span className="font-mono text-xs text-gold-400 tracking-widest uppercase">Open for Collaborations</span>
                 </div>
                 <h2 className="font-display text-3xl sm:text-4xl text-parchment-100 mb-4">
-                  Building Safety-Aligned <span className="gold-text italic">Autonomous AI</span>
+                  Building Verifiable, Secure <span className="gold-text italic">Agentic AI</span>
                 </h2>
                 <p className="font-body text-parchment-300 text-sm sm:text-base leading-relaxed mb-8">
-                  Currently open to research collaborations, academic exchanges, and graduate opportunities in AI safety,
-                  multi-agent systems, and trustworthy machine learning.
+                  {profile.collaboration}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4">
                   <Link

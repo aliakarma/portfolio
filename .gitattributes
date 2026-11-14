@@ -1,0 +1,8 @@
+# Keep line endings consistent (LF) on every platform.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.pdf binary

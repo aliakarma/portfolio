@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { SITE_NAME, SITE_URL, OG_IMAGE_URL } from '../data/site'
+import { profile } from '../data/profile'
 import { jsonLd } from '../lib/jsonld'
 
 export default function Meta({
@@ -32,9 +33,9 @@ export default function Meta({
     <Head>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      <meta name="author" content="Ali Akarma" />
-      <meta name="creator" content="Ali Akarma" />
-      <meta name="publisher" content="Ali Akarma" />
+      <meta name="author" content={profile.name} />
+      <meta name="creator" content={profile.name} />
+      <meta name="publisher" content={profile.name} />
       <meta name="application-name" content={SITE_NAME} />
       <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
       <meta name="robots" content={robots} />
@@ -51,7 +52,7 @@ export default function Meta({
       <meta property="og:image" content={image} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Ali Akarma - AI Researcher specializing in Agentic AI and AI Safety" />
+      <meta property="og:image:alt" content={`${profile.name}, ${profile.headline}`} />
       <meta property="og:site_name" content={SITE_NAME} />
 
       {/* Twitter */}
@@ -59,7 +60,7 @@ export default function Meta({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
-      <meta name="twitter:image:alt" content="Ali Akarma - AI Researcher specializing in Agentic AI and AI Safety" />
+      <meta name="twitter:image:alt" content={`${profile.name}, ${profile.headline}`} />
 
       {breadcrumbs && (
         <script

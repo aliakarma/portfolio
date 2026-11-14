@@ -4,6 +4,7 @@ import { AnimatePresence, MotionConfig } from 'framer-motion'
 import { Cormorant_Garamond, Source_Serif_4, JetBrains_Mono } from 'next/font/google'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import ExploreNext from '../components/ExploreNext'
 import ParticleField from '../components/ParticleField'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -76,6 +77,11 @@ export default function App({ Component, pageProps, router }) {
           <AnimatePresence mode="popLayout" initial={false}>
             <Component key={router.asPath} {...pageProps} />
           </AnimatePresence>
+          {/* Every page except Home (which shows it under the hero) ends by
+              pointing to the rest of the site. */}
+          {router.pathname !== '/' && (
+            <ExploreNext current={router.pathname} counts={pageProps.counts} />
+          )}
         </main>
         <Footer />
       </MotionConfig>

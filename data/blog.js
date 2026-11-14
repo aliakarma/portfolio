@@ -2,6 +2,27 @@
 
 export const blogPosts = [
   {
+    id: 27,
+    title: "Coverage-Aware Break-Even Conditions for Polymeric Membrane-Based Water Reuse in Arid Urban Systems",
+    date: "2026-11-01",
+    category: "Sustainability & Water Systems",
+    readTime: "7 min",
+    excerpt: "A utility that reclaims effluent with polymeric membranes has to choose two things: which treatment train to build and how much demand to cover. Published in MDPI Polymers, this paper gives coverage-aware break-even conditions for ultrafiltration alone versus ultrafiltration plus reverse osmosis, and finds that approved demand, not membrane recovery, limits reclaimed volume in at least 98.8% of draws.",
+    summary: "Water reuse in arid cities is usually assessed one plant at a time, but a utility's real decision couples the membrane configuration with deployment coverage: the share of eligible demand actually served by reclaimed water. Published in MDPI Polymers, this study builds a coverage-aware volume and cost model for an illustrative arid zone of 10 Mm³/yr and compares ultrafiltration (Configuration A) with ultrafiltration followed by polyamide thin-film-composite reverse osmosis (Configuration B). Membrane parameters are taken from the literature, eligibility and placement are assumed, and no experiments were performed. At 50% coverage and a potable water value of 1 USD/m³, Configuration A avoids 11.5 percentage points of potable input at 0.48 USD/m³ and Configuration B avoids 20.4 points at 0.70 USD/m³ (0.56 and 0.82 USD/m³ without real-loss credit). Break-even coverages are 11.7% and 11.5%. Configuration B becomes preferable above a crossover value of 0.98 USD/m³ (1.15 without loss credit) and leads in 46.2% of paired draws at 1 USD/m³.",
+    keyContributions: [
+      "Coverage-aware decision model: Treats membrane configuration and deployment coverage as one decision, computing avoided potable input and unit cost for an illustrative 10 Mm³/yr arid zone",
+      "Break-even coverage thresholds: Configuration A (ultrafiltration) breaks even at 11.7% coverage and Configuration B (ultrafiltration plus polyamide TFC reverse osmosis) at 11.5%",
+      "Configuration crossover value: Configuration B is preferable above a water value of 0.98 USD/m³ (1.15 USD/m³ without real-loss credit) and leads in 46.2% of paired draws at 1 USD/m³",
+      "Sensitivity ranking: Feed salinity, regulation, concentrate cost, and capital and financing costs move the crossover most",
+      "Demand-limited volume: Under independent inputs and assumed eligibility, approved demand rather than membrane recovery limits reclaimed volume in at least 98.8% of draws, and placement dominates net-benefit variance",
+      "Coupled adverse-feed scenario: When adverse feed conditions couple operating and cost parameters, treatment costs become comparably influential for Configuration B",
+    ],
+    implications: "For utilities in water-scarce cities, the results shift attention from membrane performance alone toward where reclaimed water is placed and how much demand is approved for it. The thresholds are conditional decision criteria, not city-specific predictions: they tell a planner which inputs to pin down locally before choosing between ultrafiltration and a reverse-osmosis train.",
+    tags: ["Water Reuse", "Membranes", "Sustainability", "Smart Cities", "Techno-Economic Modeling"],
+    publicationId: 19,
+    graphicalAbstract: "polymeric",
+  },
+  {
     id: 26,
     title: "Governance-Aware Autonomous Retail Coordination in AI Cities: Multi-Agent RL, Blockchain Accountability, and Federated Learning",
     date: "2026-09-22",
@@ -19,7 +40,7 @@ export const blogPosts = [
     ],
     implications: "Bridges the gap between autonomous capability and institutional accountability in AI cities. By rigorously dissecting where algorithmic advantages actually come from — showing that hard mathematical feasibility and cryptographic auditability drive value while language models add negligible benefit — the work provides regulators and urban planners with concrete, actionable governance instruments for overseeing autonomous commerce.",
     tags: ["Agentic AI", "AI Governance", "Multi-Agent RL", "Blockchain", "Federated Learning", "Smart Cities"],
-    venue: "Frontiers in Artificial Intelligence",
+    publicationId: 18,
     graphicalAbstract: "aairm",
   },
   {
@@ -39,7 +60,7 @@ export const blogPosts = [
     ],
     implications: "Confirms that privacy cannot be taken for granted in vehicular edge AI simply because raw sensor data is kept local. In safety-critical V2X environments where vehicle location, driving habits, and identities must remain untraceable, federated systems require principled differential-privacy noise injection or structural ensemble aggregation to protect user anonymity against curious server operators.",
     tags: ["Federated Learning", "AI Safety", "Privacy", "Cybersecurity", "Vehicular Networks"],
-    venue: "IEEE VTC 2026",
+    publicationId: 17,
     graphicalAbstract: "plfl",
   },
   {
@@ -58,7 +79,7 @@ export const blogPosts = [
     ],
     implications: "Demonstrates how agentic AI architectures can move beyond isolated assistance toward holistic, governance-conscious ecosystems that enhance autonomy, reduce caregiver fatigue, and uphold dignity and equity for people with disabilities.",
     tags: ["Agentic AI", "AI Governance", "Disabilities", "Accessibility", "AI Safety", "Inclusion"],
-    venue: "IGI Global 2026",
+    publicationId: 15,
     graphicalAbstract: "agentic-ai-chapter",
   },
   {
@@ -77,7 +98,7 @@ export const blogPosts = [
     ],
     implications: "Planner work, not model accuracy, is often the binding constraint for robots that must replan online. Because the exactness condition is checkable on the determinized map and the oracle is called a fixed number of times per episode, ordinary shortest-path search — already fast, well understood, and widely implemented — becomes a defensible basis for safe online navigation, with contact rates held inside budgets spanning two orders of magnitude.",
     tags: ["Robotics", "Path Planning", "Reinforcement Learning", "Online Learning", "Safety"],
-    venue: "IEEE T-ASE 2026 (Under Review)",
+    publicationId: 102,
     graphicalAbstract: "dijkstra",
   },
   {
@@ -96,7 +117,7 @@ export const blogPosts = [
     ],
     implications: "Compliance evidence stops being a document written after the fact and becomes a by-product of the test suite a team already runs. The same traceability machinery extends to black-box AI models and AI coding agents, where 'did this system meet the stated requirement?' is exactly the question that raw pass/fail output cannot answer.",
     tags: ["V&V", "Requirements Engineering", "AI Safety", "Testing", "AI Governance"],
-    venue: "IEEE/SICE SII 2027 (Under Review)",
+    publicationId: 101,
     graphicalAbstract: "vnvspec",
   },
   {
@@ -115,7 +136,7 @@ export const blogPosts = [
     ],
     implications: "Proves that regulatory compliance (EU AI Act) can be built directly into the AI training-and-deployment lifecycle of critical infrastructure with negligible operational overhead.",
     tags: ["AI Governance", "Cybersecurity", "IoT", "AI Safety", "Ethics"],
-    venue: "Nature Scientific Reports 2026",
+    publicationId: 14,
     graphicalAbstract: "eagf",
   },
   {
@@ -134,7 +155,7 @@ export const blogPosts = [
     ],
     implications: "As megacities face intensifying pressure from population growth and climate change, AI-enhanced digital twins represent the most scalable approach to urban management. The simulation-first policy testing paradigm also provides an accountability layer for autonomous urban decisions.",
     tags: ["Digital Twins", "Smart Cities", "Agentic AI", "Infrastructure"],
-    venue: "PLOS ONE 2026",
+    publicationId: 13,
     graphicalAbstract: "agentic-dt",
   },
   {
@@ -153,7 +174,7 @@ export const blogPosts = [
     ],
     implications: "Offers a standardized, accessible blueprint for building personal health management systems that cater directly to neurodiverse populations, bridging the gap between clinical data and daily assistive technology.",
     tags: ["Agentic AI", "ADAPT", "Assistive Technology", "Neurodivergence", "Healthcare"],
-    venue: "Journal of Disability Research 2026",
+    publicationId: 12,
     graphicalAbstract: "adapt",
   },
   {
@@ -172,7 +193,7 @@ export const blogPosts = [
     ],
     implications: "Demonstrates how privacy-preserving federated learning combined with agentic governance can solve sensitive cross-border workforce inclusion challenges without compromising data sovereignty.",
     tags: ["Federated Learning", "Agentic AI", "AI Governance", "Disabilities", "Smart Cities"],
-    venue: "MDPI Smart Cities 2026",
+    publicationId: 11,
     graphicalAbstract: "fedagent-chain",
   },
   {
@@ -191,7 +212,7 @@ export const blogPosts = [
     ],
     implications: "Multi-objective agentic planning has wide applicability—from personalized healthcare regimen planning to resource allocation in humanitarian aid. FinNutriAgent demonstrates that LLM-based agents can handle formal constraint satisfaction when properly scaffolded.",
     tags: ["Agentic AI", "Finance", "Nutrition", "Planning"],
-    venue: "ETASR 2026",
+    publicationId: 6,
     graphicalAbstract: "finnutri-agent",
   },
   {
@@ -210,7 +231,7 @@ export const blogPosts = [
     ],
     implications: "Provides municipal leaders and urban AI researchers with a comprehensive roadmap for moving from fragmented, domain-specific AI models to holistic, multi-agent climate resilience platforms.",
     tags: ["Agentic AI", "SDGs", "AI Governance", "Digital Twins", "Climate Resilience"],
-    venue: "MDPI Sustainability 2026",
+    publicationId: 16,
     graphicalAbstract: "climate-resilient-cities",
   },
   {
@@ -229,7 +250,7 @@ export const blogPosts = [
     ],
     implications: "Integrating LLM reasoning with MCP tool calls and digital twin verification provides a blueprint for safe autonomous control of municipal infrastructure, ensuring that high-level policies translate into deterministic, low-latency physical actions.",
     tags: ["Agentic AI", "AI Governance", "Digital Twin", "Smart Cities"],
-    venue: "MECON 2026",
+    publicationId: 8,
     graphicalAbstract: "traffic",
   },
   {
@@ -248,7 +269,7 @@ export const blogPosts = [
     ],
     implications: "Without institutional guidance, AI tool use in academia will stratify rather than democratize access to academic success. Clear, fair guidelines benefit students, faculty, and administrators equally—and position academic institutions as responsible stewards of the AI transition rather than passive bystanders.",
     tags: ["AI Governance", "Academic Integrity", "Ethics", "Guidelines"],
-    venue: "Springer 2026",
+    publicationId: 7,
     graphicalAbstract: "use-of-ai-tools",
   },
   {
@@ -268,7 +289,7 @@ export const blogPosts = [
     ],
     implications: "For emergency management agencies, this framework offers a principled path to deploying autonomous aerial monitoring that regulators and the public can trust. The model's design principle—accountability embedded in the control loop rather than bolted on afterwards—is generalizable to any safety-critical autonomous system.",
     tags: ["AI Safety", "Blockchain", "AI Governance", "Disaster Response"],
-    venue: "MDPI ICETAS 2026",
+    publicationId: 10,
     graphicalAbstract: "wildfire",
   },
   {
@@ -287,7 +308,7 @@ export const blogPosts = [
     ],
     implications: "As underwater IoT deployments expand to environmental monitoring, infrastructure inspection, and defense applications, zero-trust architectures like this become essential. The low-overhead transformer approach is also applicable to resource-constrained terrestrial IoT and satellite swarm networks.",
     tags: ["Agentic AI", "Blockchain", "Cybersecurity", "IoT"],
-    venue: "MDPI ICETAS 2026",
+    publicationId: 9,
     graphicalAbstract: "agents-for-agents",
   },
   {
@@ -306,7 +327,7 @@ export const blogPosts = [
     ],
     implications: "AI-driven nutrition-finance optimization has direct applications for food-bank meal planning, hospital dietary services, and social welfare programs in price-volatile economies—aligning with the UN SDG goals of Zero Hunger and Good Health.",
     tags: ["Agentic AI", "Finance", "LLMs", "Applications"],
-    venue: "IEEE ICCA 2025",
+    publicationId: 2,
     graphicalAbstract: "finagent",
   },
   {
@@ -325,7 +346,7 @@ export const blogPosts = [
     ],
     implications: "The framework provides a universal blueprint for deploying agentic AI in regulated industries—from hospital automation to smart grid management—where regulators require cryptographic proof of policy compliance at every decision step.",
     tags: ["Agentic AI", "Blockchain", "Architecture", "AI Safety"],
-    venue: "IEEE ICCA 2025",
+    publicationId: 1,
     graphicalAbstract: "blockchain",
   },
   {
@@ -344,7 +365,7 @@ export const blogPosts = [
     ],
     implications: "For manufacturers and retailers facing increasingly volatile supply chains, autonomous replenishment agents can dramatically reduce carrying costs while improving service levels—a compelling case for agentic AI in operations management.",
     tags: ["Agentic AI", "Supply Chain", "Automation", "LLMs"],
-    venue: "ICBDT 2025",
+    publicationId: 4,
     graphicalAbstract: "inventory",
   },
   {
@@ -363,7 +384,7 @@ export const blogPosts = [
     ],
     implications: "As AI assistants proliferate, inclusive design from the ground up—rather than retrofitted accessibility features—can meaningfully improve quality of life for hundreds of millions of people worldwide. This framework is a template for human-centered AI that takes neurodiversity seriously.",
     tags: ["Agentic AI", "Accessibility", "Inclusion", "LLMs"],
-    venue: "ICBDT 2025",
+    publicationId: 5,
     graphicalAbstract: "disabilities",
   },
   {
@@ -382,7 +403,7 @@ export const blogPosts = [
     ],
     implications: "Integrated sensing-to-response pipelines are the future of climate resilience infrastructure, especially in mountainous regions like northern Pakistan where urban expansion increases cloudburst risk. The framework is extensible to any rapid-onset natural disaster.",
     tags: ["Agentic AI", "Disaster Response", "Prediction", "Safety"],
-    venue: "ICBDT 2025",
+    publicationId: 3,
     graphicalAbstract: "cloudburst",
   },
 ]

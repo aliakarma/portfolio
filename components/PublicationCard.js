@@ -2,76 +2,19 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ChevronDown, ChevronUp, ExternalLink, BookOpen,
-  Code2, Database, FileText, Copy, Check, X, Image as ImageIcon
+  Code2, Database, FileText, Copy, Check, X, Image as ImageIcon, NotebookText
 } from 'lucide-react'
 
 import AuthorHighlight from './AuthorHighlight'
 import { fullSizeUrl } from './GraphicalAbstract'
+import { tagClass } from '../data/tags'
+import { statusLabel, TYPE_LABELS, pubAnchor, noteHref } from '../lib/publications'
 
 const STATUS_STYLES = {
   published:    'bg-emerald-900/40 text-emerald-300 border-emerald-600/30',
   accepted:     'bg-sky-900/40 text-sky-300 border-sky-600/30',
-  review:       'bg-amber-900/40 text-amber-300 border-amber-600/30',
   under_review: 'bg-amber-900/40 text-amber-300 border-amber-600/30',
 }
-
-const TYPE_LABELS = {
-  conference:   'Conference',
-  journal:      'Journal',
-  book_chapter: 'Book Chapter',
-}
-
-const TAG_PALETTE = {
-  'Agentic AI':    'text-violet-300 border-violet-500/25 bg-violet-900/20',
-  'AI Safety':     'text-rose-300 border-rose-500/25 bg-rose-900/20',
-  'Safety':        'text-rose-300 border-rose-500/25 bg-rose-900/20',
-  'AI Governance': 'text-teal-300 border-teal-500/25 bg-teal-900/20',
-  'Ethics':        'text-teal-300 border-teal-500/25 bg-teal-900/20',
-  'Blockchain':    'text-amber-300 border-amber-500/25 bg-amber-900/20',
-  'Digital Twins': 'text-cyan-300 border-cyan-500/25 bg-cyan-900/20',
-  'LLMs':          'text-blue-300 border-blue-500/25 bg-blue-900/20',
-  'Multi-Agent RL':'text-indigo-300 border-indigo-500/25 bg-indigo-900/20',
-  'Smart Cities':  'text-green-300 border-green-500/25 bg-green-900/20',
-  'Simulation':    'text-orange-300 border-orange-500/25 bg-orange-900/20',
-  'Disabilities':  'text-emerald-300 border-emerald-500/25 bg-emerald-900/20',
-  'Inclusion':     'text-emerald-300 border-emerald-500/25 bg-emerald-900/20',
-  'Accessibility': 'text-emerald-300 border-emerald-500/25 bg-emerald-900/20',
-  'Neurodivergence': 'text-purple-300 border-purple-500/25 bg-purple-900/20',
-  'Assistive technology': 'text-purple-300 border-purple-500/25 bg-purple-900/20',
-  'ADAPT':         'text-purple-300 border-purple-500/25 bg-purple-900/20',
-  'IoT':           'text-gray-300 border-gray-500/25 bg-gray-900/20',
-  'Cybersecurity': 'text-gray-300 border-gray-500/25 bg-gray-900/20',
-  'Architecture':  'text-gray-300 border-gray-500/25 bg-gray-900/20',
-  'Disaster Response': 'text-red-300 border-red-500/25 bg-red-900/20',
-  'Federated Learning': 'text-sky-300 border-sky-500/25 bg-sky-900/20',
-  'Fed Agent':     'text-sky-300 border-sky-500/25 bg-sky-900/20',
-  'Privacy':       'text-amber-300 border-amber-500/25 bg-amber-900/20',
-  'Vehicular Networks': 'text-indigo-300 border-indigo-500/25 bg-indigo-900/20',
-  'Finance':       'text-amber-300 border-amber-500/25 bg-amber-900/20',
-  'Nutrition':     'text-emerald-300 border-emerald-500/25 bg-emerald-900/20',
-  'Healthy eating':'text-emerald-300 border-emerald-500/25 bg-emerald-900/20',
-  'Personalized healthcare': 'text-purple-300 border-purple-500/25 bg-purple-900/20',
-  'Supply Chain':  'text-blue-300 border-blue-500/25 bg-blue-900/20',
-  'Automation':    'text-cyan-300 border-cyan-500/25 bg-cyan-900/20',
-  'Prediction':    'text-violet-300 border-violet-500/25 bg-violet-900/20',
-  'Academic Integrity': 'text-teal-300 border-teal-500/25 bg-teal-900/20',
-  'Guidelines':    'text-teal-300 border-teal-500/25 bg-teal-900/20',
-  'AI Cities':     'text-green-300 border-green-500/25 bg-green-900/20',
-  'Robotics':      'text-indigo-300 border-indigo-500/25 bg-indigo-900/20',
-  'Path Planning': 'text-purple-300 border-purple-500/25 bg-purple-900/20',
-  'Reinforcement Learning': 'text-indigo-300 border-indigo-500/25 bg-indigo-900/20',
-  'Online Learning': 'text-sky-300 border-sky-500/25 bg-sky-900/20',
-  'Digital Twin':  'text-cyan-300 border-cyan-500/25 bg-cyan-900/20',
-  'SDGs':          'text-lime-300 border-lime-500/25 bg-lime-900/20',
-  'SDG11':         'text-lime-300 border-lime-500/25 bg-lime-900/20',
-  'SDG13':         'text-lime-300 border-lime-500/25 bg-lime-900/20',
-  'PRISMA':        'text-pink-300 border-pink-500/25 bg-pink-900/20',
-  'Applications':  'text-pink-300 border-pink-500/25 bg-pink-900/20',
-  'Planning':      'text-pink-300 border-pink-500/25 bg-pink-900/20',
-}
-
-const tagClass = (t) =>
-  TAG_PALETTE[t] || 'text-parchment-400 border-parchment-400/20 bg-parchment-400/5'
 
 /* ─── BibTeX Modal ─── */
 function BibTeXModal({ bibtex, onClose }) {
@@ -158,7 +101,7 @@ function BibTeXModal({ bibtex, onClose }) {
 }
 
 /* ─── Publication Card ─── */
-export default function PublicationCard({ pub, index = 0 }) {
+export default function PublicationCard({ pub, index = 0, noteId = null }) {
   const [expanded, setExpanded] = useState(false)
   const [showBib, setShowBib]   = useState(false)
 
@@ -170,7 +113,8 @@ export default function PublicationCard({ pub, index = 0 }) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -8 }}
         transition={{ duration: 0.35, delay: index * 0.04 }}
-        className="pub-card-accent glass-card pl-3 sm:pl-7"
+        id={pubAnchor(pub.id)}
+        className="pub-card-accent glass-card pl-3 sm:pl-7 scroll-mt-28"
       >
         <div className="p-3 sm:p-5">
 
@@ -215,7 +159,7 @@ export default function PublicationCard({ pub, index = 0 }) {
 
             {/* STATUS BADGE */}
             <span className={`w-full sm:w-auto self-start text-[10px] sm:text-xs px-2 py-1 border rounded-sm break-words ${STATUS_STYLES[pub.status]}`}>
-              {pub.statusLabel}
+              {statusLabel(pub)}
             </span>
 
           </div>
@@ -249,15 +193,15 @@ export default function PublicationCard({ pub, index = 0 }) {
               <BookOpen size={11} aria-hidden="true" /> BibTeX
             </button>
 
-            {pub.doi && (
+            {(pub.doi || pub.url) && (
               <a
-                href={pub.doi}
+                href={pub.doi || pub.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`View DOI for ${pub.title} (opens in new tab)`}
+                aria-label={`View ${pub.doi ? 'DOI' : 'publisher page'} for ${pub.title} (opens in new tab)`}
                 className="flex items-center gap-1 text-xs font-mono text-parchment-400 hover:text-gold-400 min-h-[36px] px-1"
               >
-                <ExternalLink size={11} aria-hidden="true" /> DOI
+                <ExternalLink size={11} aria-hidden="true" /> {pub.doi ? 'DOI' : 'Publisher'}
               </a>
             )}
 
@@ -306,6 +250,16 @@ export default function PublicationCard({ pub, index = 0 }) {
                 className="flex items-center gap-1 text-xs font-mono text-parchment-400 hover:text-gold-400 min-h-[36px] px-1"
               >
                 <ImageIcon size={11} aria-hidden="true" /> Graphical Abstract
+              </a>
+            )}
+
+            {noteId != null && (
+              <a
+                href={noteHref(noteId)}
+                aria-label={`Read the plain-language research note for ${pub.title}`}
+                className="flex items-center gap-1 text-xs font-mono text-gold-400/90 hover:text-gold-300 min-h-[36px] px-1"
+              >
+                <NotebookText size={11} aria-hidden="true" /> Research Note
               </a>
             )}
 

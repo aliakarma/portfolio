@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Github, Linkedin, Mail, BookOpen, Link2 } from 'lucide-react'
 import { profile } from '../data/profile'
+import { PAGES } from '../data/nav'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -23,7 +24,7 @@ export default function Footer() {
               Ali <span className="text-gold-400">Akarma</span>
             </h3>
             <p className="font-mono text-xs text-parchment-400 mt-1 tracking-wide">
-              AI Researcher · Islamic University of Madinah
+              {profile.title} · {profile.institution}
             </p>
           </div>
 
@@ -58,31 +59,15 @@ export default function Footer() {
 
         {/* Site directory navigation for users and search engine crawlers */}
         <nav aria-label="Footer navigation" className="my-8 pt-8 border-t border-gold-500/10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-          <Link href="/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
-            Home
-          </Link>
-          <Link href="/about/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
-            About
-          </Link>
-          <Link href="/research/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
-            Research Archive
-          </Link>
-          <Link href="/projects/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
-            Research Systems
-          </Link>
-          <Link href="/blog/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
-            Research Notes
-          </Link>
-          <Link href="/news/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
-            News Feed
-          </Link>
-          <Link href="/contact/" className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
-            Contact
-          </Link>
+          {PAGES.map(p => (
+            <Link key={p.href} href={p.href} className="font-mono text-xs uppercase tracking-widest text-parchment-300 hover:text-gold-400 transition-colors">
+              {p.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="section-divider mt-4" />
-        <p className="text-center font-mono text-xs text-parchment-400/60 mt-4">Madinah, Saudi Arabia</p>
+        <p className="text-center font-mono text-xs text-parchment-400/60 mt-4">{profile.location}</p>
       </div>
     </footer>
   )

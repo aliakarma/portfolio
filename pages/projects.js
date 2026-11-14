@@ -2,23 +2,31 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Code2, Github, ExternalLink, BookOpen, ArrowRight, Layers } from 'lucide-react'
+import { X, Code2, Github, ExternalLink, ArrowRight } from 'lucide-react'
 import Meta from '../components/Meta'
 import PageTransition from '../components/PageTransition'
 import SectionReveal from '../components/SectionReveal'
 import ProjectCard from '../components/ProjectCard'
-import { projects } from '../data/projects'
-import { publications } from '../data/publications'
 import { SITE_URL } from '../data/site'
+import { profile } from '../data/profile'
 import { jsonLd } from '../lib/jsonld'
+import { siteCounts, resolvedProjects } from '../lib/content'
+
+/*
+  Projects are resolved at build time: a project linked to a paper takes its
+  status and link from that paper (lib/content.js), so the two cannot disagree.
+*/
+export async function getStaticProps() {
+  return { props: { counts: siteCounts(), projects: resolvedProjects() } }
+}
 
 /* Schema.org ItemList with SoftwareSourceCode for machine-readable research software indexing */
-const PROJECTS_JSONLD = {
+const projectsJsonLd = (projects) => ({
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Research Systems and Software Implementations | Ali Akarma',
+  name: `Research Systems | ${profile.name}`,
   url: `${SITE_URL}/projects/`,
-  description: 'Technical implementations of safety-aligned agentic systems, multi-agent frameworks, and trustworthy ML testbeds by Ali Akarma.',
+  description: `Open-source research systems by ${profile.name}.`,
   numberOfItems: projects.length,
   itemListElement: projects.map((p, i) => ({
     '@type': 'ListItem',
@@ -29,33 +37,15 @@ const PROJECTS_JSONLD = {
       description: p.description,
       programmingLanguage: p.technologies,
       keywords: p.tags,
-      author: {
-        '@type': 'Person',
-        name: 'Ali Akarma',
-        url: `${SITE_URL}/`,
-      },
+      author: { '@type': 'Person', name: profile.name, url: `${SITE_URL}/` },
       ...(p.github ? { codeRepository: p.github } : {}),
-      ...(p.demo ? { targetProduct: { '@type': 'WebApplication', url: p.demo } } : {}),
     },
   })),
-}
-
-/*
-  The modal shows only a linked paper's title and link, so resolve those at
-  build time. Importing the publication records into the page itself shipped
-  every abstract and BibTeX entry to the browser for a handful of titles.
-*/
-export async function getStaticProps() {
-  const linkedPapers = {}
-  for (const project of projects) {
-    const paper = project.paper && publications.find(p => p.pdf === project.paper || p.doi === project.paper)
-    if (paper) linkedPapers[project.id] = { title: paper.title, href: paper.pdf || paper.doi }
-  }
-  return { props: { linkedPapers } }
-}
+})
 
 /* ─── Project Modal ─── */
-function ProjectModal({ project, linkedPaper, onClose }) {
+function ProjectModal({ project, onClose }) {
+  const linkedPaper = project.paper
   const closeRef = useRef(null)
 
   /* Accessibility Fix: close on Escape */
@@ -161,16 +151,14 @@ function ProjectModal({ project, linkedPaper, onClose }) {
 
             {linkedPaper && (
               <div className="p-4 border border-gold-500/20 bg-gold-500/5 rounded-sm">
-                <p className="font-mono text-[10px] text-gold-400/70 tracking-widest uppercase mb-3">Peer Reviewed</p>
+                <p className="font-mono text-[10px] text-gold-400/70 tracking-widest uppercase mb-3">Paper · {project.status}</p>
                 <p className="font-display text-sm text-parchment-100 leading-snug mb-3">{linkedPaper.title}</p>
-                <a 
+                <Link
                   href={linkedPaper.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="font-mono text-[10px] text-gold-400 hover:underline flex items-center gap-1"
                 >
-                  Read Publication <ExternalLink size={10} />
-                </a>
+                  View in publications <ArrowRight size={10} aria-hidden="true" />
+                </Link>
               </div>
             )}
 
@@ -203,7 +191,7 @@ function ProjectModal({ project, linkedPaper, onClose }) {
   )
 }
 
-export default function Projects({ linkedPapers }) {
+export default function Projects({ projects }) {
   const [selected, setSelected] = useState(null)
   const featured = projects.filter(p => p.featured)
   const other    = projects.filter(p => !p.featured)
@@ -211,13 +199,13 @@ export default function Projects({ linkedPapers }) {
   return (
     <>
       <Meta 
-        title="Research Systems & Projects" 
-        description="Technical implementation of safety-aligned agentic systems: coordinating heterogeneous agents under Lagrangian safety constraints."
+        title="Research Systems & Projects"
+        description={`${projects.length} open-source research systems by ${profile.name}: agentic AI frameworks, governance layers, security tooling, and simulation testbeds.`}
       />
       <Head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLd(PROJECTS_JSONLD) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(projectsJsonLd(projects)) }}
         />
       </Head>
 
@@ -238,8 +226,8 @@ export default function Projects({ linkedPapers }) {
                   Research <span className="gold-text italic">Systems</span>
                 </h1>
                 <p className="font-body text-parchment-300 max-w-2xl">
-                  Applied AI systems built at the intersection of safety, governance, and real-world deployment
-                  — each tied to peer-reviewed research.
+                  Open-source code behind the research: agentic AI frameworks, governance layers, security tooling,
+                  and simulation testbeds. Systems linked to a paper show that paper's status.
                 </p>
                 <div className="section-divider mt-8" />
               </div>
@@ -280,57 +268,12 @@ export default function Projects({ linkedPapers }) {
               </div>
             </SectionReveal>
 
-            {/* Cross-linking to Research Archive & Research Notes */}
-            <SectionReveal delay={0.2}>
-              <div className="mt-16 grid sm:grid-cols-2 gap-4">
-                <Link
-                  href="/research/"
-                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
-                >
-                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
-                    <BookOpen size={18} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
-                      Peer-Reviewed Research Archive
-                    </h3>
-                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
-                      Read full academic papers, citations, BibTeX entries, and published DOIs behind these systems.
-                    </p>
-                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
-                      Explore Publications <ArrowRight size={11} aria-hidden="true" />
-                    </span>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/blog/"
-                  className="glass-card p-6 border border-gold-500/15 hover:border-gold-500/40 transition-all group flex items-start gap-4"
-                >
-                  <div className="w-10 h-10 border border-gold-500/20 bg-gold-500/5 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform flex-shrink-0">
-                    <Layers size={18} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg text-parchment-100 group-hover:text-gold-300 transition-colors">
-                      Research Notes &amp; Summaries
-                    </h3>
-                    <p className="font-body text-xs text-parchment-400 mt-1 leading-relaxed">
-                      Read concise breakdowns of threat models, experimental benchmarks, and practical takeaways.
-                    </p>
-                    <span className="font-mono text-xs text-gold-400/80 mt-3 inline-flex items-center gap-1 group-hover:underline">
-                      Read Research Notes <ArrowRight size={11} aria-hidden="true" />
-                    </span>
-                  </div>
-                </Link>
-              </div>
-            </SectionReveal>
-
           </div>
         </div>
 
         <AnimatePresence>
           {selected && (
-            <ProjectModal project={selected} linkedPaper={linkedPapers[selected.id]} onClose={() => setSelected(null)} />
+            <ProjectModal project={selected} onClose={() => setSelected(null)} />
           )}
         </AnimatePresence>
       </PageTransition>

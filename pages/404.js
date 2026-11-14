@@ -2,6 +2,12 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
 import Meta from '../components/Meta'
+import { siteCounts } from '../lib/content'
+
+/* Counts feed the "Keep exploring" cards that _app.js renders below. */
+export async function getStaticProps() {
+  return { props: { counts: siteCounts() } }
+}
 
 export default function NotFound() {
   return (
@@ -11,7 +17,7 @@ export default function NotFound() {
         description="Page not found."
         robots="noindex, follow"
       />
-      <div className="min-h-screen flex items-center justify-center px-6">
+      <div className="min-h-[70vh] flex items-center justify-center px-6 pt-28">
         <div className="text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -29,7 +35,7 @@ export default function NotFound() {
               Page Not Found
             </h1>
             <p className="font-body text-parchment-400 mb-8">
-              This page doesn't exist in the research archive.
+              This page does not exist. Try one of the sections below.
             </p>
             <Link
               href="/"

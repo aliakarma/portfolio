@@ -1,6 +1,9 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 import { PROFILE_IMAGE_URL, SITE_NAME, SITE_SHORT_NAME, SITE_URL } from '../data/site'
 import { jsonLd } from '../lib/jsonld'
+import { profile } from '../data/profile'
+
+const sameAs = [profile.linkedin, profile.github, profile.scholar, profile.orcid].filter(Boolean)
 
 export default function Document() {
   return (
@@ -10,7 +13,7 @@ export default function Document() {
         <meta name="google-site-verification" content="google0403a632ca2d950b" />
         <meta
           name="keywords"
-          content="Ali Akarma, AI Research, Agentic AI, AI Safety, LLMs, Machine Learning, Islamic University of Madinah"
+          content={[profile.name, ...profile.researchInterests.map(i => i.short), profile.institution].join(', ')}
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -43,11 +46,7 @@ export default function Document() {
                     "url": PROFILE_IMAGE_URL
                   },
                   "image": PROFILE_IMAGE_URL,
-                  "sameAs": [
-                    "https://www.linkedin.com/in/aliakarma",
-                    "https://github.com/aliakarma",
-                    "https://scholar.google.com/citations?user=kQZZJtYAAAAJ"
-                  ]
+                  "sameAs": sameAs
                 },
                 {
                   "@type": "Person",
@@ -55,41 +54,24 @@ export default function Document() {
                   "name": SITE_NAME,
                   "url": `${SITE_URL}/`,
                   "mainEntityOfPage": `${SITE_URL}/about/`,
-                  "email": "mailto:aliakarma974@gmail.com",
+                  "email": `mailto:${profile.email}`,
                   "image": {
                     "@type": "ImageObject",
                     "url": PROFILE_IMAGE_URL
                   },
-                  "jobTitle": "AI Researcher",
-                  "description": "AI Researcher specializing in Agentic AI, AI Safety, and AI Governance.",
-                  "sameAs": [
-                    "https://www.linkedin.com/in/aliakarma",
-                    "https://github.com/aliakarma",
-                    "https://scholar.google.com/citations?user=kQZZJtYAAAAJ",
-                    "https://orcid.org/0009-0002-6687-9380"
-                  ],
+                  "jobTitle": profile.title,
+                  "description": profile.summary,
+                  "sameAs": sameAs,
                   "affiliation": {
                     "@type": "CollegeOrUniversity",
-                    "name": "Islamic University of Madinah",
+                    "name": profile.institution,
                     "address": {
                       "@type": "PostalAddress",
                       "addressLocality": "Madinah",
                       "addressCountry": "SA"
                     }
                   },
-                  "alumniOf": {
-                    "@type": "CollegeOrUniversity",
-                    "name": "Islamic University of Madinah"
-                  },
-                  "knowsAbout": [
-                    "Agentic AI",
-                    "AI Safety",
-                    "Trustworthy Machine Learning",
-                    "Large Language Models",
-                    "AI Governance",
-                    "Multi-Agent Systems",
-                    "Digital Twins"
-                  ]
+                  "knowsAbout": profile.researchInterests.map(i => i.label)
                 }
               ]
             })
